@@ -1,50 +1,45 @@
 # Logs
-logs
 *.log
 npm-debug.log*
+pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Dependencies
+node_modules/
+dist/
+dist-ssr/
+certificates/
+
+# Backend
+backend/api_data/*
+backend/data/API_KEY_GEMINI
+backend/data/API_KEY_GROQ
+backend/data/articles.json
+backend/data/failed_processor.log
+backend/data/failed_scrape.log
+backend/env/
+
+# Python
+*.pyc
+*.pyo
+*.py[cod]
+__pycache__/
+**/__pycache__/
+backend/__pycache__/
 
 # Editor directories and files
-.vscode/*
+.vscode/
 !.vscode/extensions.json
-.idea
+.idea/
+*.iml
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-
-# Dependencies
-node_modules/
-dist/
-certificates/
-
-backend/data/API_KEY_GEMINI
-backend/data/API_KEY_GROQ
-backend/data/failed_processor.log
-backend/data/failed_scrape.log
-
-**/__pycache__/
-
-
-# Editor files
-.vscode/
-.idea/
-*.iml
-
-# Logs
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
 # Environment variables
 .env
@@ -53,11 +48,5 @@ yarn-error.log*
 # TypeScript build
 *.tsbuildinfo
 
-# macOS
-.DS_Store
-
 # Windows
 Thumbs.db
-
-# Other
-*.log
