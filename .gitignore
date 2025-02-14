@@ -33,6 +33,8 @@ backend/data/API_KEY_GROQ
 backend/data/failed_processor.log
 backend/data/failed_scrape.log
 
+**/__pycache__/
+
 
 # Editor files
 .vscode/
