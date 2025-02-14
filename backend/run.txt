@@ -1,0 +1,14 @@
+sudo systemctl enable apiserver
+sudo systemctl enable daemon
+
+sudo systemctl start apiserver
+sudo systemctl start daemon
+
+sudo systemctl restart apiserver
+sudo systemctl restart daemon
+
+gunicorn -w 4 -b 0.0.0.0:5000 app_server:app
+
+sudo systemctl daemon-reload
+sudo systemctl enable  apiserver
+sudo systemctl restart apiserver

@@ -1,0 +1,27 @@
+/* Hide the default radio buttons */
+input[type="radio"] {
+  display: none;
+}
+
+/* Style the labels as slim, tall containers */
+.radio-container {
+  width: 100%;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition:
+    background-color 0.3s,
+    border-color 0.3s;
+}
+
+/* Change the container color when the radio button is selected */
+input[type="radio"]:checked + .radio-container {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+/* Optional: Add hover effect */
+.radio-container:hover {
+  background-color: #e0e0e0;
+}
