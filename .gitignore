@@ -30,6 +30,9 @@ certificates/
 
 backend/data/API_KEY_GEMINI
 backend/data/API_KEY_GROQ
+backend/data/failed_processor.log
+backend/data/failed_scrape.log
+
 
 # Editor files
 .vscode/
