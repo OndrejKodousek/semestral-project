@@ -1,11 +1,10 @@
 import os
 import json
 
-
 def main():
     files = os.listdir("api_data")
 
-    known_stocks = {}  # Dictionary to ensure unique tickers
+    known_stocks = {}
 
     for file in files:
         if not file.endswith(".json") or file == "known_stocks.json":
@@ -17,20 +16,26 @@ def main():
 
         for dat in data:
 
-            # Couple few quick fixes to remove cases where LLM was having a moment
-            if dat['ticker'] == "" or dat['stock'] == "":
+            # Couple quick fixes to remove some cases where LLM was having a moment
+            try:
+                invalid_values = {"", None, "none", "null", "undefined", "unknown"}
+
+                ticker = str(dat.get("ticker", "")).strip().lower()
+                stock = str(dat.get("stock", "")).strip().lower()
+
+                if ticker in invalid_values or stock in invalid_values:
+                    continue
+
+                # Suspicious values, LLM was probably just yapping
+                if len(ticker) > 10 or len(stock) > 40:
+                    continue
+            except KeyError:
                 continue
-            if dat['ticker'] == None or dat['stock'] == None:
-                continue
-            if dat['ticker'].lower() == "none" or dat['stock'].lower() == "none":
-                continue
-            if len(dat['ticker']) > 10 or len(dat['stock']) > 40:
-                continue 
 
             ticker = dat.get("ticker", "").strip()
             company = dat.get("stock", "").strip()
 
-            if not ticker or not company:  # Skip empty or None values
+            if not ticker or not company:
                 continue
 
             if ticker not in known_stocks:

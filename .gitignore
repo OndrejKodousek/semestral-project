@@ -50,3 +50,4 @@ backend/__pycache__/
 
 # Windows
 Thumbs.db
+backend/data/API_KEY_OPENROUTER

@@ -18,13 +18,13 @@ def main():
         if scrap:
             print("-" * 40)
             print("STARTING SCRAPER")
-            subprocess.run(["python", "scraper.py"])
+            subprocess.run(["python", "scraper/scraper_yahoo.py"])
             print("SCRAPER FINISHED")
 
         if process:
             print("-" * 40)
             print("STARTING PROCESSOR")
-            subprocess.run(["python", "llm_processor.py"])
+            subprocess.run(["python", "processor/llm_processor.py"])
             print("PROCESSOR FINISHED")
             print("-" * 40)
 

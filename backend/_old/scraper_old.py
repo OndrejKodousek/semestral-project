@@ -33,16 +33,12 @@ options.add_argument("--headless")
 options.add_argument(
     "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
 )
-#driver = webdriver.Chrome(
-#    service=Service(ChromeDriverManager().install()), options=options
-#)
 
+# aarch64 fix
 try:
-  #in case we are on x86_64 we do not need the chromeservice workaround,
-  #so try the normal way first
   driver = webdriver.Chrome(options=options)
 except NoSuchDriverException:
-#  chromedriver_path = shutil.which("chromedriver") #/usr/bin/chromedriver
+#  chromedriver_path = shutil.which("chromedriver")
   chromedriver_path = "/usr/bin/chromedriver"
   service = webdriver.ChromeService(executable_path=chromedriver_path)
   driver = webdriver.Chrome(options=options, service=service)
@@ -126,7 +122,25 @@ def scrape_yahoo_finance_article(link):
     return raw_text
 
 def scrape_investors_article(link):
-    """Scrape the content of an article from Investors.com."""
+    driver.get(link)
+    random_delay()
+
+    try:
+        body = WebDriverWait(driver, 10).until(
+            EC.visibility_of_element_located((By.CSS_SELECTOR, "div.single-post-content"))
+        )
+    except TimeoutException:
+        return "ERROR-UNKNOWN-STATE"
+
+    text = extract_text(body)
+
+    index = text.find("YOU MAY ALSO LIKE")
+    if index != -1:
+        text = text[:index]
+
+    return text
+
+def scrape_barrons_article(link):
     driver.get(link)
     random_delay()
 
@@ -203,16 +217,14 @@ def main():
     rss_url = "https://finance.yahoo.com/news/rssindex"
     feed = feedparser.parse(rss_url)
 
-    # Load already scraped articles
     scraped_articles = load_scraped_articles()
-    scraped_links = {article["link"] for article in scraped_articles}
+    already_scraped_links = {article["link"] for article in scraped_articles}
 
     new_articles = []
     for entry in feed.entries:
         link = entry.link
 
-        # Skip if the article has already been scraped
-        if link in scraped_links:
+        if link in already_scraped_links:
             continue
 
         if "finance.yahoo.com/research/reports/" in link:
@@ -221,21 +233,26 @@ def main():
 
         print(f"Scraping {shorten_string(link)}", end="", flush=True)
 
-
         domain = extract_domain(link)
 
         if domain == "finance.yahoo.com":
             content = scrape_yahoo_finance_article(link)
         elif domain == "investors.com":
             content = scrape_investors_article(link)
+        elif domain == "wsj.com":
+            print(f" | FAILED, Wallstreet Journal has scraping protection")
+            continue
+        elif domain == "barrons.com":
+            print(f" | FAILED, Barrons is paywalled")
+            continue            
         else:
-            print(f" | FAILED, unsupported source: {domain}")
+            print(f" | FAILED, unknown source: {domain}")
             continue
 
         if "ERROR" in content:
             if content == "ERROR-PAYWALL":
-                print(f" | FAILED, premium article")
-                logToFile(f"FAILED, premium article, {link}")
+                print(f" | FAILED, paywalled article")
+                logToFile(f"FAILED, paywalled article, {link}")
                 continue
             else:
                 print(f" | FAILED, unknown error")

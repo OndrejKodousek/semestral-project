@@ -13,11 +13,11 @@
 {
     "stock": "Full name of company, e.g., NVIDIA Corp",
     "ticker": "Stock ticker symbol, e.g., NVDA",
-    "prediction_1_day": "Predicted percentage change in 1 day (e.g., '0.05' for +5%)",
+    "prediction_1_day": "Predicted percentage change in 1 day (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
     "prediction_1_day_confidence": "Confidence level for 1-day prediction (0-1)",
-    "prediction_3_day": "Predicted percentage change in 3 days (e.g., '0.05' for +5%)",
+    "prediction_3_day": "Predicted percentage change in 3 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
     "prediction_3_day_confidence": "Confidence level for 3-day prediction (0-1)",
-    "prediction_7_day": "Predicted percentage change in 7 days (e.g., '0.05' for +5%)",
+    "prediction_7_day": "Predicted percentage change in 7 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
     "prediction_7_day_confidence": "Confidence level for 7-day prediction (0-1)"
 }
 - Every single field must be filled.
@@ -31,7 +31,7 @@
 - If applicable, ensure that probability distributions or confidence intervals reflect precise percentage changes rather than broad approximations.
 
 5. Strict Enforcement:
-- If you cannot determine the stock, you must only return the string "ERROR-01". Do not attempt to return a JSON with placeholder values or incomplete fields.
+- If you cannot determine the stock, you must only return the string "ERROR-01". Do not attempt to return a JSON with placeholder values, incomplete fields or anything else.
 - If you encounter an unexpected error, you must only return the string "ERROR - <your error message>". Do not attempt to return a JSON in this case.
 
 6. Examples:
@@ -50,5 +50,5 @@ Valid JSON (when stock is determined):
 Valid string (when stock cannot be determined):
 ERROR-01
 
-Valid string (when an error occurs):
+Valid string (when other error occurs):
 ERROR - Unable to process the article due to unexpected input format.
