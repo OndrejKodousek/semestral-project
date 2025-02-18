@@ -1,9 +1,7 @@
 import os
-import json
 import random
 import time
 import unicodedata
-
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from selenium import webdriver
@@ -54,21 +52,6 @@ def purify_text(input_text):
     ascii_text = normalized.encode("ASCII", "ignore").decode("ASCII")
 
     return ascii_text
-
-def load_scraped_articles():
-    file_path = os.path.join(script_dir, "..", "data", "articles.json")
-    if os.path.exists(file_path):
-        with open(file_path, "r", encoding="utf-8") as f:
-            try:
-                return json.load(f)
-            except json.JSONDecodeError:
-                return []
-    return []
-
-def save_scraped_articles(articles):
-    file_path = os.path.join(script_dir, "..", "data", "articles.json")
-    with open(file_path, "w", encoding="utf-8") as f:
-        json.dump(articles, f, indent=4, ensure_ascii=False)
 
 def shorten_string(link, max_length=80):
     if len(link) <= max_length:

@@ -4,9 +4,13 @@ import { calculateMetrics } from "../utils/metricsCalculator"; // Import the uti
 interface PredictionData {
   title: string;
   source: string;
-  prediction: string;
-  confidence: string;
   link: string;
+  predictions: {
+    [key: string]: {
+      prediction: number;
+      confidence: number;
+    };
+  };
 }
 
 interface StatisticsFieldProps {
@@ -56,11 +60,12 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({ data }) => {
   // Recalculate metrics whenever data changes
   useEffect(() => {
     if (data) {
+      // Extract 1_day predictions and confidence values
       const predictionValues = data
-        .map((item) => parseFloat(item.prediction))
+        .map((item) => item.predictions["1_day"].prediction)
         .filter((num) => !isNaN(num));
       const confidenceValues = data
-        .map((item) => parseFloat(item.confidence))
+        .map((item) => item.predictions["1_day"].confidence)
         .filter((num) => !isNaN(num));
 
       setPredictionMetrics(calculateMetrics(predictionValues));
@@ -71,7 +76,7 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({ data }) => {
   return (
     <div className="row h-100 m-0">
       {/* Data Table */}
-      <div className="col-6">
+      <div className="col-lg-6 col-md-12">
         <div className="scrollable-container mt-3">
           <div className="grid-table">
             <div className="grid-header">
@@ -89,17 +94,20 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({ data }) => {
                       </div>
                       <div
                         className={
-                          parseFloat(item.prediction) < 0
+                          item.predictions["1_day"].prediction < 0
                             ? "red-text"
                             : "green-text"
                         }
                       >
-                        {parseFloat(item.prediction) < 0
-                          ? `${(parseFloat(item.prediction) * 100).toFixed(3)}%`
-                          : `+${(parseFloat(item.prediction) * 100).toFixed(3)}%`}
+                        {item.predictions["1_day"].prediction < 0
+                          ? `${(item.predictions["1_day"].prediction * 100).toFixed(3)}%`
+                          : `+${(item.predictions["1_day"].prediction * 100).toFixed(3)}%`}
                       </div>
                       <div className="bold-text">
-                        {(parseFloat(item.confidence) * 100).toFixed(3)}%
+                        {(item.predictions["1_day"].confidence * 100).toFixed(
+                          3,
+                        )}
+                        %
                       </div>
                     </div>
                     <div className="explanation-row">
@@ -118,7 +126,7 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({ data }) => {
       </div>
 
       {/* Metrics Table */}
-      <div className="col-6">
+      <div className="col-lg-6 col-md-12">
         <div className="scrollable-container mt-3">
           <div className="grid-table">
             <div className="grid-header">
@@ -127,118 +135,112 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({ data }) => {
               <div>Confidence</div>
             </div>
             <div className="grid-body">
-                <div className="grid-row">
-                  <div className="bold-text">Average</div>
-                  <div className="bold-text">{predictionMetrics.average}</div>
-                  <div className="bold-text">{confidenceMetrics.average}</div>
-                </div>
-                <div className="explanation-row">
-                  <div className="explanation-content">
-                    Arithmetic average.
-                  </div>
-                </div>
-                <div className="grid-row">
-                  <div className="bold-text">Minimum</div>
-                  <div className="bold-text">{predictionMetrics.min}</div>
-                  <div className="bold-text">{confidenceMetrics.min}</div>
-                </div>
-                <div className="explanation-row">
-                  <div className="explanation-content">
-                    Lowest value.
-                  </div>
-                </div>
-                <div className="grid-row">
-                  <div className="bold-text">Maximum</div>
-                  <div className="bold-text">{predictionMetrics.max}</div>
-                  <div className="bold-text">{confidenceMetrics.max}</div>
-                </div>
-                <div className="explanation-row">
-                  <div className="explanation-content">
-                    Highest value.
-                  </div>
-                </div>
-                <div className="grid-row">
-                  <div className="bold-text">Median</div>
-                  <div className="bold-text">{predictionMetrics.median}</div>
-                  <div className="bold-text">{confidenceMetrics.median}</div>
-                </div>
-                <div className="explanation-row">
-                  <div className="explanation-content">
+              <div className="grid-row">
+                <div className="bold-text">Average</div>
+                <div className="bold-text">{predictionMetrics.average}</div>
+                <div className="bold-text">{confidenceMetrics.average}</div>
+              </div>
+              <div className="explanation-row">
+                <div className="explanation-content">Arithmetic average.</div>
+              </div>
+              <div className="grid-row">
+                <div className="bold-text">Minimum</div>
+                <div className="bold-text">{predictionMetrics.min}</div>
+                <div className="bold-text">{confidenceMetrics.min}</div>
+              </div>
+              <div className="explanation-row">
+                <div className="explanation-content">Lowest value.</div>
+              </div>
+              <div className="grid-row">
+                <div className="bold-text">Maximum</div>
+                <div className="bold-text">{predictionMetrics.max}</div>
+                <div className="bold-text">{confidenceMetrics.max}</div>
+              </div>
+              <div className="explanation-row">
+                <div className="explanation-content">Highest value.</div>
+              </div>
+              <div className="grid-row">
+                <div className="bold-text">Median</div>
+                <div className="bold-text">{predictionMetrics.median}</div>
+                <div className="bold-text">{confidenceMetrics.median}</div>
+              </div>
+              <div className="explanation-row">
+                <div className="explanation-content">
                   The middle value when the data is sorted
-                  </div>
                 </div>
-                <div className="grid-row">
-                  <div className="bold-text">Variance</div>
-                  <div className="bold-text">{predictionMetrics.variance}</div>
-                  <div className="bold-text">{confidenceMetrics.variance}</div>
+              </div>
+              <div className="grid-row">
+                <div className="bold-text">Variance</div>
+                <div className="bold-text">{predictionMetrics.variance}</div>
+                <div className="bold-text">{confidenceMetrics.variance}</div>
+              </div>
+              <div className="explanation-row">
+                <div className="explanation-content">
+                  The measure of data dispersion; average squared deviation from
+                  the mean.
                 </div>
-                <div className="explanation-row">
-                  <div className="explanation-content">
-                  The measure of data dispersion; average squared deviation from the mean.
-                  </div>
+              </div>
+              <div className="grid-row">
+                <div className="bold-text">Standard Deviation</div>
+                <div className="bold-text">
+                  {predictionMetrics.standardDeviation}
                 </div>
-                <div className="grid-row">
-                  <div className="bold-text">
-                    Standard Deviation
-                  </div>
-                  <div className="bold-text">
-                    {predictionMetrics.standardDeviation}
-                  </div>
-                  <div className="bold-text">
-                    {confidenceMetrics.standardDeviation}
-                  </div>
+                <div className="bold-text">
+                  {confidenceMetrics.standardDeviation}
                 </div>
-                <div className="explanation-row">
-                  <div className="explanation-content">
+              </div>
+              <div className="explanation-row">
+                <div className="explanation-content">
                   A measure of spread; the square root of variance.
-                  </div>
                 </div>
-                <div className="grid-row">
-                  <div className="bold-text">IQR</div>
-                  <div className="bold-text">{predictionMetrics.iqr}</div>
-                  <div className="bold-text">{confidenceMetrics.iqr}</div>
+              </div>
+              <div className="grid-row">
+                <div className="bold-text">IQR</div>
+                <div className="bold-text">{predictionMetrics.iqr}</div>
+                <div className="bold-text">{confidenceMetrics.iqr}</div>
+              </div>
+              <div className="explanation-row">
+                <div className="explanation-content">
+                  Interquartile Range (IQR); the range between the first and
+                  third quartile (Q3 - Q1).
                 </div>
-                <div className="explanation-row">
-                  <div className="explanation-content">
-                  Interquartile Range (IQR); the range between the first and third quartile (Q3 - Q1).
-                  </div>
+              </div>
+              <div className="grid-row">
+                <div className="bold-text">Confidence Interval Range</div>
+                <div className="bold-text">
+                  {predictionMetrics.confidenceIntervalRange}
                 </div>
-                <div className="grid-row">
-                  <div className="bold-text">
-                    Confidence Interval Range
-                  </div>
-                  <div className="bold-text">
-                    {predictionMetrics.confidenceIntervalRange}
-                  </div>
-                  <div className="bold-text">
-                    {confidenceMetrics.confidenceIntervalRange}
-                  </div>
+                <div className="bold-text">
+                  {confidenceMetrics.confidenceIntervalRange}
                 </div>
-                <div className="explanation-row">
-                  <div className="explanation-content">
-                  The range of the confidence interval, indicating uncertainty in the estimate.
-                  </div>
+              </div>
+              <div className="explanation-row">
+                <div className="explanation-content">
+                  The range of the confidence interval, indicating uncertainty
+                  in the estimate.
                 </div>
-                <div className="grid-row">
-                  <div className="bold-text">Skewness</div>
-                  <div className="bold-text">{predictionMetrics.skewness}</div>
-                  <div className="bold-text">{confidenceMetrics.skewness}</div>
-                </div>
-                <div className="explanation-row">
-                  <div className="explanation-content">
+              </div>
+              <div className="grid-row">
+                <div className="bold-text">Skewness</div>
+                <div className="bold-text">{predictionMetrics.skewness}</div>
+                <div className="bold-text">{confidenceMetrics.skewness}</div>
+              </div>
+              <div className="explanation-row">
+                <div className="explanation-content">
                   A measure of asymmetry in the data distribution.
-                  </div>
                 </div>
-                <div className="grid-row">
-                  <div className="bold-text">Kurtosis</div>
-                  <div className="bold-text">{predictionMetrics.kurtosis}</div>
-                  <div className="bold-text">{confidenceMetrics.kurtosis}</div>
+              </div>
+              <div className="grid-row">
+                <div className="bold-text">Kurtosis</div>
+                <div className="bold-text">{predictionMetrics.kurtosis}</div>
+                <div className="bold-text">{confidenceMetrics.kurtosis}</div>
+              </div>
+              <div className="explanation-row">
+                <div className="explanation-content">
+                  A measure of whether the data has heavy or light tails
+                  compared to a normal distribution.
                 </div>
-                <div className="explanation-row">
-                  <div className="explanation-content">
-                  A measure of whether the data has heavy or light tails compared to a normal distribution.
-                  </div>
-                </div>
+              </div>
             </div>
           </div>
         </div>

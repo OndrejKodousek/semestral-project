@@ -27,13 +27,6 @@ def main():
             subprocess.run(["python", "processor/llm_processor.py"])
             print("PROCESSOR FINISHED")
             print("-" * 40)
-
-        if update_known_stocks:
-            print("-" * 40)
-            print("STARTING STOCK NAME UPDATER")
-            subprocess.run(["python", "update_known_stocks.py"])
-            print("STOCK NAME UPDATER FINISHED")
-            print("-" * 40)
             
         minutes = 10
         for i in range(0, minutes):

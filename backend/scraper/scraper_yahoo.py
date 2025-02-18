@@ -1,11 +1,9 @@
 import os
 import feedparser
-import json
 import random
 import time
 import unicodedata
-import shutil
-
+import sqlite3
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from selenium import webdriver
@@ -14,13 +12,16 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchDriverException
-
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
-
 from scraper_library import *
 
 driver = getDriver()
+
+def connect_with_timeout(timeout=5.0):
+    conn = sqlite3.connect('data/news.db', timeout=timeout)
+    conn.row_factory = sqlite3.Row  # Enable dictionary-like access
+    return conn
 
 def scrape_yahoo_finance_article(link):
     """Scrape the content of an article from Yahoo Finance."""
@@ -41,7 +42,6 @@ def scrape_yahoo_finance_article(link):
     except TimeoutException:
         log(f"There was no cookies")
         pass
-
 
     log(f"Finding article")
     try:
@@ -70,7 +70,6 @@ def scrape_yahoo_finance_article(link):
     except TimeoutException:
         log(f"Read more not found")
         pass
-
 
     log(f"Finding body")
     body = WebDriverWait(driver, 10).until(
@@ -103,13 +102,20 @@ def main():
     rss_url = "https://finance.yahoo.com/news/rssindex"
     feed = feedparser.parse(rss_url)
 
-    scraped_articles = load_scraped_articles()
-    already_scraped_links = {article["link"] for article in scraped_articles}
+
+    conn = connect_with_timeout()
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT link FROM articles")
+    already_scraped_links = {row["link"] for row in cursor.fetchall()}
+
+    cursor.close()
+    conn.close()
+
 
     new_articles = []
     for entry in feed.entries:
         link = entry.link
-
         if link in already_scraped_links:
             continue
 
@@ -145,22 +151,30 @@ def main():
                 logToFile(f"FAILED, unknown error {link}")
                 continue
 
-        news_entry = {
-            "priority": str(0),
-            "title": purify_text(entry.title),
-            "link": link,
-            "published": entry.published,
-            "source": entry.source.title if hasattr(entry, "source") else "Yahoo News",
-            "content": purify_text(content),
-        }
+        # Insert the new article into the database
 
-        new_articles.append(news_entry)
+        conn = connect_with_timeout()
+        cursor = conn.cursor()
+
+        cursor.execute('''
+            INSERT INTO articles (priority, link, title, published, source, content)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (
+            0,
+            link,
+            purify_text(entry.title),
+            entry.published,
+            entry.source.title if hasattr(entry, "source") else "Yahoo News",
+            purify_text(content)
+        ))
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
         print(f" | SUCCESS")
 
-    if new_articles:
-        scraped_articles.extend(new_articles)
-        save_scraped_articles(scraped_articles)
-        print(f"Saved {len(new_articles)} new articles")
+    # Commit changes and close the database connection
 
     driver.quit()
 
