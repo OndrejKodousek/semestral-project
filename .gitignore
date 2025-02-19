@@ -15,6 +15,7 @@ certificates/
 # API keys
 src/data/API_KEY_GEMINI
 src/data/API_KEY_GROQ
+src/data/API_KEY_OPENROUTER
 
 # Logs
 src/data/failed_processor.log
