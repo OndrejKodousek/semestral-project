@@ -12,14 +12,17 @@ dist/
 dist-ssr/
 certificates/
 
-# Backend
-backend/api_data/*
-backend/data/API_KEY_GEMINI
-backend/data/API_KEY_GROQ
-backend/data/articles.json
-backend/data/failed_processor.log
-backend/data/failed_scrape.log
-backend/env/
+# API keys
+src/data/API_KEY_GEMINI
+src/data/API_KEY_GROQ
+
+# Logs
+src/data/failed_processor.log
+src/data/failed_scrape.log
+
+# venv
+src/env/
+env/
 
 # Python
 *.pyc
@@ -51,3 +54,4 @@ backend/__pycache__/
 # Windows
 Thumbs.db
 backend/data/API_KEY_OPENROUTER
+src/data/news.db
