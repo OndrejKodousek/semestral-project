@@ -71,7 +71,6 @@ const App: React.FC = () => {
             throw new Error(`HTTP error! Status: ${response.status}`);
           }
           const jsonData = await response.json();
-          console.log("Fetched data:", jsonData); // Log the fetched data
           setData(jsonData);
         } catch (error) {
           console.error("Error fetching analysis data:", error);

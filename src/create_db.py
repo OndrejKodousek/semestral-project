@@ -1,10 +1,8 @@
 import sqlite3
 
-# Connect to the SQLite database (or create it if it doesn't exist)
 conn = sqlite3.connect('data/news.db')
 cursor = conn.cursor()
 
-# Create the articles table
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS articles (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -17,7 +15,6 @@ CREATE TABLE IF NOT EXISTS articles (
 );
 ''')
 
-# Create the analysis table
 cursor.execute('''
 CREATE TABLE IF NOT EXISTS analysis (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,7 +41,6 @@ CREATE TABLE IF NOT EXISTS analysis (
 );
 ''')
 
-# Commit changes and close the connection
 conn.commit()
 conn.close()
 

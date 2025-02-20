@@ -6,7 +6,8 @@ import random
 import copy
 import json
 import time
-from google import genai
+import google.generativeai as genai
+from google.api_core import exceptions
 from openai import OpenAI
 from groq import Groq, RateLimitError, APIStatusError
 
@@ -97,28 +98,28 @@ def process_article(entry, model, system_instruction):
     with open(file_path, "r") as f:
         api_key = f.readline().strip()
 
-    client = genai.Client(api_key=api_key)
+    genai.configure(api_key=api_key)
+
+    model = genai.GenerativeModel(
+        model_name=model,
+        system_instruction=system_instruction
+    )
+
 
     try:
-        response = client.models.generate_content(
-            model=model,
-            config=genai.types.GenerateContentConfig(
-                system_instruction=system_instruction
-            ),
-            contents=[entry["content"]],
-        )
+        response = model.generate_content([entry["content"]])
 
-    except genai.errors.ClientError as e:
+    except exceptions.ResourceExhausted as e:
         error_details = traceback.format_exc()
         logToFile(error_details)
-        return f"ERROR-{e.code}", None
-
-    except genai.errors.ServerError as e:
+        return f"ERROR-429", None
+    
+    except exceptions.ServerError as e:
         error_details = traceback.format_exc()
         logToFile(error_details)
-        return f"ERROR-{e.code}", None
+        return f"ERROR-413", None # TODO 413 is specific error
 
-    response_text = response.candidates[0].content.parts[0].text
+    response_text = response.text
 
     if "ERROR-01" in response_text:
         logToFile(f"link={entry['link']}, model={model}, response={response_text}")
@@ -256,46 +257,39 @@ def isValidData(data):
             "confidence_4_day", "confidence_5_day", "confidence_6_day", "confidence_7_day"
         ]
         
-        # Check if all required keys are present
         for key in required_keys:
             if key not in data:
-                return False  # Missing key
+                return False
 
-        # Validate stock and ticker
         invalid_strings = {"", "none", "unknown", "null", "N/A", "error"}
         if str(data["stock"]).strip().lower() in invalid_strings:
             return False
         if str(data["ticker"]).strip().lower() in invalid_strings:
             return False
 
-        # Validate predictions and confidences
         for i in range(1, 8):
-            # Convert prediction to float
             prediction_key = f"prediction_{i}_day"
             try:
                 prediction_value = float(data[prediction_key])
             except (ValueError, TypeError):
-                return False  # Invalid number format
+                return False 
 
-            # Check if prediction is within realistic range
             if not (-1.0 <= prediction_value <= 1.0):
                 return False
 
-            # Convert confidence to float
             confidence_key = f"confidence_{i}_day"
             try:
                 confidence_value = float(data[confidence_key])
             except (ValueError, TypeError):
-                return False  # Invalid number format
+                return False
 
-            # Check if confidence is within the expected range
             if not (0.00 <= confidence_value <= 1.00):
                 return False
 
-        return True  # All checks passed
+        return True
 
     except Exception as e:
-        print(f"Validation error: {e}")  # Debugging: Print the exception
+        print(f"Validation error: {e}")
         return False
 
 
@@ -316,7 +310,6 @@ def main():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Fetch all articles from the database
     cursor.execute('SELECT * FROM articles ORDER BY priority ASC')
     articles = cursor.fetchall()
     conn.close()
@@ -330,6 +323,7 @@ def main():
             if article['id'] in processed_article_ids:
                 continue
             if article['priority'] > 20:
+                # TODO: It's biased
                 continue
 
             print(f"Processing article {shorten_string(article['link'], 60-len(model))} with {model}", end="", flush=True)

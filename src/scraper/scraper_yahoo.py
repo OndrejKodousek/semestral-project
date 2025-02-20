@@ -18,13 +18,7 @@ from scraper_library import *
 
 driver = getDriver()
 
-def connect_with_timeout(timeout=5.0):
-    conn = sqlite3.connect('data/news.db', timeout=timeout)
-    conn.row_factory = sqlite3.Row  # Enable dictionary-like access
-    return conn
-
 def scrape_yahoo_finance_article(link):
-    """Scrape the content of an article from Yahoo Finance."""
     driver.get(link)
     random_delay()
 
@@ -79,13 +73,14 @@ def scrape_yahoo_finance_article(link):
     raw_text = extract_text(body)
     return raw_text
 
+# TODO: Fix this
 def scrape_investors_article(link):
     driver.get(link)
     random_delay()
 
     try:
         body = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located((By.CSS_SELECTOR, "div.single-post-content"))
+            EC.presence_of_element_located((By.CSS_SELECTOR, "div.single-post-content"))
         )
     except TimeoutException:
         return "ERROR-UNKNOWN-STATE"
@@ -102,16 +97,8 @@ def main():
     rss_url = "https://finance.yahoo.com/news/rssindex"
     feed = feedparser.parse(rss_url)
 
-
-    conn = connect_with_timeout()
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT link FROM articles")
-    already_scraped_links = {row["link"] for row in cursor.fetchall()}
-
-    cursor.close()
-    conn.close()
-
+    result = execute_query("SELECT link FROM articles", query_type="SELECT")
+    already_scraped_links = [item['link'] for item in result]
 
     new_articles = []
     for entry in feed.entries:
@@ -151,30 +138,20 @@ def main():
                 logToFile(f"FAILED, unknown error {link}")
                 continue
 
-        # Insert the new article into the database
-
-        conn = connect_with_timeout()
-        cursor = conn.cursor()
-
-        cursor.execute('''
+        insert_query = '''
             INSERT INTO articles (priority, link, title, published, source, content)
             VALUES (?, ?, ?, ?, ?, ?)
-        ''', (
+            '''
+        insert_params = (
             0,
             link,
             purify_text(entry.title),
             entry.published,
             entry.source.title if hasattr(entry, "source") else "Yahoo News",
             purify_text(content)
-        ))
-
-        conn.commit()
-        cursor.close()
-        conn.close()
-
+        )
+        affected_rows = execute_query(insert_query, insert_params, query_type="INSERT")
         print(f" | SUCCESS")
-
-    # Commit changes and close the database connection
 
     driver.quit()
 

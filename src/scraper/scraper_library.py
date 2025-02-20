@@ -2,15 +2,61 @@ import os
 import random
 import time
 import unicodedata
+import sqlite3
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import TimeoutException, NoSuchDriverException
+from typing import Optional, List, Dict, Union
 
 driver = None
 script_dir = os.path.dirname(os.path.abspath(__file__))
+
+def execute_query(
+    query: str,
+    params: Optional[tuple] = None,
+    db_path: str = 'data/news.db',
+    timeout: float = 5.0,
+    query_type: str = "SELECT",
+    use_row_factory: bool = True
+) -> Optional[Union[List[Dict], int]]:
+    try:
+        if query_type not in {"SELECT", "INSERT", "UPDATE", "DELETE"}:
+            raise ValueError("query_type must be one of 'SELECT', 'INSERT', 'UPDATE', 'DELETE'")
+
+        conn = sqlite3.connect(db_path, timeout=timeout)
+        if use_row_factory:
+            conn.row_factory = sqlite3.Row 
+        cursor = conn.cursor()
+
+        if params:
+            cursor.execute(query, params)
+        else:
+            cursor.execute(query)
+
+        if query_type != "SELECT":
+            conn.commit()
+            affected_rows = cursor.rowcount 
+        else:
+            affected_rows = None
+
+        if query_type == "SELECT":
+            results = cursor.fetchall()
+            if use_row_factory:
+                results = [dict(row) for row in results]
+        else:
+            results = None
+
+        cursor.close()
+        conn.close()
+
+        return results if query_type == "SELECT" else affected_rows
+
+    except (sqlite3.Error, ValueError) as e:
+        print(f"An error occurred: {e}")
+        return None
 
 def getDriver():
     options = webdriver.ChromeOptions()

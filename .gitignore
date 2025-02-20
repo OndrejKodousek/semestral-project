@@ -22,8 +22,8 @@ src/data/failed_processor.log
 src/data/failed_scrape.log
 
 # venv
-src/env/
-env/
+src/venv/
+venv/
 
 # Python
 *.pyc
@@ -52,7 +52,5 @@ backend/__pycache__/
 # TypeScript build
 *.tsbuildinfo
 
-# Windows
 Thumbs.db
-backend/data/API_KEY_OPENROUTER
 src/data/news.db

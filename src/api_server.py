@@ -20,8 +20,8 @@ def get_stocks():
         if not model:
             return jsonify({"error": "Model parameter is required"}), 400
 
-        conn = sqlite3.connect('data/news.db')  # Replace with your database path
-        conn.row_factory = sqlite3.Row  # Allows accessing columns by name
+        conn = sqlite3.connect('data/news.db')
+        conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
         cursor.execute('''
@@ -33,8 +33,17 @@ def get_stocks():
         rows = cursor.fetchall()
         conn.close()
 
-        # Create strings in the format "TICKER (Stock Name)"
-        stocks = [f"{row['ticker']} ({row['stock']})" for row in rows]
+        unique_tickers = set()
+        stocks = []
+
+        for row in rows:
+            ticker = row['ticker']
+            if ticker not in unique_tickers:
+                unique_tickers.add(ticker)
+                stocks.append(f"{ticker} ({row['stock']})")
+
+        # Sort alphabetically
+        stocks.sort()
 
         return jsonify(stocks)
 
@@ -50,28 +59,22 @@ def get_stocks():
 @app.route('/api/analysis', methods=['GET'])
 def get_results():
     try:
-        # Extract query parameters
-        ticker_with_name = request.args.get('ticker')  # e.g., "BABA (Alibaba Group Holding Ltd.)"
+        ticker_with_name = request.args.get('ticker')
         model = request.args.get('model')
 
-        # Validate required parameters
         if not ticker_with_name or not model:
             return jsonify({"error": "Ticker and model parameters are required"}), 400
 
-        # Extract the ticker symbol using regex
-        ticker_match = re.match(r"^([A-Z]+)\s*\(.*\)$", ticker_with_name)
+        ticker_match = re.match(r"^([A-Z0-9.-\^]+)\s*\(.*\)$", ticker_with_name)
         if not ticker_match:
             return jsonify({"error": "Invalid ticker format"}), 400
 
-        ticker = ticker_match.group(1)  # Extract "BABA" from "BABA (Alibaba Group Holding Ltd.)"
-        #print(f"Extracted ticker: {ticker}")
+        ticker = ticker_match.group(1)
 
-        # Connect to the SQLite database
-        conn = sqlite3.connect('data/news.db')  # Replace with your database path
-        conn.row_factory = sqlite3.Row  # Allows accessing columns by name
+        conn = sqlite3.connect('data/news.db')
+        conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
-        # Query the database for analysis data
         query = '''
             SELECT 
                 a.title, 
@@ -103,9 +106,6 @@ def get_results():
         rows = cursor.fetchall()
         conn.close()
 
-        # Log the number of rows returned
-
-        # Format the results
         results = []
         for row in rows:
             entry = {
