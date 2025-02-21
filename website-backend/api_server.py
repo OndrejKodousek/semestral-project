@@ -7,28 +7,44 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app) 
+CORS(app)
+
+
+def get_project_root():
+    marker = ".git"
+    current_path = Path(__file__).resolve()
+    for parent in current_path.parents:
+        if (parent / marker).exists():
+            return parent
+    print("ERROR: Failed to find root folder of project")
+    exit(1)
+
 
 def extract_ticker(company_string):
     match = re.match(r"^([A-Z]+)", company_string)
     return match.group(1) if match else None
 
-@app.route('/api/stocks', methods=['GET'])
+
+@app.route("/api/stocks", methods=["GET"])
 def get_stocks():
     try:
-        model = request.args.get('model')
+        model = request.args.get("model")
         if not model:
             return jsonify({"error": "Model parameter is required"}), 400
 
-        conn = sqlite3.connect('data/news.db')
+        db_path = os.path.join(get_project_root(), "data", "news.db")
+        conn = sqlite3.connect(db_path)
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
-        cursor.execute('''
+        cursor.execute(
+            """
               SELECT an.ticker, an.stock
               FROM analysis AS an
               WHERE an.model_name = ?
-            ''', (model,))
+            """,
+            (model,),
+        )
 
         rows = cursor.fetchall()
         conn.close()
@@ -37,7 +53,7 @@ def get_stocks():
         stocks = []
 
         for row in rows:
-            ticker = row['ticker']
+            ticker = row["ticker"]
             if ticker not in unique_tickers:
                 unique_tickers.add(ticker)
                 stocks.append(f"{ticker} ({row['stock']})")
@@ -55,12 +71,11 @@ def get_stocks():
         return jsonify({"error": "Unexpected error"}), 500
 
 
-
-@app.route('/api/analysis', methods=['GET'])
+@app.route("/api/analysis", methods=["GET"])
 def get_results():
     try:
-        ticker_with_name = request.args.get('ticker')
-        model = request.args.get('model')
+        ticker_with_name = request.args.get("ticker")
+        model = request.args.get("model")
 
         if not ticker_with_name or not model:
             return jsonify({"error": "Ticker and model parameters are required"}), 400
@@ -71,11 +86,12 @@ def get_results():
 
         ticker = ticker_match.group(1)
 
-        conn = sqlite3.connect('data/news.db')
+        db_path = os.path.join(get_project_root(), "data", "news.db")
+        conn = sqlite3.connect(db_path)
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
-        query = '''
+        query = """
             SELECT 
                 a.title, 
                 a.source, 
@@ -100,7 +116,7 @@ def get_results():
                 articles AS a ON an.article_id = a.id
             WHERE 
                 an.ticker = ? AND an.model_name = ?
-        '''
+        """
         cursor.execute(query, (ticker, model))
 
         rows = cursor.fetchall()
@@ -109,39 +125,39 @@ def get_results():
         results = []
         for row in rows:
             entry = {
-                "title": row['title'],
-                "source": row['source'],
-                "link": row['link'],
+                "title": row["title"],
+                "source": row["source"],
+                "link": row["link"],
                 "predictions": {
                     "1_day": {
-                        "prediction": row['pred_1_day'],
-                        "confidence": row['conf_1_day']
+                        "prediction": row["pred_1_day"],
+                        "confidence": row["conf_1_day"],
                     },
                     "2_day": {
-                        "prediction": row['pred_2_day'],
-                        "confidence": row['conf_2_day']
+                        "prediction": row["pred_2_day"],
+                        "confidence": row["conf_2_day"],
                     },
                     "3_day": {
-                        "prediction": row['pred_3_day'],
-                        "confidence": row['conf_3_day']
+                        "prediction": row["pred_3_day"],
+                        "confidence": row["conf_3_day"],
                     },
                     "4_day": {
-                        "prediction": row['pred_4_day'],
-                        "confidence": row['conf_4_day']
+                        "prediction": row["pred_4_day"],
+                        "confidence": row["conf_4_day"],
                     },
                     "5_day": {
-                        "prediction": row['pred_5_day'],
-                        "confidence": row['conf_5_day']
+                        "prediction": row["pred_5_day"],
+                        "confidence": row["conf_5_day"],
                     },
                     "6_day": {
-                        "prediction": row['pred_6_day'],
-                        "confidence": row['conf_6_day']
+                        "prediction": row["pred_6_day"],
+                        "confidence": row["conf_6_day"],
                     },
                     "7_day": {
-                        "prediction": row['pred_7_day'],
-                        "confidence": row['conf_7_day']
-                    }
-                }
+                        "prediction": row["pred_7_day"],
+                        "confidence": row["conf_7_day"],
+                    },
+                },
             }
             results.append(entry)
 
@@ -154,5 +170,6 @@ def get_results():
         print(f"Unexpected error: {e}")
         return jsonify({"error": "Unexpected error"}), 500
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=False)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=False)

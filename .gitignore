@@ -8,21 +8,19 @@ lerna-debug.log*
 
 # Dependencies
 node_modules/
+website/node_modules/
 dist/
+website/dist/
 dist-ssr/
 certificates/
 
 # API keys
-src/data/API_KEY_GEMINI
-src/data/API_KEY_GROQ
-src/data/API_KEY_OPENROUTER
-
-# Logs
-src/data/failed_processor.log
-src/data/failed_scrape.log
+data/API_KEY_GEMINI
+data/API_KEY_GROQ
+data/API_KEY_OPENROUTER
+*API_KEY*
 
 # venv
-src/venv/
 venv/
 
 # Python
@@ -31,7 +29,9 @@ venv/
 *.py[cod]
 __pycache__/
 **/__pycache__/
-backend/__pycache__/
+analyzer/__pycache__/
+scraper/__pycache__/
+website-backend/__pycache__/
 
 # Editor directories and files
 .vscode/

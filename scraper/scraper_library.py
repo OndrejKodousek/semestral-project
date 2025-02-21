@@ -10,25 +10,36 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import TimeoutException, NoSuchDriverException
 from typing import Optional, List, Dict, Union
+from pathlib import Path
 
 driver = None
-script_dir = os.path.dirname(os.path.abspath(__file__))
+
+
+def get_project_root():
+    marker = ".git"
+    current_path = Path(__file__).resolve()
+    for parent in current_path.parents:
+        if (parent / marker).exists():
+            return parent
+    print("ERROR: Failed to find root folder of project")
+    exit(1)
+
 
 def execute_query(
-    query: str,
-    params: Optional[tuple] = None,
-    db_path: str = 'data/news.db',
-    timeout: float = 5.0,
-    query_type: str = "SELECT",
-    use_row_factory: bool = True
-) -> Optional[Union[List[Dict], int]]:
+    query, params=None, timeout=5.0, query_type="SELECT", use_row_factory=True
+):
     try:
         if query_type not in {"SELECT", "INSERT", "UPDATE", "DELETE"}:
-            raise ValueError("query_type must be one of 'SELECT', 'INSERT', 'UPDATE', 'DELETE'")
+            raise ValueError(
+                "query_type must be one of 'SELECT', 'INSERT', 'UPDATE', 'DELETE'"
+            )
 
+        db_path = os.path.join(get_project_root(), "data", "news.db")
         conn = sqlite3.connect(db_path, timeout=timeout)
+
         if use_row_factory:
-            conn.row_factory = sqlite3.Row 
+            conn.row_factory = sqlite3.Row
+
         cursor = conn.cursor()
 
         if params:
@@ -38,7 +49,7 @@ def execute_query(
 
         if query_type != "SELECT":
             conn.commit()
-            affected_rows = cursor.rowcount 
+            affected_rows = cursor.rowcount
         else:
             affected_rows = None
 
@@ -58,6 +69,7 @@ def execute_query(
         print(f"An error occurred: {e}")
         return None
 
+
 def getDriver():
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
@@ -65,20 +77,23 @@ def getDriver():
         "user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0"
     )
     try:
-      driver = webdriver.Chrome(options=options)
+        driver = webdriver.Chrome(options=options)
     except NoSuchDriverException:
-      chromedriver_path = "/usr/bin/chromedriver"
-      service = webdriver.ChromeService(executable_path=chromedriver_path)
-      driver = webdriver.Chrome(options=options, service=service)
+        chromedriver_path = "/usr/bin/chromedriver"
+        service = webdriver.ChromeService(executable_path=chromedriver_path)
+        driver = webdriver.Chrome(options=options, service=service)
 
     return driver
+
 
 def log(text):
     if True is False:
         print(text)
 
+
 def random_delay(min_seconds=1, max_seconds=5):
     time.sleep(random.uniform(min_seconds, max_seconds))
+
 
 def random_click(element, driver):
     action = ActionChains(driver)
@@ -86,9 +101,11 @@ def random_click(element, driver):
     y_offset = random.randint(-10, 10)
     action.move_to_element_with_offset(element, x_offset, y_offset).click().perform()
 
+
 def extract_text(element):
     p_tags = element.find_elements(By.CSS_SELECTOR, "p")
     return "".join(tag.get_attribute("innerHTML") for tag in p_tags)
+
 
 def purify_text(input_text):
     soup = BeautifulSoup(input_text, "html.parser")
@@ -99,6 +116,7 @@ def purify_text(input_text):
 
     return ascii_text
 
+
 def shorten_string(link, max_length=80):
     if len(link) <= max_length:
         spaces = max_length - len(link)
@@ -106,15 +124,17 @@ def shorten_string(link, max_length=80):
     part_length = (max_length - 3) // 2
     return link[:part_length] + "..." + link[-part_length:]
 
+
 def extract_domain(link):
     parsed_url = urlparse(link)
     netloc = parsed_url.netloc
-    if netloc.startswith('www.'):
+    if netloc.startswith("www."):
         netloc = netloc[4:]
     return netloc
 
+
 def logToFile(string):
-    file_path = os.path.join(script_dir, "..", "data", "failed_scrape.log")
+    file_path = os.path.join(get_project_root(), "scraper", "scraper_log.log")
 
     with open(file_path, "a+") as f:
         line = f"{string}\n"

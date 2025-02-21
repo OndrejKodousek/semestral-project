@@ -7,104 +7,123 @@ import copy
 import json
 import time
 import google.generativeai as genai
+from pathlib import Path
 from google.api_core import exceptions
 from openai import OpenAI
 from groq import Groq, RateLimitError, APIStatusError
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
 
-# Connect to the SQLite database
+def get_project_root():
+    marker = ".git"
+    current_path = Path(__file__).resolve()
+    for parent in current_path.parents:
+        if (parent / marker).exists():
+            return parent
+    print("ERROR: Failed to find root folder of project")
+    exit(1)
+
+
 def get_db_connection():
-    conn = sqlite3.connect('data/news.db', timeout=30)  # Increase timeout to 30 seconds
-    conn.row_factory = sqlite3.Row  # Allows accessing columns by name
+
+    conn = sqlite3.connect("data/news.db", timeout=30)
+    conn.row_factory = sqlite3.Row
     return conn
 
-# Load processed articles from the database
+
 def load_processed_articles(model):
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Fetch processed articles for the given model
-    cursor.execute('''
+    cursor.execute(
+        """
         SELECT article_id FROM analysis WHERE model_name = ?
-    ''', (model,))
+    """,
+        (model,),
+    )
     processed_articles = cursor.fetchall()
-    processed_article_ids = {row['article_id'] for row in processed_articles}
+    processed_article_ids = {row["article_id"] for row in processed_articles}
 
     conn.close()
     return processed_article_ids
 
+
 # Save processed articles to the database
 def save_processed_articles(article_id, model, data):
     max_retries = 5
-    retry_delay = 1  # Start with 1 second delay
+    retry_delay = 1
 
     for attempt in range(max_retries):
         try:
             conn = get_db_connection()
             cursor = conn.cursor()
 
-            # Insert analysis results into the analysis table
-            cursor.execute('''
+            cursor.execute(
+                """
                 INSERT INTO analysis (
                 article_id, model_name, published, ticker, stock, 
                 pred_1_day, pred_2_day, pred_3_day, pred_4_day, pred_5_day, pred_6_day, pred_7_day,
                 conf_1_day, conf_2_day, conf_3_day, conf_4_day, conf_5_day, conf_6_day, conf_7_day)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ''', (
-                article_id,
-                model,
-                data.get('published'),
-                data.get('ticker'),
-                data.get('stock'),
-                data.get('prediction_1_day'),
-                data.get('prediction_2_day'),
-                data.get('prediction_3_day'),
-                data.get('prediction_4_day'),
-                data.get('prediction_5_day'),
-                data.get('prediction_6_day'),
-                data.get('prediction_7_day'),
-                data.get('confidence_1_day'),
-                data.get('confidence_2_day'),
-                data.get('confidence_3_day'),
-                data.get('confidence_4_day'),
-                data.get('confidence_5_day'),
-                data.get('confidence_6_day'),
-                data.get('confidence_7_day'),
-            ))
+            """,
+                (
+                    article_id,
+                    model,
+                    data.get("published"),
+                    data.get("ticker"),
+                    data.get("stock"),
+                    data.get("prediction_1_day"),
+                    data.get("prediction_2_day"),
+                    data.get("prediction_3_day"),
+                    data.get("prediction_4_day"),
+                    data.get("prediction_5_day"),
+                    data.get("prediction_6_day"),
+                    data.get("prediction_7_day"),
+                    data.get("confidence_1_day"),
+                    data.get("confidence_2_day"),
+                    data.get("confidence_3_day"),
+                    data.get("confidence_4_day"),
+                    data.get("confidence_5_day"),
+                    data.get("confidence_6_day"),
+                    data.get("confidence_7_day"),
+                ),
+            )
             conn.commit()
             cursor.close()
             conn.close()
-            break  # Success, exit the retry loop
+            break
 
         except sqlite3.OperationalError as e:
             if "database is locked" in str(e):
-                print(f"Database locked, retrying in {retry_delay} seconds (attempt {attempt + 1}/{max_retries})")
+                print(
+                    f"Database locked, retrying in {retry_delay} seconds (attempt {attempt + 1}/{max_retries})"
+                )
                 time.sleep(retry_delay)
-                retry_delay *= 2  # Exponential backoff
+                retry_delay *= 2
             else:
-                raise e  # Re-raise other errors
+                raise e
     else:
         raise Exception("Failed to save processed articles after multiple retries")
 
+
 def logToFile(string):
-    file_path = os.path.join(script_dir, "..", "data", "failed_processor.log")
+    file_path = os.path.join(get_project_root(), "analyzer", "analyzer_log.log")
+
     with open(file_path, "a+") as f:
         line = f"{string}\n"
         f.write(line)
 
+
 def process_article(entry, model, system_instruction):
-    file_path = os.path.join(script_dir, "..", "data", "API_KEY_GEMINI")
+
+    file_path = os.path.join(get_project_root(), "data", "API_KEY_GEMINI")
     with open(file_path, "r") as f:
         api_key = f.readline().strip()
 
     genai.configure(api_key=api_key)
 
     model = genai.GenerativeModel(
-        model_name=model,
-        system_instruction=system_instruction
+        model_name=model, system_instruction=system_instruction
     )
-
 
     try:
         response = model.generate_content([entry["content"]])
@@ -113,11 +132,14 @@ def process_article(entry, model, system_instruction):
         error_details = traceback.format_exc()
         logToFile(error_details)
         return f"ERROR-429", None
-    
+
     except exceptions.ServerError as e:
         error_details = traceback.format_exc()
         logToFile(error_details)
-        return f"ERROR-413", None # TODO 413 is specific error
+        return (
+            f"ERROR-413",
+            None,
+        )  # TODO 413 is specific error, this exception probably catches more errors
 
     response_text = response.text
 
@@ -139,19 +161,23 @@ def process_article(entry, model, system_instruction):
 
     return None, {**entry, **data}
 
+
 def shorten_string(link, max_length=60):
     if len(link) <= max_length:
         return link
     part_length = (max_length - 3) // 2
     return link[:part_length] + "..." + link[-part_length:]
 
+
 def str_to_int(string):
     matches = re.findall(r"\d+", str(string))
     integer = int(matches[0])
     return integer
 
+
 def process_article_groq(article, model, system_instruction):
-    file_path = os.path.join(script_dir, "..", "data", "API_KEY_GROQ")
+    file_path = os.path.join(get_project_root(), "data", "API_KEY_GROQ")
+
     with open(file_path, "r") as f:
         api_key = f.readline().strip()
 
@@ -197,8 +223,9 @@ def process_article_groq(article, model, system_instruction):
 
     return None, {**article, **data}
 
+
 def process_article_openrouter(article, model, system_instruction):
-    file_path = os.path.join(script_dir, "..", "data", "API_KEY_OPENROUTER")
+    file_path = os.path.join(get_project_root(), "data", "API_KEY_OPENROUTER")
     with open(file_path, "r") as f:
         api_key = f.readline().strip()
 
@@ -213,7 +240,7 @@ def process_article_openrouter(article, model, system_instruction):
             model=model,
         )
         if chat_completion.choices == None:
-            error_code = str(chat_completion.error['code'])
+            error_code = str(chat_completion.error["code"])
             if error_code == "429":
                 error_details = traceback.format_exc()
                 logToFile(error_details)
@@ -247,16 +274,28 @@ def process_article_openrouter(article, model, system_instruction):
 
     return None, {**article, **data}
 
+
 def isValidData(data):
     try:
         required_keys = [
-            "stock", "ticker",
-            "prediction_1_day", "prediction_2_day", "prediction_3_day",
-            "prediction_4_day", "prediction_5_day", "prediction_6_day", "prediction_7_day",
-            "confidence_1_day", "confidence_2_day", "confidence_3_day",
-            "confidence_4_day", "confidence_5_day", "confidence_6_day", "confidence_7_day"
+            "stock",
+            "ticker",
+            "prediction_1_day",
+            "prediction_2_day",
+            "prediction_3_day",
+            "prediction_4_day",
+            "prediction_5_day",
+            "prediction_6_day",
+            "prediction_7_day",
+            "confidence_1_day",
+            "confidence_2_day",
+            "confidence_3_day",
+            "confidence_4_day",
+            "confidence_5_day",
+            "confidence_6_day",
+            "confidence_7_day",
         ]
-        
+
         for key in required_keys:
             if key not in data:
                 return False
@@ -272,7 +311,7 @@ def isValidData(data):
             try:
                 prediction_value = float(data[prediction_key])
             except (ValueError, TypeError):
-                return False 
+                return False
 
             if not (-1.0 <= prediction_value <= 1.0):
                 return False
@@ -294,15 +333,23 @@ def isValidData(data):
 
 
 def main():
-    file_path = os.path.join(script_dir, "..", "data", "system_instruction.txt")
+    file_path = os.path.join(get_project_root(), "analyzer", "system_instruction.txt")
     with open(file_path, "r") as f:
         system_instruction = f.read().strip()
 
     models = [
-        "gemini-1.5-flash", "gemini-2.0-flash", "gemini-2.0-flash-lite-preview",
-        "gemini-2.0-pro-exp", "gemini-2.0-flash-exp", "llama-3.3-70b-versatile",
-        "llama-3.1-8b-instant", "llama3-70b-8192", "llama3-8b-8192", "gemma2-9b-it",
-        "mixtral-8x7b-32768", "deepseek/deepseek-chat:free"
+        "gemini-1.5-flash",
+        "gemini-2.0-flash",
+        "gemini-2.0-flash-lite-preview",
+        "gemini-2.0-pro-exp",
+        "gemini-2.0-flash-exp",
+        "llama-3.3-70b-versatile",
+        "llama-3.1-8b-instant",
+        "llama3-70b-8192",
+        "llama3-8b-8192",
+        "gemma2-9b-it",
+        "mixtral-8x7b-32768",
+        "deepseek/deepseek-chat:free",
     ]
 
     total_new_processed_entries = 0
@@ -310,7 +357,7 @@ def main():
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    cursor.execute('SELECT * FROM articles ORDER BY priority ASC')
+    cursor.execute("SELECT * FROM articles ORDER BY priority ASC")
     articles = cursor.fetchall()
     conn.close()
 
@@ -320,27 +367,40 @@ def main():
         # Process only unprocessed articles
         new_processed_articles = []
         for article in articles:
-            if article['id'] in processed_article_ids:
+            if article["id"] in processed_article_ids:
                 continue
-            if article['priority'] > 20:
+            if article["priority"] > 20:
                 # TODO: It's biased
                 continue
 
-            print(f"Processing article {shorten_string(article['link'], 60-len(model))} with {model}", end="", flush=True)
+            print(
+                f"Processing article {shorten_string(article['link'], 60-len(model))} with {model}",
+                end="",
+                flush=True,
+            )
 
             if "gemini" in model:
-                error_code, processed_entry = process_article(article, model, system_instruction)
+                error_code, processed_entry = process_article(
+                    article, model, system_instruction
+                )
             elif "deepseek/deepseek-chat:free" == model:
-                error_code, processed_entry = process_article_openrouter(article, model, system_instruction)
+                error_code, processed_entry = process_article_openrouter(
+                    article, model, system_instruction
+                )
             else:
-                error_code, processed_entry = process_article_groq(article, model, system_instruction)
+                error_code, processed_entry = process_article_groq(
+                    article, model, system_instruction
+                )
 
             if error_code:
                 if error_code == "ERROR-01":
                     print(f" | FAILED, couldn't determine relevant stock for article")
                     conn = get_db_connection()
                     cursor = conn.cursor()
-                    cursor.execute('UPDATE articles SET priority = priority + 1 WHERE id = ?', (article['id'],))
+                    cursor.execute(
+                        "UPDATE articles SET priority = priority + 1 WHERE id = ?",
+                        (article["id"],),
+                    )
                     conn.commit()
                     conn.close()
                 elif error_code == "ERROR-02":
@@ -357,11 +417,12 @@ def main():
                 continue
             elif isValidData(processed_entry):
                 print(f" | SUCCESS")
-                save_processed_articles(article['id'], model, processed_entry)
+                save_processed_articles(article["id"], model, processed_entry)
             else:
                 print(f" | FAILED, data format is invalid")
 
     print(f"Processed {total_new_processed_entries} new entries")
+
 
 if __name__ == "__main__":
     main()
