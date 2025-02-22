@@ -1,6 +1,10 @@
 import subprocess
 import time
 import sys
+import os
+
+from pathlib import Path
+
 
 def get_project_root():
     marker = ".git"
@@ -11,12 +15,13 @@ def get_project_root():
     print("ERROR: Failed to find root folder of project")
     exit(1)
 
+
 def main():
     args = sys.argv[1:]
     scrap = True
     process = True
     update_known_stocks = True
-    
+
     if "--scrap-only" in args or "-s" in args:
         process = False
     elif "--process-only" in args or "-p" in args:
@@ -40,7 +45,7 @@ def main():
             subprocess.run(["python", analyzer_path])
             print("PROCESSOR FINISHED")
             print("-" * 40)
-            
+
         minutes = 10
         for i in range(0, minutes):
             print(f"Process will run again in {minutes-i} minutes")

@@ -1,22 +1,10 @@
 body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 100vw;
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .overflow-y-auto {
   overflow-y: auto;
-}
-
-.flex-grow-overflow {
-  flex-grow: 1;
-  overflow: auto;
-}
-
-.stats-column-divider {
-  border-right: 1px solid #dee2e6;
 }
 
 .inset-container {
@@ -29,99 +17,36 @@ body {
   flex-direction: column;
   flex-grow: 1;
   overflow-y: auto;
-  /* Enable scrollbar if needed */
+  max-height: 100vh;
 }
 
-.green-text {
-  color: rgb(30, 100, 30);
+.article-row {
+  border: 2px solid rgb(119, 119, 119);
+  border-radius: 5px;
+}
+
+.article-title a {
+  text-decoration: none;
   font-weight: bold;
 }
 
-.red-text {
-  color: rgb(150, 30, 30);
-  font-weight: bold;
-}
-
-.bold-text {
-  font-weight: bold;
-}
-
-html,
-body,
-#root,
-.container-fluid {
-  height: 100%;
-  margin: 0;
-}
-
-.row {
-  height: 100%;
-  /* Ensure full height */
-}
-
-.col-7 {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  /* Ensure it stretches */
-}
-
-html,
-body,
-#root,
-.container-fluid {
-  height: 100%;
-  margin: 0;
-}
-
-.row {
-  height: 100%;
-}
-
-.col-6 {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.table-container {
-  flex-grow: 1;
-  overflow-y: auto;
-}
-
-.flex-overflow {
-  flex-grow: 1;
-  overflow-y: auto;
-}
-
-.inset-container {
-  flex-grow: 1;
-  overflow-y: auto;
+.article-body {
+  text-shadow: 2px 0px 10px #ffffff;
 }
 
 .no-select {
-  user-select: none; /* Standard syntax */
-}
-
-/* Ensure the selected option stays blue even when out of focus */
-select option:checked {
-  background-color: #007bff; /* Bootstrap's primary blue color */
-  color: white; /* Ensure text is readable */
-}
-
-/* Optional: Style the select element itself */
-.form-select {
-  background-color: white;
-  border: 1px solid #ced4da;
-  border-radius: 4px;
-  padding: 8px;
-  font-size: 16px;
+  user-select: none;
 }
 
 .drop-shadow {
   box-shadow: 2px 1px 4px rgb(0, 0, 0);
 }
 
-.hidden{
+.hidden {
   display: none;
+}
+
+.graph {
+  width: 100%;
+  margin: 0;
 }

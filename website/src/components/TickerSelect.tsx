@@ -1,9 +1,5 @@
 import React from "react";
-
-interface TickerSelectProps {
-  setTicker: (ticker: string) => void;
-  stockNames: string[];
-}
+import { TickerSelectProps } from "../utils/interfaces";
 
 const TickerSelect: React.FC<TickerSelectProps> = ({
   setTicker,

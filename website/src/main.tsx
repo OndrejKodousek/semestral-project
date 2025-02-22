@@ -1,10 +1,10 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./assets/styles/index.css";
-import "./assets/styles/table.css";
-import "./assets/styles/radio.css";
-import App from "./App.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./assets/styles/index.css";
+import "./assets/styles/input.css";
+import "./assets/styles/backdrop.css";
+import App from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

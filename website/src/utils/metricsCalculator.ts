@@ -1,6 +1,3 @@
-// metricsCalculator.ts
-
-// Helper function to calculate the median
 export const calculateMedian = (sortedValues: number[]): number => {
   const mid = Math.floor(sortedValues.length / 2);
   return sortedValues.length % 2 !== 0
@@ -8,7 +5,6 @@ export const calculateMedian = (sortedValues: number[]): number => {
     : (sortedValues[mid - 1] + sortedValues[mid]) / 2;
 };
 
-// Helper function to calculate the variance
 export const calculateVariance = (values: number[], mean: number): number => {
   return (
     values.reduce((sum, value) => sum + Math.pow(value - mean, 2), 0) /
@@ -16,7 +12,6 @@ export const calculateVariance = (values: number[], mean: number): number => {
   );
 };
 
-// Helper function to calculate the interquartile range (IQR)
 export const calculateIQR = (sortedValues: number[]): number => {
   const q1 = calculateMedian(
     sortedValues.slice(0, Math.floor(sortedValues.length / 2)),
@@ -27,7 +22,6 @@ export const calculateIQR = (sortedValues: number[]): number => {
   return q3 - q1;
 };
 
-// Helper function to calculate the confidence interval range
 export const calculateConfidenceIntervalRange = (
   values: number[],
   standardDeviation: number,
@@ -36,7 +30,6 @@ export const calculateConfidenceIntervalRange = (
   return zScore * (standardDeviation / Math.sqrt(values.length));
 };
 
-// Helper function to calculate skewness
 export const calculateSkewness = (
   values: number[],
   mean: number,
@@ -53,7 +46,6 @@ export const calculateSkewness = (
   );
 };
 
-// Helper function to calculate kurtosis
 export const calculateKurtosis = (
   values: number[],
   mean: number,
@@ -71,7 +63,6 @@ export const calculateKurtosis = (
   );
 };
 
-// Main function to calculate all metrics
 export const calculateMetrics = (
   values: number[],
 ): {
@@ -116,7 +107,6 @@ export const calculateMetrics = (
   const skewness = calculateSkewness(values, average, standardDeviation);
   const kurtosis = calculateKurtosis(values, average, standardDeviation);
 
-  // Format values to percentages (where applicable) and 3 decimal places
   const formatValue = (value: number, isPercentage: boolean = true): string => {
     const formattedValue = (value * (isPercentage ? 100 : 1)).toFixed(3);
     return isPercentage ? `${formattedValue}%` : formattedValue;

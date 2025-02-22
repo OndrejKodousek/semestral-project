@@ -2,12 +2,18 @@ import json
 import os
 import re
 import sqlite3
+import yfinance as yf
 
+from pathlib import Path
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
+from datetime import datetime, timedelta
+
 
 app = Flask(__name__)
 CORS(app)
+
+# gunicorn --bind 0.0.0.0:5000 website-backend/api_server:app
 
 
 def get_project_root():
@@ -25,12 +31,43 @@ def extract_ticker(company_string):
     return match.group(1) if match else None
 
 
+@app.route("/api/historical-data", methods=["GET"])
+def historical_data():
+    ticker = request.args.get("ticker")
+    published = request.args.get("published")
+
+    try:
+        published_date = datetime.strptime(published, "%Y-%m-%d")
+
+        end_date = published_date + timedelta(days=7)
+
+        stock = yf.Ticker(ticker)
+        historical_data = stock.history(start=published_date, end=end_date)
+
+        published_price = historical_data.iloc[0]["Close"]
+
+        percentage_changes = []
+        for date, row in historical_data.iterrows():
+            close_price = row["Close"]
+            percentage_change = (close_price - published_price) / published_price
+            percentage_changes.append(percentage_change)
+
+        return jsonify(percentage_changes)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route("/api/stocks", methods=["GET"])
 def get_stocks():
     try:
         model = request.args.get("model")
-        if not model:
-            return jsonify({"error": "Model parameter is required"}), 400
+        min_articles = request.args.get("min_articles")
+        print(min_articles)
+        if not model or not min_articles:
+            return (
+                jsonify({"error": "Model and min_articles parameters are required"}),
+                400,
+            )
 
         db_path = os.path.join(get_project_root(), "data", "news.db")
         conn = sqlite3.connect(db_path)
@@ -39,11 +76,13 @@ def get_stocks():
 
         cursor.execute(
             """
-              SELECT an.ticker, an.stock
-              FROM analysis AS an
-              WHERE an.model_name = ?
+            SELECT an.ticker, an.stock
+            FROM analysis AS an
+            WHERE an.model_name = ?
+            GROUP BY an.ticker
+            HAVING COUNT(an.ticker) >= ?
             """,
-            (model,),
+            (model, int(min_articles)),
         )
 
         rows = cursor.fetchall()
@@ -74,17 +113,11 @@ def get_stocks():
 @app.route("/api/analysis", methods=["GET"])
 def get_results():
     try:
-        ticker_with_name = request.args.get("ticker")
+        ticker = request.args.get("ticker")
         model = request.args.get("model")
 
-        if not ticker_with_name or not model:
+        if not ticker or not model:
             return jsonify({"error": "Ticker and model parameters are required"}), 400
-
-        ticker_match = re.match(r"^([A-Z0-9.-\^]+)\s*\(.*\)$", ticker_with_name)
-        if not ticker_match:
-            return jsonify({"error": "Invalid ticker format"}), 400
-
-        ticker = ticker_match.group(1)
 
         db_path = os.path.join(get_project_root(), "data", "news.db")
         conn = sqlite3.connect(db_path)
@@ -95,7 +128,9 @@ def get_results():
             SELECT 
                 a.title, 
                 a.source, 
-                a.link, 
+                a.link,
+                a.published, 
+                an.summary,
                 an.pred_1_day, 
                 an.conf_1_day, 
                 an.pred_2_day, 
@@ -128,6 +163,9 @@ def get_results():
                 "title": row["title"],
                 "source": row["source"],
                 "link": row["link"],
+                "published": row["published"],
+                "summary": row["summary"],
+                "ticker": ticker,
                 "predictions": {
                     "1_day": {
                         "prediction": row["pred_1_day"],

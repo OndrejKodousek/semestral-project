@@ -60,10 +60,10 @@ def save_processed_articles(article_id, model, data):
             cursor.execute(
                 """
                 INSERT INTO analysis (
-                article_id, model_name, published, ticker, stock, 
+                article_id, model_name, published, ticker, stock, summary,
                 pred_1_day, pred_2_day, pred_3_day, pred_4_day, pred_5_day, pred_6_day, pred_7_day,
                 conf_1_day, conf_2_day, conf_3_day, conf_4_day, conf_5_day, conf_6_day, conf_7_day)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
                 (
                     article_id,
@@ -71,6 +71,7 @@ def save_processed_articles(article_id, model, data):
                     data.get("published"),
                     data.get("ticker"),
                     data.get("stock"),
+                    data.get("summary"),
                     data.get("prediction_1_day"),
                     data.get("prediction_2_day"),
                     data.get("prediction_3_day"),
@@ -280,6 +281,7 @@ def isValidData(data):
         required_keys = [
             "stock",
             "ticker",
+            "summary",
             "prediction_1_day",
             "prediction_2_day",
             "prediction_3_day",
@@ -345,12 +347,14 @@ def main():
         "gemini-2.0-flash-exp",
         "llama-3.3-70b-versatile",
         "llama-3.1-8b-instant",
-        "llama3-70b-8192",
-        "llama3-8b-8192",
         "gemma2-9b-it",
         "mixtral-8x7b-32768",
         "deepseek/deepseek-chat:free",
     ]
+        # "llama3-70b-8192",
+        # "llama3-8b-8192",
+
+    random.shuffle(models)
 
     total_new_processed_entries = 0
 

@@ -1,0 +1,17 @@
+.green-text {
+  color: rgb(30, 100, 30);
+  font-weight: bold;
+}
+
+.red-text {
+  color: rgb(150, 30, 30);
+  font-weight: bold;
+}
+
+.bold-text {
+  font-weight: bold;
+}
+
+.no-select {
+  user-select: none;
+}

@@ -1,0 +1,99 @@
+.article-row {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.article-row::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transform: translate(-25%, 0) rotate(-45deg);
+  background-size: 25%;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  opacity: 0.15;
+}
+
+.backdrop-bloomberg::before {
+  background-image: url("../images/bloomberg.png");
+}
+
+.backdrop-motley-fool::before {
+  background-image: url("../images/motley_fool.png");
+}
+
+.backdrop-yahoo-finance::before {
+  background-image: url("../images/yahoo_finance.png");
+}
+
+.backdrop-reuters::before {
+  background-image: url("../images/reuters.png");
+}
+
+.backdrop-freight-waves::before {
+  background-image: url("../images/freight_waves.png");
+}
+
+.backdrop-freightwaves::before {
+  background-image: url("../images/freight_waves.png");
+}
+
+.backdrop-investopedia::before {
+  background-image: url("../images/investopedia.png");
+}
+
+.backdrop-marketwatch::before {
+  background-image: url("../images/marketwatch.png");
+}
+
+.backdrop-quartz::before {
+  background-image: url("../images/quartz.png");
+}
+
+.backdrop-associated-press::before,
+.backdrop-associated-press-finance::before {
+  background-image: url("../images/associated_press_finance.png");
+}
+
+.backdrop-benzinga::before {
+  background-image: url("../images/benzinga.png");
+}
+
+.backdrop-fortune::before {
+  background-image: url("../images/fortune.png");
+}
+
+.backdrop-south-china-morning-post::before {
+  background-image: url("../images/south_china_morning_post.png");
+  background-size: 18%;
+}
+
+.backdrop-etf-com::before {
+  background-image: url("../images/etf_com.jpg");
+}
+
+.backdrop-schaeffers-investment-research::before {
+  background-image: url("../images/schaeffers_investment_research.png");
+}
+
+.backdrop-investors-business-daily::before {
+  background-image: url("../images/investors_business_daily.png");
+  background-size: 18%;
+}
+
+.backdrop-manufacturing-net::before {
+  background-image: url("../images/manufacturing_net.jpg");
+}
+
+.backdrop-exec-edge::before {
+  background-image: url("../images/exec_edge.png");
+}
+
+.backdrop-business-insider::before {
+  background-image: url("../images/business_insider.png");
+}
