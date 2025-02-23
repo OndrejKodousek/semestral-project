@@ -1,14 +1,7 @@
 import React from "react";
 import Chart from "./Chart";
 import { ArticleListProps } from "../utils/interfaces";
-
-const formatString = (input: string): string => {
-  return input
-    .toLowerCase() // Convert the string to lowercase
-    .replace(/\s+/g, "-") // Replace spaces with a dash
-    .replace(/\./g, "-") // Replace dots with a dash
-    .replace(/\'/g, "");
-};
+import { formatStringToCSSClass } from "../utils/parsing";
 
 const ArticleList: React.FC<ArticleListProps> = ({ data }) => {
   return (
@@ -17,7 +10,7 @@ const ArticleList: React.FC<ArticleListProps> = ({ data }) => {
         data.map((item, index) => (
           <div
             key={index}
-            className={`article-row p-3 my-3 backdrop-${formatString(item.source)}`}
+            className={`article-row p-3 my-3 backdrop-${formatStringToCSSClass(item.source)}`}
           >
             <div className="row">
               <div className="col-6 col-md-6">

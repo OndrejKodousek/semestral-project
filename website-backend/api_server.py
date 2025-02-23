@@ -39,20 +39,28 @@ def historical_data():
     try:
         published_date = datetime.strptime(published, "%Y-%m-%d")
 
-        end_date = published_date + timedelta(days=7)
-
         stock = yf.Ticker(ticker)
-        historical_data = stock.history(start=published_date, end=end_date)
+        historical_data = stock.history(
+            start=published_date, end=published_date + timedelta(days=7)
+        )
 
         published_price = historical_data.iloc[0]["Close"]
 
-        percentage_changes = []
+        price_changes = []
         for date, row in historical_data.iterrows():
             close_price = row["Close"]
             percentage_change = (close_price - published_price) / published_price
-            percentage_changes.append(percentage_change)
+            price_changes.append(
+                {
+                    "date": date.strftime("%Y-%m-%d"),
+                    "change": percentage_change,
+                }
+            )
 
-        return jsonify(percentage_changes)
+        return jsonify(price_changes)
+    except IndexError:
+        # No data found
+        return jsonify([])
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

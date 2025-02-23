@@ -18,6 +18,7 @@
 - When evaluating how confidence you are with choosen prediction, base it of how many explicit statements about stock changes there were in the article
 - For example, if article was very general, and the author didn't do much explicit predictions themselves, then value of your confidence should be quite low
 - In opposite case, when article makes a lot of explicit predictions, confidence in your values should be high.
+- All predictions are changes relative to the time when article was published.
 
 4. JSON Format (for valid cases only):
 {

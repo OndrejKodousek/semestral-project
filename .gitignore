@@ -54,5 +54,6 @@ website-backend/__pycache__/
 
 Thumbs.db
 src/data/news.db
+data/news.db
 data/news_old.db
 website/package-lock.json

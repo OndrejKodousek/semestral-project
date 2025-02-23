@@ -46,13 +46,13 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
             className={`mode-button ${mode === 1 ? "active" : ""}`}
             onClick={() => handleModeChange(1)}
           >
-            Show individual articles
+            Individual articles
           </button>
           <button
             className={`mode-button ${mode === 2 ? "active" : ""}`}
             onClick={() => handleModeChange(2)}
           >
-            Show large aggregated graph
+            Aggregated graph
           </button>
           <button
             className={`mode-button ${mode === 3 ? "active" : ""}`}

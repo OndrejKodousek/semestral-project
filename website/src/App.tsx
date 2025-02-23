@@ -4,11 +4,8 @@ import ControlPanel from "./components/ControlPanel";
 import ModelSelect from "./components/ModelSelect";
 import StatisticsField from "./components/StatisticsField";
 import { PredictionData } from "./utils/interfaces";
-
-const extractTicker = (input: string): string | null => {
-  const match = input.match(/^([A-Z0-9.]+)/);
-  return match ? match[1] : null;
-};
+import { fetchAnalysisData, fetchStockNames } from "./utils/apiEndpoints";
+import { extractTicker } from "./utils/parsing";
 
 const App: React.FC = () => {
   const [data, setData] = useState<PredictionData[] | null>(null);
@@ -17,34 +14,15 @@ const App: React.FC = () => {
   const [minArticles, setMinArticles] = useState<number>(5);
   const [includeConfidence, setIncludeConfidence] = useState<number>(1);
   const [stockNames, setStockNames] = useState<string[]>([]);
-
-  // Switch in control panel
-  // 1 = Show individual articles
-  // 2 = Show large aggregated graph
-  // 3 = Show metrics
   const [mode, setMode] = useState<number>(1);
 
   useEffect(() => {
-    // Main API call that fetches article data, with mode switch
     const fetchData = async () => {
       if (ticker && model) {
-        try {
-          const apiBaseUrl =
-            window.location.hostname === "localhost"
-              ? "http://localhost:5000"
-              : "https://kodousek.cz";
-          const extractedTicker = extractTicker(ticker);
-          const response = await fetch(
-            `${apiBaseUrl}/api/analysis?ticker=${extractedTicker}&model=${model}`,
-          );
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          const jsonData = await response.json();
-          setData(jsonData);
-        } catch (error) {
-          console.error("Error fetching analysis data:", error);
-          setData(null);
+        const extractedTicker = extractTicker(ticker);
+        if (extractedTicker) {
+          const data = await fetchAnalysisData(extractedTicker, model);
+          setData(data);
         }
       }
     };
@@ -53,32 +31,16 @@ const App: React.FC = () => {
   }, [ticker, model]);
 
   useEffect(() => {
-    const fetchStockNames = async () => {
+    const fetchNames = async () => {
       if (model) {
-        try {
-          const apiBaseUrl =
-            window.location.hostname === "localhost"
-              ? "http://localhost:5000"
-              : "https://kodousek.cz";
-
-          const response = await fetch(
-            `${apiBaseUrl}/api/stocks?model=${model}&min_articles=${minArticles}`,
-          );
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          const jsonData: string[] = await response.json();
-          setStockNames(jsonData);
-        } catch (error) {
-          console.error("Error fetching stock names:", error);
-          setStockNames([]);
-        }
+        const stockNames = await fetchStockNames(model, minArticles);
+        setStockNames(stockNames);
       } else {
         setStockNames([]);
       }
     };
 
-    fetchStockNames();
+    fetchNames();
   }, [model, minArticles]);
 
   return (

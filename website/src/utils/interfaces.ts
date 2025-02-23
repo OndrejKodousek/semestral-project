@@ -13,6 +13,15 @@ export interface PredictionData {
   };
 }
 
+export interface CombinedChartProps {
+  data: PredictionData[] | null;
+}
+
+export interface HistoricalData {
+  date: string;
+  change: number;
+}
+
 export interface MetricsStats {
   average: string;
   min: string;

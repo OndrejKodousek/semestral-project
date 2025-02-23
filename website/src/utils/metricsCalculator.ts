@@ -125,3 +125,12 @@ export const calculateMetrics = (
     kurtosis: formatValue(kurtosis, false),
   };
 };
+
+export const convertToPercent = (array: (number | null)[]): number[] => {
+  return array.map((value) => {
+    if (typeof value === "number" && !isNaN(value)) {
+      return value * 100;
+    }
+    return NaN;
+  });
+};

@@ -302,7 +302,15 @@ def isValidData(data):
             if key not in data:
                 return False
 
-        invalid_strings = {"", "none", "unknown", "null", "N/A", "error"}
+        invalid_strings = {
+            "",
+            "none",
+            "unknown",
+            "null",
+            "n/a",
+            "error",
+            "not available",
+        }
         if str(data["stock"]).strip().lower() in invalid_strings:
             return False
         if str(data["ticker"]).strip().lower() in invalid_strings:
@@ -351,12 +359,10 @@ def main():
         "mixtral-8x7b-32768",
         "deepseek/deepseek-chat:free",
     ]
-        # "llama3-70b-8192",
-        # "llama3-8b-8192",
+    # "llama3-70b-8192",
+    # "llama3-8b-8192",
 
     random.shuffle(models)
-
-    total_new_processed_entries = 0
 
     conn = get_db_connection()
     cursor = conn.cursor()
@@ -424,8 +430,6 @@ def main():
                 save_processed_articles(article["id"], model, processed_entry)
             else:
                 print(f" | FAILED, data format is invalid")
-
-    print(f"Processed {total_new_processed_entries} new entries")
 
 
 if __name__ == "__main__":
