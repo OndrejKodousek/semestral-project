@@ -6,9 +6,10 @@ import StatisticsField from "./components/StatisticsField";
 import { PredictionData } from "./utils/interfaces";
 import { fetchAnalysisData, fetchStockNames } from "./utils/apiEndpoints";
 import { extractTicker } from "./utils/parsing";
+import { motion } from "motion/react";
 
 const App: React.FC = () => {
-  const [data, setData] = useState<PredictionData[] | null>(null);
+  const [predictionData, setPredictionData] = useState<PredictionData[]>([]);
   const [ticker, setTicker] = useState<string | null>(null);
   const [model, setModel] = useState<string | null>(null);
   const [minArticles, setMinArticles] = useState<number>(5);
@@ -22,7 +23,7 @@ const App: React.FC = () => {
         const extractedTicker = extractTicker(ticker);
         if (extractedTicker) {
           const data = await fetchAnalysisData(extractedTicker, model);
-          setData(data);
+          setPredictionData(data);
         }
       }
     };
@@ -44,30 +45,56 @@ const App: React.FC = () => {
   }, [model, minArticles]);
 
   return (
-    <div className="container-fluid vh-100 vw-100 d-flex flex-column">
-      <div className="row flex-grow-1">
-        <div className="col-lg-2 col-md-5 d-flex flex-column">
-          <div className="flex-grow-1 d-flex flex-column gap-3">
+    <motion.div
+      initial={{ opacity: 0, y: -50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-2 grow-vert p-0">
+            <div className="split-cell bg-light">
+            <div className="component-container">
             <ModelSelect setModel={setModel} />
-            <ControlPanel
-              mode={mode}
-              setMode={setMode}
-              setMinArticles={setMinArticles}
-              setIncludeConfidence={setIncludeConfidence}
-            />
+              </div>
+            </div>
+            <div className="split-cell bg-light">
+              <div className="component-container">
+                <ControlPanel
+                  mode={mode}
+                  setMode={setMode}
+                  setMinArticles={setMinArticles}
+                  setIncludeConfidence={setIncludeConfidence}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="col-3 grow-vert p-0">
+            <div className="full-height-col bg-light">
+              <div className="component-container">
+                <TickerSelect setTicker={setTicker} stockNames={stockNames} />
+              </div>
+            </div>
+          </div>
+
+          <div className="col-7 grow-vert p-0">
+            <div className="full-height-col bg-light">
+              <div className="component-container">
+                {predictionData.length > 0 ? (
+                  <StatisticsField
+                    predictionData={predictionData}
+                    mode={mode}
+                  />
+                ) : (
+                  <div>Select model and ticker to view data</div>
+                )}
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="col-lg-3 col-md-7 d-flex flex-column">
-          <TickerSelect setTicker={setTicker} stockNames={stockNames} />
-        </div>
-
-        <div className="col-lg-7 col-md-12 d-flex flex-column vh-100">
-          <StatisticsField data={data} mode={mode} />
-        </div>
-        <div className="hidden">read/tmhmtznrmnyp#986b8b</div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

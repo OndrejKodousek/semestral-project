@@ -3,9 +3,9 @@ import { PredictionData } from "../utils/interfaces"; // Import the correct inte
 const formatDate = (date: Date): string => {
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
-  return `${day}-${month}`;
-  //const year = date.getFullYear();
-  //return `${day}-${month}-${year}`;
+  const year = date.getFullYear();
+  return `${year}-${month}-${day}`;
+  //return `${day}-${month}`;
 };
 
 export const generateWeekDates = (startDate: string): string[] => {
@@ -20,12 +20,31 @@ export const generateWeekDates = (startDate: string): string[] => {
   return weekDates;
 };
 
+export const generatePeriodDates = (
+  startDate: string,
+  endDate: string,
+  extraDays: number,
+): string[] => {
+  const dates: string[] = [];
+  const currentDate = new Date(startDate);
+  const end = new Date(endDate);
+
+  end.setDate(end.getDate() + extraDays);
+
+  while (currentDate <= end) {
+    dates.push(formatDate(currentDate));
+    currentDate.setDate(currentDate.getDate() + 1);
+  }
+
+  return dates;
+};
+
 export const getCurrentDate = () => {
   const today = new Date();
   const year = today.getFullYear();
   const month = String(today.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
   const day = String(today.getDate()).padStart(2, "0");
-  return `${day}-${month}`;
+  return `${year}-${month}-${day}`;
 };
 
 export const getDateOnly = (published: string): string => {
@@ -56,22 +75,43 @@ export const calculateDateDifferenceInDays = (
   return dayDifference;
 };
 
-export const getEarliestPublishedDate = (
-  articles: PredictionData[],
-): string => {
+export const getEarliestDate = (articles: PredictionData[]): string => {
   if (articles.length === 0) {
+    return "0000-00-00";
     throw new Error("Articles array is empty");
   }
 
-  const publishedDates = articles.map((article) => new Date(article.published));
+  const dates = articles.map((article) => new Date(article.published));
 
   const earliestDate = new Date(
-    Math.min(...publishedDates.map((date) => date.getTime())),
+    Math.min(...dates.map((date) => date.getTime())),
   );
 
   const year = earliestDate.getFullYear();
   const month = String(earliestDate.getMonth() + 1).padStart(2, "0");
   const day = String(earliestDate.getDate()).padStart(2, "0");
 
+  console.log("EARLIEST ----");
+  console.log(articles);
+  console.log(`${year}-${month}-${day}`);
+
+  return `${year}-${month}-${day}`;
+};
+
+export const getLatestDate = (articles: PredictionData[]): string => {
+  if (articles.length === 0) {
+    throw new Error("Articles array is empty");
+  }
+
+  const dates = articles.map((article) => new Date(article.published));
+
+  const latestDate = new Date(Math.max(...dates.map((date) => date.getTime())));
+
+  const year = latestDate.getFullYear();
+  const month = String(latestDate.getMonth() + 1).padStart(2, "0");
+  const day = String(latestDate.getDate()).padStart(2, "0");
+  console.log("LATEST ----");
+  console.log(articles);
+  console.log(`${year}-${month}-${day}`);
   return `${year}-${month}-${day}`;
 };

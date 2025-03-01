@@ -57,3 +57,4 @@ src/data/news.db
 data/news.db
 data/news_old.db
 website/package-lock.json
+data/news.db

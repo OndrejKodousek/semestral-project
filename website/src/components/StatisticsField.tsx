@@ -1,16 +1,47 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ArticleList from "./ArticleList";
 import CombinedChart from "./CombinedChart";
-import { StatisticsFieldProps } from "../utils/interfaces";
+import { StatisticsFieldProps,  HistoricalData } from "../utils/interfaces";
+import { fetchHistoricalData } from "../utils/apiEndpoints";
+import { getEarliestDate } from "../utils/date";
 
-const StatisticsField: React.FC<StatisticsFieldProps> = ({ data, mode }) => {
+const StatisticsField: React.FC<StatisticsFieldProps> = ({
+  predictionData,
+  mode,
+}) => {
+  const [historicalData, setHistoricalData] = useState<HistoricalData[]>([]);
+
+  useEffect(() => {
+    if (predictionData) {
+      const start = getEarliestDate(predictionData);
+      const ticker = predictionData[0]["ticker"];
+
+      const fetchData = async () => {
+        if (ticker && start) {
+          const historicalData = await fetchHistoricalData(ticker, start);
+          setHistoricalData(historicalData);
+        }
+      };
+
+      fetchData();
+    }
+  }, [predictionData]);
+
   return (
-    <div className="inset-container p-3">
-      <div className="col-lg-12 col-md-12">
-        {mode === 1 && <ArticleList data={data} />}
-        {mode === 2 && <CombinedChart data={data} />}
-      </div>
-    </div>
+    <>
+      {mode === 1 && (
+        <ArticleList
+          predictionData={predictionData}
+          historicalData={historicalData}
+        />
+      )}
+      {mode === 2 && (
+        <CombinedChart
+          predictionData={predictionData}
+          historicalData={historicalData}
+        />
+      )}
+    </>
   );
 };
 

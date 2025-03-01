@@ -14,11 +14,11 @@ const apiBaseUrl = (() => {
 
 export const fetchHistoricalData = async (
   ticker: string,
-  published: string,
+  start: string,
 ) => {
   try {
     const response = await fetch(
-      `${apiBaseUrl}/api/historical-data?ticker=${ticker}&published=${getDateOnly(published)}`,
+      `${apiBaseUrl}/api/historical-data?ticker=${ticker}&start=${getDateOnly(start)}`,
     );
 
     if (!response.ok) {

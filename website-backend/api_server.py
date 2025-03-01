@@ -34,32 +34,28 @@ def extract_ticker(company_string):
 @app.route("/api/historical-data", methods=["GET"])
 def historical_data():
     ticker = request.args.get("ticker")
-    published = request.args.get("published")
+    start = request.args.get("start")
 
     try:
-        published_date = datetime.strptime(published, "%Y-%m-%d")
+        start = datetime.strptime(start, "%Y-%m-%d")
 
         stock = yf.Ticker(ticker)
-        historical_data = stock.history(
-            start=published_date, end=published_date + timedelta(days=7)
-        )
+        historical_data = stock.history(start=start)
+        print(historical_data)
 
-        published_price = historical_data.iloc[0]["Close"]
-
-        price_changes = []
+        prices = []
         for date, row in historical_data.iterrows():
-            close_price = row["Close"]
-            percentage_change = (close_price - published_price) / published_price
-            price_changes.append(
+
+            latest_day_price = row["Close"]
+            prices.append(
                 {
                     "date": date.strftime("%Y-%m-%d"),
-                    "change": percentage_change,
+                    "price": latest_day_price,
                 }
             )
 
-        return jsonify(price_changes)
+        return jsonify(prices)
     except IndexError:
-        # No data found
         return jsonify([])
     except Exception as e:
         return jsonify({"error": str(e)}), 500

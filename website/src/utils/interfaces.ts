@@ -14,12 +14,13 @@ export interface PredictionData {
 }
 
 export interface CombinedChartProps {
-  data: PredictionData[] | null;
+  predictionData: PredictionData[];
+  historicalData: HistoricalData[];
 }
 
 export interface HistoricalData {
   date: string;
-  change: number;
+  price: number;
 }
 
 export interface MetricsStats {
@@ -40,14 +41,14 @@ export interface MetricsProps {
 }
 
 export interface ChartProps {
-  published: string;
-  ticker: string;
   predictions: {
     [key: string]: {
       prediction: number;
       confidence: number;
     };
   };
+  historicalData: HistoricalData[];
+  published: string;
 }
 
 export interface ControlPanelProps {
@@ -58,11 +59,12 @@ export interface ControlPanelProps {
 }
 
 export interface ArticleListProps {
-  data: PredictionData[] | null;
+  predictionData: PredictionData[] | null;
+  historicalData: HistoricalData[];
 }
 
 export interface StatisticsFieldProps {
-  data: PredictionData[] | null;
+  predictionData: PredictionData[];
   mode: number;
 }
 

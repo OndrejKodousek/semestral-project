@@ -20,22 +20,19 @@ const ModelSelect: React.FC<ModelSelectProps> = ({ setModel }) => {
   ];
 
   return (
-    <div className="inset-container p-3 h-100">
-      <div className="d-flex flex-column h-100">
-        <h3 className="no-select">Choose model</h3>
-        <select
-          className="form-select flex-grow-1 overflow-y-auto"
-          size={5}
-          aria-label="Select option"
-          onChange={(e) => setModel(e.target.value)}
-        >
-          {items.map((item, index) => (
-            <option key={index} value={item}>
-              {item}
-            </option>
-          ))}
-        </select>
-      </div>
+    <div className="h-100">
+      <select
+        className="w-100 h-100"
+        size={5}
+        aria-label="Select option"
+        onChange={(e) => setModel(e.target.value)}
+      >
+        {items.map((item, index) => (
+          <option key={index} value={item}>
+            {item}
+          </option>
+        ))}
+      </select>
     </div>
   );
 };

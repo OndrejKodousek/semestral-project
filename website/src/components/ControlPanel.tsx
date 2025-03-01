@@ -26,46 +26,48 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   };
 
   return (
-    <div className="inset-container p-3 h-100">
-      <div className="control-panel d-flex flex-column h-100 justify-content-between">
-        <div className="d-flex justify-content-between align-items-center">
-          <label className="me-2">Minimum Articles:</label>
-          <input
-            type="number"
-            min="1"
-            max="99"
-            defaultValue={5}
-            className="form-control"
-            style={{ width: "80px" }}
-            onChange={handleMinArticlesChange}
-          />
-        </div>
+    <div className="h-100 d-flex flex-column justify-content-between">
+      <div className="subcomponent-container mb-3">
+        <span className="mx-1">Minimum articles:</span>
+        <input
+          type="number"
+          min="1"
+          max="99"
+          defaultValue={5}
+          onChange={handleMinArticlesChange}
+        />
+      </div>
 
-        <div className="mode-buttons">
+      {/* Buttons for modes */}
+      <div className="subcomponent-container mb-3">
+        <div className="d-flex flex-column align-items-center">
           <button
-            className={`mode-button ${mode === 1 ? "active" : ""}`}
+            className={`m-1 button ${mode === 1 ? "active" : ""}`}
             onClick={() => handleModeChange(1)}
           >
             Individual articles
           </button>
           <button
-            className={`mode-button ${mode === 2 ? "active" : ""}`}
+            className={`m-1 button ${mode === 2 ? "active" : ""}`}
             onClick={() => handleModeChange(2)}
           >
             Aggregated graph
           </button>
           <button
-            className={`mode-button ${mode === 3 ? "active" : ""}`}
+            className={`m-1 button ${mode === 3 ? "active" : ""}`}
             onClick={() => handleModeChange(3)}
           >
             Show metrics
           </button>
         </div>
+      </div>
 
-        <div>
+      {/* Use Confidence button */}
+      <div className="subcomponent-container">
+        <div className="d-flex flex-column align-items-center">
           <button
-            className={`mode-button ${isChecked ? "active" : ""}`}
-            onClick={handleIncludeConfidenceChange} // Call the handler directly
+            className={`m-1 button ${isChecked ? "active" : ""}`}
+            onClick={handleIncludeConfidenceChange}
           >
             Use Confidence
           </button>

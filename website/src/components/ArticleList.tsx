@@ -1,40 +1,41 @@
 import React from "react";
-import Chart from "./Chart";
+import ArticleChart from "./Chart";
 import { ArticleListProps } from "../utils/interfaces";
 import { formatStringToCSSClass } from "../utils/parsing";
 
-const ArticleList: React.FC<ArticleListProps> = ({ data }) => {
+const ArticleList: React.FC<ArticleListProps> = ({
+  predictionData,
+  historicalData,
+}) => {
   return (
-    <div className="">
-      {data && data.length > 0 ? (
-        data.map((item, index) => (
+    <>
+      {predictionData &&
+        predictionData.length > 0 &&
+        predictionData.map((item, index) => (
           <div
+            className={`p-3 ${index !== 0 ? "mt-3" : ""} article`}
             key={index}
-            className={`article-row p-3 my-3 backdrop-${formatStringToCSSClass(item.source)}`}
           >
-            <div className="row">
-              <div className="col-6 col-md-6">
-                <div className="article-title">
+            <div
+              className={`backdrop-${formatStringToCSSClass(item.source)} row p-3`}
+            >
+              <div className="col-6">
+                <div className="pb-3">
                   <a href={item.link}>{item.title}</a>
                 </div>
-                <div className="article-body">{item.summary}</div>
+                <div>{item.summary}</div>
               </div>
-              <div className="col-6 col-md-6">
-                <Chart
+              <div className="col-6">
+                <ArticleChart
                   predictions={item.predictions}
+                  historicalData={historicalData}
                   published={item.published}
-                  ticker={item.ticker}
                 />
               </div>
             </div>
           </div>
-        ))
-      ) : (
-        <div className="col-12 h-100">
-          <div>No data available</div>
-        </div>
-      )}
-    </div>
+        ))}
+    </>
   );
 };
 

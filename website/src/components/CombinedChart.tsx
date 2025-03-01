@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
+  ChartOptions,
   CategoryScale,
   LinearScale,
   PointElement,
@@ -11,10 +12,19 @@ import {
   Legend,
 } from "chart.js";
 import annotationPlugin from "chartjs-plugin-annotation";
-import { CombinedChartProps } from "../utils/interfaces";
-import { generateWeekDates, getEarliestPublishedDate } from "../utils/date";
-import { convertToPercent } from "../utils/metricsCalculator";
-import { fetchHistoricalData } from "../utils/apiEndpoints";
+import { CombinedChartProps, HistoricalData } from "../utils/interfaces";
+import {
+  generatePeriodDates,
+  getCurrentDate,
+  getEarliestDate,
+  getLatestDate,
+} from "../utils/date";
+import {
+  parsePredictions,
+  convertToPercent,
+  filterHistoricalData,
+  convertStockPriceToPercentChange,
+} from "../utils/parsing";
 
 ChartJS.register(
   CategoryScale,
@@ -27,74 +37,104 @@ ChartJS.register(
   annotationPlugin,
 );
 
-const CombinedChart: React.FC<CombinedChartProps> = ({ data }) => {
-  const [historicalData, setHistoricalData] = useState<number[]>([]);
+const CombinedChart: React.FC<CombinedChartProps> = ({
+  predictionData,
+  historicalData,
+}) => {
+  const [labels, setLabels] = useState<string[]>([]);
+  const [realData, setRealData] = useState<number[]>([]);
 
   useEffect(() => {
-    if (data) {
-      if (data.length > 0) {
-        const ticker = data[0].ticker;
-        const published = getEarliestPublishedDate(data);
-        fetchHistoricalData(ticker, published).then((result) => {
-          setHistoricalData(result);
-        });
-      }
+    if (predictionData && historicalData) {
+      const earliestDate = getEarliestDate(predictionData);
+      const latestDate = getLatestDate(predictionData);
+
+      const labels = generatePeriodDates(earliestDate, latestDate, 7);
+      setLabels(labels);
+
+      const stockPrices = filterHistoricalData(historicalData, labels);
+      const stockChanges = convertStockPriceToPercentChange(stockPrices);
+      setRealData(stockChanges);
     }
-  }, [data]);
+  }, [predictionData, historicalData]);
 
-  var chartData;
-  var chartOptions;
-  if (data) {
-    const labels = generateWeekDates(data[0]?.published);
-
-    chartData = {
-      labels: labels,
-      datasets: [
-        {
-          label: "Historical Data",
-          data: convertToPercent(historicalData),
-          borderColor: "rgba(75, 192, 192, 1)",
-          backgroundColor: "rgba(75, 192, 192, 0.2)",
-          borderDash: [5, 5],
+  const getColorForSource = (source: string) => {
+    const colors = [
+      "rgb(165, 118, 56)",
+      "rgb(56, 165, 110)",
+      "rgb(56, 103, 165)",
+      "rgb(72, 56, 165)",
+      "rgb(165, 56, 150)",
+      "rgb(114, 165, 56)",
+      "rgb(56, 165, 141)",
+      "rgb(56, 85, 165)",
+      "rgb(130, 56, 165)",
+    ];
+    const index = Object.keys(
+      predictionData.reduce(
+        (acc, item) => {
+          acc[item.source] = true;
+          return acc;
         },
-        ...data.map((article) => ({
-          label: article.source,
-          data: convertToPercent(
-            Object.values(article.predictions).map((p) => p.prediction),
-          ),
-          borderColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
-            Math.random() * 255,
-          )}, ${Math.floor(Math.random() * 255)}, 1)`,
-          backgroundColor: `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(
-            Math.random() * 255,
-          )}, ${Math.floor(Math.random() * 255)}, 0.2)`,
-        })),
-      ],
-    };
+        {} as { [key: string]: boolean },
+      ),
+    ).indexOf(source);
+    return colors[index % colors.length];
+  };
 
-    chartOptions = {
-      responsive: true,
-      scales: {
-        y: {
-          title: {
-            display: true,
-            text: "Change [%]",
+  const chartData = {
+    labels: labels,
+    datasets: [
+      {
+        label: "Real Data",
+        data: convertToPercent(realData),
+        borderColor: "rgb(255, 0, 0)",
+        backgroundColor: "rgba(0, 0, 0, 0.2)",
+      },
+      ...predictionData.map((item) => ({
+        label: item.source,
+        data: convertToPercent(parsePredictions(item.predictions)),
+        borderColor: getColorForSource(item.source),
+        backgroundColor: getColorForSource(item.source).replace(
+          ", 1)",
+          ", 0.2)",
+        ),
+      })),
+    ],
+  };
+
+  const chartOptions: ChartOptions<"line"> = {
+    responsive: true,
+    scales: {
+      y: {
+        title: {
+          display: true,
+          text: "Change [%]",
+        },
+      },
+    },
+    plugins: {
+      annotation: {
+        annotations: {
+          verticalLine: {
+            type: "line",
+            xMin: labels.indexOf(getCurrentDate()),
+            xMax: labels.indexOf(getCurrentDate()),
+            borderColor: "red",
+            borderWidth: 2,
+            borderDash: [5, 5],
           },
         },
       },
-      plugins: {
-        legend: {
-          display: false,
-        },
+      legend: {
+        display: false,
       },
-    };
-  }
+    },
+  };
 
   return (
-    <div className="combined-graph">
-      {data && chartData && chartOptions && (
-        <Line data={chartData} options={chartOptions} />
-      )}
+    <div className="combined-chart">
+      <Line data={chartData} options={chartOptions} />
     </div>
   );
 };
