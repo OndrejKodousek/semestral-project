@@ -12,10 +12,7 @@ const apiBaseUrl = (() => {
   }
 })();
 
-export const fetchHistoricalData = async (
-  ticker: string,
-  start: string,
-) => {
+export const fetchHistoricalData = async (ticker: string, start: string) => {
   try {
     const response = await fetch(
       `${apiBaseUrl}/api/historical-data?ticker=${ticker}&start=${getDateOnly(start)}`,
@@ -60,5 +57,20 @@ export const fetchStockNames = async (model: string, minArticles: number) => {
   } catch (error) {
     console.error("Error fetching stock names:", error);
     return [];
+  }
+};
+
+export const fetchSumAnalysis = async (ticker: string, model: string) => {
+  try {
+    const response = await fetch(
+      `${apiBaseUrl}/api/sum_analysis?model=${model}&ticker=${ticker}`,
+    );
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching summarized analysis:", error);
+    return null;
   }
 };

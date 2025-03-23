@@ -24,7 +24,7 @@
 {
     "stock": "Full name of company, e.g., NVIDIA Corp",
     "ticker": "Stock ticker symbol, e.g., NVDA",
-    "summary": "Short summary of article and your reasoning for chosen values. Maximum of 500 characters is allowed"
+    "summary": "Short summary of article and your reasoning for chosen values. Maximum of 400 characters is allowed"
     "prediction_1_day": "Predicted percentage change in 1 day  (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
     "prediction_2_day": "Predicted percentage change in 2 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
     "prediction_3_day": "Predicted percentage change in 3 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
@@ -32,6 +32,11 @@
     "prediction_5_day": "Predicted percentage change in 5 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
     "prediction_6_day": "Predicted percentage change in 6 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
     "prediction_7_day": "Predicted percentage change in 7 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
+    "prediction_8_day": "Predicted percentage change in 8 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
+    "prediction_9_day": "Predicted percentage change in 9 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
+    "prediction_10_day": "Predicted percentage change in 10 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
+    "prediction_11_day": "Predicted percentage change in 11 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
+    "prediction_12_day": "Predicted percentage change in 12 days (e.g., '0.05987' for +5.987% or '-0.02563' for -2.563)",
     "confidence_1_day": "Confidence level for 1-day prediction (e.g., '0.7587' for +75.87%)",
     "confidence_2_day": "Confidence level for 2-day prediction (e.g., '0.7587' for +75.87%)",
     "confidence_3_day": "Confidence level for 3-day prediction (e.g., '0.7587' for +75.87%)",
@@ -39,10 +44,16 @@
     "confidence_5_day": "Confidence level for 5-day prediction (e.g., '0.7587' for +75.87%)",
     "confidence_6_day": "Confidence level for 6-day prediction (e.g., '0.7587' for +75.87%)",
     "confidence_7_day": "Confidence level for 7-day prediction (e.g., '0.7587' for +75.87%)",
+    "confidence_8_day": "Confidence level for 8-day prediction (e.g., '0.7587' for +75.87%)",
+    "confidence_9_day": "Confidence level for 9-day prediction (e.g., '0.7587' for +75.87%)",
+    "confidence_10_day": "Confidence level for 10-day prediction (e.g., '0.7587' for +75.87%)",
+    "confidence_11_day": "Confidence level for 11-day prediction (e.g., '0.7587' for +75.87%)",
+    "confidence_12_day": "Confidence level for 12-day prediction (e.g., '0.7587' for +75.87%)",
 }
 - Every single field must be filled.
 - Values must be a decimal fraction of a percentage change (e.g., "0.05" for a 5% change), and must be enclosed in quotation marks.
-- Confidence values must be a decimal between 0 and 1, representing probability (e.g., "0.85" for 85% confidence).
+- Confidence values must be a decimal between 0 and 1, representing probability (e.g., "0.45" for 45% confidence).
+- Example: If article was published in 2025-22-02 at 7PM, then "prediction_3_day" is prediction how much the stock will change in 2025-25-02 compared to 2025-22-02. 
 
 5. Predicted values:
 - The model should predict stock price changes with high precision, avoiding rounded or overly simplistic values like 0.01 (1%) or 0.02 (2%).

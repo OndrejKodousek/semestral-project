@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ArticleList from "./ArticleList";
 import CombinedChart from "./CombinedChart";
-import { StatisticsFieldProps,  HistoricalData } from "../utils/interfaces";
+import { StatisticsFieldProps, HistoricalData } from "../utils/interfaces";
 import { fetchHistoricalData } from "../utils/apiEndpoints";
 import { getEarliestDate } from "../utils/date";
 
 const StatisticsField: React.FC<StatisticsFieldProps> = ({
   predictionData,
+  ticker,
+  model,
   mode,
 }) => {
   const [historicalData, setHistoricalData] = useState<HistoricalData[]>([]);
@@ -39,6 +41,8 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
         <CombinedChart
           predictionData={predictionData}
           historicalData={historicalData}
+          ticker={ticker}
+          model={model}
         />
       )}
     </>

@@ -16,14 +16,22 @@ const App: React.FC = () => {
   const [includeConfidence, setIncludeConfidence] = useState<number>(1);
   const [stockNames, setStockNames] = useState<string[]>([]);
   const [mode, setMode] = useState<number>(1);
+  const [extractedTicker, setExtractedTicker] = useState<string | null>(null);
+
+  includeConfidence;
 
   useEffect(() => {
     const fetchData = async () => {
       if (ticker && model) {
-        const extractedTicker = extractTicker(ticker);
+        setExtractedTicker(extractTicker(ticker));
         if (extractedTicker) {
-          const data = await fetchAnalysisData(extractedTicker, model);
-          setPredictionData(data);
+          try {
+            const data = await fetchAnalysisData(extractedTicker, model);
+            setPredictionData(data);
+          } catch (error) {
+            console.error("Failed to fetch analysis data:", error);
+            setPredictionData([]); // Clear prediction data on error
+          }
         }
       }
     };
@@ -34,8 +42,13 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchNames = async () => {
       if (model) {
-        const stockNames = await fetchStockNames(model, minArticles);
-        setStockNames(stockNames);
+        try {
+          const stockNames = await fetchStockNames(model, minArticles);
+          setStockNames(stockNames);
+        } catch (error) {
+          console.error("Failed to fetch stock names:", error);
+          setStockNames([]); // Clear stock names on error
+        }
       } else {
         setStockNames([]);
       }
@@ -54,8 +67,8 @@ const App: React.FC = () => {
         <div className="row">
           <div className="col-2 grow-vert p-0">
             <div className="split-cell bg-light">
-            <div className="component-container">
-            <ModelSelect setModel={setModel} />
+              <div className="component-container">
+                <ModelSelect setModel={setModel} />
               </div>
             </div>
             <div className="split-cell bg-light">
@@ -81,9 +94,14 @@ const App: React.FC = () => {
           <div className="col-7 grow-vert p-0">
             <div className="full-height-col bg-light">
               <div className="component-container">
-                {predictionData.length > 0 ? (
+                {predictionData.length > 0 &&
+                ticker &&
+                model &&
+                extractedTicker ? (
                   <StatisticsField
                     predictionData={predictionData}
+                    ticker={extractedTicker}
+                    model={model}
                     mode={mode}
                   />
                 ) : (
@@ -94,6 +112,7 @@ const App: React.FC = () => {
           </div>
         </div>
       </div>
+      <div style={{ display: "none" }}>read/tmhmtznrmnyp#986b8b</div>
     </motion.div>
   );
 };

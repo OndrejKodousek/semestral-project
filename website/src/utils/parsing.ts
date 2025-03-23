@@ -61,47 +61,20 @@ export const filterHistoricalData = (
   data: HistoricalData[],
   labels: string[],
 ): number[] => {
-  const result: number[] = [];
-  let startIndex = 0;
+  const priceByDate = new Map<string, number>();
 
-  // Find the first label that matches a date in the data
-  let foundStart = false;
-  for (let i = 0; i < labels.length && foundStart == false; i++) {
-    startIndex = 0;
-    while (startIndex < data.length && data[startIndex].date !== labels[i]) {
-      startIndex++;
-    }
-    if (startIndex < data.length && data[startIndex].date === labels[i]) {
-      foundStart = true;
-      break;
-    }
-  }
+  data.forEach((item) => {
+    priceByDate.set(item.date, item.price);
+  });
 
-  if (!foundStart) {
-    return result;
-  }
-
-  let j = startIndex;
-  let found = false;
-  for (let i = 0; i < 7 && startIndex < data.length; i++) {
-    for (let j = startIndex; j < data.length; j++) {
-      if (labels[i] === data[j].date) {
-        result.push(data[j].price);
-        found = true;
-        break;
-      }
-    }
-    if (found != true) {
-      // Likely a weekend, holiday or just some missing day
-      // NaN will skip this value when rendering the chart
-      result.push(NaN);
-      found = false;
-    }
-  }
+  // NaN gets ignored in final graph, it just skips it entirely
+  const result = labels.map((label) => {
+    const price = priceByDate.get(label);
+    return price !== undefined ? price : NaN;
+  });
 
   return result;
 };
-
 export const convertStockPriceToPercentChange = (
   prices: number[],
 ): number[] => {

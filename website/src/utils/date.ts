@@ -8,16 +8,26 @@ const formatDate = (date: Date): string => {
   //return `${day}-${month}`;
 };
 
-export const generateWeekDates = (startDate: string): string[] => {
-  const date = new Date(startDate);
-  const weekDates = [formatDate(date)];
-  for (let i = 1; i < 7; i++) {
-    const nextDate = new Date(date);
-    nextDate.setDate(date.getDate() + i);
-    weekDates.push(formatDate(nextDate));
+export const generateDateRange = (
+  startDate: string,
+  daysBeforeStart: number = 7,
+  totalDays: number = 12, // Don't touch if possible, predictions are hardcoded to 12 days
+): string[] => {
+  const inputDate = new Date(startDate);
+
+  const actualStartDate = new Date(inputDate);
+  actualStartDate.setDate(inputDate.getDate() - daysBeforeStart);
+
+  const dates: string[] = [];
+
+  // Generate dates starting from the calculated start date
+  for (let i = 0; i < totalDays; i++) {
+    const currentDate = new Date(actualStartDate);
+    currentDate.setDate(actualStartDate.getDate() + i);
+    dates.push(formatDate(currentDate));
   }
 
-  return weekDates;
+  return dates;
 };
 
 export const generatePeriodDates = (
@@ -91,10 +101,6 @@ export const getEarliestDate = (articles: PredictionData[]): string => {
   const month = String(earliestDate.getMonth() + 1).padStart(2, "0");
   const day = String(earliestDate.getDate()).padStart(2, "0");
 
-  console.log("EARLIEST ----");
-  console.log(articles);
-  console.log(`${year}-${month}-${day}`);
-
   return `${year}-${month}-${day}`;
 };
 
@@ -110,8 +116,5 @@ export const getLatestDate = (articles: PredictionData[]): string => {
   const year = latestDate.getFullYear();
   const month = String(latestDate.getMonth() + 1).padStart(2, "0");
   const day = String(latestDate.getDate()).padStart(2, "0");
-  console.log("LATEST ----");
-  console.log(articles);
-  console.log(`${year}-${month}-${day}`);
   return `${year}-${month}-${day}`;
 };

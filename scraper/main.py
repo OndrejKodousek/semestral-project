@@ -18,6 +18,7 @@ from scraper_library import *
 
 driver = getDriver()
 
+
 def scrape_yahoo_finance_article(link):
     driver.get(link)
     random_delay()
@@ -73,6 +74,7 @@ def scrape_yahoo_finance_article(link):
     raw_text = extract_text(body)
     return raw_text
 
+
 # TODO: Fix this
 def scrape_investors_article(link):
     driver.get(link)
@@ -93,12 +95,13 @@ def scrape_investors_article(link):
 
     return text
 
+
 def main():
     rss_url = "https://finance.yahoo.com/news/rssindex"
     feed = feedparser.parse(rss_url)
 
     result = execute_query("SELECT link FROM articles", query_type="SELECT")
-    already_scraped_links = [item['link'] for item in result]
+    already_scraped_links = [item["link"] for item in result]
 
     new_articles = []
     for entry in feed.entries:
@@ -117,13 +120,15 @@ def main():
         if domain == "finance.yahoo.com":
             content = scrape_yahoo_finance_article(link)
         elif domain == "investors.com":
+            # TODO: Fix investors.com
+            continue
             content = scrape_investors_article(link)
         elif domain == "wsj.com":
             print(f" | FAILED, Wallstreet Journal has scraping protection")
             continue
         elif domain == "barrons.com":
             print(f" | FAILED, Barrons is paywalled")
-            continue            
+            continue
         else:
             print(f" | FAILED, unknown source: {domain}")
             continue
@@ -138,22 +143,27 @@ def main():
                 logToFile(f"FAILED, unknown error {link}")
                 continue
 
-        insert_query = '''
+        # Sometimes old article gets pushed to RSS feed, because it was updated or similar
+        if not entry.published.startswith("2025"):
+            continue
+
+        insert_query = """
             INSERT INTO articles (priority, link, title, published, source, content)
             VALUES (?, ?, ?, ?, ?, ?)
-            '''
+            """
         insert_params = (
             0,
             link,
             purify_text(entry.title),
             entry.published,
             entry.source.title if hasattr(entry, "source") else "Yahoo News",
-            purify_text(content)
+            purify_text(content),
         )
         affected_rows = execute_query(insert_query, insert_params, query_type="INSERT")
         print(f" | SUCCESS")
 
     driver.quit()
+
 
 if __name__ == "__main__":
     main()

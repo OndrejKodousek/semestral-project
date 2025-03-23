@@ -16,6 +16,8 @@ export interface PredictionData {
 export interface CombinedChartProps {
   predictionData: PredictionData[];
   historicalData: HistoricalData[];
+  ticker: string;
+  model: string;
 }
 
 export interface HistoricalData {
@@ -65,6 +67,8 @@ export interface ArticleListProps {
 
 export interface StatisticsFieldProps {
   predictionData: PredictionData[];
+  ticker: string;
+  model: string;
   mode: number;
 }
 

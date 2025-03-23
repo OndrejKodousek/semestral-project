@@ -12,10 +12,9 @@ import {
   Legend,
 } from "chart.js";
 import annotationPlugin from "chartjs-plugin-annotation";
-import { ChartProps, HistoricalData } from "../utils/interfaces";
-import { generateWeekDates, getCurrentDate } from "../utils/date";
+import { ChartProps } from "../utils/interfaces";
+import { generateDateRange, getCurrentDate } from "../utils/date";
 import {
-  parsePredictions,
   convertToPercent,
   filterHistoricalData,
   convertStockPriceToPercentChange,
@@ -40,14 +39,20 @@ const Chart: React.FC<ChartProps> = ({
   const [realData, setRealData] = useState<number[]>([]);
   const [labels, setLabels] = useState<(string | null)[]>([]);
 
-  const predictionData = parsePredictions(predictions);
+  // Convert predictions to an array of { date, prediction }
+  const predictionEntries = Object.entries(predictions).map(
+    ([date, { prediction }]) => ({
+      date,
+      prediction,
+    }),
+  );
 
   const currentDate = getCurrentDate();
   const currentDayIndex = labels.indexOf(currentDate);
 
   useEffect(() => {
     if (historicalData && historicalData[0]) {
-      const labels = generateWeekDates(published);
+      const labels = generateDateRange(published, 3);
       const stockPrices = filterHistoricalData(historicalData, labels);
       const stockChanges = convertStockPriceToPercentChange(stockPrices);
       setRealData(stockChanges);
@@ -66,7 +71,14 @@ const Chart: React.FC<ChartProps> = ({
       },
       {
         label: "Prediction",
-        data: convertToPercent(predictionData),
+        data: labels.map((label) => {
+          const predictionEntry = predictionEntries.find(
+            (entry) => entry.date === label,
+          );
+          return predictionEntry
+            ? convertToPercent([predictionEntry.prediction])[0]
+            : null;
+        }),
         borderColor: "rgba(75, 192, 192, 1)",
         backgroundColor: "rgba(75, 192, 192, 0.2)",
       },

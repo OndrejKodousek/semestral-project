@@ -11,6 +11,7 @@ from pathlib import Path
 from google.api_core import exceptions
 from openai import OpenAI
 from groq import Groq, RateLimitError, APIStatusError
+from datetime import datetime, timedelta
 
 
 def get_project_root():
@@ -24,7 +25,6 @@ def get_project_root():
 
 
 def get_db_connection():
-
     conn = sqlite3.connect("data/news.db", timeout=30)
     conn.row_factory = sqlite3.Row
     return conn
@@ -57,37 +57,49 @@ def save_processed_articles(article_id, model, data):
             conn = get_db_connection()
             cursor = conn.cursor()
 
+            # Extract the date part (YYYY-MM-DD) from the published field
+            published_date = data["published"].split("T")[0]
+
+            # Insert into analysis table
             cursor.execute(
                 """
                 INSERT INTO analysis (
-                article_id, model_name, published, ticker, stock, summary,
-                pred_1_day, pred_2_day, pred_3_day, pred_4_day, pred_5_day, pred_6_day, pred_7_day,
-                conf_1_day, conf_2_day, conf_3_day, conf_4_day, conf_5_day, conf_6_day, conf_7_day)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """,
+                    article_id, model_name, published, ticker, stock, summary
+                ) VALUES (?, ?, ?, ?, ?, ?)
+                """,
                 (
                     article_id,
                     model,
-                    data.get("published"),
+                    published_date,  # Use the extracted date
                     data.get("ticker"),
                     data.get("stock"),
                     data.get("summary"),
-                    data.get("prediction_1_day"),
-                    data.get("prediction_2_day"),
-                    data.get("prediction_3_day"),
-                    data.get("prediction_4_day"),
-                    data.get("prediction_5_day"),
-                    data.get("prediction_6_day"),
-                    data.get("prediction_7_day"),
-                    data.get("confidence_1_day"),
-                    data.get("confidence_2_day"),
-                    data.get("confidence_3_day"),
-                    data.get("confidence_4_day"),
-                    data.get("confidence_5_day"),
-                    data.get("confidence_6_day"),
-                    data.get("confidence_7_day"),
                 ),
             )
+            analysis_id = cursor.lastrowid
+
+            # Insert into predictions table
+            for day in range(1, 13):  # Assuming predictions for 12 days
+                prediction_key = f"prediction_{day}_day"
+                confidence_key = f"confidence_{day}_day"
+                prediction_date = (
+                    datetime.strptime(published_date, "%Y-%m-%d") + timedelta(days=day)
+                ).strftime("%Y-%m-%d")
+
+                cursor.execute(
+                    """
+                    INSERT INTO predictions (
+                        analysis_id, date, prediction, confidence
+                    ) VALUES (?, ?, ?, ?)
+                    """,
+                    (
+                        analysis_id,
+                        prediction_date,
+                        data.get(prediction_key),
+                        data.get(confidence_key),
+                    ),
+                )
+
             conn.commit()
             cursor.close()
             conn.close()
@@ -115,7 +127,6 @@ def logToFile(string):
 
 
 def process_article(entry, model, system_instruction):
-
     file_path = os.path.join(get_project_root(), "data", "API_KEY_GEMINI")
     with open(file_path, "r") as f:
         api_key = f.readline().strip()

@@ -7,7 +7,7 @@
     "dev": "vite",
     "dev-host": "vite --host 0.0.0.0 --port 5173",
     "build": "tsc -b && vite build",
-    "publish": "cp -r /mnt/samsung/semestral-project/www/dist/* /var/www/kodousek.cz/ && sudo systemctl restart nginx",
+    "publish": "cp -r /mnt/samsung/semestral-project/website/dist/* /var/www/kodousek.cz/ && sudo systemctl restart nginx",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --fix",
