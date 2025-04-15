@@ -138,23 +138,19 @@ def sum_analysis():
     if not model or not ticker:
         return jsonify({"error": "Missing model or ticker parameter"}), 400
 
-    # Fetch analyzed articles and predictions
     data = fetch_analyzed_articles_and_predictions(model, ticker)
     if not data:
         return jsonify({"error": "No data found for the given model and ticker"}), 404
 
-    # Prepare data for LLM analysis
     analysis_data = [dict(row) for row in data]
     analysis_content = json.dumps(analysis_data)
 
-    # Load system instruction
     file_path = os.path.join(
         get_project_root(), "website-backend", "system_instruction_sum_analysis.txt"
     )
     with open(file_path, "r") as f:
         system_instruction = f.read().strip()
 
-    # Use the same model to analyze the fetched data
     if "groq" in model:
         error_code, result = process_article_groq(
             {"content": analysis_content}, model, system_instruction
@@ -176,13 +172,10 @@ def sum_analysis():
             500,
         )
 
-    # Extract JSON from the Markdown code block
     try:
-        # Use regex to extract the JSON content
         json_match = re.search(r"```json\n(.*?)\n```", result, re.DOTALL)
         if json_match:
             json_content = json_match.group(1)
-            # Parse the JSON content into a Python dictionary
             analysis_dict = json.loads(json_content)
             return jsonify({"analysis": analysis_dict})
         else:

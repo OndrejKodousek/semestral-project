@@ -47,7 +47,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
   const [realData, setRealData] = useState<number[]>([]);
   const [sumAnalysis, setSumAnalysis] = useState<{
     summary: string;
-    predictions: { [key: string]: number };
+    predictions: { [key: string]: any };
   } | null>(null);
 
   // Fetch summarized analysis data
@@ -55,7 +55,6 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
     const fetchData = async () => {
       if (ticker && model) {
         const data = await fetchSumAnalysis(ticker, model);
-        console.log("DATA:", data);
         if (data) {
           setSumAnalysis({
             summary: data.analysis.summary,

@@ -26,7 +26,7 @@ def get_project_root():
 
 
 def execute_query(
-    query, params=None, timeout=5.0, query_type="SELECT", use_row_factory=True
+    query, params=None, timeout=300.0, query_type="SELECT", use_row_factory=True
 ):
     try:
         if query_type not in {"SELECT", "INSERT", "UPDATE", "DELETE"}:

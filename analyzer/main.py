@@ -25,7 +25,7 @@ def get_project_root():
 
 
 def get_db_connection():
-    conn = sqlite3.connect("data/news.db", timeout=30)
+    conn = sqlite3.connect("data/news.db", timeout=300)
     conn.row_factory = sqlite3.Row
     return conn
 
