@@ -7,7 +7,7 @@ const TickerSelect: React.FC<TickerSelectProps> = ({
 }) => {
   return (
     <div className="h-100">
-      {stockNames ? (
+      {stockNames && Array.isArray(stockNames) && stockNames.length > 0 ? (
         <select
           className="w-100 h-100"
           size={10}

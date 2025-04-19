@@ -24,7 +24,7 @@ import {
   filterHistoricalData,
   convertStockPriceToPercentChange,
 } from "../utils/parsing";
-import { fetchSumAnalysis } from "../utils/apiEndpoints"; // Import the new function
+import { fetchSumAnalysis, fetchLSTMAnalysis } from "../utils/apiEndpoints";
 
 ChartJS.register(
   CategoryScale,
@@ -50,9 +50,14 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
     predictions: { [key: string]: any };
   } | null>(null);
 
+  const [LSTMAnalysis, setLSTMAnalysis] = useState<{
+    summary: string;
+    predictions: { [key: string]: any };
+  } | null>(null);
+
   // Fetch summarized analysis data
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchSumData = async () => {
       if (ticker && model) {
         const data = await fetchSumAnalysis(ticker, model);
         if (data) {
@@ -71,7 +76,27 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
       console.log(sumAnalysis);
     };
 
-    fetchData();
+    const fetchLSTMData = async () => {
+      if (ticker && model) {
+        const data = await fetchLSTMAnalysis(ticker);
+        if (data) {
+          setLSTMAnalysis({
+            summary: data.analysis.summary,
+            predictions: {
+              ...Object.fromEntries(
+                Object.entries(data.analysis).filter(([key]) =>
+                  key.startsWith("prediction_"),
+                ),
+              ),
+            },
+          });
+        }
+      }
+      console.log(LSTMAnalysis);
+    };
+
+    fetchSumData();
+    fetchLSTMData();
   }, [ticker, model]);
 
   // Generate labels and real data
@@ -138,21 +163,57 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
           ", 0.2)",
         ),
       })),
-      // Add summarized analysis data as a new dataset
+      // summarized analysis data as a new dataset
       ...(sumAnalysis
         ? [
             {
               label: "Summarized Analysis",
-              data: labels.map((label) => {
-                const predictionKey = `prediction_${labels.indexOf(label) + 1}_day`;
-                return sumAnalysis.predictions[predictionKey]
+              data: labels.map((label, index) => {
+                var todayIndex = labels.indexOf(getCurrentDate());
+
+                if (todayIndex === -1 || index < todayIndex) {
+                  return null;
+                }
+
+                const dayNumber = index - todayIndex + 1;
+
+                const predictionKey = `prediction_${dayNumber}_day`;
+
+                return sumAnalysis.predictions[predictionKey] !== undefined
                   ? convertToPercent([
                       sumAnalysis.predictions[predictionKey],
                     ])[0]
-                  : null;
+                  : null; // Plot null if there's no prediction
               }),
               borderColor: "rgb(0, 0, 255)",
               backgroundColor: "rgba(0, 0, 255, 0.2)",
+              borderDash: [5, 5],
+            },
+          ]
+        : []),
+      ...(LSTMAnalysis
+        ? [
+            {
+              label: "LSTM Predictions",
+              data: labels.map((label, index) => {
+                var todayIndex = labels.indexOf(getCurrentDate());
+
+                if (todayIndex === -1 || index < todayIndex) {
+                  return null;
+                }
+
+                const dayNumber = index - todayIndex + 1;
+
+                const predictionKey = `prediction_${dayNumber}_day`;
+
+                return LSTMAnalysis.predictions[predictionKey] !== undefined
+                  ? convertToPercent([
+                      LSTMAnalysis.predictions[predictionKey],
+                    ])[0]
+                  : null; // Plot null if there's no prediction
+              }),
+              borderColor: "rgb(7, 224, 0)",
+              backgroundColor: "rgba(17, 102, 0, 0.69)",
               borderDash: [5, 5],
             },
           ]

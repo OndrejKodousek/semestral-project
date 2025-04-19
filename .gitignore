@@ -64,3 +64,6 @@ website/package-lock.json
 data/news.db
 data/news.db
 data/news.db
+
+*.pkl
+*.keras
