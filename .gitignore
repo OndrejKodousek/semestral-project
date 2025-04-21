@@ -71,3 +71,4 @@ data/time_tracking.txt
 data/lstm_models/NVDA_model.keras
 data/lstm_models/NVDA_scaler.pkl
 data/news.db
+data/news.db
