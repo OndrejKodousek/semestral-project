@@ -1,4 +1,3 @@
-# python train_model.py <ticker>
 import os
 import sys
 import yfinance as yf
@@ -9,11 +8,11 @@ import sqlite3
 from sklearn.preprocessing import MinMaxScaler
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
-from tensorflow.keras.callbacks import EarlyStopping  # Optional: For efficiency
+from tensorflow.keras.callbacks import EarlyStopping
 from datetime import datetime
 from pathlib import Path
 
-DB_PATH = "data/news.db"  # Define DB Path
+DB_PATH = "data/news.db"
 
 
 def get_project_root():
@@ -22,12 +21,10 @@ def get_project_root():
     for parent in current_path.parents:
         if (parent / marker).exists():
             return parent
-    # Fallback if .git not found (e.g., running outside repo)
     return Path(__file__).resolve().parent.parent
 
 
 def fetch_stock_data(ticker, start_date="2010-01-01"):
-    """Fetches stock data up to the most recent trading day."""
     try:
         # Fetch data up to today, yfinance handles finding the last available day
         stock_data_df = yf.download(ticker, start=start_date, progress=False)
@@ -58,7 +55,7 @@ def save_model_and_scaler(model, scaler, ticker, base_path):
     filepath_scaler = base_path / f"{ticker}_scaler.pkl"
 
     try:
-        os.makedirs(base_path, exist_ok=True)  # Ensure directory exists
+        os.makedirs(base_path, exist_ok=True)
         model.save(filepath_model)
         joblib.dump(scaler, filepath_scaler)
         print(f"Model saved to {filepath_model}")
@@ -73,24 +70,18 @@ def main(ticker):
     db_file = project_root / DB_PATH
 
     print(f"Fetching historical data for {ticker}...")
-    # Fetch all available data for training
+
     data_values, _ = fetch_stock_data(ticker)
 
-    if (
-        data_values is None or len(data_values) < 61
-    ):  # Need 60 for sequence + 1 for label
+    if data_values is None or len(data_values) < 61:
         print(f"Insufficient data for {ticker} to train. Skipping.")
         return
 
     sequence_length = 60
 
-    # --- Correct Scaling ---
     scaler = MinMaxScaler(feature_range=(0, 1))
-    # Fit scaler only on the data itself (no train/test split for daily operational model)
     scaled_data = scaler.fit_transform(data_values)
-    # ---------------------
 
-    # Prepare sequences using all available data
     X, y = [], []
     for i in range(sequence_length, len(scaled_data)):
         X.append(scaled_data[i - sequence_length : i, 0])
@@ -103,22 +94,17 @@ def main(ticker):
     X, y = np.array(X), np.array(y)
     X = X.reshape((X.shape[0], X.shape[1], 1))
 
-    print(f"Building and training LSTM model for {ticker} using {len(X)} sequences...")
+    print(f"Building and training LSTM model for {ticker} using {len(X)} sequences")
     model = build_lstm_model((X.shape[1], 1))
 
-    # Optional: Early stopping to prevent overfitting and potentially speed up training
     early_stopping = EarlyStopping(
         monitor="loss", patience=10, restore_best_weights=True
     )
 
-    # Train on all sequences
-    # Consider making batch_size and epochs configurable
-    model.fit(X, y, batch_size=32, epochs=50, verbose=1, callbacks=[early_stopping])
+    model.fit(X, y, batch_size=32, epochs=25, verbose=1, callbacks=[early_stopping])
 
     print(f"Saving model and scaler for {ticker}...")
     save_model_and_scaler(model, scaler, ticker, models_path)
-
-    print(f"Training complete for {ticker}.")
 
 
 if __name__ == "__main__":

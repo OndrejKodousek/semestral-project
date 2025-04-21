@@ -2,21 +2,29 @@ import React from "react";
 import { ModelSelectProps } from "../utils/interfaces";
 
 const ModelSelect: React.FC<ModelSelectProps> = ({ setModel }) => {
+  // ! Make sure it's always sync'd with LLM analyzer models
   const items: string[] = [
-    "gemini-1.5-flash",
+    // Google AI Studio
+    "gemini-2.5-flash-preview-04-17",
+    "gemini-2.5-pro-preview-03-25",
     "gemini-2.0-flash",
-    //"gemini-2.0-flash-lite-preview",
-    // "gemini-2.0-pro-exp",
-    "gemini-2.0-flash-exp",
-
-    //"gemma2-9b-it",
-
-    //"llama-3.1-8b-instant",
-    //"llama-3.3-70b-versatile",
-    //"llama-3-8b-8192",
-    //"llama-3-70b-8192",
-
-    // "mixtral-8x7b-32768",
+    "gemini-2.0-flash-lite",
+    "gemini-1.5-flash",
+    "gemini-1.5-flash-8b",
+    "gemini-1.5-pro",
+    // OpenRouter
+    "deepseek/deepseek-chat:free",
+    // Groq
+    "llama-3.3-70b-versatile",
+    "llama-3.1-8b-instant",
+    "gemma2-9b-it",
+    "distil-whisper-large-v3-en",
+    // Groq preview
+    "deepseek-r1-distill-llama-70b",
+    "meta-llama/llama-4-maverick-17b-128e-instruct",
+    "meta-llama/llama-4-scout-17b-16e-instruct",
+    "mistral-saba-24b",
+    "qwen-qwq-32b",
   ];
 
   return (

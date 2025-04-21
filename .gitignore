@@ -58,12 +58,16 @@ data/*.db
 data/news.db
 Thumbs.db
 src/data/news.db
-data/news.db
 data/news_old.db
 website/package-lock.json
 data/news.db
-data/news.db
-data/news.db
+data/time_tracking.txt
 
 *.pkl
 *.keras
+data/time_tracking.txt
+data/news.db
+data/time_tracking.txt
+data/lstm_models/NVDA_model.keras
+data/lstm_models/NVDA_scaler.pkl
+data/news.db

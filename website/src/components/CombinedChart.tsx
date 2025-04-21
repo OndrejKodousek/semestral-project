@@ -168,7 +168,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
         ? [
             {
               label: "Summarized Analysis",
-              data: labels.map((label, index) => {
+              data: labels.map((_, index) => {
                 var todayIndex = labels.indexOf(getCurrentDate());
 
                 if (todayIndex === -1 || index < todayIndex) {
@@ -195,7 +195,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
         ? [
             {
               label: "LSTM Predictions",
-              data: labels.map((label, index) => {
+              data: labels.map((_, index) => {
                 var todayIndex = labels.indexOf(getCurrentDate());
 
                 if (todayIndex === -1 || index < todayIndex) {

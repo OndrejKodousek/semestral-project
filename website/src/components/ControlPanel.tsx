@@ -1,14 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { ControlPanelProps } from "../utils/interfaces";
 
 const ControlPanel: React.FC<ControlPanelProps> = ({
   mode,
   setMode,
   setMinArticles,
-  setIncludeConfidence,
 }) => {
-  const [isChecked, setIsChecked] = useState(false);
-
   const handleModeChange = (selectedMode: number) => {
     setMode(selectedMode); // Update the selected mode
   };
@@ -19,59 +16,40 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
     setMinArticles(Number(event.target.value));
   };
 
-  const handleIncludeConfidenceChange = () => {
-    const newCheckedState = !isChecked; // Toggle the state
-    setIsChecked(newCheckedState);
-    setIncludeConfidence(newCheckedState ? 1 : 0); // Update the parent state
-  };
-
   return (
     <div className="h-100 d-flex flex-column justify-content-between">
-      <div className="subcomponent-container mb-3">
-        <span className="mx-1">Minimum articles:</span>
+      <div className="subcomponent-container mb-3 d-flex flex-column align-items-start">
+        <span className="mb-2">Minimum articles:</span>
+
         <input
           type="number"
           min="1"
           max="99"
           defaultValue={5}
           onChange={handleMinArticlesChange}
+          className="mb-2"
         />
-      </div>
 
-      {/* Buttons for modes */}
-      <div className="subcomponent-container mb-3">
-        <div className="d-flex flex-column align-items-center">
-          <button
-            className={`m-1 button ${mode === 1 ? "active" : ""}`}
-            onClick={() => handleModeChange(1)}
-          >
-            Individual articles
-          </button>
-          <button
-            className={`m-1 button ${mode === 2 ? "active" : ""}`}
-            onClick={() => handleModeChange(2)}
-          >
-            Aggregated graph
-          </button>
-          <button
-            className={`m-1 button ${mode === 3 ? "active" : ""}`}
-            onClick={() => handleModeChange(3)}
-          >
-            Show metrics
-          </button>
-        </div>
-      </div>
+        <button
+          className={`mb-2 button ${mode === 1 ? "active" : ""}`}
+          onClick={() => handleModeChange(1)}
+        >
+          Individual articles
+        </button>
 
-      {/* Use Confidence button */}
-      <div className="subcomponent-container">
-        <div className="d-flex flex-column align-items-center">
-          <button
-            className={`m-1 button ${isChecked ? "active" : ""}`}
-            onClick={handleIncludeConfidenceChange}
-          >
-            Use Confidence
-          </button>
-        </div>
+        <button
+          className={`mb-2 button ${mode === 2 ? "active" : ""}`}
+          onClick={() => handleModeChange(2)}
+        >
+          Aggregated graph
+        </button>
+
+        <button
+          className={`button ${mode === 3 ? "active" : ""}`}
+          onClick={() => handleModeChange(3)}
+        >
+          Show metrics
+        </button>
       </div>
     </div>
   );

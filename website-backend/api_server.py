@@ -162,7 +162,7 @@ def fetch_lstm():
                 404,
             )
 
-        reference_value = reference_row["value"]
+        reference_value = float(reference_row["value"])
         prediction_made_date = reference_row["prediction_made_date"]
         # Use the reference point's target date as the base date for day counting
         reference_target_date_str = reference_row["prediction_target_date"]
@@ -217,7 +217,7 @@ def fetch_lstm():
 
             for row in prediction_rows:
                 target_date = date.fromisoformat(row["prediction_target_date"])
-                predicted_value = row["value"]
+                predicted_value = float(row["value"])
 
                 # Calculate day number relative to the first prediction's target date
                 # If first prediction target is the day after reference target, it's day 1
@@ -225,9 +225,9 @@ def fetch_lstm():
 
                 # Calculate percentage change
                 if reference_value is not None and reference_value != 0:
-                    percentage_change = (
+                    percentage_change = float(
                         predicted_value - reference_value
-                    ) / reference_value
+                    ) / float(reference_value)
                 else:
                     percentage_change = (
                         0.0  # Avoid division by zero or handle as needed
@@ -235,9 +235,7 @@ def fetch_lstm():
 
                 # Add to core_data, similar to sum_analysis (up to 12 days for consistency)
                 if 1 <= day_number <= 12:
-                    core_data[f"prediction_{day_number}_day"] = round(
-                        percentage_change, 2
-                    )
+                    core_data[f"prediction_{day_number}_day"] = percentage_change
                     core_data[f"confidence_{day_number}_day"] = (
                         None  # LSTM data doesn't have confidence score
                     )

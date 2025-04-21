@@ -33,12 +33,14 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
     <>
       {mode === 1 && (
         <ArticleList
+          key={`combined-chart-<span class="math-inline">\{ticker\}\-</span>{model}`}
           predictionData={predictionData}
           historicalData={historicalData}
         />
       )}
       {mode === 2 && (
         <CombinedChart
+          key={`combined-chart-<span class="math-inline">\{ticker\}\-</span>{model}`}
           predictionData={predictionData}
           historicalData={historicalData}
           ticker={ticker}

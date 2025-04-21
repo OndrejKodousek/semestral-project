@@ -21,7 +21,9 @@ const ArticleList: React.FC<ArticleListProps> = ({
             >
               <div className="col-6">
                 <div className="pb-3">
-                  <a href={item.link}>{item.title}</a>
+                  <a href={item.link}>
+                    {item.source}: {item.title}
+                  </a>
                 </div>
                 <div>{item.summary}</div>
               </div>

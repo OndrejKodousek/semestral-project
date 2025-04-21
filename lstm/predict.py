@@ -1,4 +1,3 @@
-# python predict_model.py <ticker> [days_to_predict]
 import os
 import sys
 import yfinance as yf
@@ -6,7 +5,7 @@ import numpy as np
 import pandas as pd
 import joblib
 import sqlite3
-from datetime import datetime, date, timedelta  # Added date
+from datetime import datetime, date, timedelta
 from pathlib import Path
 from tensorflow.keras.models import load_model
 from tensorflow.keras.utils import disable_interactive_logging
@@ -19,7 +18,6 @@ SEQUENCE_LENGTH = 60
 
 
 def get_project_root():
-    # (Function remains the same)
     marker = ".git"
     current_path = Path(__file__).resolve()
     for parent in current_path.parents:
@@ -29,16 +27,12 @@ def get_project_root():
 
 
 def fetch_recent_stock_data(ticker, days_needed=SEQUENCE_LENGTH):
-    # (Function remains the same)
     try:
         start_date = (datetime.today() - timedelta(days=days_needed + 30)).strftime(
             "%Y-%m-%d"
         )
         stock_data_df = yf.download(ticker, start=start_date, progress=False)
         if stock_data_df.empty or len(stock_data_df) < days_needed:
-            print(
-                f"Warning: Insufficient recent data fetched for {ticker} (< {days_needed} days)."
-            )
             return None, None
         return stock_data_df["Close"].values.astype(float).reshape(-1, 1), stock_data_df
     except Exception as e:
@@ -47,7 +41,6 @@ def fetch_recent_stock_data(ticker, days_needed=SEQUENCE_LENGTH):
 
 
 def load_model_and_scaler(ticker, base_path):
-    # (Function remains the same)
     filepath_model = base_path / f"{ticker}_model.keras"
     filepath_scaler = base_path / f"{ticker}_scaler.pkl"
     if not filepath_model.exists() or not filepath_scaler.exists():
@@ -69,7 +62,6 @@ def predict_future_prices(
     sequence_length=SEQUENCE_LENGTH,
     prediction_days=DEFAULT_PREDICTION_DAYS,
 ):
-    # (Function remains the same)
     predictions = []
     last_sequence = recent_data_values[-sequence_length:]
     current_batch = scaler.transform(last_sequence).reshape((1, sequence_length, 1))
@@ -86,70 +78,61 @@ def predict_future_prices(
 def save_reference_and_predictions(
     db_path, ticker, last_actual_value, last_actual_date_obj, prediction_list
 ):
-    """Saves the reference value and the predictions to the database."""
     conn = None
-    try:
-        conn = sqlite3.connect(db_path)
-        cursor = conn.cursor()
-        # Use only the date part for prediction_made_date
-        prediction_made_date_str = date.today().strftime("%Y-%m-%d")
-        rows_to_insert = []
+    conn = sqlite3.connect(db_path)
+    cursor = conn.cursor()
+    prediction_made_date_str = date.today().strftime("%Y-%m-%d")
+    rows_to_insert = []
 
-        # 1. Add the reference value row
+    # Add the reference value row
+    rows_to_insert.append(
+        (
+            ticker,
+            prediction_made_date_str,
+            last_actual_date_obj.strftime("%Y-%m-%d"),
+            float(last_actual_value),
+            1,
+        )
+    )
+
+    # Add the prediction rows
+    start_target_date = last_actual_date_obj + timedelta(days=1)
+    for i, pred_value in enumerate(prediction_list):
+        target_date = start_target_date + timedelta(days=i)
         rows_to_insert.append(
             (
                 ticker,
                 prediction_made_date_str,
-                last_actual_date_obj.strftime(
-                    "%Y-%m-%d"
-                ),  # Target date is the actual date
-                float(last_actual_value),
-                1,  # is_reference = True
+                target_date.strftime("%Y-%m-%d"),
+                float(pred_value),
+                0,
             )
         )
 
-        # 2. Add the prediction rows
-        start_target_date = last_actual_date_obj + timedelta(
-            days=1
-        )  # Predictions start day after actual
-        for i, pred_value in enumerate(prediction_list):
-            target_date = start_target_date + timedelta(days=i)
-            rows_to_insert.append(
-                (
-                    ticker,
-                    prediction_made_date_str,
-                    target_date.strftime("%Y-%m-%d"),  # Target date for prediction
-                    float(pred_value),
-                    0,  # is_reference = False
-                )
-            )
+    cursor.execute(
+        """
+        DELETE FROM lstm_predictions
+        WHERE ticker = ?
+        """,
+        (ticker),
+    )
 
-        cursor.executemany(
-            """
-             INSERT INTO lstm_predictions
-             (ticker, prediction_made_date, prediction_target_date, value, is_reference)
-             VALUES (?, ?, ?, ?, ?)
-             """,
-            rows_to_insert,
-        )
-        conn.commit()
-        print(
-            f"Successfully saved reference + {len(prediction_list)} predictions for {ticker} to DB."
-        )
-
-    except sqlite3.Error as e:
-        print(f"Database error saving predictions for {ticker}: {e}")
-    finally:
-        if conn:
-            conn.close()
+    cursor.executemany(
+        """
+         INSERT INTO lstm_predictions
+         (ticker, prediction_made_date, prediction_target_date, value, is_reference)
+         VALUES (?, ?, ?, ?, ?)
+         """,
+        rows_to_insert,
+    )
+    conn.commit()
+    conn.close()
 
 
 def main(ticker, days_to_predict):
     project_root = get_project_root()
     models_path = project_root / "data" / "lstm_models"
     db_file = project_root / DB_PATH
-
-    print(f"Attempting prediction for {ticker}...")
 
     model, scaler = load_model_and_scaler(ticker, models_path)
     if model is None or scaler is None:
@@ -164,38 +147,23 @@ def main(ticker, days_to_predict):
         sys.exit(1)
 
     last_actual_value = recent_data_values[-1][0]
-    # Ensure last_actual_date is a date object
-    last_actual_date_obj = None
-    if isinstance(recent_data_df.index, pd.DatetimeIndex):
-        last_actual_date_obj = recent_data_df.index[-1].date()
-    else:
-        print("Error: Could not determine last actual date from DataFrame index.")
-        sys.exit(1)  # Exit if we can't get the reference date
 
-    try:
-        print(f"Making {days_to_predict}-day prediction for {ticker}...")
-        predictions = predict_future_prices(
-            model, scaler, recent_data_values, SEQUENCE_LENGTH, days_to_predict
-        )
-        print(f"Predictions generated.")
-    except Exception as e:
-        print(f"Error during prediction generation for {ticker}: {e}")
-        sys.exit(1)
+    last_actual_date_obj = recent_data_df.index[-1].date()
 
-    print(f"Saving reference + predictions for {ticker} to database...")
-    save_reference_and_predictions(  # Renamed function call
+    predictions = predict_future_prices(
+        model, scaler, recent_data_values, SEQUENCE_LENGTH, days_to_predict
+    )
+
+    save_reference_and_predictions(
         db_file,
         ticker,
         last_actual_value,
-        last_actual_date_obj,  # Pass date object
+        last_actual_date_obj,
         predictions,
     )
 
-    print(f"Prediction process complete for {ticker}.")
-
 
 if __name__ == "__main__":
-    # (Argument parsing remains the same)
     if len(sys.argv) < 2 or len(sys.argv) > 3:
         print("Usage: python predict_model.py <ticker> [days_to_predict]")
         print(f"  (Default prediction days: {DEFAULT_PREDICTION_DAYS})")

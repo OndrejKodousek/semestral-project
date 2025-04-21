@@ -1,15 +1,11 @@
-# master_workflow.py
 import sqlite3
 import subprocess
 import sys
 import time
 from pathlib import Path
-from datetime import datetime, date  # Import date
+from datetime import datetime, date
 
-# --- Configuration ---
-# Using path from your version. Ensure cron runs from project root or use absolute path.
 VENV_PYTHON_PATH = "/mnt/samsung/semestral-project/venv/bin/python"
-# -------------------
 
 DB_PATH = "data/news.db"
 
@@ -38,7 +34,7 @@ def get_unique_tickers(db_file):
 def check_if_processed_today(db_file, ticker):
     """Checks if a prediction record exists for the ticker today."""
     processed_today = False
-    conn = sqlite3.connect(db_file)  # Let it fail if connection fails
+    conn = sqlite3.connect(db_file)
     cursor = conn.cursor()
     today_str = date.today().strftime("%Y-%m-%d")
     cursor.execute(
@@ -87,7 +83,6 @@ def run_script(script_path, ticker):
 
 
 if __name__ == "__main__":
-    print(f"Master workflow started at: {datetime.now()}")
     overall_start_time = time.perf_counter()
 
     project_root = get_project_root()
@@ -120,14 +115,14 @@ if __name__ == "__main__":
         train_success = False
         predict_success = False
 
-        print(f"  Running Training for {ticker}...")
+        print(f"  Running Training for {ticker}")
         train_success = run_script(train_script, ticker)
         if train_success is True:
             total_train_success += 1
         else:
             continue
 
-        print(f"  Running Prediction for {ticker}...")
+        print(f"  Running Prediction for {ticker}")
         predict_success = run_script(predict_script, ticker)
         if predict_success is True:
             total_predict_success += 1
@@ -135,15 +130,13 @@ if __name__ == "__main__":
             continue
         ticker_end_time = time.perf_counter()
         ticker_duration = ticker_end_time - ticker_start_time
-        message = f"Finished processing {ticker} in {ticker_duration:.2f} seconds."
 
         try:
             with open(project_root / "data" / "time_tracking.txt", "a+") as f:
-                f.write(message + "\n")
+                f.write(f"{ticker_duration:.2f}" + "\n")
         except Exception as e:
-            print(f"Warning: Could not write to time_tracking.txt: {e}")
+            pass
 
-        print(f"  {message}")
         total_tickers_processed += 1
 
     overall_end_time = time.perf_counter()
