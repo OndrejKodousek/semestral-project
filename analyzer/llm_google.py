@@ -3,7 +3,7 @@ import google.generativeai as genai
 import config
 import re
 
-from database import fetch_sum_analysis_data, increment_priority
+from database import fetch_sum_analysis_data, increment_priority, get_db_connection
 from google.api_core import exceptions
 
 

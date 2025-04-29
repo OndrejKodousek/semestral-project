@@ -2,7 +2,7 @@ import json
 import config
 import re
 
-from database import fetch_sum_analysis_data, increment_priority
+from database import fetch_sum_analysis_data, increment_priority, get_db_connection
 from groq import Groq, RateLimitError, APIStatusError
 
 

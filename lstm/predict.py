@@ -26,13 +26,13 @@ def get_project_root():
     return Path(__file__).resolve().parent.parent
 
 
-def fetch_recent_stock_data(ticker, days_needed=SEQUENCE_LENGTH):
+def fetch_recent_stock_data(ticker):
     try:
-        start_date = (datetime.today() - timedelta(days=days_needed + 30)).strftime(
+        start_date = (datetime.today() - timedelta(days=SEQUENCE_LENGTH + 30)).strftime(
             "%Y-%m-%d"
         )
         stock_data_df = yf.download(ticker, start=start_date, progress=False)
-        if stock_data_df.empty or len(stock_data_df) < days_needed:
+        if stock_data_df.empty or len(stock_data_df) < SEQUENCE_LENGTH:
             return None, None
         return stock_data_df["Close"].values.astype(float).reshape(-1, 1), stock_data_df
     except Exception as e:
@@ -55,17 +55,11 @@ def load_model_and_scaler(ticker, base_path):
         return None, None
 
 
-def predict_future_prices(
-    model,
-    scaler,
-    recent_data_values,
-    sequence_length=SEQUENCE_LENGTH,
-    prediction_days=DEFAULT_PREDICTION_DAYS,
-):
+def predict_future_prices(model, scaler, recent_data_values):
     predictions = []
-    last_sequence = recent_data_values[-sequence_length:]
-    current_batch = scaler.transform(last_sequence).reshape((1, sequence_length, 1))
-    for _ in range(prediction_days):
+    last_sequence = recent_data_values[-SEQUENCE_LENGTH:]
+    current_batch = scaler.transform(last_sequence).reshape((1, SEQUENCE_LENGTH, 1))
+    for _ in range(DEFAULT_PREDICTION_DAYS):
         predicted_price_scaled = model.predict(current_batch, verbose=0)
         predicted_price = scaler.inverse_transform(predicted_price_scaled)
         predictions.append(predicted_price[0][0])
@@ -114,7 +108,7 @@ def save_reference_and_predictions(
         DELETE FROM lstm_predictions
         WHERE ticker = ?
         """,
-        (ticker),
+        (ticker,),
     )
 
     cursor.executemany(
@@ -139,9 +133,7 @@ def main(ticker, days_to_predict):
         print(f"Failed to load model/scaler for {ticker}. Cannot proceed.")
         sys.exit(1)
 
-    recent_data_values, recent_data_df = fetch_recent_stock_data(
-        ticker, SEQUENCE_LENGTH
-    )
+    recent_data_values, recent_data_df = fetch_recent_stock_data(ticker)
     if recent_data_values is None or recent_data_df is None:
         print(f"Failed to fetch recent data for {ticker}. Cannot proceed.")
         sys.exit(1)
@@ -150,9 +142,7 @@ def main(ticker, days_to_predict):
 
     last_actual_date_obj = recent_data_df.index[-1].date()
 
-    predictions = predict_future_prices(
-        model, scaler, recent_data_values, SEQUENCE_LENGTH, days_to_predict
-    )
+    predictions = predict_future_prices(model, scaler, recent_data_values)
 
     save_reference_and_predictions(
         db_file,
@@ -166,7 +156,7 @@ def main(ticker, days_to_predict):
 if __name__ == "__main__":
     if len(sys.argv) < 2 or len(sys.argv) > 3:
         print("Usage: python predict_model.py <ticker> [days_to_predict]")
-        print(f"  (Default prediction days: {DEFAULT_PREDICTION_DAYS})")
+        print(f"Default prediction days: {DEFAULT_PREDICTION_DAYS}")
         sys.exit(1)
     ticker_symbol = sys.argv[1].upper()
     num_days = DEFAULT_PREDICTION_DAYS

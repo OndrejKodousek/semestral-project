@@ -9,37 +9,34 @@ import { extractTicker } from "./utils/parsing";
 import { motion } from "motion/react";
 
 const App: React.FC = () => {
-  // Keep existing states
   const [predictionData, setPredictionData] = useState<PredictionData[] | null>(
     null,
-  ); // Initialize as null
-  const [tickerString, setTickerString] = useState<string | null>(null); // Renamed for clarity
+  );
+  const [tickerString, setTickerString] = useState<string | null>(null);
   const [model, setModel] = useState<string | null>(null);
   const [minArticles, setMinArticles] = useState<number>(5);
   const [includeConfidence, setIncludeConfidence] = useState<number>(1);
   const [stockNames, setStockNames] = useState<string[]>([]);
   const [mode, setMode] = useState<number>(1);
-  const [isLoading, setIsLoading] = useState<boolean>(false); // Added loading state
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  // Memoize extracted ticker to avoid recalculation and ensure consistency
   const extractedTicker = useMemo(
     () => (tickerString ? extractTicker(tickerString) : null),
     [tickerString],
   );
 
-  includeConfidence; // If this is unused, consider removing it
+  includeConfidence;
 
   // Effect for fetching analysis data
   useEffect(() => {
     // Only fetch if we have a valid ticker and model
     if (extractedTicker && model) {
       const fetchData = async () => {
-        setIsLoading(true); // Start loading
-        setPredictionData(null); // Clear previous data immediately
+        setIsLoading(true);
+        setPredictionData(null);
         try {
-          // Fetch with the current extractedTicker and model
           const data = await fetchAnalysisData(extractedTicker, model);
-          setPredictionData(data ?? []); // Set new data, ensure it's an array even if null returned
+          setPredictionData(data ?? []);
         } catch (error) {
           console.error("Failed to fetch analysis data:", error);
           setPredictionData([]); // Clear prediction data on error

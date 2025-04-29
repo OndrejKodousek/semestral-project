@@ -2,6 +2,7 @@ import React from "react";
 import { ModelSelectProps } from "../utils/interfaces";
 
 const ModelSelect: React.FC<ModelSelectProps> = ({ setModel }) => {
+  
   // ! Make sure it's always sync'd with LLM analyzer models
   const items: string[] = [
     // Google AI Studio

@@ -5,6 +5,8 @@ import sqlite3
 import yfinance as yf
 import traceback
 import google.generativeai as genai
+import warnings
+
 from groq import Groq, RateLimitError, APIStatusError
 from openai import OpenAI
 from pathlib import Path
@@ -13,6 +15,8 @@ from flask_cors import CORS, cross_origin
 from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 
+
+warnings.simplefilter(action="ignore", category=FutureWarning)
 app = Flask(__name__)
 CORS(app)
 
@@ -143,115 +147,46 @@ def fetch_lstm():
         conn.row_factory = sqlite3.Row
         cursor = conn.cursor()
 
-        # 1. Find the latest prediction run's reference point
+        # Fetch the latest set of predictions for the ticker
         cursor.execute(
             """
-            SELECT value, prediction_made_date, prediction_target_date
+            SELECT prediction_made_date, prediction_target_date, value
             FROM lstm_predictions
-            WHERE ticker = ? AND is_reference = 1
-            ORDER BY prediction_made_date DESC, prediction_target_date DESC
-            LIMIT 1;
+            WHERE ticker = ?
+            ORDER BY prediction_made_date DESC, prediction_target_date ASC;
             """,
             (ticker,),
         )
-        reference_row = cursor.fetchone()
+        all_predictions = cursor.fetchall()
 
-        if not reference_row:
-            return (
-                jsonify({"error": "No LSTM reference data found for this ticker"}),
-                404,
-            )
+        conn.close()
 
-        reference_value = float(reference_row["value"])
-        prediction_made_date = reference_row["prediction_made_date"]
-        # Use the reference point's target date as the base date for day counting
-        reference_target_date_str = reference_row["prediction_target_date"]
-        reference_target_date = date.fromisoformat(reference_target_date_str)
+        if not all_predictions:
+            return jsonify({})
 
-        # 2. Fetch the predictions made at the same time as the reference point
-        cursor.execute(
-            """
-            SELECT prediction_target_date, value
-            FROM lstm_predictions
-            WHERE ticker = ? AND prediction_made_date = ? AND is_reference = 0
-            ORDER BY prediction_target_date ASC;
-            """,
-            (ticker, prediction_made_date),
-        )
-        prediction_rows = cursor.fetchall()
+        latest_prediction_made_date = all_predictions[0]["prediction_made_date"]
 
-        if not prediction_rows:
-            return (
-                jsonify(
-                    {"error": "Prediction data missing for the latest reference point"}
-                ),
-                404,
-            )
+        latest_prediction_rows = [
+            p
+            for p in all_predictions
+            if p["prediction_made_date"] == latest_prediction_made_date
+        ]
 
-        # 3. Attempt to fetch the full stock name (optional, fallback to ticker)
-        cursor.execute(
-            """
-            SELECT stock FROM analysis WHERE ticker = ? LIMIT 1
-            """,
-            (ticker,),
-        )
-        stock_row = cursor.fetchone()
-        stock_name = stock_row["stock"] if stock_row else ticker
+        predictions_dict = {}
+        for row in latest_prediction_rows:
+            target_date_str = row["prediction_target_date"]
+            predicted_value = float(row["value"])
+            predictions_dict[target_date_str] = predicted_value
 
-        conn.close()  # Close connection after fetching data
-
-        # 4. Process predictions and calculate percentage change
-        core_data = {
-            "stock": stock_name,
-            "ticker": ticker,
-            "summary": f"LSTM Prediction based on data from {prediction_made_date}",
-            "reference_date": reference_target_date_str,
-            "reference_value": reference_value,
-        }
-
-        # Find the earliest prediction target date to establish day 1
-        if prediction_rows:
-            min_prediction_target_date = date.fromisoformat(
-                min(p["prediction_target_date"] for p in prediction_rows)
-            )
-
-            for row in prediction_rows:
-                target_date = date.fromisoformat(row["prediction_target_date"])
-                predicted_value = float(row["value"])
-
-                # Calculate day number relative to the first prediction's target date
-                # If first prediction target is the day after reference target, it's day 1
-                day_number = (target_date - min_prediction_target_date).days + 1
-
-                # Calculate percentage change
-                if reference_value is not None and reference_value != 0:
-                    percentage_change = float(
-                        predicted_value - reference_value
-                    ) / float(reference_value)
-                else:
-                    percentage_change = (
-                        0.0  # Avoid division by zero or handle as needed
-                    )
-
-                # Add to core_data, similar to sum_analysis (up to 12 days for consistency)
-                if 1 <= day_number <= 12:
-                    core_data[f"prediction_{day_number}_day"] = percentage_change
-                    core_data[f"confidence_{day_number}_day"] = (
-                        None  # LSTM data doesn't have confidence score
-                    )
-
-        result = {"analysis": core_data}
-        return jsonify(result)
+        return jsonify(predictions_dict)
 
     except sqlite3.Error as e:
         print(f"Database error in /api/fetch_lstm: {e}")
-        # Log traceback here if needed: import traceback; traceback.print_exc()
         if conn:
             conn.close()
         return jsonify({"error": "Database error occurred"}), 500
     except Exception as e:
         print(f"Unexpected error in /api/fetch_lstm: {e}")
-        # Log traceback here if needed: import traceback; traceback.print_exc()
         if conn:
             conn.close()
         return jsonify({"error": "An unexpected error occurred"}), 500
@@ -366,23 +301,29 @@ def sum_analysis():
 def historical_data():
     ticker = request.args.get("ticker")
     start = request.args.get("start")
-
     try:
-        start = datetime.strptime(start, "%Y-%m-%d")
-        start = start - relativedelta(months=1)  # Workaround
+        start_date = datetime.strptime(start, "%Y-%m-%d")
+        start_date = start_date - relativedelta(months=1)
 
-        stock = yf.Ticker(ticker)
-        historical_data = stock.history(start=start)
+        stock_data = yf.download(
+            ticker,
+            start=start_date.strftime("%Y-%m-%d"),
+            end=None,
+            progress=False,
+        )
+
+        if stock_data.empty:
+            return jsonify([])
 
         prices = []
-        for date, row in historical_data.iterrows():
-            latest_day_price = row["Close"]
+        for date, row in stock_data.iterrows():
             prices.append(
                 {
                     "date": date.strftime("%Y-%m-%d"),
-                    "price": latest_day_price,
+                    "price": float(row["Close"]),
                 }
             )
+
         return jsonify(prices)
     except IndexError:
         return jsonify([])

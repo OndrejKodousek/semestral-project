@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ArticleList from "./ArticleList";
 import CombinedChart from "./CombinedChart";
-import { StatisticsFieldProps, HistoricalData } from "../utils/interfaces";
+import {
+  StatisticsFieldProps,
+  HistoricalData,
+  PredictionData,
+} from "../utils/interfaces";
 import { fetchHistoricalData } from "../utils/apiEndpoints";
 import { getEarliestDate } from "../utils/date";
 
@@ -12,40 +16,85 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
   mode,
 }) => {
   const [historicalData, setHistoricalData] = useState<HistoricalData[]>([]);
+  const [isLoadingHistorical, setIsLoadingHistorical] =
+    useState<boolean>(false);
 
   useEffect(() => {
-    if (predictionData) {
-      const start = getEarliestDate(predictionData);
-      const ticker = predictionData[0]["ticker"];
-
-      const fetchData = async () => {
-        if (ticker && start) {
-          const historicalData = await fetchHistoricalData(ticker, start);
-          setHistoricalData(historicalData);
-        }
-      };
-
-      fetchData();
+    // Clear previous data and set loading state when ticker changes
+    setHistoricalData([]);
+    if (!ticker) {
+      return;
     }
-  }, [predictionData]);
+
+    setIsLoadingHistorical(true);
+
+    const fetchData = async (
+      currentTicker: string,
+      currentPredictionData: PredictionData[] | null,
+    ) => {
+      let start: string | null = null;
+      if (
+        currentPredictionData &&
+        currentPredictionData.length > 0 &&
+        currentPredictionData[0].ticker === currentTicker
+      ) {
+        try {
+          start = getEarliestDate(currentPredictionData);
+        } catch (e) {
+          console.error("Could not get earliest date from prediction data:", e);
+        }
+      }
+
+      if (currentTicker && start) {
+        try {
+          const fetchedHistoricalData = await fetchHistoricalData(
+            currentTicker,
+            start,
+          );
+
+          setHistoricalData(fetchedHistoricalData);
+        } catch (error) {
+          console.error("Failed to fetch historical data:", error);
+          setHistoricalData([]); // Clear data on error
+        } finally {
+          setIsLoadingHistorical(false);
+        }
+      } else {
+        setHistoricalData([]);
+        setIsLoadingHistorical(false);
+      }
+    };
+
+    fetchData(ticker, predictionData);
+  }, [ticker, predictionData]);
+
+  const relevantPredictionData =
+    predictionData &&
+    predictionData.length > 0 &&
+    predictionData[0].ticker === ticker
+      ? predictionData
+      : null;
 
   return (
     <>
-      {mode === 1 && (
+      {mode === 1 && relevantPredictionData && (
         <ArticleList
-          key={`combined-chart-<span class="math-inline">\{ticker\}\-</span>{model}`}
-          predictionData={predictionData}
+          key={`article-list-${ticker}-${model}`}
+          predictionData={relevantPredictionData}
           historicalData={historicalData}
         />
       )}
       {mode === 2 && (
         <CombinedChart
-          key={`combined-chart-<span class="math-inline">\{ticker\}\-</span>{model}`}
-          predictionData={predictionData}
+          key={`combined-chart-${ticker}-${model}`}
+          predictionData={relevantPredictionData || []}
           historicalData={historicalData}
           ticker={ticker}
           model={model}
         />
+      )}
+      {mode === 1 && !relevantPredictionData && ticker && (
+        <p>Loading analysis data for {ticker}...</p>
       )}
     </>
   );

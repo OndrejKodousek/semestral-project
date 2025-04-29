@@ -85,8 +85,9 @@ def main():
                 print(f" | FAILED, data format is invalid")
                 continue
 
-            print(f" | ARTICLE ANALYSIS SUCCESS")
-            save_processed_articles(article["id"], model, processed_entry)
+            ret = save_processed_articles(article["id"], model, processed_entry)
+            if ret is True:
+                print(f" | ARTICLE ANALYSIS SUCCESS")
 
             # INDIVIDUAL ARTICLE
             ####################################################################
@@ -102,7 +103,7 @@ def main():
                 flush=True,
             )
 
-            prompt = fetch_sum_analysis_data(ticker, model)
+            reference_date, prompt = fetch_sum_analysis_data(ticker, model)
 
             if "gemini" in model:
                 processed_entry = process_article_google_sum(model, prompt)
@@ -118,7 +119,9 @@ def main():
                 continue
 
             print(f" | AGGREGATED ANALYSIS SUCCESS")
-            save_processed_summarized_articles(processed_entry, model, ticker)
+            save_processed_summarized_articles(
+                processed_entry, model, ticker, reference_date
+            )
 
 
 if __name__ == "__main__":

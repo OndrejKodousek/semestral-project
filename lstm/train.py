@@ -13,6 +13,8 @@ from datetime import datetime
 from pathlib import Path
 
 DB_PATH = "data/news.db"
+SEQUENCE_LENGTH = 60
+EPOCHS = 25
 
 
 def get_project_root():
@@ -31,7 +33,8 @@ def fetch_stock_data(ticker, start_date="2010-01-01"):
         if stock_data_df.empty:
             print(f"Warning: No data fetched for {ticker}.")
             return None, None
-        # Return only Close prices and the actual data fetched
+
+        # Return only close prices and the actual data fetched
         return stock_data_df["Close"].values.reshape(-1, 1), stock_data_df
     except Exception as e:
         print(f"Error fetching data for {ticker}: {e}")
@@ -40,7 +43,6 @@ def fetch_stock_data(ticker, start_date="2010-01-01"):
 
 def build_lstm_model(input_shape):
     model = Sequential()
-    # Consider making units configurable
     model.add(LSTM(50, return_sequences=True, input_shape=input_shape))
     model.add(LSTM(50, return_sequences=False))
     model.add(Dense(25))
@@ -50,7 +52,6 @@ def build_lstm_model(input_shape):
 
 
 def save_model_and_scaler(model, scaler, ticker, base_path):
-    """Saves the model and scaler to the specified base path."""
     filepath_model = base_path / f"{ticker}_model.keras"
     filepath_scaler = base_path / f"{ticker}_scaler.pkl"
 
@@ -77,14 +78,12 @@ def main(ticker):
         print(f"Insufficient data for {ticker} to train. Skipping.")
         return
 
-    sequence_length = 60
-
     scaler = MinMaxScaler(feature_range=(0, 1))
     scaled_data = scaler.fit_transform(data_values)
 
     X, y = [], []
-    for i in range(sequence_length, len(scaled_data)):
-        X.append(scaled_data[i - sequence_length : i, 0])
+    for i in range(SEQUENCE_LENGTH, len(scaled_data)):
+        X.append(scaled_data[i - SEQUENCE_LENGTH : i, 0])
         y.append(scaled_data[i, 0])
 
     if not X:
@@ -101,7 +100,7 @@ def main(ticker):
         monitor="loss", patience=10, restore_best_weights=True
     )
 
-    model.fit(X, y, batch_size=32, epochs=25, verbose=1, callbacks=[early_stopping])
+    model.fit(X, y, batch_size=32, epochs=EPOCHS, verbose=1, callbacks=[early_stopping])
 
     print(f"Saving model and scaler for {ticker}...")
     save_model_and_scaler(model, scaler, ticker, models_path)

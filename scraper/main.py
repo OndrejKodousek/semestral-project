@@ -136,15 +136,14 @@ def main():
         if "ERROR" in content:
             if content == "ERROR-PAYWALL":
                 print(f" | FAILED, paywalled article")
-                logToFile(f"FAILED, paywalled article, {link}")
                 continue
             else:
                 print(f" | FAILED, unknown error")
-                logToFile(f"FAILED, unknown error {link}")
                 continue
 
         # Sometimes old article gets pushed to RSS feed, because it was updated or similar
         if not entry.published.startswith("2025"):
+            print(f" | FAILED, article was suspiciously old")
             continue
 
         insert_query = """

@@ -54,8 +54,8 @@ const Chart: React.FC<ChartProps> = ({
     if (historicalData && historicalData[0]) {
       const labels = generateDateRange(published, 3);
       const stockPrices = filterHistoricalData(historicalData, labels);
-      const stockChanges = convertStockPriceToPercentChange(stockPrices);
-      setRealData(stockChanges);
+      // const stockChanges = convertStockPriceToPercentChange(stockPrices);
+      setRealData(stockPrices);
       setLabels(labels);
     }
   }, [historicalData]);
@@ -65,9 +65,10 @@ const Chart: React.FC<ChartProps> = ({
     datasets: [
       {
         label: "Real Data",
-        data: convertToPercent(realData),
+        data: realData,
         borderColor: "rgba(153, 102, 255, 1)",
         backgroundColor: "rgba(153, 102, 255, 0.2)",
+        borderDash: [5, 5],
       },
       {
         label: "Prediction",
@@ -75,9 +76,7 @@ const Chart: React.FC<ChartProps> = ({
           const predictionEntry = predictionEntries.find(
             (entry) => entry.date === label,
           );
-          return predictionEntry
-            ? convertToPercent([predictionEntry.prediction])[0]
-            : null;
+          return predictionEntry ? [predictionEntry.prediction][0] : null;
         }),
         borderColor: "rgba(75, 192, 192, 1)",
         backgroundColor: "rgba(75, 192, 192, 0.2)",

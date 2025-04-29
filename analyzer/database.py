@@ -1,9 +1,14 @@
 import sqlite3
 import time
 import json
+import pandas as pd
+import warnings
+import yfinance as yf
 
 from datetime import datetime, timedelta, date
 from collections import defaultdict
+
+warnings.simplefilter(action="ignore", category=FutureWarning)
 
 
 def get_db_connection():
@@ -29,7 +34,68 @@ def load_processed_articles(model):
     return processed_article_ids
 
 
-# Save processed articles to the database
+def get_last_trading_day(date_str):
+    date = datetime.strptime(date_str, "%Y-%m-%d")
+
+    pd_date = pd.Timestamp(date)
+
+    # 5=Saturday, 6=Sunday
+    if pd_date.dayofweek >= 5:
+
+        # Go back to the most recent business day
+        trading_day = pd_date - pd.tseries.offsets.BDay(1)
+        return trading_day.strftime("%Y-%m-%d")
+
+    return date_str
+
+
+def get_stock_price(ticker, date_str):
+    max_retries = 3
+    retry_delay = 2
+    trading_date = get_last_trading_day(date_str)
+
+    for attempt in range(max_retries):
+        try:
+            # Get data for a window around the target date
+            start_date = datetime.strptime(trading_date, "%Y-%m-%d") - timedelta(days=5)
+            end_date = datetime.strptime(trading_date, "%Y-%m-%d") + timedelta(days=1)
+
+            stock_data = yf.download(
+                ticker,
+                start=start_date.strftime("%Y-%m-%d"),
+                end=end_date.strftime("%Y-%m-%d"),
+                progress=False,
+            )
+
+            if not stock_data.empty:
+                closest_date = None
+                for date in stock_data.index:
+                    date_str_format = date.strftime("%Y-%m-%d")
+                    if date_str_format <= trading_date and (
+                        closest_date is None or date > closest_date
+                    ):
+                        closest_date = date
+
+                if closest_date is not None:
+                    close_price = float(stock_data.loc[closest_date, "Close"])
+                    return close_price
+
+            print(
+                f"No price data found for {ticker} on {trading_date}, attempt {attempt+1}"
+            )
+            time.sleep(retry_delay)
+            retry_delay *= 2
+
+        except Exception as e:
+            print(f"Error fetching stock price for {ticker} on {date_str}: {e}")
+            time.sleep(retry_delay)
+            retry_delay *= 2
+
+    raise Exception(
+        f"Failed to fetch stock price for {ticker} after {max_retries} attempts"
+    )
+
+
 def save_processed_articles(article_id, model, data):
     max_retries = 5
     retry_delay = 1
@@ -41,6 +107,23 @@ def save_processed_articles(article_id, model, data):
 
             # Extract the date part (YYYY-MM-DD) from the published field
             published_date = data["published"].split("T")[0]
+            ticker = data.get("ticker")
+
+            base_stock_price = None
+            if ticker:
+                try:
+                    # print(f"Fetching stock price for {ticker} on {published_date}")
+                    base_stock_price = get_stock_price(ticker, published_date)
+                # print(
+                #     f"Base price for {ticker} on {published_date}: ${base_stock_price:.2f}"
+                # )
+                except Exception as e:
+                    print(f" | FAILED to get stock price: {e}")
+                    return False  # TODO: Probably handle this somehow. Idk how tho
+
+            if base_stock_price is None:
+                print(f" | FAILED to get stock price: {e}")
+                return False  # TODO: Probably handle this somehow. Idk how tho
 
             # Insert into analysis table
             cursor.execute(
@@ -52,8 +135,8 @@ def save_processed_articles(article_id, model, data):
                 (
                     article_id,
                     model,
-                    published_date,  # Use the extracted date
-                    data.get("ticker"),
+                    published_date,
+                    ticker,
                     data.get("stock"),
                     data.get("summary"),
                 ),
@@ -61,26 +144,44 @@ def save_processed_articles(article_id, model, data):
             analysis_id = cursor.lastrowid
 
             # Insert into predictions table
-            for day in range(1, 13):  # Assuming predictions for 12 days
+            for day in range(1, 13):
                 prediction_key = f"prediction_{day}_day"
                 confidence_key = f"confidence_{day}_day"
+
                 prediction_date = (
                     datetime.strptime(published_date, "%Y-%m-%d") + timedelta(days=day)
                 ).strftime("%Y-%m-%d")
 
-                cursor.execute(
-                    """
-                    INSERT INTO predictions (
-                        analysis_id, date, prediction, confidence
-                    ) VALUES (?, ?, ?, ?)
-                    """,
-                    (
-                        analysis_id,
-                        prediction_date,
-                        data.get(prediction_key),
-                        data.get(confidence_key),
-                    ),
-                )
+                percentage_prediction = data.get(prediction_key)
+
+                if percentage_prediction is not None:
+                    try:
+                        # Convert percentage to decimal and calculate absolute price
+                        percentage_decimal = float(percentage_prediction)
+                        absolute_prediction = base_stock_price * (
+                            1 + percentage_decimal
+                        )
+
+                        # print(f"percentage_prediction: {percentage_prediction}")
+                        # print(f"percentage_decimal: {percentage_decimal}")
+                        # print(f"base_stock_price: {base_stock_price}")
+                        # print(f"absolute_prediction: {absolute_prediction}")
+
+                        cursor.execute(
+                            """
+                            INSERT INTO predictions (
+                                analysis_id, date, prediction, confidence
+                            ) VALUES (?, ?, ?, ?)
+                            """,
+                            (
+                                analysis_id,
+                                prediction_date,
+                                absolute_prediction,
+                                data.get(confidence_key),
+                            ),
+                        )
+                    except (ValueError, TypeError) as e:
+                        print(f"Could not calculate absolute value for day {day}: {e}")
 
             conn.commit()
             cursor.close()
@@ -99,29 +200,44 @@ def save_processed_articles(article_id, model, data):
     else:
         raise Exception("Failed to save processed articles after multiple retries")
 
+    return True
 
-def save_processed_summarized_articles(data, model_name, ticker):
-    """
-    Saves summarized analysis and its associated predictions to the database,
-    storing predictions in a separate linked table.
-    """
+
+def save_processed_summarized_articles(data, model_name, ticker, published_date):
     max_retries = 5
     retry_delay = 1
-    summarized_analysis_id = None  # Initialize id variable
+    summarized_analysis_id = None
 
-    # Extract summary text - prediction data is handled separately now
     summary_text = data.get("summary", "")
-    # Get today's date to calculate prediction dates
     today_date = date.today()
 
     for attempt in range(max_retries):
-        conn = None  # Ensure conn is defined for finally block
+        conn = None
         try:
+
+            # Extract the date part (YYYY-MM-DD) from the published field
+            ticker = data.get("ticker")
+
+            base_stock_price = None
+            if ticker:
+                try:
+                    # print(f"Fetching stock price for {ticker} on {published_date}")
+                    base_stock_price = get_stock_price(ticker, published_date)
+                # print(
+                #     f"Base price for {ticker} on {published_date}: ${base_stock_price:.2f}"
+                # )
+                except Exception as e:
+                    print(f" | FAILED to get stock price: {e}")
+                    return False  # TODO: Probably handle this somehow. Idk how tho
+
+            if base_stock_price is None:
+                print(f" | FAILED to get stock price: {e}")
+                return False  # TODO: Probably handle this somehow. Idk how tho
+
             conn = get_db_connection()
             cursor = conn.cursor()
-            conn.execute("BEGIN TRANSACTION")  # Start transaction
+            conn.execute("BEGIN TRANSACTION")  # NTFS-like thingy
 
-            # --- Step 1: Insert or Replace the main summary ---
             last_updated_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             cursor.execute(
                 """
@@ -134,12 +250,10 @@ def save_processed_summarized_articles(data, model_name, ticker):
                     ticker,
                     last_updated_time,
                     summary_text,
-                    # prediction_data_json is no longer needed here
                 ),
             )
 
-            # --- Step 2: Get the ID of the inserted/replaced row ---
-            # This must be done *before* potential commit/rollback in exception handling
+            # Get the ID of the inserted/replaced row
             cursor.execute(
                 """
                  SELECT id FROM summarized_analysis
@@ -151,12 +265,10 @@ def save_processed_summarized_articles(data, model_name, ticker):
             if result:
                 summarized_analysis_id = result["id"]
             else:
-                # Should not happen with INSERT OR REPLACE unless something went very wrong
+                # Should not happen with INSERT OR REPLACE unless something went very, very wrong
                 raise Exception("Failed to retrieve ID after INSERT OR REPLACE")
 
-            # --- Step 3: Delete old predictions for this summary (if any) ---
-            # Necessary because INSERT OR REPLACE on parent doesn't cascade delete children
-            # And we want to insert the fresh set of predictions
+            # Delete old predictions for this summary
             cursor.execute(
                 """
                 DELETE FROM summarized_predictions WHERE summarized_analysis_id = ?
@@ -164,44 +276,59 @@ def save_processed_summarized_articles(data, model_name, ticker):
                 (summarized_analysis_id,),
             )
 
-            # --- Step 4: Insert new predictions ---
+            # Insert new predictions
             for day in range(1, 13):
                 pred_key = f"prediction_{day}_day"
                 conf_key = f"confidence_{day}_day"
                 prediction_value = data.get(pred_key)
                 confidence_value = data.get(conf_key)
 
-                if prediction_value is not None and confidence_value is not None:
-                    # Calculate the actual date for the prediction
-                    prediction_date = (today_date + timedelta(days=day)).strftime(
-                        "%Y-%m-%d"
-                    )
-                    cursor.execute(
-                        """
-                        INSERT INTO summarized_predictions (
+                prediction_date = (
+                    datetime.strptime(published_date, "%Y-%m-%d") + timedelta(days=day)
+                ).strftime("%Y-%m-%d")
+
+                percentage_prediction = data.get(pred_key)
+
+                if percentage_prediction is not None:
+                    try:
+                        # Convert percentage to decimal and calculate absolute price
+                        percentage_decimal = float(percentage_prediction)
+                        absolute_prediction = base_stock_price * (
+                            1 + percentage_decimal
+                        )
+
+                        # print(f"percentage_prediction: {percentage_prediction}")
+                        # print(f"percentage_decimal: {percentage_decimal}")
+                        # print(f"base_stock_price: {base_stock_price}")
+                        # print(f"absolute_prediction: {absolute_prediction}")
+
+                        cursor.execute(
+                            """
+                            INSERT INTO summarized_predictions (
                             summarized_analysis_id, date, prediction, confidence
                         ) VALUES (?, ?, ?, ?)
-                        """,
-                        (
-                            summarized_analysis_id,
-                            prediction_date,
-                            prediction_value,
-                            confidence_value,
-                        ),
-                    )
+                            """,
+                            (
+                                summarized_analysis_id,
+                                prediction_date,
+                                absolute_prediction,
+                                confidence_value,
+                            ),
+                        )
+                    except (ValueError, TypeError) as e:
+                        print(f"Could not calculate absolute value for day {day}: {e}")
 
-            # --- Step 5: Commit transaction ---
             conn.commit()
-            break  # Success, exit retry loop
+            break
 
         except sqlite3.OperationalError as e:
             if conn:
-                conn.rollback()  # Rollback on error
+                conn.rollback()
             if "database is locked" in str(e):
                 print(
                     f"Database locked (Summary Save), retrying in {retry_delay} seconds (attempt {attempt + 1}/{max_retries})"
                 )
-                if attempt + 1 == max_retries:  # Check if it was the last attempt
+                if attempt + 1 == max_retries:
                     print(
                         f" | FAILED (Summary Save), DB locked after final attempt for {ticker} with {model_name}."
                     )
@@ -212,13 +339,6 @@ def save_processed_summarized_articles(data, model_name, ticker):
                     f" | FAILED (Summary Save), DB Error: {e} for {ticker} with {model_name}"
                 )
                 break  # Stop retrying on non-lock errors
-        except Exception as e:  # Catch other potential errors
-            if conn:
-                conn.rollback()  # Rollback on error
-            print(
-                f" | FAILED (Summary Save), Unexpected Error: {e} for {ticker} with {model_name}"
-            )
-            break  # Stop retrying
 
         finally:
             if conn:
@@ -318,59 +438,4 @@ def fetch_sum_analysis_data(ticker, model):
 
     result_string = json.dumps(result_list, indent=4)
 
-    return metadata + result_string
-
-
-"""
-DATABASE SCHEME:
-
-CREATE TABLE IF NOT EXISTS articles (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    priority INTEGER NOT NULL,
-    link TEXT UNIQUE NOT NULL,
-    title TEXT NOT NULL,
-    published DATETIME NOT NULL,
-    source TEXT NOT NULL,
-    content TEXT NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS analysis (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    article_id INTEGER NOT NULL,
-    model_name TEXT NOT NULL,
-    published DATETIME NOT NULL,
-    ticker TEXT NOT NULL,
-    stock TEXT NOT NULL,
-    summary TEXT NOT NULL,
-    FOREIGN KEY (article_id) REFERENCES articles(id)
-);
-
-CREATE TABLE IF NOT EXISTS predictions (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    analysis_id INTEGER NOT NULL,
-    date DATE NOT NULL,
-    prediction FLOAT NOT NULL,
-    confidence FLOAT NOT NULL,
-    FOREIGN KEY (analysis_id) REFERENCES analysis(id)
-);
-
-CREATE TABLE IF NOT EXISTS summarized_analysis (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    model_name TEXT NOT NULL,
-    ticker TEXT NOT NULL,
-    last_updated DATETIME NOT NULL,
-    summary_text TEXT NOT NULL,
-    -- Removed prediction_data TEXT NOT NULL,
-    UNIQUE(model_name, ticker)
-);
-
-CREATE TABLE IF NOT EXISTS summarized_predictions (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    summarized_analysis_id INTEGER NOT NULL,
-    date DATE NOT NULL,
-    prediction FLOAT NOT NULL,
-    confidence FLOAT NOT NULL,
-    FOREIGN KEY (summarized_analysis_id) REFERENCES summarized_analysis(id) ON DELETE CASCADE -- Added ON DELETE CASCADE
-);
-
-"""
+    return today_str, (metadata + result_string)
