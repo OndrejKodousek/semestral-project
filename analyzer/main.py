@@ -59,11 +59,13 @@ def main():
             if article["id"] in processed_article_ids:
                 continue
             if article["priority"] > 20:
-                # TODO: It's biased
+                # Model/s have failed to analyze article too many times, something is very likely
+                # wrong with the article that makes it impossible to determine ticker
                 continue
 
             ####################################################################
-            # INDIVIDUAL ARTICLE
+            # PROCESSING INDIVIDUAL ARTICLE
+            #
 
             print(
                 f"Processing article {shorten_string(article['link'], 60-len(model))} with {model}",
@@ -89,15 +91,18 @@ def main():
             if ret is True:
                 print(f" | ARTICLE ANALYSIS SUCCESS")
 
-            # INDIVIDUAL ARTICLE
+            #
+            # PROCESSING INDIVIDUAL ARTICLE
             ####################################################################
-            # AGGREGATED ARTICLES
+            # PROCESSING AGGREGATED ARTICLES
+            #
+
             ticker = str(processed_entry["ticker"])
             stock = str(processed_entry["stock"])
             print(
                 shorten_string(
                     f"Running aggregated analysis for {stock} ({ticker})",
-                    84,
+                    85,
                 ),
                 end="",
                 flush=True,
@@ -122,6 +127,10 @@ def main():
             save_processed_summarized_articles(
                 processed_entry, model, ticker, reference_date
             )
+
+            #
+            # PROCESSING AGGREGATED ARTICLES
+            ####################################################################
 
 
 if __name__ == "__main__":

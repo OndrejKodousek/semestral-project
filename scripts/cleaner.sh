@@ -12,9 +12,6 @@ TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
 BACKUP_FILE="${BACKUP_DIR}/news_backup_${TIMESTAMP}.db"
 LOG_FILE="${BACKUP_DIR}/maintenance_log_${TIMESTAMP}.log"
 
-# Redirect all output (stdout and stderr) to a log file AND the console/cron output
-#exec > >(tee -a "$LOG_FILE") 2>&1
-
 echo "====================================================="
 echo "Starting SQLite Maintenance at $(date)"
 echo "Database: $DB_FILE"

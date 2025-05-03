@@ -7,7 +7,7 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   setMinArticles,
 }) => {
   const handleModeChange = (selectedMode: number) => {
-    setMode(selectedMode); // Update the selected mode
+    setMode(selectedMode);
   };
 
   const handleMinArticlesChange = (

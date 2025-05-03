@@ -1,11 +1,10 @@
-import { PredictionData } from "../utils/interfaces"; // Import the correct interface
+import { PredictionData } from "../utils/interfaces";
 
 const formatDate = (date: Date): string => {
   const day = String(date.getDate()).padStart(2, "0");
   const month = String(date.getMonth() + 1).padStart(2, "0");
   const year = date.getFullYear();
   return `${year}-${month}-${day}`;
-  //return `${day}-${month}`;
 };
 
 export const generateDateRange = (
@@ -61,7 +60,7 @@ export const getDateOnly = (published: string): string => {
   const dateObj = new Date(published);
 
   const year = dateObj.getFullYear();
-  const month = String(dateObj.getMonth() + 1).padStart(2, "0"); // Months are zero-based
+  const month = String(dateObj.getMonth() + 1).padStart(2, "0"); // Months are 0-indexed
   const day = String(dateObj.getDate()).padStart(2, "0");
 
   return `${year}-${month}-${day}`;
@@ -88,7 +87,6 @@ export const calculateDateDifferenceInDays = (
 export const getEarliestDate = (articles: PredictionData[]): string => {
   if (articles.length === 0) {
     return "0000-00-00";
-    throw new Error("Articles array is empty");
   }
 
   const dates = articles.map((article) => new Date(article.published));

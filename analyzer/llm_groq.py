@@ -72,24 +72,22 @@ def processed_article_groq_sum(model, prompt):
         response_text = chat_completion.choices[0].message.content
 
     except RateLimitError as e:
-        print(f" | FAILED (SUM), reached quota")
+        print(f" | FAILED, reached quota")
         return None
     except APIStatusError as e:
-        print(f" | FAILED (SUM), API status error: {e}")
+        print(f" | FAILED, API status error: {e}")
         return None
     except Exception as e:
-        print(f" | FAILED (SUM), Unexpected error: {e}")
+        print(f" | FAILED, Unexpected error: {e}")
         return None
 
     if "ERROR-01" in response_text:
-        print(f" | FAILED (SUM), couldn't determine relevant stock for summary")
-        # Note: incrementPriority might need adjustment if 'article_id' isn't directly available
-        # incrementPriority(article["id"]) # This likely needs context adjustment
+        print(f" | FAILED, couldn't determine relevant stock for summary")
         return None
 
     match = re.search(r"\{(.*?)\}", response_text, re.DOTALL)
     if not match:
-        print(f" | FAILED (SUM), couldn't find proper JSON in response")
+        print(f" | FAILED, couldn't find proper JSON in response")
         return None
 
     extracted_content = "{" + match.group(1) + "}"
@@ -97,7 +95,7 @@ def processed_article_groq_sum(model, prompt):
     try:
         data = json.loads(extracted_content)
     except json.decoder.JSONDecodeError:
-        print(f" | FAILED (SUM), response has bad JSON format")
+        print(f" | FAILED, response has bad JSON format")
         return None
 
     return data

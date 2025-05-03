@@ -68,7 +68,6 @@ def check_if_processed_today(db_file: Path, ticker: str) -> bool:
         if result:
             processed_today = True
     except sqlite3.Error as e:
-        # Include date in error for clarity when running continuously
         print(
             f"Database error checking if processed today ({date.today().strftime('%Y-%m-%d')}) for {ticker}: {e}"
         )
@@ -145,17 +144,13 @@ if __name__ == "__main__":
         )
 
         if is_pause_time:
-            print(
-                f"Current time {current_time.strftime('%H:%M')} is within the pause window ({PAUSE_START_HOUR}:00 - {PAUSE_END_HOUR:02}:{PAUSE_END_MINUTE:02}). Pausing for {SLEEP_DURATION_SECONDS // 60} minutes..."
-            )
+            print(f"Break time. Pausing for {SLEEP_DURATION_SECONDS // 60} minutes...")
             time.sleep(SLEEP_DURATION_SECONDS)
             continue
 
-        print(
-            f"\n--- Starting processing cycle at {now.strftime('%Y-%m-%d %H:%M:%S')} ---"
-        )
+        print(f"Starting processing cycle at {now.strftime('%Y-%m-%d %H:%M:%S')}")
 
-        print(f"Fetching all tickers ordered by frequency from {db_file}...")
+        print(f"Fetching all tickers ordered by frequency")
         candidate_tickers = get_top_tickers_by_frequency(db_file)
 
         if not candidate_tickers:
@@ -166,11 +161,9 @@ if __name__ == "__main__":
             continue
 
         tickers_to_process = []
-        current_processing_date = date.today().strftime(
-            "%Y-%m-%d"
-        )  # Get date for this cycle
+        current_processing_date = date.today().strftime("%Y-%m-%d")
         print(
-            f"Found {len(candidate_tickers)} total tickers. Filtering for up to {TOP_N_TICKERS} not processed on {current_processing_date}..."
+            f"Found {len(candidate_tickers)} total tickers. Filtering for up to {TOP_N_TICKERS} not processed on {current_processing_date}"
         )
 
         for ticker in candidate_tickers:
@@ -192,7 +185,6 @@ if __name__ == "__main__":
         )
         failed_tickers = []
 
-        # Process each selected ticker
         for i, ticker in enumerate(tickers_to_process):
 
             print(f"\nProcessing ticker {i+1}/{len(tickers_to_process)}: {ticker}")
@@ -212,7 +204,5 @@ if __name__ == "__main__":
             f"\nProcessing cycle for {current_processing_date} finished at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}."
         )
 
-        print(
-            f"Waiting for {SHORT_SLEEP_SECONDS} seconds before starting next cycle..."
-        )
+        print(f"Waiting for {SHORT_SLEEP_SECONDS} seconds before starting next cycle")
         time.sleep(SHORT_SLEEP_SECONDS)

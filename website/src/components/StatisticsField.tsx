@@ -16,17 +16,13 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
   mode,
 }) => {
   const [historicalData, setHistoricalData] = useState<HistoricalData[]>([]);
-  const [isLoadingHistorical, setIsLoadingHistorical] =
-    useState<boolean>(false);
 
   useEffect(() => {
-    // Clear previous data and set loading state when ticker changes
+    // Clear previous data and set loading state when ticker changes to prevent error with mixed data
     setHistoricalData([]);
     if (!ticker) {
       return;
     }
-
-    setIsLoadingHistorical(true);
 
     const fetchData = async (
       currentTicker: string,
@@ -55,13 +51,11 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
           setHistoricalData(fetchedHistoricalData);
         } catch (error) {
           console.error("Failed to fetch historical data:", error);
-          setHistoricalData([]); // Clear data on error
+          setHistoricalData([]); // Clear data
         } finally {
-          setIsLoadingHistorical(false);
         }
       } else {
         setHistoricalData([]);
-        setIsLoadingHistorical(false);
       }
     };
 

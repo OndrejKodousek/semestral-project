@@ -112,18 +112,15 @@ def save_processed_articles(article_id, model, data):
             base_stock_price = None
             if ticker:
                 try:
-                    # print(f"Fetching stock price for {ticker} on {published_date}")
                     base_stock_price = get_stock_price(ticker, published_date)
-                # print(
-                #     f"Base price for {ticker} on {published_date}: ${base_stock_price:.2f}"
-                # )
+
                 except Exception as e:
                     print(f" | FAILED to get stock price: {e}")
-                    return False  # TODO: Probably handle this somehow. Idk how tho
+                    return False
 
             if base_stock_price is None:
                 print(f" | FAILED to get stock price: {e}")
-                return False  # TODO: Probably handle this somehow. Idk how tho
+                return False
 
             # Insert into analysis table
             cursor.execute(
@@ -161,11 +158,6 @@ def save_processed_articles(article_id, model, data):
                         absolute_prediction = base_stock_price * (
                             1 + percentage_decimal
                         )
-
-                        # print(f"percentage_prediction: {percentage_prediction}")
-                        # print(f"percentage_decimal: {percentage_decimal}")
-                        # print(f"base_stock_price: {base_stock_price}")
-                        # print(f"absolute_prediction: {absolute_prediction}")
 
                         cursor.execute(
                             """
@@ -221,22 +213,18 @@ def save_processed_summarized_articles(data, model_name, ticker, published_date)
             base_stock_price = None
             if ticker:
                 try:
-                    # print(f"Fetching stock price for {ticker} on {published_date}")
                     base_stock_price = get_stock_price(ticker, published_date)
-                # print(
-                #     f"Base price for {ticker} on {published_date}: ${base_stock_price:.2f}"
-                # )
                 except Exception as e:
                     print(f" | FAILED to get stock price: {e}")
-                    return False  # TODO: Probably handle this somehow. Idk how tho
+                    return False
 
             if base_stock_price is None:
                 print(f" | FAILED to get stock price: {e}")
-                return False  # TODO: Probably handle this somehow. Idk how tho
+                return False
 
             conn = get_db_connection()
             cursor = conn.cursor()
-            conn.execute("BEGIN TRANSACTION")  # NTFS-like thingy
+            conn.execute("BEGIN TRANSACTION")
 
             last_updated_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             cursor.execute(
@@ -296,11 +284,6 @@ def save_processed_summarized_articles(data, model_name, ticker, published_date)
                         absolute_prediction = base_stock_price * (
                             1 + percentage_decimal
                         )
-
-                        # print(f"percentage_prediction: {percentage_prediction}")
-                        # print(f"percentage_decimal: {percentage_decimal}")
-                        # print(f"base_stock_price: {base_stock_price}")
-                        # print(f"absolute_prediction: {absolute_prediction}")
 
                         cursor.execute(
                             """
@@ -394,7 +377,7 @@ def fetch_sum_analysis_data(ticker, model):
 
     for row in data:
         try:
-            analysis_id = row["id"]  #
+            analysis_id = row["id"]
 
             prediction_date_str = date.fromisoformat(row["date"]).strftime(
                 "%Y-%m-%d"
@@ -410,7 +393,7 @@ def fetch_sum_analysis_data(ticker, model):
                     row["published"], "%Y-%m-%d"
                 ).strftime(
                     "%Y-%m-%d"
-                )  #
+                )
                 current_analysis = {
                     "analysis_id": analysis_id,
                     "published": published_dt_str,

@@ -46,9 +46,9 @@ export const alignHistoricalData = (
 
 export const formatStringToCSSClass = (input: string): string => {
   return input
-    .toLowerCase() // Convert the string to lowercase
-    .replace(/\s+/g, "-") // Replace spaces with a dash
-    .replace(/\./g, "-") // Replace dots with a dash
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/\./g, "-")
     .replace(/\'/g, "");
 };
 

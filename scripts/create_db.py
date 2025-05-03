@@ -85,29 +85,6 @@ CREATE TABLE IF NOT EXISTS lstm_predictions (
 """
 )
 
-# --- Indices (adjust if needed, maybe add is_actual) ---
-cursor.execute(
-    """
-CREATE INDEX IF NOT EXISTS idx_lstm_ticker_target_date
-ON lstm_predictions (ticker, prediction_target_date);
-"""
-)
-
-cursor.execute(
-    """
-CREATE INDEX IF NOT EXISTS idx_lstm_ticker_made_date
-ON lstm_predictions (ticker, prediction_made_date);
-"""
-)
-
-# Optional index including is_actual might be useful
-cursor.execute(
-    """
-CREATE INDEX IF NOT EXISTS idx_lstm_ticker_made_actual_target
-ON lstm_predictions (ticker, prediction_made_date, is_reference, prediction_target_date);
-"""
-)
-
 
 conn.commit()
 conn.close()

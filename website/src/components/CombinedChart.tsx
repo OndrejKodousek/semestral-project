@@ -19,10 +19,7 @@ import {
   getEarliestDate,
   getLatestDate,
 } from "../utils/date";
-import {
-  filterHistoricalData,
-  convertStockPriceToPercentChange,
-} from "../utils/parsing";
+import { filterHistoricalData } from "../utils/parsing";
 import { fetchSumAnalysis, fetchLSTMAnalysis } from "../utils/apiEndpoints";
 
 ChartJS.register(
@@ -170,19 +167,19 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
         label: item.source,
         data: labels.map((label) => {
           const predictionEntry = item.predictions[label];
-          return predictionEntry ? predictionEntry.prediction : null; // Simplified access
+          return predictionEntry ? predictionEntry.prediction : null;
         }),
         borderColor: getColorForSource(item.source),
         backgroundColor: getColorForSource(item.source)
           .replace(")", ", 0.2)")
-          .replace("rgb(", "rgba("), // Safer replace
+          .replace("rgb(", "rgba("),
         tension: 0.1,
       })) ?? []),
       ...(sumAnalysis
         ? [
             {
               label: "Summarized Analysis",
-              data: labels.map((label, index) => {
+              data: labels.map((_, index) => {
                 const todayIndex = labels.indexOf(getCurrentDate());
                 if (todayIndex === -1 || index < todayIndex) {
                   return null;
@@ -225,7 +222,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
       y: {
         title: {
           display: true,
-          text: "Stock Price [$]", // Assuming absolute price now
+          text: "Stock Price [$]",
         },
       },
     },
@@ -233,7 +230,6 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
       annotation: {
         annotations: labels.includes(getCurrentDate())
           ? {
-              // Check if current date exists in labels
               verticalLine: {
                 type: "line",
                 xMin: labels.indexOf(getCurrentDate()),
@@ -243,12 +239,11 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
                 borderDash: [5, 5],
                 label: {
                   content: "Today",
-                  enabled: true,
                   position: "start",
                 },
               },
             }
-          : {}, // Provide empty object if date not found
+          : {},
       },
       legend: {
         position: "top" as const,

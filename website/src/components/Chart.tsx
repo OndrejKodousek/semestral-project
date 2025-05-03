@@ -14,11 +14,7 @@ import {
 import annotationPlugin from "chartjs-plugin-annotation";
 import { ChartProps } from "../utils/interfaces";
 import { generateDateRange, getCurrentDate } from "../utils/date";
-import {
-  convertToPercent,
-  filterHistoricalData,
-  convertStockPriceToPercentChange,
-} from "../utils/parsing";
+import { filterHistoricalData } from "../utils/parsing";
 
 ChartJS.register(
   CategoryScale,
@@ -39,7 +35,6 @@ const Chart: React.FC<ChartProps> = ({
   const [realData, setRealData] = useState<number[]>([]);
   const [labels, setLabels] = useState<(string | null)[]>([]);
 
-  // Convert predictions to an array of { date, prediction }
   const predictionEntries = Object.entries(predictions).map(
     ([date, { prediction }]) => ({
       date,
@@ -54,7 +49,6 @@ const Chart: React.FC<ChartProps> = ({
     if (historicalData && historicalData[0]) {
       const labels = generateDateRange(published, 3);
       const stockPrices = filterHistoricalData(historicalData, labels);
-      // const stockChanges = convertStockPriceToPercentChange(stockPrices);
       setRealData(stockPrices);
       setLabels(labels);
     }
