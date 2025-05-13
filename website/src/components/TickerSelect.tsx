@@ -21,7 +21,7 @@ const TickerSelect: React.FC<TickerSelectProps> = ({
           ))}
         </select>
       ) : (
-        <div className="bold-text">Loading stock names...</div>
+        <div className="bold-text">Select model to show available stocks</div>
       )}
     </div>
   );

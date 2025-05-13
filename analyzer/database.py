@@ -10,6 +10,10 @@ from collections import defaultdict
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
+from curl_cffi import requests
+
+session = requests.Session(impersonate="chrome")
+
 
 def get_db_connection():
     conn = sqlite3.connect("data/news.db", timeout=300)
@@ -391,9 +395,7 @@ def fetch_sum_analysis_data(ticker, model):
             if analysis_id not in analysis_map:
                 published_dt_str = datetime.strptime(
                     row["published"], "%Y-%m-%d"
-                ).strftime(
-                    "%Y-%m-%d"
-                )
+                ).strftime("%Y-%m-%d")
                 current_analysis = {
                     "analysis_id": analysis_id,
                     "published": published_dt_str,

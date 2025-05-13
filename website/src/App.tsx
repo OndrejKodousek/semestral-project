@@ -14,7 +14,7 @@ const App: React.FC = () => {
   );
   const [tickerString, setTickerString] = useState<string | null>(null);
   const [model, setModel] = useState<string | null>(null);
-  const [minArticles, setMinArticles] = useState<number>(5);
+  const [minArticles, setMinArticles] = useState<number>(3);
   const [includeConfidence, setIncludeConfidence] = useState<number>(1);
   const [stockNames, setStockNames] = useState<string[]>([]);
   const [mode, setMode] = useState<number>(1);
@@ -115,20 +115,21 @@ const App: React.FC = () => {
               <div className="component-container">
                 {isLoading ? (
                   <div>Loading data...</div>
-                ) : predictionData &&
-                  predictionData.length > 0 &&
-                  extractedTicker &&
-                  model ? (
+                ) : (predictionData &&
+                    predictionData.length > 0 &&
+                    extractedTicker &&
+                    model) ||
+                  mode == 4 ? (
                   <StatisticsField
                     key={`stats-${extractedTicker}-${model}`}
                     predictionData={predictionData}
                     ticker={extractedTicker}
                     model={model}
                     mode={mode}
+                    minArticles={minArticles}
                   />
                 ) : predictionData === null && !isLoading ? (
-                  // Only show select message if not loading and data is null (initial state)
-                  <div>Select model and ticker to view data</div>
+                  <div>Select both model and ticker to view data</div>
                 ) : (
                   // Data is fetched but empty
                   <div>

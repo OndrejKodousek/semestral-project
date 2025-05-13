@@ -100,7 +100,7 @@ def main(ticker):
         monitor="loss", patience=10, restore_best_weights=True
     )
 
-    model.fit(X, y, batch_size=32, epochs=EPOCHS, verbose=1, callbacks=[early_stopping])
+    model.fit(X, y, batch_size=64, epochs=EPOCHS, verbose=1, callbacks=[early_stopping])
 
     print(f"Saving model and scaler for {ticker}...")
     save_model_and_scaler(model, scaler, ticker, models_path)

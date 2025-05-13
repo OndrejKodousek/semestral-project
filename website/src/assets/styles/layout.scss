@@ -38,7 +38,7 @@ body {
   border: 1px solid #001244;
   padding: 12px;
   height: 100%;
-  overflow-y: auto;
+  //overflow-y: auto;
   //background-color: #022076;
 }
 
@@ -59,4 +59,68 @@ body {
 .combined-chart {
   position: relative;
   height: 60vh;
+}
+
+.metrics-container {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.metrics-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.metric-group {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.metric-group-title {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.metric-list {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.metric-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.metric-label {
+  font-weight: 500;
+  color: #555;
+}
+
+.metric-value {
+  font-weight: 600;
+  color: #222;
+}
+
+.analysis-summary {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: #f0f7ff;
+  border-radius: 8px;
+}
+
+.analysis-summary h3 {
+  margin-top: 0;
 }

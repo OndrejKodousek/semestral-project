@@ -73,3 +73,5 @@ data/lstm_models/NVDA_scaler.pkl
 data/news.db
 data/news.db
 data/news.db
+
+evaluator/data/*

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ArticleList from "./ArticleList";
+import BatchDownloader from "./BatchDownloader";
 import CombinedChart from "./CombinedChart";
+import Metrics from "./Metrics";
 import {
   StatisticsFieldProps,
   HistoricalData,
@@ -14,6 +16,7 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
   ticker,
   model,
   mode,
+  minArticles,
 }) => {
   const [historicalData, setHistoricalData] = useState<HistoricalData[]>([]);
 
@@ -76,6 +79,7 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
           key={`article-list-${ticker}-${model}`}
           predictionData={relevantPredictionData}
           historicalData={historicalData}
+          ticker={ticker}
         />
       )}
       {mode === 2 && (
@@ -85,6 +89,42 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
           historicalData={historicalData}
           ticker={ticker}
           model={model}
+        />
+      )}
+      {mode === 3 && (
+        <Metrics
+          key={`metrics-${ticker}-${model}`}
+          predictionData={relevantPredictionData || []}
+          historicalData={historicalData}
+          ticker={ticker}
+        />
+      )}
+      {mode === 4 && (
+        <BatchDownloader
+          models={[
+            // Google AI Studio
+            "gemini-2.5-flash-preview-04-17",
+            "gemini-2.5-pro-preview-03-25",
+            "gemini-2.0-flash",
+            "gemini-2.0-flash-lite",
+            "gemini-1.5-flash",
+            "gemini-1.5-flash-8b",
+            "gemini-1.5-pro",
+            // OpenRouter
+            "deepseek/deepseek-chat:free",
+            // Groq
+            "llama-3.3-70b-versatile",
+            "llama-3.1-8b-instant",
+            "gemma2-9b-it",
+            "distil-whisper-large-v3-en",
+            // Groq preview
+            "deepseek-r1-distill-llama-70b",
+            "meta-llama/llama-4-maverick-17b-128e-instruct",
+            "meta-llama/llama-4-scout-17b-16e-instruct",
+            "mistral-saba-24b",
+            "qwen-qwq-32b",
+          ]} // Replace with your actual models
+          minArticles={minArticles}
         />
       )}
       {mode === 1 && !relevantPredictionData && ticker && (

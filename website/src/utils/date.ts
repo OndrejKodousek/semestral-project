@@ -84,6 +84,16 @@ export const calculateDateDifferenceInDays = (
   return dayDifference;
 };
 
+export const getDateDifferenceSigned = (
+  date1: string,
+  date2: string,
+): number => {
+  const d1 = new Date(date1);
+  const d2 = new Date(date2);
+  const timeDifference = d2.getTime() - d1.getTime();
+  return timeDifference / (1000 * 60 * 60 * 24);
+};
+
 export const getEarliestDate = (articles: PredictionData[]): string => {
   if (articles.length === 0) {
     return "0000-00-00";

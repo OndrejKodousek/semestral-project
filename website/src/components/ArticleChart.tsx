@@ -13,8 +13,13 @@ import {
 } from "chart.js";
 import annotationPlugin from "chartjs-plugin-annotation";
 import { ChartProps } from "../utils/interfaces";
-import { generateDateRange, getCurrentDate } from "../utils/date";
+import {
+  generateDateRange,
+  getCurrentDate,
+  getDateDifferenceSigned,
+} from "../utils/date";
 import { filterHistoricalData } from "../utils/parsing";
+import { fetchLSTMAnalysis } from "../utils/apiEndpoints";
 
 ChartJS.register(
   CategoryScale,
@@ -31,9 +36,13 @@ const Chart: React.FC<ChartProps> = ({
   predictions,
   historicalData,
   published,
+  ticker,
 }) => {
   const [realData, setRealData] = useState<number[]>([]);
   const [labels, setLabels] = useState<(string | null)[]>([]);
+  const [lstmPredictions, setLstmPredictions] = useState<{
+    [key: string]: number;
+  }>();
 
   const predictionEntries = Object.entries(predictions).map(
     ([date, { prediction }]) => ({
@@ -47,12 +56,37 @@ const Chart: React.FC<ChartProps> = ({
 
   useEffect(() => {
     if (historicalData && historicalData[0]) {
-      const labels = generateDateRange(published, 3);
+      const labels = generateDateRange(published, 0);
       const stockPrices = filterHistoricalData(historicalData, labels);
       setRealData(stockPrices);
       setLabels(labels);
     }
   }, [historicalData]);
+
+  useEffect(() => {
+    const fetchLSTMData = async () => {
+      if (ticker) {
+        const data = await fetchLSTMAnalysis(ticker);
+        if (data && typeof data === "object" && Object.keys(data).length > 0) {
+          setLstmPredictions(data);
+        }
+      }
+    };
+
+    fetchLSTMData();
+  }, [ticker]);
+
+  let shouldShowLstm;
+  const latestLabelDate = labels[labels.length - 1];
+  if (latestLabelDate) {
+    const lstmDates = lstmPredictions ? Object.keys(lstmPredictions) : [];
+    const earliestLstmDate = lstmDates.length > 0 ? lstmDates[0] : null;
+
+    // Calculate if LSTM predictions are in range
+    shouldShowLstm =
+      earliestLstmDate &&
+      getDateDifferenceSigned(latestLabelDate, earliestLstmDate) <= 1;
+  }
 
   const chartData = {
     labels: labels,
@@ -60,8 +94,7 @@ const Chart: React.FC<ChartProps> = ({
       {
         label: "Real Data",
         data: realData,
-        borderColor: "rgba(153, 102, 255, 1)",
-        backgroundColor: "rgba(153, 102, 255, 0.2)",
+        borderColor: "rgb(255, 0, 0)",
         borderDash: [5, 5],
       },
       {
@@ -72,9 +105,23 @@ const Chart: React.FC<ChartProps> = ({
           );
           return predictionEntry ? [predictionEntry.prediction][0] : null;
         }),
-        borderColor: "rgba(75, 192, 192, 1)",
-        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderColor: "rgb(75, 130, 192)",
+        borderDash: [5, 5],
       },
+      ...(shouldShowLstm && lstmPredictions
+        ? [
+            {
+              label: "LSTM Predictions",
+              data: labels.map((label) =>
+                label && lstmPredictions[label] !== undefined
+                  ? lstmPredictions[label]
+                  : null,
+              ),
+              borderColor: "rgb(32, 160, 28)",
+              borderDash: [5, 5],
+            },
+          ]
+        : []),
     ],
   };
 
@@ -95,7 +142,7 @@ const Chart: React.FC<ChartProps> = ({
             type: "line",
             xMin: currentDayIndex,
             xMax: currentDayIndex,
-            borderColor: "red",
+            borderColor: "rgb(90, 0, 90)",
             borderWidth: 2,
             borderDash: [5, 5],
           },
@@ -103,7 +150,6 @@ const Chart: React.FC<ChartProps> = ({
       },
     },
   };
-
   return (
     <div className="graph">
       <Line data={chartData} options={chartOptions} />

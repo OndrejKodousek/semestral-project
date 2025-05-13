@@ -38,10 +38,6 @@ export interface MetricsStats {
   kurtosis: string;
 }
 
-export interface MetricsProps {
-  data: PredictionData[] | null;
-}
-
 export interface ChartProps {
   predictions: {
     [key: string]: {
@@ -51,6 +47,7 @@ export interface ChartProps {
   };
   historicalData: HistoricalData[];
   published: string;
+  ticker: string;
 }
 
 export interface ControlPanelProps {
@@ -63,6 +60,7 @@ export interface ControlPanelProps {
 export interface ArticleListProps {
   predictionData: PredictionData[] | null;
   historicalData: HistoricalData[];
+  ticker: string;
 }
 
 export interface StatisticsFieldProps {
@@ -70,6 +68,7 @@ export interface StatisticsFieldProps {
   ticker: string;
   model: string;
   mode: number;
+  minArticles: number;
 }
 
 export interface ModelSelectProps {
@@ -79,4 +78,15 @@ export interface ModelSelectProps {
 export interface TickerSelectProps {
   setTicker: (ticker: string) => void;
   stockNames: string[];
+}
+
+export interface HistoricalData {
+  date: string;
+  price: number;
+}
+
+export interface MetricsProps {
+  predictionData: PredictionData[];
+  historicalData: HistoricalData[];
+  ticker: string;
 }

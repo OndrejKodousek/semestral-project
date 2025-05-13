@@ -167,7 +167,7 @@ if __name__ == "__main__":
         )
 
         for ticker in candidate_tickers:
-            # check_if_processed_today uses the *current* date automatically
+            # check_if_processed_today uses the current date automatically
             if not check_if_processed_today(db_file, ticker):
                 tickers_to_process.append(ticker)
                 if len(tickers_to_process) == TOP_N_TICKERS:
@@ -186,7 +186,7 @@ if __name__ == "__main__":
         failed_tickers = []
 
         for i, ticker in enumerate(tickers_to_process):
-
+            start = time.time()
             print(f"\nProcessing ticker {i+1}/{len(tickers_to_process)}: {ticker}")
 
             print(f"Running Training for {ticker}...")
@@ -199,6 +199,10 @@ if __name__ == "__main__":
             else:
                 print(f"Training failed for {ticker}. Skipping prediction.")
                 continue
+
+            elapsed_time = time.time() - start
+            with open("data/lstm_train_time.txt", "a+") as f:
+                f.write(f"{elapsed_time}\n")
 
         print(
             f"\nProcessing cycle for {current_processing_date} finished at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}."

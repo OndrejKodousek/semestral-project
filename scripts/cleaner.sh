@@ -4,7 +4,7 @@ DB_FILE="/mnt/samsung/semestral-project/data/news.db"
 
 BACKUP_DIR="/mnt/samsung/semestral-project/data/db_backup"
 
-RETENTION_DAYS=14
+RETENTION_DAYS=13
 
 mkdir -p "$BACKUP_DIR" || { echo "ERROR: Cannot create backup directory $BACKUP_DIR. Exiting."; exit 1; }
 

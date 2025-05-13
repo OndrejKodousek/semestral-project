@@ -15,6 +15,9 @@ from flask_cors import CORS, cross_origin
 from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 
+from curl_cffi import requests
+
+session = requests.Session(impersonate="chrome")
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
 app = Flask(__name__)
@@ -209,9 +212,10 @@ def sum_analysis():
         # --- Fetch the main summarized analysis ---
         cursor.execute(
             """
-            SELECT id, summary_text
+            SELECT id, summary_text, last_updated
             FROM summarized_analysis
             WHERE model_name = ? AND ticker = ?
+            LIMIT 1
             """,
             (model, ticker),
         )
@@ -229,6 +233,7 @@ def sum_analysis():
 
         summary_id = summary_row["id"]
         summary_text = summary_row["summary_text"]
+        analysis_date = summary_row["last_updated"][:10]
 
         # --- Attempt to fetch the full stock name ---
         cursor.execute(
@@ -260,6 +265,7 @@ def sum_analysis():
             "stock": stock_name,
             "ticker": ticker,
             "summary": summary_text,
+            "analysis_date": analysis_date,
         }
 
         if prediction_rows:
@@ -301,6 +307,7 @@ def sum_analysis():
 def historical_data():
     ticker = request.args.get("ticker")
     start = request.args.get("start")
+
     try:
         start_date = datetime.strptime(start, "%Y-%m-%d")
         start_date = start_date - relativedelta(months=1)
@@ -315,6 +322,9 @@ def historical_data():
         if stock_data.empty:
             return jsonify([])
 
+        # Ensure we're working with unique dates by taking the last value if duplicates exist
+        stock_data = stock_data[~stock_data.index.duplicated(keep="last")]
+
         prices = []
         for date, row in stock_data.iterrows():
             prices.append(
@@ -323,12 +333,11 @@ def historical_data():
                     "price": float(row["Close"]),
                 }
             )
-
         return jsonify(prices)
-    except IndexError:
-        return jsonify([])
+
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        print(f"Error in historical-data endpoint: {e}")
+        return jsonify({"error": "Failed to fetch historical data"}), 500
 
 
 @app.route("/api/stocks", methods=["GET"])

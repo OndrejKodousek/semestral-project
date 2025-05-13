@@ -5,8 +5,8 @@ const apiBaseUrl = (() => {
 
   if (hostname === "localhost") {
     return "http://localhost:5000";
-  } else if (hostname === "192.168.1.110") {
-    return "http://192.168.1.110:5000";
+  } else if (hostname === "192.168.1.101") {
+    return "http://192.168.1.101:5000";
   } else {
     return "https://kodousek.cz";
   }

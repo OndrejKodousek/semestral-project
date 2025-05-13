@@ -1,11 +1,12 @@
 import React from "react";
-import ArticleChart from "./Chart";
+import ArticleChart from "./ArticleChart";
 import { ArticleListProps } from "../utils/interfaces";
 import { formatStringToCSSClass } from "../utils/parsing";
 
 const ArticleList: React.FC<ArticleListProps> = ({
   predictionData,
   historicalData,
+  ticker,
 }) => {
   return (
     <>
@@ -32,6 +33,7 @@ const ArticleList: React.FC<ArticleListProps> = ({
                   predictions={item.predictions}
                   historicalData={historicalData}
                   published={item.published}
+                  ticker={ticker}
                 />
               </div>
             </div>

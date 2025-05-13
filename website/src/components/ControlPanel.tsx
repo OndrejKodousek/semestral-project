@@ -19,19 +19,21 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
   return (
     <div className="h-100 d-flex flex-column justify-content-between">
       <div className="subcomponent-container mb-3 d-flex flex-column align-items-start">
-        <span className="mb-2">Minimum articles:</span>
+        <div>
+          <span className="mb-2">Minimum articles:</span>
 
-        <input
-          type="number"
-          min="1"
-          max="99"
-          defaultValue={5}
-          onChange={handleMinArticlesChange}
-          className="mb-2"
-        />
+          <input
+            type="number"
+            min="1"
+            max="99"
+            defaultValue={3}
+            onChange={handleMinArticlesChange}
+            className="mb-2 mx-3"
+          />
+        </div>
 
         <button
-          className={`mb-2 button ${mode === 1 ? "active" : ""}`}
+          className={`mb-2 mt-2 button ${mode === 1 ? "active" : ""}`}
           onClick={() => handleModeChange(1)}
         >
           Individual articles
@@ -45,10 +47,17 @@ const ControlPanel: React.FC<ControlPanelProps> = ({
         </button>
 
         <button
-          className={`button ${mode === 3 ? "active" : ""}`}
+          className={`mb-2 button ${mode === 3 ? "active" : ""}`}
           onClick={() => handleModeChange(3)}
         >
           Show metrics
+        </button>
+
+        <button
+          className={`button ${mode === 4 ? "active" : ""}`}
+          onClick={() => handleModeChange(4)}
+        >
+          Batch download
         </button>
       </div>
     </div>
