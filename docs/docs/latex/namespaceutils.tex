@@ -1,0 +1,104 @@
+\hypertarget{namespaceutils}{}\doxysection{utils Namespace Reference}
+\label{namespaceutils}\index{utils@{utils}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceutils_a5f0bf53873931ff75fd4b0f58e6aaa6e}{shorten\+\_\+string}} (string, max\+\_\+length=60)
+\item 
+def \mbox{\hyperlink{namespaceutils_ae20f1344088613e2c4ccbe1c95de48ef}{str\+\_\+to\+\_\+int}} (string)
+\item 
+def \mbox{\hyperlink{namespaceutils_a831264642252f5623e53bfb687ba295f}{is\+\_\+valid\+\_\+data}} (data)
+\item 
+def \mbox{\hyperlink{namespaceutils_a9e5b18caf6181bb092a19721a6e7bbf0}{get\+\_\+project\+\_\+root}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file utils.py
+@brief Utility functions for string manipulation, data validation, and project management.
+
+This module contains helper functions used throughout the project for tasks like
+string formatting, data validation, and project path management.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceutils_a9e5b18caf6181bb092a19721a6e7bbf0}\label{namespaceutils_a9e5b18caf6181bb092a19721a6e7bbf0}} 
+\index{utils@{utils}!get\_project\_root@{get\_project\_root}}
+\index{get\_project\_root@{get\_project\_root}!utils@{utils}}
+\doxysubsubsection{\texorpdfstring{get\_project\_root()}{get\_project\_root()}}
+{\footnotesize\ttfamily def utils.\+get\+\_\+project\+\_\+root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Finds the root directory of the project.
+
+Searches for a .git directory in parent directories to identify the project root.
+
+@return Path to the project root directory.
+@throws SystemExit if the root directory cannot be found.
+\end{DoxyVerb}
+ 
+
+Definition at line 121 of file utils.\+py.
+
+\mbox{\Hypertarget{namespaceutils_a831264642252f5623e53bfb687ba295f}\label{namespaceutils_a831264642252f5623e53bfb687ba295f}} 
+\index{utils@{utils}!is\_valid\_data@{is\_valid\_data}}
+\index{is\_valid\_data@{is\_valid\_data}!utils@{utils}}
+\doxysubsubsection{\texorpdfstring{is\_valid\_data()}{is\_valid\_data()}}
+{\footnotesize\ttfamily def utils.\+is\+\_\+valid\+\_\+data (\begin{DoxyParamCaption}\item[{}]{data }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Validates stock data structure.
+
+Ensures that the data dictionary contains all required keys and that values are valid.
+Checks for presence of required keys, validates that stock and ticker fields are not empty,
+and verifies that prediction values are between -1.0 and 1.0 and confidence values are
+between 0.0 and 1.0.
+
+@param data The data dictionary to validate.
+@return True if the data is valid, False otherwise.
+\end{DoxyVerb}
+ 
+
+Definition at line 44 of file utils.\+py.
+
+
+
+Referenced by main.\+main().
+
+\mbox{\Hypertarget{namespaceutils_a5f0bf53873931ff75fd4b0f58e6aaa6e}\label{namespaceutils_a5f0bf53873931ff75fd4b0f58e6aaa6e}} 
+\index{utils@{utils}!shorten\_string@{shorten\_string}}
+\index{shorten\_string@{shorten\_string}!utils@{utils}}
+\doxysubsubsection{\texorpdfstring{shorten\_string()}{shorten\_string()}}
+{\footnotesize\ttfamily def utils.\+shorten\+\_\+string (\begin{DoxyParamCaption}\item[{}]{string,  }\item[{}]{max\+\_\+length = {\ttfamily 60} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Shortens a string to a specified maximum length.
+
+If the string is shorter than the maximum length, it will be padded with spaces.
+If longer, it will be truncated with ellipsis in the middle.
+
+@param string The input string to be shortened.
+@param max_length Maximum length of the output string (default: 60).
+@return The shortened or padded string.
+\end{DoxyVerb}
+ 
+
+Definition at line 13 of file utils.\+py.
+
+
+
+Referenced by main.\+main().
+
+\mbox{\Hypertarget{namespaceutils_ae20f1344088613e2c4ccbe1c95de48ef}\label{namespaceutils_ae20f1344088613e2c4ccbe1c95de48ef}} 
+\index{utils@{utils}!str\_to\_int@{str\_to\_int}}
+\index{str\_to\_int@{str\_to\_int}!utils@{utils}}
+\doxysubsubsection{\texorpdfstring{str\_to\_int()}{str\_to\_int()}}
+{\footnotesize\ttfamily def utils.\+str\+\_\+to\+\_\+int (\begin{DoxyParamCaption}\item[{}]{string }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Extracts the first integer from a string.
+
+@param string The input string to extract an integer from.
+@return The first integer found in the string.
+\end{DoxyVerb}
+ 
+
+Definition at line 32 of file utils.\+py.
+

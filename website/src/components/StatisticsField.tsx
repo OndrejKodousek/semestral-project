@@ -1,3 +1,13 @@
+/**
+ * @file StatisticsField.tsx
+ * @brief Container component for displaying different statistical views
+ * @details Manages the display of different view modes:
+ * 1. Article List
+ * 2. Combined Chart
+ * 3. Metrics
+ * 4. Batch Downloader
+ */
+
 import React, { useEffect, useState } from "react";
 import ArticleList from "./ArticleList";
 import BatchDownloader from "./BatchDownloader";
@@ -11,6 +21,14 @@ import {
 import { fetchHistoricalData } from "../utils/apiEndpoints";
 import { getEarliestDate } from "../utils/date";
 
+/**
+ * @brief Statistics container component
+ * @param predictionData - Array of prediction data from articles
+ * @param ticker - Stock ticker symbol
+ * @param model - Selected AI model name
+ * @param mode - Current view mode (1-4)
+ * @param minArticles - Minimum articles filter value
+ */
 const StatisticsField: React.FC<StatisticsFieldProps> = ({
   predictionData,
   ticker,
@@ -20,13 +38,19 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
 }) => {
   const [historicalData, setHistoricalData] = useState<HistoricalData[]>([]);
 
+  // Fetch historical data when ticker or prediction data changes
   useEffect(() => {
-    // Clear previous data and set loading state when ticker changes to prevent error with mixed data
+    // Clear previous data when ticker changes
     setHistoricalData([]);
     if (!ticker) {
       return;
     }
 
+    /**
+     * @brief Fetches historical stock data
+     * @param currentTicker - Stock ticker to fetch data for
+     * @param currentPredictionData - Prediction data for date range
+     */
     const fetchData = async (
       currentTicker: string,
       currentPredictionData: PredictionData[] | null,
@@ -50,12 +74,10 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
             currentTicker,
             start,
           );
-
           setHistoricalData(fetchedHistoricalData);
         } catch (error) {
           console.error("Failed to fetch historical data:", error);
-          setHistoricalData([]); // Clear data
-        } finally {
+          setHistoricalData([]); // Clear data on error
         }
       } else {
         setHistoricalData([]);
@@ -65,6 +87,7 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
     fetchData(ticker, predictionData);
   }, [ticker, predictionData]);
 
+  // Filter prediction data for current ticker
   const relevantPredictionData =
     predictionData &&
     predictionData.length > 0 &&
@@ -74,6 +97,7 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
 
   return (
     <>
+      {/* Mode 1: Article List View */}
       {mode === 1 && relevantPredictionData && (
         <ArticleList
           key={`article-list-${ticker}-${model}`}
@@ -82,6 +106,8 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
           ticker={ticker}
         />
       )}
+
+      {/* Mode 2: Combined Chart View */}
       {mode === 2 && (
         <CombinedChart
           key={`combined-chart-${ticker}-${model}`}
@@ -91,6 +117,8 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
           model={model}
         />
       )}
+
+      {/* Mode 3: Metrics View */}
       {mode === 3 && (
         <Metrics
           key={`metrics-${ticker}-${model}`}
@@ -99,6 +127,8 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
           ticker={ticker}
         />
       )}
+
+      {/* Mode 4: Batch Downloader View */}
       {mode === 4 && (
         <BatchDownloader
           models={[
@@ -123,10 +153,12 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
             "meta-llama/llama-4-scout-17b-16e-instruct",
             "mistral-saba-24b",
             "qwen-qwq-32b",
-          ]} // Replace with your actual models
+          ]}
           minArticles={minArticles}
         />
       )}
+
+      {/* Loading state */}
       {mode === 1 && !relevantPredictionData && ticker && (
         <p>Loading analysis data for {ticker}...</p>
       )}

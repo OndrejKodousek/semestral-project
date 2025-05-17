@@ -1,0 +1,199 @@
+\hypertarget{App_8tsx}{}\doxysection{website/src/\+App.tsx File Reference}
+\label{App_8tsx}\index{website/src/App.tsx@{website/src/App.tsx}}
+
+
+Main application component.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{App_8tsx_a268b40c7bdbfb618b73546fd95f330fc}{use\+Effect}} (()=$>$ \{ if(\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}} \&\&\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}) \{ \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} fetch\+Data=async()=$>$ \{ set\+Is\+Loading(true);\mbox{\hyperlink{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}{set\+Prediction\+Data}}(\mbox{[}$\,$\mbox{]});try \{ \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} data=await \mbox{\hyperlink{apiEndpoints_8ts_ac8ca33971cc7998a6a70cc61021947cc}{fetch\+Analysis\+Data}}(\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}}, \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}});\mbox{\hyperlink{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}{set\+Prediction\+Data}}(data ??\mbox{[}$\,$\mbox{]});\} catch(error) \{ console.\+error(\char`\"{}Failed to fetch analysis data\+:\char`\"{}, error);\mbox{\hyperlink{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}{set\+Prediction\+Data}}(\mbox{[}$\,$\mbox{]});\} finally \{ set\+Is\+Loading(false);\} \};fetch\+Data();\} else \{ \mbox{\hyperlink{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}{set\+Prediction\+Data}}(\mbox{[}$\,$\mbox{]});set\+Is\+Loading(false);\} \}, \mbox{[}\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}}, \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}\mbox{]})
+\item 
+\mbox{\hyperlink{App_8tsx_ae72614e1bcb6e12aad45855264aac53e}{return}} ($<$ motion.\+div initial=\{\{ opacity\+:0, y\+:-\/50 \}\} animate=\{\{ opacity\+:1, y\+:0 \}\} transition=\{\{ duration\+:0.\+5 \}\} $>$$<$ div class\+Name=\char`\"{}container-\/fluid\char`\"{}$>$$<$ div class\+Name=\char`\"{}row\char`\"{}$>$ \{\}$<$ div class\+Name=\char`\"{}col-\/2 grow-\/vert p-\/0\char`\"{}$>$$<$ div class\+Name=\char`\"{}split-\/cell bg-\/light\char`\"{}$>$$<$ div class\+Name=\char`\"{}component-\/container\char`\"{}$>$$<$ Model\+Select set\+Model=\{set\+Model\}/$>$$<$/div $>$$<$/div $>$$<$ div class\+Name=\char`\"{}split-\/cell bg-\/light\char`\"{}$>$$<$ div class\+Name=\char`\"{}component-\/container\char`\"{}$>$$<$ Control\+Panel \mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}=\{\mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}\} \mbox{\hyperlink{ControlPanel_8tsx_aba9fa17e766cf3b97714f480d201436e}{set\+Mode}}=\{\mbox{\hyperlink{ControlPanel_8tsx_aba9fa17e766cf3b97714f480d201436e}{set\+Mode}}\} \mbox{\hyperlink{ControlPanel_8tsx_aec5a8fe75d235b0ccaa84be4bc96d5eb}{set\+Min\+Articles}}=\{\mbox{\hyperlink{ControlPanel_8tsx_aec5a8fe75d235b0ccaa84be4bc96d5eb}{set\+Min\+Articles}}\} set\+Include\+Confidence=\{set\+Include\+Confidence\}/$>$$<$/div $>$$<$/div $>$$<$/div $>$ \{\}$<$ div class\+Name=\char`\"{}col-\/3 grow-\/vert p-\/0\char`\"{}$>$$<$ div class\+Name=\char`\"{}full-\/height-\/col bg-\/light\char`\"{}$>$$<$ div class\+Name=\char`\"{}component-\/container\char`\"{}$>$$<$ Ticker\+Select set\+Ticker=\{set\+Ticker\+String\} \mbox{\hyperlink{TickerSelect_8tsx_a277a80cf211faba7b5bba4d8d4de9695}{stock\+Names}}=\{\mbox{\hyperlink{TickerSelect_8tsx_a277a80cf211faba7b5bba4d8d4de9695}{stock\+Names}}\}/$>$$<$/div $>$$<$/div $>$$<$/div $>$ \{\}$<$ div class\+Name=\char`\"{}col-\/7 grow-\/vert p-\/0\char`\"{}$>$$<$ div class\+Name=\char`\"{}full-\/height-\/col bg-\/light\char`\"{}$>$$<$ div class\+Name=\char`\"{}component-\/container\char`\"{}$>$ \{is\+Loading ?($<$ div $>$Loading data...$<$/div $>$) \+:(prediction\+Data \&\&prediction\+Data.\+length $>$ 0 \&\&\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}} \&\&\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}})$\vert$$\vert$\mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}==4 ?($<$ \mbox{\hyperlink{StatisticsField_8tsx_ab74b3f56efdc3a31095d708c45eccef0}{Statistics\+Field}} key=\{\`{}stats-\/\$\{\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}}\}-\/\$\{\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}\}\`{}\} prediction\+Data=\{prediction\+Data\} \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}=\{\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}}$\vert$$\vert$\char`\"{}\char`\"{}\} \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}=\{\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}\} \mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}=\{\mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}\} \mbox{\hyperlink{StatisticsField_8tsx_af03917480ce8b403c1192676754eb7e0}{min\+Articles}}=\{\mbox{\hyperlink{StatisticsField_8tsx_af03917480ce8b403c1192676754eb7e0}{min\+Articles}}\}/$>$) \+:prediction\+Data===\mbox{\hyperlink{metrics_8ts_a44586f3a2399ec6c956326d5a405a714}{null}} \&\&!is\+Loading ?($<$ div $>$Select both \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}} and \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}} to view data$<$/div $>$) \+:($<$ div $>$ No analysis data found for the selected \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}/model.$<$/div $>$)\}$<$/div $>$$<$/div $>$$<$/div $>$$<$/div $>$$<$/div $>$$<$/motion.\+div $>$)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{App_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}{React}}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Ticker\+Select from components \mbox{\hyperlink{App_8tsx_af4b94efbba8c122e80fafb927b958a9d}{Ticker\+Select}} \{ use\+State, \mbox{\hyperlink{App_8tsx_a268b40c7bdbfb618b73546fd95f330fc}{use\+Effect}}, use\+Memo \} from \char`\"{}react\char`\"{}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Control\+Panel from components \mbox{\hyperlink{App_8tsx_adb5d3490ac921e88541e28c608241ea9}{Control\+Panel}}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Model\+Select from components \mbox{\hyperlink{App_8tsx_a796ed387d8aca0803b1ea46bd85ab78f}{Model\+Select}}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Statistics\+Field from components \mbox{\hyperlink{App_8tsx_ab74b3f56efdc3a31095d708c45eccef0}{Statistics\+Field}}
+\item 
+\mbox{\hyperlink{App_8tsx_a59be084da8908b7d77ff34b25cd84488}{import}} \{ \mbox{\hyperlink{interfaces_8ts_a42cbf6a8ac2e59b4dc469f0f3c84bc4e}{Prediction\+Data}} \} from \char`\"{}./utils/interfaces\char`\"{}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{App_8tsx_a690f095bb8406aa8956b250c0ff7f2d7}{App}}
+\begin{DoxyCompactList}\small\item\em Main App component. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}{set\+Prediction\+Data}} = use\+State$<$\mbox{\hyperlink{interfaces_8ts_a42cbf6a8ac2e59b4dc469f0f3c84bc4e}{Prediction\+Data}}\mbox{[}$\,$\mbox{]}$>$(\mbox{[}$\,$\mbox{]})
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{[}ticker\+String, set\+Ticker\+String\mbox{]} = use\+State$<$string$>$(\char`\"{}\char`\"{})
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}}
+\item 
+\mbox{\hyperlink{App_8tsx_a38f3a215a2def006618081d1da776e8f}{include\+Confidence}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main application component. 
+
+The root component that manages application state and renders the main layout including model selection, ticker selection, and statistics display components. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{App_8tsx_ae72614e1bcb6e12aad45855264aac53e}\label{App_8tsx_ae72614e1bcb6e12aad45855264aac53e}} 
+\index{App.tsx@{App.tsx}!return@{return}}
+\index{return@{return}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{return()}{return()}}
+{\footnotesize\ttfamily return (\begin{DoxyParamCaption}\item[{$<$ motion.\+div initial=\{\{ opacity\+:0, y\+:-\/50 \}\} animate=\{\{ opacity\+:1, y\+:0 \}\} transition=\{\{ duration\+:0.\+5 \}\} $>$$<$ div class\+Name=\char`\"{}container-\/fluid\char`\"{}$>$$<$ div class\+Name=\char`\"{}row\char`\"{}$>$ \{\}$<$ div class\+Name=\char`\"{}col-\/2 grow-\/vert p-\/0\char`\"{}$>$$<$ div class\+Name=\char`\"{}split-\/cell bg-\/light\char`\"{}$>$$<$ div class\+Name=\char`\"{}component-\/container\char`\"{}$>$$<$ Model\+Select set\+Model=\{set\+Model\}/$>$$<$/div $>$$<$/div $>$$<$ div class\+Name=\char`\"{}split-\/cell bg-\/light\char`\"{}$>$$<$ div class\+Name=\char`\"{}component-\/container\char`\"{}$>$$<$ Control\+Panel \mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}=\{\mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}\} \mbox{\hyperlink{ControlPanel_8tsx_aba9fa17e766cf3b97714f480d201436e}{set\+Mode}}=\{\mbox{\hyperlink{ControlPanel_8tsx_aba9fa17e766cf3b97714f480d201436e}{set\+Mode}}\} \mbox{\hyperlink{ControlPanel_8tsx_aec5a8fe75d235b0ccaa84be4bc96d5eb}{set\+Min\+Articles}}=\{\mbox{\hyperlink{ControlPanel_8tsx_aec5a8fe75d235b0ccaa84be4bc96d5eb}{set\+Min\+Articles}}\} set\+Include\+Confidence=\{set\+Include\+Confidence\}/$>$$<$/div $>$$<$/div $>$$<$/div $>$ \{\}$<$ div class\+Name=\char`\"{}col-\/3 grow-\/vert p-\/0\char`\"{}$>$$<$ div class\+Name=\char`\"{}full-\/height-\/col bg-\/light\char`\"{}$>$$<$ div class\+Name=\char`\"{}component-\/container\char`\"{}$>$$<$ Ticker\+Select set\+Ticker=\{set\+Ticker\+String\} \mbox{\hyperlink{TickerSelect_8tsx_a277a80cf211faba7b5bba4d8d4de9695}{stock\+Names}}=\{\mbox{\hyperlink{TickerSelect_8tsx_a277a80cf211faba7b5bba4d8d4de9695}{stock\+Names}}\}/$>$$<$/div $>$$<$/div $>$$<$/div $>$ \{\}$<$ div class\+Name=\char`\"{}col-\/7 grow-\/vert p-\/0\char`\"{}$>$$<$ div class\+Name=\char`\"{}full-\/height-\/col bg-\/light\char`\"{}$>$$<$ div class\+Name=\char`\"{}component-\/container\char`\"{}$>$ \{is\+Loading ?($<$ div $>$Loading data...$<$/div $>$) \+:(prediction\+Data \&\&prediction\+Data.\+length $>$ 0 \&\&\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}} \&\&\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}})$\vert$$\vert$\mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}==4 ?($<$ \mbox{\hyperlink{StatisticsField_8tsx_ab74b3f56efdc3a31095d708c45eccef0}{Statistics\+Field}} key=\{\`{}stats-\/\$\{\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}}\}-\/\$\{\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}\}\`{}\} prediction\+Data=\{prediction\+Data\} \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}=\{\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}}$\vert$$\vert$\char`\"{}\char`\"{}\} \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}=\{\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}\} \mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}=\{\mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}\} \mbox{\hyperlink{StatisticsField_8tsx_af03917480ce8b403c1192676754eb7e0}{min\+Articles}}=\{\mbox{\hyperlink{StatisticsField_8tsx_af03917480ce8b403c1192676754eb7e0}{min\+Articles}}\}/$>$) \+:prediction\+Data===\mbox{\hyperlink{metrics_8ts_a44586f3a2399ec6c956326d5a405a714}{null}} \&\&!is\+Loading ?($<$ div $>$Select both \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}} and \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}} to view data$<$/div $>$) \+:($<$ div $>$ No analysis data found for the selected \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}/model.$<$/div $>$)\}$<$/div $>$$<$/div $>$$<$/div $>$$<$/div $>$$<$/div $>$$<$/motion.\+div $>$}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{App_8tsx_a268b40c7bdbfb618b73546fd95f330fc}\label{App_8tsx_a268b40c7bdbfb618b73546fd95f330fc}} 
+\index{App.tsx@{App.tsx}!useEffect@{useEffect}}
+\index{useEffect@{useEffect}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{useEffect()}{useEffect()}}
+{\footnotesize\ttfamily use\+Effect (\begin{DoxyParamCaption}\item[{()}]{,  }\item[{\{ if(\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}} \&\&\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}) \{ \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} fetch\+Data=async()=$>$ \{ set\+Is\+Loading(true);\mbox{\hyperlink{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}{set\+Prediction\+Data}}(\mbox{[}$\,$\mbox{]});try \{ \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} data=await \mbox{\hyperlink{apiEndpoints_8ts_ac8ca33971cc7998a6a70cc61021947cc}{fetch\+Analysis\+Data}}(\mbox{\hyperlink{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}{extracted\+Ticker}}, \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}});\mbox{\hyperlink{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}{set\+Prediction\+Data}}(data ??\mbox{[}$\,$\mbox{]});\} catch(error) \{ console.\+error(\char`\"{}Failed to fetch analysis data\+:\char`\"{}, error);\mbox{\hyperlink{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}{set\+Prediction\+Data}}(\mbox{[}$\,$\mbox{]});\} finally \{ set\+Is\+Loading(false);\} \};fetch\+Data();\} else \{ \mbox{\hyperlink{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}{set\+Prediction\+Data}}(\mbox{[}$\,$\mbox{]});set\+Is\+Loading(false);\} \}}]{ }\end{DoxyParamCaption})}
+
+
+
+References extracted\+Ticker, fetch\+Analysis\+Data, model, and set\+Prediction\+Data.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{App_8tsx_a690f095bb8406aa8956b250c0ff7f2d7}\label{App_8tsx_a690f095bb8406aa8956b250c0ff7f2d7}} 
+\index{App.tsx@{App.tsx}!App@{App}}
+\index{App@{App}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{App}{App}}
+{\footnotesize\ttfamily export default App}
+
+
+
+Main App component. 
+
+\begin{DoxyReturn}{Returns}
+The root application component with all subcomponents 
+\end{DoxyReturn}
+
+
+Definition at line 22 of file App.\+tsx.
+
+\mbox{\Hypertarget{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}\label{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}} 
+\index{App.tsx@{App.tsx}!const@{const}}
+\index{const@{const}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{const}{const}}
+{\footnotesize\ttfamily const\mbox{[}is\+Loading, set\+Is\+Loading\mbox{]} = use\+State$<$string$>$(\char`\"{}\char`\"{})}
+
+
+
+Definition at line 25 of file App.\+tsx.
+
+\mbox{\Hypertarget{App_8tsx_adb5d3490ac921e88541e28c608241ea9}\label{App_8tsx_adb5d3490ac921e88541e28c608241ea9}} 
+\index{App.tsx@{App.tsx}!ControlPanel@{ControlPanel}}
+\index{ControlPanel@{ControlPanel}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{ControlPanel}{ControlPanel}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} export default Control\+Panel}
+
+
+
+Definition at line 10 of file App.\+tsx.
+
+\mbox{\Hypertarget{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}\label{App_8tsx_a3c8ce510f5908022b0528be32cd37c3d}} 
+\index{App.tsx@{App.tsx}!extractedTicker@{extractedTicker}}
+\index{extractedTicker@{extractedTicker}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{extractedTicker}{extractedTicker}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} extracted\+Ticker}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= useMemo(}
+\DoxyCodeLine{    () => \mbox{\hyperlink{parsing_8ts_aec032600429a76b51a6d8d10e4c1268a}{extractTicker}}(tickerString),}
+\DoxyCodeLine{    [tickerString],}
+\DoxyCodeLine{  )}
+
+\end{DoxyCode}
+
+
+Definition at line 34 of file App.\+tsx.
+
+
+
+Referenced by use\+Effect().
+
+\mbox{\Hypertarget{App_8tsx_a59be084da8908b7d77ff34b25cd84488}\label{App_8tsx_a59be084da8908b7d77ff34b25cd84488}} 
+\index{App.tsx@{App.tsx}!import@{import}}
+\index{import@{import}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily import \{ \mbox{\hyperlink{interfaces_8ts_a42cbf6a8ac2e59b4dc469f0f3c84bc4e}{Prediction\+Data}} \} from \char`\"{}./utils/interfaces\char`\"{}}
+
+
+
+Definition at line 13 of file App.\+tsx.
+
+\mbox{\Hypertarget{App_8tsx_a38f3a215a2def006618081d1da776e8f}\label{App_8tsx_a38f3a215a2def006618081d1da776e8f}} 
+\index{App.tsx@{App.tsx}!includeConfidence@{includeConfidence}}
+\index{includeConfidence@{includeConfidence}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{includeConfidence}{includeConfidence}}
+{\footnotesize\ttfamily include\+Confidence}
+
+
+
+Definition at line 40 of file App.\+tsx.
+
+\mbox{\Hypertarget{App_8tsx_a796ed387d8aca0803b1ea46bd85ab78f}\label{App_8tsx_a796ed387d8aca0803b1ea46bd85ab78f}} 
+\index{App.tsx@{App.tsx}!ModelSelect@{ModelSelect}}
+\index{ModelSelect@{ModelSelect}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{ModelSelect}{ModelSelect}}
+{\footnotesize\ttfamily export default Model\+Select}
+
+
+
+Definition at line 11 of file App.\+tsx.
+
+\mbox{\Hypertarget{App_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}\label{App_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}} 
+\index{App.tsx@{App.tsx}!React@{React}}
+\index{React@{React}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{React}{React}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} React}
+
+
+
+Definition at line 8 of file App.\+tsx.
+
+\mbox{\Hypertarget{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}\label{App_8tsx_a5df3d8a8351a0ac148fe500f14f81eb8}} 
+\index{App.tsx@{App.tsx}!setPredictionData@{setPredictionData}}
+\index{setPredictionData@{setPredictionData}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{setPredictionData}{setPredictionData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} set\+Prediction\+Data = use\+State$<$\mbox{\hyperlink{interfaces_8ts_a42cbf6a8ac2e59b4dc469f0f3c84bc4e}{Prediction\+Data}}\mbox{[}$\,$\mbox{]}$>$(\mbox{[}$\,$\mbox{]})}
+
+
+
+Definition at line 24 of file App.\+tsx.
+
+
+
+Referenced by use\+Effect().
+
+\mbox{\Hypertarget{App_8tsx_ab74b3f56efdc3a31095d708c45eccef0}\label{App_8tsx_ab74b3f56efdc3a31095d708c45eccef0}} 
+\index{App.tsx@{App.tsx}!StatisticsField@{StatisticsField}}
+\index{StatisticsField@{StatisticsField}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{StatisticsField}{StatisticsField}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} export default Statistics\+Field}
+
+
+
+Definition at line 12 of file App.\+tsx.
+
+\mbox{\Hypertarget{App_8tsx_af4b94efbba8c122e80fafb927b958a9d}\label{App_8tsx_af4b94efbba8c122e80fafb927b958a9d}} 
+\index{App.tsx@{App.tsx}!TickerSelect@{TickerSelect}}
+\index{TickerSelect@{TickerSelect}!App.tsx@{App.tsx}}
+\doxysubsubsection{\texorpdfstring{TickerSelect}{TickerSelect}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} export default Ticker\+Select \{ use\+State, \mbox{\hyperlink{App_8tsx_a268b40c7bdbfb618b73546fd95f330fc}{use\+Effect}}, use\+Memo \} from \char`\"{}react\char`\"{}}
+
+
+
+Definition at line 9 of file App.\+tsx.
+

@@ -1,0 +1,175 @@
+\hypertarget{namespaceapi__server}{}\doxysection{api\+\_\+server Namespace Reference}
+\label{namespaceapi__server}\index{api\_server@{api\_server}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceapi__server_a48016177366974fbea006dec34dcd0a8}{get\+\_\+project\+\_\+root}} ()
+\item 
+def \mbox{\hyperlink{namespaceapi__server_a0eb3122ba60fc0be801f8b4220be4990}{fetch\+\_\+lstm}} ()
+\item 
+def \mbox{\hyperlink{namespaceapi__server_a2ec44e055c055d54db0ba78818d4593f}{sum\+\_\+analysis}} ()
+\item 
+def \mbox{\hyperlink{namespaceapi__server_afdf37e3c051638b1e88e15fe7fdd3d97}{historical\+\_\+data}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceapi__server_ab0ad197101b7c6eb30af78f5acbf6ffe}{app}} = Flask(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\item 
+\mbox{\hyperlink{namespaceapi__server_addd1b83a3fde1b2e9044795e5c0c2a33}{action}}
+\item 
+\mbox{\hyperlink{namespaceapi__server_a63be5e31e3f33a7f6357db86c87e9fc2}{category}}
+\item 
+\mbox{\hyperlink{namespaceapi__server_a764a1817ee677f57da2f56c9db7fe1a4}{host}}
+\item 
+\mbox{\hyperlink{namespaceapi__server_a93f8cc8a36673cd7b9b68d9c50ad7868}{port}}
+\item 
+\mbox{\hyperlink{namespaceapi__server_a32f0ed0478293ebb613012e14ed03786}{debug}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file api_server.py
+@brief Flask API server for stock analysis system.
+
+This module provides RESTful endpoints for:
+- Fetching LSTM predictions
+- Retrieving summarized analyses
+- Accessing historical stock data
+- Getting stock lists and individual analyses
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceapi__server_a0eb3122ba60fc0be801f8b4220be4990}\label{namespaceapi__server_a0eb3122ba60fc0be801f8b4220be4990}} 
+\index{api\_server@{api\_server}!fetch\_lstm@{fetch\_lstm}}
+\index{fetch\_lstm@{fetch\_lstm}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{fetch\_lstm()}{fetch\_lstm()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+fetch\+\_\+lstm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Endpoint for fetching LSTM predictions.
+
+@return JSON response with predictions or error message
+\end{DoxyVerb}
+ 
+
+Definition at line 54 of file api\+\_\+server.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+
+\mbox{\Hypertarget{namespaceapi__server_a48016177366974fbea006dec34dcd0a8}\label{namespaceapi__server_a48016177366974fbea006dec34dcd0a8}} 
+\index{api\_server@{api\_server}!get\_project\_root@{get\_project\_root}}
+\index{get\_project\_root@{get\_project\_root}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{get\_project\_root()}{get\_project\_root()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+get\+\_\+project\+\_\+root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Locates the project root directory.
+
+@return Path object pointing to project root directory
+@throws SystemExit if root directory cannot be found
+\end{DoxyVerb}
+ 
+
+Definition at line 37 of file api\+\_\+server.\+py.
+
+
+
+Referenced by fetch\+\_\+lstm(), and sum\+\_\+analysis().
+
+\mbox{\Hypertarget{namespaceapi__server_afdf37e3c051638b1e88e15fe7fdd3d97}\label{namespaceapi__server_afdf37e3c051638b1e88e15fe7fdd3d97}} 
+\index{api\_server@{api\_server}!historical\_data@{historical\_data}}
+\index{historical\_data@{historical\_data}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{historical\_data()}{historical\_data()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+historical\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Endpoint for historical stock price data.
+
+@return JSON response with price history or error message
+\end{DoxyVerb}
+ 
+
+Definition at line 202 of file api\+\_\+server.\+py.
+
+\mbox{\Hypertarget{namespaceapi__server_a2ec44e055c055d54db0ba78818d4593f}\label{namespaceapi__server_a2ec44e055c055d54db0ba78818d4593f}} 
+\index{api\_server@{api\_server}!sum\_analysis@{sum\_analysis}}
+\index{sum\_analysis@{sum\_analysis}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{sum\_analysis()}{sum\_analysis()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+sum\+\_\+analysis (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Endpoint for summarized analysis data.
+
+@return JSON response with analysis or error message
+\end{DoxyVerb}
+ 
+
+Definition at line 115 of file api\+\_\+server.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceapi__server_addd1b83a3fde1b2e9044795e5c0c2a33}\label{namespaceapi__server_addd1b83a3fde1b2e9044795e5c0c2a33}} 
+\index{api\_server@{api\_server}!action@{action}}
+\index{action@{action}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{action}{action}}
+{\footnotesize\ttfamily api\+\_\+server.\+action}
+
+
+
+Definition at line 34 of file api\+\_\+server.\+py.
+
+\mbox{\Hypertarget{namespaceapi__server_ab0ad197101b7c6eb30af78f5acbf6ffe}\label{namespaceapi__server_ab0ad197101b7c6eb30af78f5acbf6ffe}} 
+\index{api\_server@{api\_server}!app@{app}}
+\index{app@{app}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{app}{app}}
+{\footnotesize\ttfamily api\+\_\+server.\+app = Flask(\+\_\+\+\_\+name\+\_\+\+\_\+)}
+
+
+
+Definition at line 32 of file api\+\_\+server.\+py.
+
+\mbox{\Hypertarget{namespaceapi__server_a63be5e31e3f33a7f6357db86c87e9fc2}\label{namespaceapi__server_a63be5e31e3f33a7f6357db86c87e9fc2}} 
+\index{api\_server@{api\_server}!category@{category}}
+\index{category@{category}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{category}{category}}
+{\footnotesize\ttfamily api\+\_\+server.\+category}
+
+
+
+Definition at line 34 of file api\+\_\+server.\+py.
+
+\mbox{\Hypertarget{namespaceapi__server_a32f0ed0478293ebb613012e14ed03786}\label{namespaceapi__server_a32f0ed0478293ebb613012e14ed03786}} 
+\index{api\_server@{api\_server}!debug@{debug}}
+\index{debug@{debug}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{debug}{debug}}
+{\footnotesize\ttfamily api\+\_\+server.\+debug}
+
+
+
+Definition at line 241 of file api\+\_\+server.\+py.
+
+\mbox{\Hypertarget{namespaceapi__server_a764a1817ee677f57da2f56c9db7fe1a4}\label{namespaceapi__server_a764a1817ee677f57da2f56c9db7fe1a4}} 
+\index{api\_server@{api\_server}!host@{host}}
+\index{host@{host}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{host}{host}}
+{\footnotesize\ttfamily api\+\_\+server.\+host}
+
+
+
+Definition at line 241 of file api\+\_\+server.\+py.
+
+\mbox{\Hypertarget{namespaceapi__server_a93f8cc8a36673cd7b9b68d9c50ad7868}\label{namespaceapi__server_a93f8cc8a36673cd7b9b68d9c50ad7868}} 
+\index{api\_server@{api\_server}!port@{port}}
+\index{port@{port}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{port}{port}}
+{\footnotesize\ttfamily api\+\_\+server.\+port}
+
+
+
+Definition at line 241 of file api\+\_\+server.\+py.
+

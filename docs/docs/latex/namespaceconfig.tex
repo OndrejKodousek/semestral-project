@@ -1,0 +1,90 @@
+\hypertarget{namespaceconfig}{}\doxysection{config Namespace Reference}
+\label{namespaceconfig}\index{config@{config}}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceconfig_a9705145279595a44abf39c42460f7428}{file\+\_\+path}} = os.\+path.\+join(get\+\_\+project\+\_\+root(), \char`\"{}data\char`\"{}, \char`\"{}\mbox{\hyperlink{namespaceconfig_a5ab42e20a89e2b9e5d1e8d3a522dd498}{API\+\_\+\+KEY\+\_\+\+GEMINI}}\char`\"{})
+\item 
+\mbox{\hyperlink{namespaceconfig_a5ab42e20a89e2b9e5d1e8d3a522dd498}{API\+\_\+\+KEY\+\_\+\+GEMINI}} = f.\+readline().strip()
+\item 
+\mbox{\hyperlink{namespaceconfig_a606336c49eb96338ad2f98ece6136cef}{API\+\_\+\+KEY\+\_\+\+GROQ}} = f.\+readline().strip()
+\item 
+\mbox{\hyperlink{namespaceconfig_ae2aea2dfa9da9a96f717680917589714}{API\+\_\+\+KEY\+\_\+\+OPENROUTER}} = f.\+readline().strip()
+\item 
+\mbox{\hyperlink{namespaceconfig_a7f9575e1b2e521a95b1ade8e340f67f3}{SYSTEM\+\_\+\+INSTRUCTION\+\_\+\+INDIVIDUAL}} = f.\+read().strip()
+\item 
+\mbox{\hyperlink{namespaceconfig_a7889e93f289432fbec15fb7ecbaf6343}{SYSTEM\+\_\+\+INSTRUCTION\+\_\+\+AGGREGATED}} = f.\+read().strip()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file config.py
+@brief Configuration loader for API keys and system instructions.
+
+This module handles loading of sensitive API keys and system instruction templates
+from files in the project directory. It centralizes all configuration loading
+to ensure secure and consistent access to these resources throughout the application.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceconfig_a5ab42e20a89e2b9e5d1e8d3a522dd498}\label{namespaceconfig_a5ab42e20a89e2b9e5d1e8d3a522dd498}} 
+\index{config@{config}!API\_KEY\_GEMINI@{API\_KEY\_GEMINI}}
+\index{API\_KEY\_GEMINI@{API\_KEY\_GEMINI}!config@{config}}
+\doxysubsubsection{\texorpdfstring{API\_KEY\_GEMINI}{API\_KEY\_GEMINI}}
+{\footnotesize\ttfamily config.\+API\+\_\+\+KEY\+\_\+\+GEMINI = f.\+readline().strip()}
+
+
+
+Definition at line 17 of file config.\+py.
+
+\mbox{\Hypertarget{namespaceconfig_a606336c49eb96338ad2f98ece6136cef}\label{namespaceconfig_a606336c49eb96338ad2f98ece6136cef}} 
+\index{config@{config}!API\_KEY\_GROQ@{API\_KEY\_GROQ}}
+\index{API\_KEY\_GROQ@{API\_KEY\_GROQ}!config@{config}}
+\doxysubsubsection{\texorpdfstring{API\_KEY\_GROQ}{API\_KEY\_GROQ}}
+{\footnotesize\ttfamily config.\+API\+\_\+\+KEY\+\_\+\+GROQ = f.\+readline().strip()}
+
+
+
+Definition at line 22 of file config.\+py.
+
+\mbox{\Hypertarget{namespaceconfig_ae2aea2dfa9da9a96f717680917589714}\label{namespaceconfig_ae2aea2dfa9da9a96f717680917589714}} 
+\index{config@{config}!API\_KEY\_OPENROUTER@{API\_KEY\_OPENROUTER}}
+\index{API\_KEY\_OPENROUTER@{API\_KEY\_OPENROUTER}!config@{config}}
+\doxysubsubsection{\texorpdfstring{API\_KEY\_OPENROUTER}{API\_KEY\_OPENROUTER}}
+{\footnotesize\ttfamily config.\+API\+\_\+\+KEY\+\_\+\+OPENROUTER = f.\+readline().strip()}
+
+
+
+Definition at line 27 of file config.\+py.
+
+\mbox{\Hypertarget{namespaceconfig_a9705145279595a44abf39c42460f7428}\label{namespaceconfig_a9705145279595a44abf39c42460f7428}} 
+\index{config@{config}!file\_path@{file\_path}}
+\index{file\_path@{file\_path}!config@{config}}
+\doxysubsubsection{\texorpdfstring{file\_path}{file\_path}}
+{\footnotesize\ttfamily config.\+file\+\_\+path = os.\+path.\+join(get\+\_\+project\+\_\+root(), \char`\"{}data\char`\"{}, \char`\"{}\mbox{\hyperlink{namespaceconfig_a5ab42e20a89e2b9e5d1e8d3a522dd498}{API\+\_\+\+KEY\+\_\+\+GEMINI}}\char`\"{})}
+
+
+
+Definition at line 15 of file config.\+py.
+
+\mbox{\Hypertarget{namespaceconfig_a7889e93f289432fbec15fb7ecbaf6343}\label{namespaceconfig_a7889e93f289432fbec15fb7ecbaf6343}} 
+\index{config@{config}!SYSTEM\_INSTRUCTION\_AGGREGATED@{SYSTEM\_INSTRUCTION\_AGGREGATED}}
+\index{SYSTEM\_INSTRUCTION\_AGGREGATED@{SYSTEM\_INSTRUCTION\_AGGREGATED}!config@{config}}
+\doxysubsubsection{\texorpdfstring{SYSTEM\_INSTRUCTION\_AGGREGATED}{SYSTEM\_INSTRUCTION\_AGGREGATED}}
+{\footnotesize\ttfamily config.\+SYSTEM\+\_\+\+INSTRUCTION\+\_\+\+AGGREGATED = f.\+read().strip()}
+
+
+
+Definition at line 39 of file config.\+py.
+
+\mbox{\Hypertarget{namespaceconfig_a7f9575e1b2e521a95b1ade8e340f67f3}\label{namespaceconfig_a7f9575e1b2e521a95b1ade8e340f67f3}} 
+\index{config@{config}!SYSTEM\_INSTRUCTION\_INDIVIDUAL@{SYSTEM\_INSTRUCTION\_INDIVIDUAL}}
+\index{SYSTEM\_INSTRUCTION\_INDIVIDUAL@{SYSTEM\_INSTRUCTION\_INDIVIDUAL}!config@{config}}
+\doxysubsubsection{\texorpdfstring{SYSTEM\_INSTRUCTION\_INDIVIDUAL}{SYSTEM\_INSTRUCTION\_INDIVIDUAL}}
+{\footnotesize\ttfamily config.\+SYSTEM\+\_\+\+INSTRUCTION\+\_\+\+INDIVIDUAL = f.\+read().strip()}
+
+
+
+Definition at line 32 of file config.\+py.
+

@@ -1,6 +1,18 @@
+/**
+ * @file TickerSelect.tsx
+ * @brief Component for selecting a stock ticker from available options
+ * @details Displays a scrollable list of stock tickers that meet the
+ * minimum articles requirement for the selected model.
+ */
+
 import React from "react";
 import { TickerSelectProps } from "../utils/interfaces";
 
+/**
+ * @brief Ticker selection dropdown component
+ * @param setTicker - Callback function to update selected ticker
+ * @param stockNames - Array of available stock names/tickers
+ */
 const TickerSelect: React.FC<TickerSelectProps> = ({
   setTicker,
   stockNames,

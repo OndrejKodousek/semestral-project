@@ -1,3 +1,14 @@
+"""
+@file scraper_library.py
+@brief Utility functions for web scraping operations.
+
+This module provides common functions used across scraping scripts including:
+- Database operations
+- Web driver management
+- Text processing utilities
+- Randomization helpers
+"""
+
 import os
 import random
 import time
@@ -12,10 +23,17 @@ from selenium.common.exceptions import TimeoutException, NoSuchDriverException
 from typing import Optional, List, Dict, Union
 from pathlib import Path
 
+# Global webdriver instance
 driver = None
 
 
 def get_project_root():
+    """
+    @brief Locates the project root directory by searching for .git marker.
+
+    @return Path object pointing to project root directory
+    @throws SystemExit if root directory cannot be found
+    """
     marker = ".git"
     current_path = Path(__file__).resolve()
     for parent in current_path.parents:
@@ -28,6 +46,16 @@ def get_project_root():
 def execute_query(
     query, params=None, timeout=300.0, query_type="SELECT", use_row_factory=True
 ):
+    """
+    @brief Executes a SQL query against the database.
+
+    @param query SQL query string
+    @param params Parameters for parameterized queries
+    @param timeout Database timeout in seconds
+    @param query_type Type of query ('SELECT', 'INSERT', 'UPDATE', 'DELETE')
+    @param use_row_factory Whether to use sqlite3.Row factory
+    @return Query results for SELECT, affected rows count for others
+    """
     try:
         if query_type not in {"SELECT", "INSERT", "UPDATE", "DELETE"}:
             raise ValueError(
@@ -71,6 +99,11 @@ def execute_query(
 
 
 def getDriver():
+    """
+    @brief Initializes and returns a headless Chrome webdriver.
+
+    @return Configured WebDriver instance
+    """
     options = webdriver.ChromeOptions()
     options.add_argument("--headless")
     options.add_argument(
@@ -87,15 +120,32 @@ def getDriver():
 
 
 def log(text):
+    """
+    @brief Conditional logging function.
+
+    @param text Message to log
+    """
     if True is False:
         print(text)
 
 
 def random_delay(min_seconds=1, max_seconds=5):
+    """
+    @brief Introduces a random delay between operations.
+
+    @param min_seconds Minimum delay in seconds
+    @param max_seconds Maximum delay in seconds
+    """
     time.sleep(random.uniform(min_seconds, max_seconds))
 
 
 def random_click(element, driver):
+    """
+    @brief Performs a randomized click action on an element.
+
+    @param element WebElement to click
+    @param driver WebDriver instance
+    """
     action = ActionChains(driver)
     x_offset = random.randint(-10, 10)
     y_offset = random.randint(-10, 10)
@@ -103,11 +153,23 @@ def random_click(element, driver):
 
 
 def extract_text(element):
+    """
+    @brief Extracts text content from HTML element.
+
+    @param element WebElement containing content
+    @return Concatenated text from all <p> tags
+    """
     p_tags = element.find_elements(By.CSS_SELECTOR, "p")
     return "".join(tag.get_attribute("innerHTML") for tag in p_tags)
 
 
 def purify_text(input_text):
+    """
+    @brief Cleans and normalizes text content.
+
+    @param input_text Raw HTML or text input
+    @return Cleaned ASCII text
+    """
     soup = BeautifulSoup(input_text, "html.parser")
     text = soup.get_text().strip()
 
@@ -118,6 +180,13 @@ def purify_text(input_text):
 
 
 def shorten_string(link, max_length=80):
+    """
+    @brief Shortens a string to specified length with ellipsis.
+
+    @param link Input string to shorten
+    @param max_length Maximum length of output string
+    @return Shortened string with ellipsis
+    """
     if len(link) <= max_length:
         spaces = max_length - len(link)
         return link + (" " * spaces)
@@ -126,6 +195,12 @@ def shorten_string(link, max_length=80):
 
 
 def extract_domain(link):
+    """
+    @brief Extracts domain name from URL.
+
+    @param link Full URL
+    @return Base domain without www prefix
+    """
     parsed_url = urlparse(link)
     netloc = parsed_url.netloc
     if netloc.startswith("www."):
@@ -134,6 +209,11 @@ def extract_domain(link):
 
 
 def logToFile(string):
+    """
+    @brief Logs message to scraper log file.
+
+    @param string Message to log
+    """
     file_path = os.path.join(get_project_root(), "scraper", "scraper_log.log")
 
     with open(file_path, "a+") as f:

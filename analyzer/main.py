@@ -1,3 +1,12 @@
+"""
+@file main.py
+@brief Main entry point for the stock news analysis system.
+
+This script orchestrates the process of analyzing financial news articles using
+various LLM models and saving the results to a database. It processes both individual
+articles and performs aggregated analysis for stocks.
+"""
+
 import random
 import config
 
@@ -16,6 +25,18 @@ from llm_openrouter import process_article_openrouter, processed_article_openrou
 
 
 def main():
+    """
+    @brief Main function that orchestrates the article analysis process.
+
+    This function:
+    1. Defines available LLM models
+    2. Shuffles models to distribute load
+    3. Fetches articles from the database
+    4. For each model, processes unprocessed articles
+    5. Performs individual article analysis
+    6. Performs aggregated analysis for each stock
+    7. Saves results to the database
+    """
 
     models = [
         # Google AI Studio

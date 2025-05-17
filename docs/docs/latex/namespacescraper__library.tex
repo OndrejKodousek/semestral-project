@@ -1,0 +1,267 @@
+\hypertarget{namespacescraper__library}{}\doxysection{scraper\+\_\+library Namespace Reference}
+\label{namespacescraper__library}\index{scraper\_library@{scraper\_library}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacescraper__library_a3a420a1daeb66a57c9e9dfb56f0bbf7c}{get\+\_\+project\+\_\+root}} ()
+\item 
+def \mbox{\hyperlink{namespacescraper__library_a6dbb7a0c71a642f127b5ae5a89e2a785}{execute\+\_\+query}} (query, params=None, timeout=300.\+0, query\+\_\+type=\char`\"{}SELECT\char`\"{}, use\+\_\+row\+\_\+factory=True)
+\item 
+def \mbox{\hyperlink{namespacescraper__library_a51803b7e799776783a99cf7914799cde}{get\+Driver}} ()
+\item 
+def \mbox{\hyperlink{namespacescraper__library_a06eabbd400515672cd48746c2a7406a0}{log}} (text)
+\item 
+def \mbox{\hyperlink{namespacescraper__library_aec1d0deefa3351fc5c09b835839d4ee0}{random\+\_\+delay}} (min\+\_\+seconds=1, max\+\_\+seconds=5)
+\item 
+def \mbox{\hyperlink{namespacescraper__library_a5ceee0ccf63200c1b6a251006341fea9}{random\+\_\+click}} (element, \mbox{\hyperlink{namespacescraper__library_a0aa9967b78a87db9f2ee28e8254f6533}{driver}})
+\item 
+def \mbox{\hyperlink{namespacescraper__library_a797f321516d0c125b644454ecf9d0e32}{extract\+\_\+text}} (element)
+\item 
+def \mbox{\hyperlink{namespacescraper__library_adb740b5ad911adbc4f91db37135b2543}{purify\+\_\+text}} (input\+\_\+text)
+\item 
+def \mbox{\hyperlink{namespacescraper__library_af3b8b05fb579da960c27275b19e0d5c7}{shorten\+\_\+string}} (link, max\+\_\+length=80)
+\item 
+def \mbox{\hyperlink{namespacescraper__library_a5c0595bc151c02fdb6cd1aacdc049516}{extract\+\_\+domain}} (link)
+\item 
+def \mbox{\hyperlink{namespacescraper__library_a4b04649db1a00bb6fdab9de41f26c3d7}{log\+To\+File}} (string)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacescraper__library_a0aa9967b78a87db9f2ee28e8254f6533}{driver}} = None
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file scraper_library.py
+@brief Utility functions for web scraping operations.
+
+This module provides common functions used across scraping scripts including:
+- Database operations
+- Web driver management
+- Text processing utilities
+- Randomization helpers
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacescraper__library_a6dbb7a0c71a642f127b5ae5a89e2a785}\label{namespacescraper__library_a6dbb7a0c71a642f127b5ae5a89e2a785}} 
+\index{scraper\_library@{scraper\_library}!execute\_query@{execute\_query}}
+\index{execute\_query@{execute\_query}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{execute\_query()}{execute\_query()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+execute\+\_\+query (\begin{DoxyParamCaption}\item[{}]{query,  }\item[{}]{params = {\ttfamily None},  }\item[{}]{timeout = {\ttfamily 300.0},  }\item[{}]{query\+\_\+type = {\ttfamily \char`\"{}SELECT\char`\"{}},  }\item[{}]{use\+\_\+row\+\_\+factory = {\ttfamily True} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Executes a SQL query against the database.
+
+@param query SQL query string
+@param params Parameters for parameterized queries
+@param timeout Database timeout in seconds
+@param query_type Type of query ('SELECT', 'INSERT', 'UPDATE', 'DELETE')
+@param use_row_factory Whether to use sqlite3.Row factory
+@return Query results for SELECT, affected rows count for others
+\end{DoxyVerb}
+ 
+
+Definition at line 46 of file scraper\+\_\+library.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+
+
+
+Referenced by main.\+scrape\+\_\+investors\+\_\+article().
+
+\mbox{\Hypertarget{namespacescraper__library_a5c0595bc151c02fdb6cd1aacdc049516}\label{namespacescraper__library_a5c0595bc151c02fdb6cd1aacdc049516}} 
+\index{scraper\_library@{scraper\_library}!extract\_domain@{extract\_domain}}
+\index{extract\_domain@{extract\_domain}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{extract\_domain()}{extract\_domain()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+extract\+\_\+domain (\begin{DoxyParamCaption}\item[{}]{link }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Extracts domain name from URL.
+
+@param link Full URL
+@return Base domain without www prefix
+\end{DoxyVerb}
+ 
+
+Definition at line 197 of file scraper\+\_\+library.\+py.
+
+
+
+Referenced by main.\+scrape\+\_\+investors\+\_\+article().
+
+\mbox{\Hypertarget{namespacescraper__library_a797f321516d0c125b644454ecf9d0e32}\label{namespacescraper__library_a797f321516d0c125b644454ecf9d0e32}} 
+\index{scraper\_library@{scraper\_library}!extract\_text@{extract\_text}}
+\index{extract\_text@{extract\_text}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{extract\_text()}{extract\_text()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+extract\+\_\+text (\begin{DoxyParamCaption}\item[{}]{element }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Extracts text content from HTML element.
+
+@param element WebElement containing content
+@return Concatenated text from all <p> tags
+\end{DoxyVerb}
+ 
+
+Definition at line 155 of file scraper\+\_\+library.\+py.
+
+
+
+Referenced by main.\+scrape\+\_\+investors\+\_\+article(), and main.\+scrape\+\_\+yahoo\+\_\+finance\+\_\+article().
+
+\mbox{\Hypertarget{namespacescraper__library_a3a420a1daeb66a57c9e9dfb56f0bbf7c}\label{namespacescraper__library_a3a420a1daeb66a57c9e9dfb56f0bbf7c}} 
+\index{scraper\_library@{scraper\_library}!get\_project\_root@{get\_project\_root}}
+\index{get\_project\_root@{get\_project\_root}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{get\_project\_root()}{get\_project\_root()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+get\+\_\+project\+\_\+root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Locates the project root directory by searching for .git marker.
+
+@return Path object pointing to project root directory
+@throws SystemExit if root directory cannot be found
+\end{DoxyVerb}
+ 
+
+Definition at line 30 of file scraper\+\_\+library.\+py.
+
+
+
+Referenced by execute\+\_\+query(), and log\+To\+File().
+
+\mbox{\Hypertarget{namespacescraper__library_a51803b7e799776783a99cf7914799cde}\label{namespacescraper__library_a51803b7e799776783a99cf7914799cde}} 
+\index{scraper\_library@{scraper\_library}!getDriver@{getDriver}}
+\index{getDriver@{getDriver}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{getDriver()}{getDriver()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+get\+Driver (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Initializes and returns a headless Chrome webdriver.
+
+@return Configured WebDriver instance
+\end{DoxyVerb}
+ 
+
+Definition at line 101 of file scraper\+\_\+library.\+py.
+
+\mbox{\Hypertarget{namespacescraper__library_a06eabbd400515672cd48746c2a7406a0}\label{namespacescraper__library_a06eabbd400515672cd48746c2a7406a0}} 
+\index{scraper\_library@{scraper\_library}!log@{log}}
+\index{log@{log}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{log()}{log()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+log (\begin{DoxyParamCaption}\item[{}]{text }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Conditional logging function.
+
+@param text Message to log
+\end{DoxyVerb}
+ 
+
+Definition at line 122 of file scraper\+\_\+library.\+py.
+
+
+
+Referenced by main.\+scrape\+\_\+yahoo\+\_\+finance\+\_\+article().
+
+\mbox{\Hypertarget{namespacescraper__library_a4b04649db1a00bb6fdab9de41f26c3d7}\label{namespacescraper__library_a4b04649db1a00bb6fdab9de41f26c3d7}} 
+\index{scraper\_library@{scraper\_library}!logToFile@{logToFile}}
+\index{logToFile@{logToFile}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{logToFile()}{logToFile()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+log\+To\+File (\begin{DoxyParamCaption}\item[{}]{string }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Logs message to scraper log file.
+
+@param string Message to log
+\end{DoxyVerb}
+ 
+
+Definition at line 211 of file scraper\+\_\+library.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+
+\mbox{\Hypertarget{namespacescraper__library_adb740b5ad911adbc4f91db37135b2543}\label{namespacescraper__library_adb740b5ad911adbc4f91db37135b2543}} 
+\index{scraper\_library@{scraper\_library}!purify\_text@{purify\_text}}
+\index{purify\_text@{purify\_text}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{purify\_text()}{purify\_text()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+purify\+\_\+text (\begin{DoxyParamCaption}\item[{}]{input\+\_\+text }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Cleans and normalizes text content.
+
+@param input_text Raw HTML or text input
+@return Cleaned ASCII text
+\end{DoxyVerb}
+ 
+
+Definition at line 166 of file scraper\+\_\+library.\+py.
+
+
+
+Referenced by main.\+scrape\+\_\+investors\+\_\+article().
+
+\mbox{\Hypertarget{namespacescraper__library_a5ceee0ccf63200c1b6a251006341fea9}\label{namespacescraper__library_a5ceee0ccf63200c1b6a251006341fea9}} 
+\index{scraper\_library@{scraper\_library}!random\_click@{random\_click}}
+\index{random\_click@{random\_click}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{random\_click()}{random\_click()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+random\+\_\+click (\begin{DoxyParamCaption}\item[{}]{element,  }\item[{}]{driver }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Performs a randomized click action on an element.
+
+@param element WebElement to click
+@param driver WebDriver instance
+\end{DoxyVerb}
+ 
+
+Definition at line 142 of file scraper\+\_\+library.\+py.
+
+
+
+Referenced by main.\+scrape\+\_\+yahoo\+\_\+finance\+\_\+article().
+
+\mbox{\Hypertarget{namespacescraper__library_aec1d0deefa3351fc5c09b835839d4ee0}\label{namespacescraper__library_aec1d0deefa3351fc5c09b835839d4ee0}} 
+\index{scraper\_library@{scraper\_library}!random\_delay@{random\_delay}}
+\index{random\_delay@{random\_delay}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{random\_delay()}{random\_delay()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+random\+\_\+delay (\begin{DoxyParamCaption}\item[{}]{min\+\_\+seconds = {\ttfamily 1},  }\item[{}]{max\+\_\+seconds = {\ttfamily 5} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Introduces a random delay between operations.
+
+@param min_seconds Minimum delay in seconds
+@param max_seconds Maximum delay in seconds
+\end{DoxyVerb}
+ 
+
+Definition at line 132 of file scraper\+\_\+library.\+py.
+
+
+
+Referenced by main.\+scrape\+\_\+investors\+\_\+article(), and main.\+scrape\+\_\+yahoo\+\_\+finance\+\_\+article().
+
+\mbox{\Hypertarget{namespacescraper__library_af3b8b05fb579da960c27275b19e0d5c7}\label{namespacescraper__library_af3b8b05fb579da960c27275b19e0d5c7}} 
+\index{scraper\_library@{scraper\_library}!shorten\_string@{shorten\_string}}
+\index{shorten\_string@{shorten\_string}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{shorten\_string()}{shorten\_string()}}
+{\footnotesize\ttfamily def scraper\+\_\+library.\+shorten\+\_\+string (\begin{DoxyParamCaption}\item[{}]{link,  }\item[{}]{max\+\_\+length = {\ttfamily 80} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Shortens a string to specified length with ellipsis.
+
+@param link Input string to shorten
+@param max_length Maximum length of output string
+@return Shortened string with ellipsis
+\end{DoxyVerb}
+ 
+
+Definition at line 182 of file scraper\+\_\+library.\+py.
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacescraper__library_a0aa9967b78a87db9f2ee28e8254f6533}\label{namespacescraper__library_a0aa9967b78a87db9f2ee28e8254f6533}} 
+\index{scraper\_library@{scraper\_library}!driver@{driver}}
+\index{driver@{driver}!scraper\_library@{scraper\_library}}
+\doxysubsubsection{\texorpdfstring{driver}{driver}}
+{\footnotesize\ttfamily scraper\+\_\+library.\+driver = None}
+
+
+
+Definition at line 27 of file scraper\+\_\+library.\+py.
+

@@ -1,3 +1,15 @@
+"""
+@file database.py
+@brief Database operations for stock news analysis system.
+
+This module handles all database interactions including:
+- Managing connections
+- Loading processed articles
+- Fetching stock prices
+- Saving analysis results
+- Performing aggregated data operations
+"""
+
 import sqlite3
 import time
 import json
@@ -16,12 +28,23 @@ session = requests.Session(impersonate="chrome")
 
 
 def get_db_connection():
+    """
+    @brief Establishes a connection to the SQLite database.
+
+    @return sqlite3.Connection object with row factory set to sqlite3.Row
+    """
     conn = sqlite3.connect("data/news.db", timeout=300)
     conn.row_factory = sqlite3.Row
     return conn
 
 
 def load_processed_articles(model):
+    """
+    @brief Loads IDs of articles already processed by a specific model.
+
+    @param model Name of the LLM model to check for processed articles
+    @return Set of article IDs that have already been processed by the given model
+    """
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -39,13 +62,18 @@ def load_processed_articles(model):
 
 
 def get_last_trading_day(date_str):
+    """
+    @brief Adjusts a given date to the last trading day if it falls on a weekend.
+
+    @param date_str Date string in YYYY-MM-DD format
+    @return Adjusted date string for the last trading day
+    """
     date = datetime.strptime(date_str, "%Y-%m-%d")
 
     pd_date = pd.Timestamp(date)
 
     # 5=Saturday, 6=Sunday
     if pd_date.dayofweek >= 5:
-
         # Go back to the most recent business day
         trading_day = pd_date - pd.tseries.offsets.BDay(1)
         return trading_day.strftime("%Y-%m-%d")
@@ -54,6 +82,14 @@ def get_last_trading_day(date_str):
 
 
 def get_stock_price(ticker, date_str):
+    """
+    @brief Retrieves the closing stock price for a given ticker on a specific date.
+
+    @param ticker Stock ticker symbol
+    @param date_str Date string in YYYY-MM-DD format
+    @return Closing price as float
+    @throws Exception If price cannot be retrieved after max retries
+    """
     max_retries = 3
     retry_delay = 2
     trading_date = get_last_trading_day(date_str)
@@ -101,6 +137,14 @@ def get_stock_price(ticker, date_str):
 
 
 def save_processed_articles(article_id, model, data):
+    """
+    @brief Saves processed article analysis to the database.
+
+    @param article_id ID of the article being processed
+    @param model Name of the LLM model used for analysis
+    @param data Dictionary containing analysis results
+    @return True if save was successful, False otherwise
+    """
     max_retries = 5
     retry_delay = 1
 
@@ -117,7 +161,6 @@ def save_processed_articles(article_id, model, data):
             if ticker:
                 try:
                     base_stock_price = get_stock_price(ticker, published_date)
-
                 except Exception as e:
                     print(f" | FAILED to get stock price: {e}")
                     return False
@@ -200,6 +243,15 @@ def save_processed_articles(article_id, model, data):
 
 
 def save_processed_summarized_articles(data, model_name, ticker, published_date):
+    """
+    @brief Saves aggregated analysis results for a stock to the database.
+
+    @param data Dictionary containing summarized analysis results
+    @param model_name Name of the LLM model used for analysis
+    @param ticker Stock ticker symbol
+    @param published_date Reference date for the analysis
+    @return None
+    """
     max_retries = 5
     retry_delay = 1
     summarized_analysis_id = None
@@ -210,7 +262,6 @@ def save_processed_summarized_articles(data, model_name, ticker, published_date)
     for attempt in range(max_retries):
         conn = None
         try:
-
             # Extract the date (YYYY-MM-DD) from the published field
             ticker = data.get("ticker")
 
@@ -257,7 +308,7 @@ def save_processed_summarized_articles(data, model_name, ticker, published_date)
             if result:
                 summarized_analysis_id = result["id"]
             else:
-                # Should not happen with INSERT OR REPLACE unless something went very, very wrong
+                # Should not happen with INSERT OR REPLACE unless something went very wrong
                 raise Exception("Failed to retrieve ID after INSERT OR REPLACE")
 
             # Delete old predictions for this summary
@@ -334,6 +385,11 @@ def save_processed_summarized_articles(data, model_name, ticker, published_date)
 
 
 def increment_priority(article_id):
+    """
+    @brief Increments the priority value of an article in the database.
+
+    @param article_id ID of the article to update
+    """
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute(
@@ -345,6 +401,13 @@ def increment_priority(article_id):
 
 
 def fetch_sum_analysis_data(ticker, model):
+    """
+    @brief Fetches analysis data for aggregated processing.
+
+    @param ticker Stock ticker symbol
+    @param model Name of the LLM model to fetch data for
+    @return Tuple containing (today's date, formatted analysis data string)
+    """
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -373,7 +436,7 @@ def fetch_sum_analysis_data(ticker, model):
         ),
     )
 
-    data = cursor.fetchall()  #
+    data = cursor.fetchall()
     conn.close()
 
     result_list = []
@@ -383,9 +446,7 @@ def fetch_sum_analysis_data(ticker, model):
         try:
             analysis_id = row["id"]
 
-            prediction_date_str = date.fromisoformat(row["date"]).strftime(
-                "%Y-%m-%d"
-            )  #
+            prediction_date_str = date.fromisoformat(row["date"]).strftime("%Y-%m-%d")
             prediction_details = {
                 "date": prediction_date_str,
                 "prediction": row["prediction"],
@@ -405,12 +466,12 @@ def fetch_sum_analysis_data(ticker, model):
                 analysis_map[analysis_id] = current_analysis
                 result_list.append(current_analysis)
             else:
-                current_analysis = analysis_map[analysis_id]  #
+                current_analysis = analysis_map[analysis_id]
 
-            current_analysis["predictions"].append(prediction_details)  #
+            current_analysis["predictions"].append(prediction_details)
 
         except (ValueError, TypeError, KeyError) as e:
-            print(f"Warning: Skipping row due to error: {e} - Row data: {dict(row)}")  #
+            print(f"Warning: Skipping row due to error: {e} - Row data: {dict(row)}")
             continue
 
     today_str = date.today().strftime("%Y-%m-%d")

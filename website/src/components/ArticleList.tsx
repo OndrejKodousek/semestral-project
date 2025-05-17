@@ -1,8 +1,22 @@
+/**
+ * @file ArticleList.tsx
+ * @brief Component for displaying a list of articles with their charts
+ * @details Renders a list of financial articles each with:
+ * - Article metadata (source, title, summary)
+ * - Associated stock prediction chart
+ */
+
 import React from "react";
 import ArticleChart from "./ArticleChart";
 import { ArticleListProps } from "../utils/interfaces";
 import { formatStringToCSSClass } from "../utils/parsing";
 
+/**
+ * @brief Component that renders a list of articles with their prediction charts
+ * @param predictionData - Array of article prediction data
+ * @param historicalData - Array of historical stock prices
+ * @param ticker - Stock ticker symbol
+ */
 const ArticleList: React.FC<ArticleListProps> = ({
   predictionData,
   historicalData,

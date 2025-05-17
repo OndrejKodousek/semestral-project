@@ -1,9 +1,21 @@
+/**
+ * @file BatchDownloader.tsx
+ * @brief Component for batch downloading stock prediction data
+ * @details Handles downloading data for all ticker-model combinations
+ * with progress tracking and error handling
+ */
+
 import React, { useState } from "react";
 import { fetchStockNames } from "../utils/apiEndpoints";
 import { extractTicker } from "../utils/parsing";
 import { downloadTickerModelData } from "../utils/downloadUtils";
 import { BatchDownloaderProps, Progress } from "../utils/interfaces";
 
+/**
+ * @brief Component for batch downloading stock prediction data
+ * @param models - Array of model names to download data for
+ * @param minArticles - Minimum number of articles required for a ticker to be included
+ */
 const BatchDownloader: React.FC<BatchDownloaderProps> = ({
   models,
   minArticles,
@@ -14,6 +26,10 @@ const BatchDownloader: React.FC<BatchDownloaderProps> = ({
   const [errorLog, setErrorLog] = useState<string[]>([]);
   const [currentModel, setCurrentModel] = useState<string>("");
 
+  /**
+   * @brief Initiates batch download process
+   * @async
+   */
   const downloadAll = async (): Promise<void> => {
     setIsDownloading(true);
     setCompleted([]);
@@ -32,8 +48,6 @@ const BatchDownloader: React.FC<BatchDownloaderProps> = ({
 
           for (const ticker of tickers) {
             try {
-              //await new Promise((resolve) => setTimeout(resolve, 500));
-
               await downloadTickerModelData(ticker, model);
 
               setCompleted((prev) => [...prev, `${ticker}-${model}`]);

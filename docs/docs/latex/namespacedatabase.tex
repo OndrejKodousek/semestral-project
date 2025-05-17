@@ -1,0 +1,261 @@
+\hypertarget{namespacedatabase}{}\doxysection{database Namespace Reference}
+\label{namespacedatabase}\index{database@{database}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacedatabase_a39c4e0f70234e06bcc8009fae6eb8be4}{get\+\_\+db\+\_\+connection}} ()
+\item 
+def \mbox{\hyperlink{namespacedatabase_a8a9c901bb7ad668bcd553ec4acceb32f}{load\+\_\+processed\+\_\+articles}} (\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}})
+\item 
+def \mbox{\hyperlink{namespacedatabase_a7bbdd782b04c81f8c07dc60b71702570}{get\+\_\+last\+\_\+trading\+\_\+day}} (date\+\_\+str)
+\item 
+def \mbox{\hyperlink{namespacedatabase_aabf0f407342b4944cac6265e56aa80fe}{get\+\_\+stock\+\_\+price}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, date\+\_\+str)
+\item 
+def \mbox{\hyperlink{namespacedatabase_a12ef51bb8363d1e2c94879a30d96d5c9}{save\+\_\+processed\+\_\+articles}} (article\+\_\+id, \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}, data)
+\item 
+def \mbox{\hyperlink{namespacedatabase_a7adfcf4312a21615a8345b1a408d0ca1}{save\+\_\+processed\+\_\+summarized\+\_\+articles}} (data, model\+\_\+name, \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, published\+\_\+date)
+\item 
+def \mbox{\hyperlink{namespacedatabase_a906156926d43e445af616c66790feff1}{increment\+\_\+priority}} (article\+\_\+id)
+\item 
+def \mbox{\hyperlink{namespacedatabase_adfc74b0bd3a80196ad1f1ea664109557}{fetch\+\_\+sum\+\_\+analysis\+\_\+data}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacedatabase_a11b9286e05da07e50ad97dd4d79fb2a1}{action}}
+\item 
+\mbox{\hyperlink{namespacedatabase_ab7b94f8c9f0da6ef5528134c7c099502}{category}}
+\item 
+\mbox{\hyperlink{namespacedatabase_a5ea5ad3861edbf8701ae765712705cbe}{session}} = requests.\+Session(impersonate=\char`\"{}chrome\char`\"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file database.py
+@brief Database operations for stock news analysis system.
+
+This module handles all database interactions including:
+- Managing connections
+- Loading processed articles
+- Fetching stock prices
+- Saving analysis results
+- Performing aggregated data operations
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacedatabase_adfc74b0bd3a80196ad1f1ea664109557}\label{namespacedatabase_adfc74b0bd3a80196ad1f1ea664109557}} 
+\index{database@{database}!fetch\_sum\_analysis\_data@{fetch\_sum\_analysis\_data}}
+\index{fetch\_sum\_analysis\_data@{fetch\_sum\_analysis\_data}!database@{database}}
+\doxysubsubsection{\texorpdfstring{fetch\_sum\_analysis\_data()}{fetch\_sum\_analysis\_data()}}
+{\footnotesize\ttfamily def database.\+fetch\+\_\+sum\+\_\+analysis\+\_\+data (\begin{DoxyParamCaption}\item[{}]{ticker,  }\item[{}]{model }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Fetches analysis data for aggregated processing.
+
+@param ticker Stock ticker symbol
+@param model Name of the LLM model to fetch data for
+@return Tuple containing (today's date, formatted analysis data string)
+\end{DoxyVerb}
+ 
+
+Definition at line 403 of file database.\+py.
+
+
+
+References get\+\_\+db\+\_\+connection().
+
+
+
+Referenced by main.\+main().
+
+\mbox{\Hypertarget{namespacedatabase_a39c4e0f70234e06bcc8009fae6eb8be4}\label{namespacedatabase_a39c4e0f70234e06bcc8009fae6eb8be4}} 
+\index{database@{database}!get\_db\_connection@{get\_db\_connection}}
+\index{get\_db\_connection@{get\_db\_connection}!database@{database}}
+\doxysubsubsection{\texorpdfstring{get\_db\_connection()}{get\_db\_connection()}}
+{\footnotesize\ttfamily def database.\+get\+\_\+db\+\_\+connection (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Establishes a connection to the SQLite database.
+
+@return sqlite3.Connection object with row factory set to sqlite3.Row
+\end{DoxyVerb}
+ 
+
+Definition at line 30 of file database.\+py.
+
+
+
+Referenced by fetch\+\_\+sum\+\_\+analysis\+\_\+data(), increment\+\_\+priority(), load\+\_\+processed\+\_\+articles(), main.\+main(), llm\+\_\+google.\+process\+\_\+article\+\_\+google\+\_\+sum(), llm\+\_\+groq.\+process\+\_\+article\+\_\+groq(), llm\+\_\+openrouter.\+process\+\_\+article\+\_\+openrouter(), save\+\_\+processed\+\_\+articles(), and save\+\_\+processed\+\_\+summarized\+\_\+articles().
+
+\mbox{\Hypertarget{namespacedatabase_a7bbdd782b04c81f8c07dc60b71702570}\label{namespacedatabase_a7bbdd782b04c81f8c07dc60b71702570}} 
+\index{database@{database}!get\_last\_trading\_day@{get\_last\_trading\_day}}
+\index{get\_last\_trading\_day@{get\_last\_trading\_day}!database@{database}}
+\doxysubsubsection{\texorpdfstring{get\_last\_trading\_day()}{get\_last\_trading\_day()}}
+{\footnotesize\ttfamily def database.\+get\+\_\+last\+\_\+trading\+\_\+day (\begin{DoxyParamCaption}\item[{}]{date\+\_\+str }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Adjusts a given date to the last trading day if it falls on a weekend.
+
+@param date_str Date string in YYYY-MM-DD format
+@return Adjusted date string for the last trading day
+\end{DoxyVerb}
+ 
+
+Definition at line 64 of file database.\+py.
+
+
+
+Referenced by get\+\_\+stock\+\_\+price().
+
+\mbox{\Hypertarget{namespacedatabase_aabf0f407342b4944cac6265e56aa80fe}\label{namespacedatabase_aabf0f407342b4944cac6265e56aa80fe}} 
+\index{database@{database}!get\_stock\_price@{get\_stock\_price}}
+\index{get\_stock\_price@{get\_stock\_price}!database@{database}}
+\doxysubsubsection{\texorpdfstring{get\_stock\_price()}{get\_stock\_price()}}
+{\footnotesize\ttfamily def database.\+get\+\_\+stock\+\_\+price (\begin{DoxyParamCaption}\item[{}]{ticker,  }\item[{}]{date\+\_\+str }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Retrieves the closing stock price for a given ticker on a specific date.
+
+@param ticker Stock ticker symbol
+@param date_str Date string in YYYY-MM-DD format
+@return Closing price as float
+@throws Exception If price cannot be retrieved after max retries
+\end{DoxyVerb}
+ 
+
+Definition at line 84 of file database.\+py.
+
+
+
+References get\+\_\+last\+\_\+trading\+\_\+day().
+
+
+
+Referenced by save\+\_\+processed\+\_\+articles(), and save\+\_\+processed\+\_\+summarized\+\_\+articles().
+
+\mbox{\Hypertarget{namespacedatabase_a906156926d43e445af616c66790feff1}\label{namespacedatabase_a906156926d43e445af616c66790feff1}} 
+\index{database@{database}!increment\_priority@{increment\_priority}}
+\index{increment\_priority@{increment\_priority}!database@{database}}
+\doxysubsubsection{\texorpdfstring{increment\_priority()}{increment\_priority()}}
+{\footnotesize\ttfamily def database.\+increment\+\_\+priority (\begin{DoxyParamCaption}\item[{}]{article\+\_\+id }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Increments the priority value of an article in the database.
+
+@param article_id ID of the article to update
+\end{DoxyVerb}
+ 
+
+Definition at line 387 of file database.\+py.
+
+
+
+References get\+\_\+db\+\_\+connection().
+
+
+
+Referenced by llm\+\_\+google.\+process\+\_\+article\+\_\+google(), llm\+\_\+google.\+process\+\_\+article\+\_\+google\+\_\+sum(), llm\+\_\+groq.\+process\+\_\+article\+\_\+groq(), and llm\+\_\+openrouter.\+process\+\_\+article\+\_\+openrouter().
+
+\mbox{\Hypertarget{namespacedatabase_a8a9c901bb7ad668bcd553ec4acceb32f}\label{namespacedatabase_a8a9c901bb7ad668bcd553ec4acceb32f}} 
+\index{database@{database}!load\_processed\_articles@{load\_processed\_articles}}
+\index{load\_processed\_articles@{load\_processed\_articles}!database@{database}}
+\doxysubsubsection{\texorpdfstring{load\_processed\_articles()}{load\_processed\_articles()}}
+{\footnotesize\ttfamily def database.\+load\+\_\+processed\+\_\+articles (\begin{DoxyParamCaption}\item[{}]{model }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Loads IDs of articles already processed by a specific model.
+
+@param model Name of the LLM model to check for processed articles
+@return Set of article IDs that have already been processed by the given model
+\end{DoxyVerb}
+ 
+
+Definition at line 41 of file database.\+py.
+
+
+
+References get\+\_\+db\+\_\+connection().
+
+
+
+Referenced by main.\+main().
+
+\mbox{\Hypertarget{namespacedatabase_a12ef51bb8363d1e2c94879a30d96d5c9}\label{namespacedatabase_a12ef51bb8363d1e2c94879a30d96d5c9}} 
+\index{database@{database}!save\_processed\_articles@{save\_processed\_articles}}
+\index{save\_processed\_articles@{save\_processed\_articles}!database@{database}}
+\doxysubsubsection{\texorpdfstring{save\_processed\_articles()}{save\_processed\_articles()}}
+{\footnotesize\ttfamily def database.\+save\+\_\+processed\+\_\+articles (\begin{DoxyParamCaption}\item[{}]{article\+\_\+id,  }\item[{}]{model,  }\item[{}]{data }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Saves processed article analysis to the database.
+
+@param article_id ID of the article being processed
+@param model Name of the LLM model used for analysis
+@param data Dictionary containing analysis results
+@return True if save was successful, False otherwise
+\end{DoxyVerb}
+ 
+
+Definition at line 139 of file database.\+py.
+
+
+
+References get\+\_\+db\+\_\+connection(), and get\+\_\+stock\+\_\+price().
+
+
+
+Referenced by main.\+main().
+
+\mbox{\Hypertarget{namespacedatabase_a7adfcf4312a21615a8345b1a408d0ca1}\label{namespacedatabase_a7adfcf4312a21615a8345b1a408d0ca1}} 
+\index{database@{database}!save\_processed\_summarized\_articles@{save\_processed\_summarized\_articles}}
+\index{save\_processed\_summarized\_articles@{save\_processed\_summarized\_articles}!database@{database}}
+\doxysubsubsection{\texorpdfstring{save\_processed\_summarized\_articles()}{save\_processed\_summarized\_articles()}}
+{\footnotesize\ttfamily def database.\+save\+\_\+processed\+\_\+summarized\+\_\+articles (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{model\+\_\+name,  }\item[{}]{ticker,  }\item[{}]{published\+\_\+date }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Saves aggregated analysis results for a stock to the database.
+
+@param data Dictionary containing summarized analysis results
+@param model_name Name of the LLM model used for analysis
+@param ticker Stock ticker symbol
+@param published_date Reference date for the analysis
+@return None
+\end{DoxyVerb}
+ 
+
+Definition at line 245 of file database.\+py.
+
+
+
+References get\+\_\+db\+\_\+connection(), and get\+\_\+stock\+\_\+price().
+
+
+
+Referenced by main.\+main().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacedatabase_a11b9286e05da07e50ad97dd4d79fb2a1}\label{namespacedatabase_a11b9286e05da07e50ad97dd4d79fb2a1}} 
+\index{database@{database}!action@{action}}
+\index{action@{action}!database@{database}}
+\doxysubsubsection{\texorpdfstring{action}{action}}
+{\footnotesize\ttfamily database.\+action}
+
+
+
+Definition at line 23 of file database.\+py.
+
+\mbox{\Hypertarget{namespacedatabase_ab7b94f8c9f0da6ef5528134c7c099502}\label{namespacedatabase_ab7b94f8c9f0da6ef5528134c7c099502}} 
+\index{database@{database}!category@{category}}
+\index{category@{category}!database@{database}}
+\doxysubsubsection{\texorpdfstring{category}{category}}
+{\footnotesize\ttfamily database.\+category}
+
+
+
+Definition at line 23 of file database.\+py.
+
+\mbox{\Hypertarget{namespacedatabase_a5ea5ad3861edbf8701ae765712705cbe}\label{namespacedatabase_a5ea5ad3861edbf8701ae765712705cbe}} 
+\index{database@{database}!session@{session}}
+\index{session@{session}!database@{database}}
+\doxysubsubsection{\texorpdfstring{session}{session}}
+{\footnotesize\ttfamily database.\+session = requests.\+Session(impersonate=\char`\"{}chrome\char`\"{})}
+
+
+
+Definition at line 27 of file database.\+py.
+

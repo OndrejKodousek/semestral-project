@@ -1,3 +1,17 @@
+/**
+ * @file metrics.ts
+ * @brief Stock prediction metrics calculation utilities
+ * @details Provides functions for calculating various performance metrics
+ * comparing predictions to actual stock data.
+ */
+
+/**
+ * @interface StockMetrics
+ * @brief Container for all calculated metrics
+ * @property realData - Metrics for actual stock data
+ * @property predictions - Metrics for model predictions
+ * @property lstm - Metrics for LSTM predictions
+ */
 export interface StockMetrics {
   realData: {
     average: number;
@@ -24,6 +38,13 @@ export interface StockMetrics {
   } | null;
 }
 
+/**
+ * @brief Calculates performance metrics for stock predictions
+ * @param realPrices - Array of actual stock prices
+ * @param allPredictions - Array of all prediction values
+ * @param lstmPredictions - Array of LSTM prediction values
+ * @returns StockMetrics object with calculated values
+ */
 export const calculateMetrics = (
   realPrices: number[],
   allPredictions: number[],
@@ -123,6 +144,11 @@ export const calculateMetrics = (
   return metrics;
 };
 
+/**
+ * @brief Calculates volatility (standard deviation) of values
+ * @param values - Array of numeric values
+ * @returns Calculated volatility
+ */
 const calculateVolatility = (values: number[]): number => {
   const avg = values.reduce((a, b) => a + b, 0) / values.length;
   const variance =
@@ -130,10 +156,20 @@ const calculateVolatility = (values: number[]): number => {
   return Math.sqrt(variance);
 };
 
+/**
+ * @brief Formats a number as currency string
+ * @param value - Numeric value to format
+ * @returns Formatted currency string (e.g., "$123.45")
+ */
 export const formatCurrency = (value: number): string => {
   return `$${value.toFixed(2)}`;
 };
 
+/**
+ * @brief Formats a number as percentage string
+ * @param value - Numeric value to format
+ * @returns Formatted percentage string (e.g., "12.34%")
+ */
 export const formatPercentage = (value: number): string => {
   return `${value.toFixed(2)}%`;
 };

@@ -1,0 +1,11 @@
+var searchData=
+[
+  ['metricitem_467',['MetricItem',['../Metrics_8tsx.html#a01b3ea0d8a2d773e45ecaafa3420121e',1,'Metrics.tsx']]],
+  ['metrics_468',['Metrics',['../Metrics_8tsx.html#a2329696b2cba036f81fe4a4c52fe7c48',1,'Metrics():&#160;Metrics.tsx'],['../StatisticsField_8tsx.html#a6443fcbcb82a8ef9798d65df91d1920c',1,'Metrics():&#160;StatisticsField.tsx']]],
+  ['metricsprops_469',['MetricsProps',['../interfaces_8ts.html#ae281e78c9439edf15cf44b4502bdffb4',1,'interfaces.ts']]],
+  ['minarticles_470',['minArticles',['../BatchDownloader_8tsx.html#af03917480ce8b403c1192676754eb7e0',1,'minArticles():&#160;BatchDownloader.tsx'],['../StatisticsField_8tsx.html#af03917480ce8b403c1192676754eb7e0',1,'minArticles():&#160;StatisticsField.tsx']]],
+  ['mode_471',['mode',['../StatisticsField_8tsx.html#a24dc565d453773eb0b87ce607454be84',1,'StatisticsField.tsx']]],
+  ['model_472',['model',['../CombinedChart_8tsx.html#ae1dc0ec49824bce648121ebaf9efbc03',1,'model():&#160;CombinedChart.tsx'],['../StatisticsField_8tsx.html#a644378717e5c9f39f5d013d33189c65a',1,'model():&#160;StatisticsField.tsx']]],
+  ['modelselect_473',['ModelSelect',['../App_8tsx.html#a796ed387d8aca0803b1ea46bd85ab78f',1,'ModelSelect():&#160;App.tsx'],['../ModelSelect_8tsx.html#a796ed387d8aca0803b1ea46bd85ab78f',1,'ModelSelect():&#160;ModelSelect.tsx']]],
+  ['modelselectprops_474',['ModelSelectProps',['../interfaces_8ts.html#ab022cd22403b5a866b36c42b0b43f2b5',1,'interfaces.ts']]]
+];

@@ -1,7 +1,0 @@
-- Minimum 5 článků
-- Všechny modely a všechny tickery, kteří byly dostupní
-- První 3 dny predikce
-- Pokud predikce neměla reálné data v ten stejný den, tak se zcela ignoruje
-- Pokud model neměl žádné články, tak se ignoruje, následně se tohle odůvodní ve výsledcích (např. input limit modelu)
-- Tyto přísné podmínky odfiltrují hodně položek, proto se ignoruje ticker, a berou se všechny data ohledně modelu,
-  tedy netestuje se jakou úspěšnost měl model XYZ u META, ale jakou úspěšnost měl model XYZ u všech jeho společností

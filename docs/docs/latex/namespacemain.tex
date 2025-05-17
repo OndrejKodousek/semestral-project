@@ -1,0 +1,256 @@
+\hypertarget{namespacemain}{}\doxysection{main Namespace Reference}
+\label{namespacemain}\index{main@{main}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacemain_ab0a4a29a72200a5cf786f96fdab9a2bd}{main}} ()
+\item 
+def \mbox{\hyperlink{namespacemain_a01ac8c3db06ec878a1058f68356ab6b3}{scrape\+\_\+yahoo\+\_\+finance\+\_\+article}} (link)
+\item 
+def \mbox{\hyperlink{namespacemain_a9857e55ea6ab873152eeaaa0777fce89}{scrape\+\_\+investors\+\_\+article}} (link)
+\item 
+def \mbox{\hyperlink{namespacemain_ad3dd80a0fa613c36027489e6a30ff4a8}{load\+\_\+data}} (data\+\_\+dir, max\+\_\+day=12, min\+\_\+articles\+\_\+per\+\_\+source=1, max\+\_\+include\+\_\+day=3)
+\item 
+def \mbox{\hyperlink{namespacemain_a6799d2420b243f26115e3ea6c34450db}{plot\+\_\+accuracy\+\_\+over\+\_\+time}} (data, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_a6ae94e36676b642ce57e9bf30b535f13}{plot\+\_\+model\+\_\+accuracy\+\_\+over\+\_\+time}} (data, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_aef1500531fe4f19990966296f07f7e53}{plot\+\_\+source\+\_\+accuracy\+\_\+over\+\_\+time}} (data, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_a173e39208dea470d5846209fff78032b}{plot\+\_\+model\+\_\+comparison}} (data, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_a8395a735d305102ae106b41acd6555df}{plot\+\_\+source\+\_\+comparison}} (data, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_a85f40bca3406eb6c66eabc63db266f2f}{print\+\_\+summary\+\_\+stats}} (data, min\+\_\+datapoints=10)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemain_afe1c140a1cab1f302ab94aac99efba8f}{driver}} = get\+Driver()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file main.py
+@brief Main entry point for the stock news analysis system.
+
+This script orchestrates the process of analyzing financial news articles using
+various LLM models and saving the results to a database. It processes both individual
+articles and performs aggregated analysis for stocks.
+\end{DoxyVerb}
+
+
+\begin{DoxyVerb}@file Main.py
+@brief Main scraping script for financial news articles.
+
+This script handles:
+- RSS feed parsing
+- Article content extraction
+- Database storage of scraped content
+- Source-specific scraping logic
+\end{DoxyVerb}
+
+
+\begin{DoxyVerb}Analyzes and visualizes stock prediction accuracy metrics from JSON files.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacemain_ad3dd80a0fa613c36027489e6a30ff4a8}\label{namespacemain_ad3dd80a0fa613c36027489e6a30ff4a8}} 
+\index{main@{main}!load\_data@{load\_data}}
+\index{load\_data@{load\_data}!main@{main}}
+\doxysubsubsection{\texorpdfstring{load\_data()}{load\_data()}}
+{\footnotesize\ttfamily def main.\+load\+\_\+data (\begin{DoxyParamCaption}\item[{}]{data\+\_\+dir,  }\item[{}]{max\+\_\+day = {\ttfamily 12},  }\item[{}]{min\+\_\+articles\+\_\+per\+\_\+source = {\ttfamily 1},  }\item[{}]{max\+\_\+include\+\_\+day = {\ttfamily 3} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Load and process prediction data from JSON files.\end{DoxyVerb}
+ 
+
+Definition at line 16 of file main.\+py.
+
+
+
+Referenced by print\+\_\+summary\+\_\+stats().
+
+\mbox{\Hypertarget{namespacemain_ab0a4a29a72200a5cf786f96fdab9a2bd}\label{namespacemain_ab0a4a29a72200a5cf786f96fdab9a2bd}} 
+\index{main@{main}!main@{main}}
+\index{main@{main}!main@{main}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def main.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Main function that orchestrates the article analysis process.
+
+This function:
+1. Defines available LLM models
+2. Shuffles models to distribute load
+3. Fetches articles from the database
+4. For each model, processes unprocessed articles
+5. Performs individual article analysis
+6. Performs aggregated analysis for each stock
+7. Saves results to the database
+\end{DoxyVerb}
+
+
+\begin{DoxyVerb}@brief Main scraping workflow.
+
+Processes RSS feed, scrapes new articles, and stores them in database.
+\end{DoxyVerb}
+
+
+\begin{DoxyVerb}Command line interface for prediction analysis.\end{DoxyVerb}
+ 
+
+Definition at line 27 of file main.\+py.
+
+
+
+References database.\+fetch\+\_\+sum\+\_\+analysis\+\_\+data(), database.\+get\+\_\+db\+\_\+connection(), utils.\+is\+\_\+valid\+\_\+data(), database.\+load\+\_\+processed\+\_\+articles(), llm\+\_\+google.\+process\+\_\+article\+\_\+google(), llm\+\_\+google.\+process\+\_\+article\+\_\+google\+\_\+sum(), llm\+\_\+groq.\+process\+\_\+article\+\_\+groq(), llm\+\_\+openrouter.\+process\+\_\+article\+\_\+openrouter(), llm\+\_\+groq.\+processed\+\_\+article\+\_\+groq\+\_\+sum(), llm\+\_\+openrouter.\+processed\+\_\+article\+\_\+openrouter\+\_\+sum(), database.\+save\+\_\+processed\+\_\+articles(), database.\+save\+\_\+processed\+\_\+summarized\+\_\+articles(), and utils.\+shorten\+\_\+string().
+
+
+
+Referenced by print\+\_\+summary\+\_\+stats(), and scrape\+\_\+investors\+\_\+article().
+
+\mbox{\Hypertarget{namespacemain_a6799d2420b243f26115e3ea6c34450db}\label{namespacemain_a6799d2420b243f26115e3ea6c34450db}} 
+\index{main@{main}!plot\_accuracy\_over\_time@{plot\_accuracy\_over\_time}}
+\index{plot\_accuracy\_over\_time@{plot\_accuracy\_over\_time}!main@{main}}
+\doxysubsubsection{\texorpdfstring{plot\_accuracy\_over\_time()}{plot\_accuracy\_over\_time()}}
+{\footnotesize\ttfamily def main.\+plot\+\_\+accuracy\+\_\+over\+\_\+time (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{min\+\_\+datapoints = {\ttfamily 10},  }\item[{}]{output\+\_\+dir = {\ttfamily \char`\"{}graphs\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Plot overall prediction accuracy degradation over time.\end{DoxyVerb}
+ 
+
+Definition at line 109 of file main.\+py.
+
+
+
+Referenced by print\+\_\+summary\+\_\+stats().
+
+\mbox{\Hypertarget{namespacemain_a6ae94e36676b642ce57e9bf30b535f13}\label{namespacemain_a6ae94e36676b642ce57e9bf30b535f13}} 
+\index{main@{main}!plot\_model\_accuracy\_over\_time@{plot\_model\_accuracy\_over\_time}}
+\index{plot\_model\_accuracy\_over\_time@{plot\_model\_accuracy\_over\_time}!main@{main}}
+\doxysubsubsection{\texorpdfstring{plot\_model\_accuracy\_over\_time()}{plot\_model\_accuracy\_over\_time()}}
+{\footnotesize\ttfamily def main.\+plot\+\_\+model\+\_\+accuracy\+\_\+over\+\_\+time (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{min\+\_\+datapoints = {\ttfamily 10},  }\item[{}]{output\+\_\+dir = {\ttfamily \char`\"{}graphs\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Plot accuracy trends for individual models over time.\end{DoxyVerb}
+ 
+
+Definition at line 156 of file main.\+py.
+
+
+
+Referenced by print\+\_\+summary\+\_\+stats().
+
+\mbox{\Hypertarget{namespacemain_a173e39208dea470d5846209fff78032b}\label{namespacemain_a173e39208dea470d5846209fff78032b}} 
+\index{main@{main}!plot\_model\_comparison@{plot\_model\_comparison}}
+\index{plot\_model\_comparison@{plot\_model\_comparison}!main@{main}}
+\doxysubsubsection{\texorpdfstring{plot\_model\_comparison()}{plot\_model\_comparison()}}
+{\footnotesize\ttfamily def main.\+plot\+\_\+model\+\_\+comparison (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{min\+\_\+datapoints = {\ttfamily 10},  }\item[{}]{output\+\_\+dir = {\ttfamily \char`\"{}graphs\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate bar chart comparing overall model accuracy.\end{DoxyVerb}
+ 
+
+Definition at line 289 of file main.\+py.
+
+
+
+Referenced by print\+\_\+summary\+\_\+stats().
+
+\mbox{\Hypertarget{namespacemain_aef1500531fe4f19990966296f07f7e53}\label{namespacemain_aef1500531fe4f19990966296f07f7e53}} 
+\index{main@{main}!plot\_source\_accuracy\_over\_time@{plot\_source\_accuracy\_over\_time}}
+\index{plot\_source\_accuracy\_over\_time@{plot\_source\_accuracy\_over\_time}!main@{main}}
+\doxysubsubsection{\texorpdfstring{plot\_source\_accuracy\_over\_time()}{plot\_source\_accuracy\_over\_time()}}
+{\footnotesize\ttfamily def main.\+plot\+\_\+source\+\_\+accuracy\+\_\+over\+\_\+time (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{min\+\_\+datapoints = {\ttfamily 10},  }\item[{}]{output\+\_\+dir = {\ttfamily \char`\"{}graphs\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Plot accuracy trends for individual sources over time.\end{DoxyVerb}
+ 
+
+Definition at line 223 of file main.\+py.
+
+
+
+Referenced by print\+\_\+summary\+\_\+stats().
+
+\mbox{\Hypertarget{namespacemain_a8395a735d305102ae106b41acd6555df}\label{namespacemain_a8395a735d305102ae106b41acd6555df}} 
+\index{main@{main}!plot\_source\_comparison@{plot\_source\_comparison}}
+\index{plot\_source\_comparison@{plot\_source\_comparison}!main@{main}}
+\doxysubsubsection{\texorpdfstring{plot\_source\_comparison()}{plot\_source\_comparison()}}
+{\footnotesize\ttfamily def main.\+plot\+\_\+source\+\_\+comparison (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{min\+\_\+datapoints = {\ttfamily 10},  }\item[{}]{output\+\_\+dir = {\ttfamily \char`\"{}graphs\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generate bar chart comparing overall source accuracy.\end{DoxyVerb}
+ 
+
+Definition at line 344 of file main.\+py.
+
+
+
+Referenced by print\+\_\+summary\+\_\+stats().
+
+\mbox{\Hypertarget{namespacemain_a85f40bca3406eb6c66eabc63db266f2f}\label{namespacemain_a85f40bca3406eb6c66eabc63db266f2f}} 
+\index{main@{main}!print\_summary\_stats@{print\_summary\_stats}}
+\index{print\_summary\_stats@{print\_summary\_stats}!main@{main}}
+\doxysubsubsection{\texorpdfstring{print\_summary\_stats()}{print\_summary\_stats()}}
+{\footnotesize\ttfamily def main.\+print\+\_\+summary\+\_\+stats (\begin{DoxyParamCaption}\item[{}]{data,  }\item[{}]{min\+\_\+datapoints = {\ttfamily 10} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Print summary statistics to console.\end{DoxyVerb}
+ 
+
+Definition at line 399 of file main.\+py.
+
+
+
+References load\+\_\+data(), main(), plot\+\_\+accuracy\+\_\+over\+\_\+time(), plot\+\_\+model\+\_\+accuracy\+\_\+over\+\_\+time(), plot\+\_\+model\+\_\+comparison(), plot\+\_\+source\+\_\+accuracy\+\_\+over\+\_\+time(), and plot\+\_\+source\+\_\+comparison().
+
+\mbox{\Hypertarget{namespacemain_a9857e55ea6ab873152eeaaa0777fce89}\label{namespacemain_a9857e55ea6ab873152eeaaa0777fce89}} 
+\index{main@{main}!scrape\_investors\_article@{scrape\_investors\_article}}
+\index{scrape\_investors\_article@{scrape\_investors\_article}!main@{main}}
+\doxysubsubsection{\texorpdfstring{scrape\_investors\_article()}{scrape\_investors\_article()}}
+{\footnotesize\ttfamily def main.\+scrape\+\_\+investors\+\_\+article (\begin{DoxyParamCaption}\item[{}]{link }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Scrapes article content from Investors.com.
+
+@param link URL of article to scrape
+@return Extracted article content or error string
+\end{DoxyVerb}
+ 
+
+Definition at line 96 of file main.\+py.
+
+
+
+References scraper\+\_\+library.\+execute\+\_\+query(), scraper\+\_\+library.\+extract\+\_\+domain(), scraper\+\_\+library.\+extract\+\_\+text(), main(), scraper\+\_\+library.\+purify\+\_\+text(), scraper\+\_\+library.\+random\+\_\+delay(), and scrape\+\_\+yahoo\+\_\+finance\+\_\+article().
+
+\mbox{\Hypertarget{namespacemain_a01ac8c3db06ec878a1058f68356ab6b3}\label{namespacemain_a01ac8c3db06ec878a1058f68356ab6b3}} 
+\index{main@{main}!scrape\_yahoo\_finance\_article@{scrape\_yahoo\_finance\_article}}
+\index{scrape\_yahoo\_finance\_article@{scrape\_yahoo\_finance\_article}!main@{main}}
+\doxysubsubsection{\texorpdfstring{scrape\_yahoo\_finance\_article()}{scrape\_yahoo\_finance\_article()}}
+{\footnotesize\ttfamily def main.\+scrape\+\_\+yahoo\+\_\+finance\+\_\+article (\begin{DoxyParamCaption}\item[{}]{link }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Scrapes article content from Yahoo Finance.
+
+@param link URL of article to scrape
+@return Extracted article content or error string
+\end{DoxyVerb}
+ 
+
+Definition at line 34 of file main.\+py.
+
+
+
+References scraper\+\_\+library.\+extract\+\_\+text(), scraper\+\_\+library.\+log(), scraper\+\_\+library.\+random\+\_\+click(), and scraper\+\_\+library.\+random\+\_\+delay().
+
+
+
+Referenced by scrape\+\_\+investors\+\_\+article().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacemain_afe1c140a1cab1f302ab94aac99efba8f}\label{namespacemain_afe1c140a1cab1f302ab94aac99efba8f}} 
+\index{main@{main}!driver@{driver}}
+\index{driver@{driver}!main@{main}}
+\doxysubsubsection{\texorpdfstring{driver}{driver}}
+{\footnotesize\ttfamily main.\+driver = get\+Driver()}
+
+
+
+Definition at line 31 of file main.\+py.
+

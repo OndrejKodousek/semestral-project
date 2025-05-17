@@ -1,0 +1,31 @@
+\hypertarget{train_8py}{}\doxysection{lstm/train.py File Reference}
+\label{train_8py}\index{lstm/train.py@{lstm/train.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacetrain}{train}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacetrain_a2a1eac85254c697154c79a12ee779a96}{train.\+get\+\_\+project\+\_\+root}} ()
+\item 
+def \mbox{\hyperlink{namespacetrain_a3281fd41677c1de0f9a627b2c5bc61ce}{train.\+fetch\+\_\+stock\+\_\+data}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, start\+\_\+date=\char`\"{}2010-\/01-\/01\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacetrain_a1e91f400270e2a0220654557c231d546}{train.\+build\+\_\+lstm\+\_\+model}} (input\+\_\+shape)
+\item 
+def \mbox{\hyperlink{namespacetrain_a254853cf3fcd65fa96ba5b0cc66f5bf3}{train.\+save\+\_\+model\+\_\+and\+\_\+scaler}} (\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}, scaler, \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, base\+\_\+path)
+\item 
+def \mbox{\hyperlink{namespacetrain_a96b92a5d8e2b1a8280c6b6302989d9a5}{train.\+main}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{namespacetrain_accc55b0eb3c6c023a8b877485eb63c39}{train.\+DB\+\_\+\+PATH}} = \char`\"{}data/news.\+db\char`\"{}
+\item 
+int \mbox{\hyperlink{namespacetrain_a88ab20f5ea0f6663b2057073c4687853}{train.\+SEQUENCE\+\_\+\+LENGTH}} = 60
+\item 
+int \mbox{\hyperlink{namespacetrain_aa6944fe332881cea473979a10c51d1c2}{train.\+EPOCHS}} = 25
+\item 
+\mbox{\hyperlink{namespacetrain_aadaf49b79b62965c9992367f505e5f01}{train.\+ticker\+\_\+symbol}} = sys.\+argv\mbox{[}1\mbox{]}.upper()
+\end{DoxyCompactItemize}

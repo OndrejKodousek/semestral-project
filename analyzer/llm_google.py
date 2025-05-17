@@ -1,3 +1,11 @@
+"""
+@file llm_google.py
+@brief Integration with Google Generative AI API for article analysis.
+
+This module handles sending requests to Google's Generative AI API for both
+individual article analysis and aggregated stock analysis.
+"""
+
 import json
 import google.generativeai as genai
 import config
@@ -8,7 +16,16 @@ from google.api_core import exceptions
 
 
 def process_article_google(entry, model):
+    """
+    @brief Process an individual article using Google's Generative AI API.
 
+    Sends the article content to the specified model via Google API,
+    extracts JSON from the response, and validates it.
+
+    @param entry Dictionary containing article data.
+    @param model The model name to use for processing.
+    @return Combined dictionary of article data and analysis results, or None if processing failed.
+    """
     genai.configure(api_key=config.API_KEY_GEMINI)
 
     model = genai.GenerativeModel(
@@ -48,7 +65,16 @@ def process_article_google(entry, model):
 
 
 def process_article_google_sum(model_name, prompt):
+    """
+    @brief Process aggregated article data for a stock using Google's Generative AI API.
 
+    Sends the aggregated prompt to the specified model via Google API,
+    extracts JSON from the response, and validates it.
+
+    @param model_name The model name to use for processing.
+    @param prompt The aggregated prompt containing multiple articles about a stock.
+    @return Dictionary containing analysis results, or None if processing failed.
+    """
     genai.configure(api_key=config.API_KEY_GEMINI)
 
     model = genai.GenerativeModel(

@@ -1,3 +1,14 @@
+"""
+@file train.py
+@brief LSTM model training for stock price prediction.
+
+This module provides functionality to:
+- Fetch historical stock data
+- Preprocess data for LSTM training
+- Build and train LSTM models
+- Save trained models and scalers
+"""
+
 import os
 import sys
 import yfinance as yf
@@ -12,12 +23,17 @@ from tensorflow.keras.callbacks import EarlyStopping
 from datetime import datetime
 from pathlib import Path
 
-DB_PATH = "data/news.db"
-SEQUENCE_LENGTH = 60
-EPOCHS = 25
+DB_PATH = "data/news.db"  # Path to database file
+SEQUENCE_LENGTH = 60  # Sequence length for LSTM input
+EPOCHS = 25  # Maximum number of training epochs
 
 
 def get_project_root():
+    """
+    @brief Locates the project root directory by searching for .git marker.
+
+    @return Path object pointing to project root directory
+    """
     marker = ".git"
     current_path = Path(__file__).resolve()
     for parent in current_path.parents:
@@ -27,14 +43,19 @@ def get_project_root():
 
 
 def fetch_stock_data(ticker, start_date="2010-01-01"):
+    """
+    @brief Fetches historical stock data from Yahoo Finance.
+
+    @param ticker Stock ticker symbol
+    @param start_date Start date for historical data
+    @return Tuple containing (numpy array of close prices, pandas DataFrame of full data)
+            or (None, None) if data cannot be fetched
+    """
     try:
-        # Fetch data up to today, yfinance handles finding the last available day
         stock_data_df = yf.download(ticker, start=start_date, progress=False)
         if stock_data_df.empty:
             print(f"Warning: No data fetched for {ticker}.")
             return None, None
-
-        # Return only close prices and the actual data fetched
         return stock_data_df["Close"].values.reshape(-1, 1), stock_data_df
     except Exception as e:
         print(f"Error fetching data for {ticker}: {e}")
@@ -42,6 +63,12 @@ def fetch_stock_data(ticker, start_date="2010-01-01"):
 
 
 def build_lstm_model(input_shape):
+    """
+    @brief Constructs LSTM model architecture.
+
+    @param input_shape Shape of input data (sequence_length, features)
+    @return Compiled Keras Sequential model
+    """
     model = Sequential()
     model.add(LSTM(50, return_sequences=True, input_shape=input_shape))
     model.add(LSTM(50, return_sequences=False))
@@ -52,6 +79,14 @@ def build_lstm_model(input_shape):
 
 
 def save_model_and_scaler(model, scaler, ticker, base_path):
+    """
+    @brief Saves trained model and scaler to disk.
+
+    @param model Trained Keras model
+    @param scaler Fitted MinMaxScaler
+    @param ticker Stock ticker symbol
+    @param base_path Directory path to save files
+    """
     filepath_model = base_path / f"{ticker}_model.keras"
     filepath_scaler = base_path / f"{ticker}_scaler.pkl"
 
@@ -66,6 +101,11 @@ def save_model_and_scaler(model, scaler, ticker, base_path):
 
 
 def main(ticker):
+    """
+    @brief Main training workflow.
+
+    @param ticker Stock ticker symbol to train model for
+    """
     project_root = get_project_root()
     models_path = project_root / "data" / "lstm_models"
     db_file = project_root / DB_PATH

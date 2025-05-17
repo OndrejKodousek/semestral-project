@@ -1,9 +1,19 @@
+"""
+@file create_db.py
+@brief Database schema creation script.
+
+This script creates the SQLite database schema for the stock news analysis system.
+It defines all tables needed for storing articles, analyses, predictions, and LSTM results.
+"""
+
 import sqlite3
 from datetime import datetime, timedelta
 
+# Establish database connection
 conn = sqlite3.connect("data/news.db")
 cursor = conn.cursor()
 
+# Create articles table
 cursor.execute(
     """
 CREATE TABLE IF NOT EXISTS articles (
@@ -18,6 +28,7 @@ CREATE TABLE IF NOT EXISTS articles (
 """
 )
 
+# Create analysis table
 cursor.execute(
     """
 CREATE TABLE IF NOT EXISTS analysis (
@@ -33,6 +44,7 @@ CREATE TABLE IF NOT EXISTS analysis (
 """
 )
 
+# Create predictions table
 cursor.execute(
     """
 CREATE TABLE IF NOT EXISTS predictions (
@@ -46,6 +58,7 @@ CREATE TABLE IF NOT EXISTS predictions (
 """
 )
 
+# Create summarized_analysis table
 cursor.execute(
     """
 CREATE TABLE IF NOT EXISTS summarized_analysis (
@@ -59,6 +72,7 @@ CREATE TABLE IF NOT EXISTS summarized_analysis (
 """
 )
 
+# Create summarized_predictions table
 cursor.execute(
     """
 CREATE TABLE IF NOT EXISTS summarized_predictions (
@@ -67,24 +81,25 @@ CREATE TABLE IF NOT EXISTS summarized_predictions (
     date DATE NOT NULL,
     prediction FLOAT NOT NULL,
     confidence FLOAT NOT NULL,
-    FOREIGN KEY (summarized_analysis_id) REFERENCES summarized_analysis(id) ON DELETE CASCADE -- Added ON DELETE CASCADE
+    FOREIGN KEY (summarized_analysis_id) REFERENCES summarized_analysis(id) ON DELETE CASCADE
 );
 """
 )
 
+# Create lstm_predictions table
 cursor.execute(
     """
 CREATE TABLE IF NOT EXISTS lstm_predictions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     ticker TEXT NOT NULL,
     prediction_made_date DATETIME NOT NULL,
-    prediction_target_date DATE NOT NULL, -- Date the value applies to (actual or predicted)
-    value FLOAT NOT NULL,                -- Stores actual or predicted value
-    is_reference INTEGER NOT NULL DEFAULT 0 -- 0 = Prediction, 1 = Actual reference value
+    prediction_target_date DATE NOT NULL,
+    value FLOAT NOT NULL,
+    is_reference INTEGER NOT NULL DEFAULT 0
 );
 """
 )
 
-
+# Commit changes and close connection
 conn.commit()
 conn.close()

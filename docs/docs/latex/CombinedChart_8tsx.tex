@@ -1,0 +1,156 @@
+\hypertarget{CombinedChart_8tsx}{}\doxysection{website/src/components/\+Combined\+Chart.tsx File Reference}
+\label{CombinedChart_8tsx}\index{website/src/components/CombinedChart.tsx@{website/src/components/CombinedChart.tsx}}
+
+
+Component for displaying a combined chart of multiple predictions.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Chart\+JS \mbox{\hyperlink{CombinedChart_8tsx_ae11047d12b7829f671b08ad9139df02e}{register}} (Category\+Scale, Linear\+Scale, Point\+Element, Line\+Element, Title, Tooltip, Legend, annotation\+Plugin,)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{CombinedChart_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}{React}}
+\item 
+import \mbox{\hyperlink{CombinedChart_8tsx_a59be084da8908b7d77ff34b25cd84488}{import}} \{ Line \} from \char`\"{}react-\/chartjs-\/2\char`\"{}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} annotation\+Plugin from chartjs plugin \mbox{\hyperlink{CombinedChart_8tsx_a47e20ad1faecf50ad8abe52738a98c1e}{annotation}}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} html2canvas from \mbox{\hyperlink{CombinedChart_8tsx_a4703a19d583ab25ec092b507e6b34d75}{html2canvas}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{CombinedChart_8tsx_a0a82cdfefd693a85170ec01b81c2dfc3}{Combined\+Chart}}
+\begin{DoxyCompactList}\small\item\em Combined chart component showing multiple prediction sources. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{CombinedChart_8tsx_a46958e400133845da077a817e5d46f76}{historical\+Data}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{CombinedChart_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}}
+\begin{DoxyCompactList}\small\item\em Props for Model\+Select component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Component for displaying a combined chart of multiple predictions. 
+
+Shows real stock data alongside predictions from\+:
+\begin{DoxyItemize}
+\item Multiple articles
+\item Summarized analysis
+\item LSTM model Includes functionality to download the chart as PNG 
+\end{DoxyItemize}
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{CombinedChart_8tsx_ae11047d12b7829f671b08ad9139df02e}\label{CombinedChart_8tsx_ae11047d12b7829f671b08ad9139df02e}} 
+\index{CombinedChart.tsx@{CombinedChart.tsx}!register@{register}}
+\index{register@{register}!CombinedChart.tsx@{CombinedChart.tsx}}
+\doxysubsubsection{\texorpdfstring{register()}{register()}}
+{\footnotesize\ttfamily Chart\+JS register (\begin{DoxyParamCaption}\item[{Category\+Scale}]{,  }\item[{Linear\+Scale}]{,  }\item[{Point\+Element}]{,  }\item[{Line\+Element}]{,  }\item[{Title}]{,  }\item[{Tooltip}]{,  }\item[{Legend}]{,  }\item[{annotation\+Plugin}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{CombinedChart_8tsx_a47e20ad1faecf50ad8abe52738a98c1e}\label{CombinedChart_8tsx_a47e20ad1faecf50ad8abe52738a98c1e}} 
+\index{CombinedChart.tsx@{CombinedChart.tsx}!annotation@{annotation}}
+\index{annotation@{annotation}!CombinedChart.tsx@{CombinedChart.tsx}}
+\doxysubsubsection{\texorpdfstring{annotation}{annotation}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} annotation\+Plugin from chartjs plugin annotation}
+
+
+
+Definition at line 24 of file Combined\+Chart.\+tsx.
+
+\mbox{\Hypertarget{CombinedChart_8tsx_a0a82cdfefd693a85170ec01b81c2dfc3}\label{CombinedChart_8tsx_a0a82cdfefd693a85170ec01b81c2dfc3}} 
+\index{CombinedChart.tsx@{CombinedChart.tsx}!CombinedChart@{CombinedChart}}
+\index{CombinedChart@{CombinedChart}!CombinedChart.tsx@{CombinedChart.tsx}}
+\doxysubsubsection{\texorpdfstring{CombinedChart}{CombinedChart}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} export default Combined\+Chart}
+
+
+
+Combined chart component showing multiple prediction sources. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prediction\+Data} & -\/ Array of prediction data from articles \\
+\hline
+{\em historical\+Data} & -\/ Array of historical stock prices \\
+\hline
+{\em ticker} & -\/ Stock ticker symbol \\
+\hline
+{\em model} & -\/ Model name used for predictions \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 55 of file Combined\+Chart.\+tsx.
+
+\mbox{\Hypertarget{CombinedChart_8tsx_a46958e400133845da077a817e5d46f76}\label{CombinedChart_8tsx_a46958e400133845da077a817e5d46f76}} 
+\index{CombinedChart.tsx@{CombinedChart.tsx}!historicalData@{historicalData}}
+\index{historicalData@{historicalData}!CombinedChart.tsx@{CombinedChart.tsx}}
+\doxysubsubsection{\texorpdfstring{historicalData}{historicalData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} historical\+Data}
+
+
+
+Definition at line 57 of file Combined\+Chart.\+tsx.
+
+\mbox{\Hypertarget{CombinedChart_8tsx_a4703a19d583ab25ec092b507e6b34d75}\label{CombinedChart_8tsx_a4703a19d583ab25ec092b507e6b34d75}} 
+\index{CombinedChart.tsx@{CombinedChart.tsx}!html2canvas@{html2canvas}}
+\index{html2canvas@{html2canvas}!CombinedChart.tsx@{CombinedChart.tsx}}
+\doxysubsubsection{\texorpdfstring{html2canvas}{html2canvas}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} html2canvas from html2canvas}
+
+
+
+Definition at line 34 of file Combined\+Chart.\+tsx.
+
+\mbox{\Hypertarget{CombinedChart_8tsx_a59be084da8908b7d77ff34b25cd84488}\label{CombinedChart_8tsx_a59be084da8908b7d77ff34b25cd84488}} 
+\index{CombinedChart.tsx@{CombinedChart.tsx}!import@{import}}
+\index{import@{import}!CombinedChart.tsx@{CombinedChart.tsx}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily import \{ Line \} from \char`\"{}react-\/chartjs-\/2\char`\"{}}
+
+
+
+Definition at line 12 of file Combined\+Chart.\+tsx.
+
+\mbox{\Hypertarget{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}\label{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}} 
+\index{CombinedChart.tsx@{CombinedChart.tsx}!model@{model}}
+\index{model@{model}!CombinedChart.tsx@{CombinedChart.tsx}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily Model\+Select\+Propsset\+Model Function to update selected model}
+
+
+
+Props for Model\+Select component. 
+
+
+
+Definition at line 59 of file Combined\+Chart.\+tsx.
+
+
+
+Referenced by use\+Effect().
+
+\mbox{\Hypertarget{CombinedChart_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}\label{CombinedChart_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}} 
+\index{CombinedChart.tsx@{CombinedChart.tsx}!React@{React}}
+\index{React@{React}!CombinedChart.tsx@{CombinedChart.tsx}}
+\doxysubsubsection{\texorpdfstring{React}{React}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} React}
+
+
+
+Definition at line 11 of file Combined\+Chart.\+tsx.
+
+\mbox{\Hypertarget{CombinedChart_8tsx_a1601f364121b84b5088e4fb763f0e540}\label{CombinedChart_8tsx_a1601f364121b84b5088e4fb763f0e540}} 
+\index{CombinedChart.tsx@{CombinedChart.tsx}!ticker@{ticker}}
+\index{ticker@{ticker}!CombinedChart.tsx@{CombinedChart.tsx}}
+\doxysubsubsection{\texorpdfstring{ticker}{ticker}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} ticker}
+
+
+
+Definition at line 58 of file Combined\+Chart.\+tsx.
+

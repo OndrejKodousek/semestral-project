@@ -1,5 +1,17 @@
+/**
+ * @file apiEndpoints.ts
+ * @brief API service module for all backend communication
+ * @details Handles all HTTP requests to the backend API with proper
+ * error handling. Automatically detects environment to set correct
+ * API base URL.
+ */
+
 import { getDateOnly } from "../utils/date";
 
+/**
+ * @brief Determines the base API URL based on current hostname
+ * @returns Base URL string for API requests
+ */
 const apiBaseUrl = (() => {
   const hostname = window.location.hostname;
 
@@ -12,6 +24,12 @@ const apiBaseUrl = (() => {
   }
 })();
 
+/**
+ * @brief Fetches historical stock price data
+ * @param ticker - Stock ticker symbol
+ * @param start - Start date for historical data
+ * @returns Promise resolving to historical data array
+ */
 export const fetchHistoricalData = async (ticker: string, start: string) => {
   try {
     const response = await fetch(
@@ -30,6 +48,12 @@ export const fetchHistoricalData = async (ticker: string, start: string) => {
   }
 };
 
+/**
+ * @brief Fetches prediction analysis data
+ * @param ticker - Stock ticker symbol
+ * @param model - AI model name
+ * @returns Promise resolving to analysis data
+ */
 export const fetchAnalysisData = async (ticker: string, model: string) => {
   try {
     const response = await fetch(
@@ -45,6 +69,12 @@ export const fetchAnalysisData = async (ticker: string, model: string) => {
   }
 };
 
+/**
+ * @brief Fetches list of available stock tickers for a model
+ * @param model - AI model name
+ * @param minArticles - Minimum articles filter
+ * @returns Promise resolving to array of stock names
+ */
 export const fetchStockNames = async (model: string, minArticles: number) => {
   try {
     const response = await fetch(
@@ -60,6 +90,12 @@ export const fetchStockNames = async (model: string, minArticles: number) => {
   }
 };
 
+/**
+ * @brief Fetches summarized analysis data
+ * @param ticker - Stock ticker symbol
+ * @param model - AI model name
+ * @returns Promise resolving to summarized analysis
+ */
 export const fetchSumAnalysis = async (ticker: string, model: string) => {
   try {
     const response = await fetch(
@@ -75,6 +111,11 @@ export const fetchSumAnalysis = async (ticker: string, model: string) => {
   }
 };
 
+/**
+ * @brief Fetches LSTM model predictions
+ * @param ticker - Stock ticker symbol
+ * @returns Promise resolving to LSTM predictions
+ */
 export const fetchLSTMAnalysis = async (ticker: string) => {
   try {
     const response = await fetch(

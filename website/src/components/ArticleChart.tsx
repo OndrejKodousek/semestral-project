@@ -1,3 +1,13 @@
+/**
+ * @file ArticleChart.tsx
+ * @brief Component for displaying stock price charts with predictions
+ * @details This component renders a line chart showing:
+ * - Historical stock prices
+ * - Model predictions
+ * - Optional LSTM predictions
+ * Uses Chart.js for rendering
+ */
+
 import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import {
@@ -21,6 +31,7 @@ import {
 import { filterHistoricalData } from "../utils/parsing";
 import { fetchLSTMAnalysis } from "../utils/apiEndpoints";
 
+// Register Chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -32,6 +43,13 @@ ChartJS.register(
   annotationPlugin,
 );
 
+/**
+ * @brief Chart component displaying stock data and predictions
+ * @param predictions - Object containing prediction data by date
+ * @param historicalData - Array of historical stock prices
+ * @param published - Publication date of the article
+ * @param ticker - Stock ticker symbol
+ */
 const Chart: React.FC<ChartProps> = ({
   predictions,
   historicalData,
@@ -44,6 +62,7 @@ const Chart: React.FC<ChartProps> = ({
     [key: string]: number;
   }>();
 
+  // Convert predictions object to array of entries
   const predictionEntries = Object.entries(predictions).map(
     ([date, { prediction }]) => ({
       date,
@@ -54,6 +73,7 @@ const Chart: React.FC<ChartProps> = ({
   const currentDate = getCurrentDate();
   const currentDayIndex = labels.indexOf(currentDate);
 
+  // Load historical data when it changes
   useEffect(() => {
     if (historicalData && historicalData[0]) {
       const labels = generateDateRange(published, 0);
@@ -63,6 +83,7 @@ const Chart: React.FC<ChartProps> = ({
     }
   }, [historicalData]);
 
+  // Fetch LSTM predictions when ticker changes
   useEffect(() => {
     const fetchLSTMData = async () => {
       if (ticker) {
@@ -76,6 +97,7 @@ const Chart: React.FC<ChartProps> = ({
     fetchLSTMData();
   }, [ticker]);
 
+  // Determine if LSTM predictions should be shown
   let shouldShowLstm;
   const latestLabelDate = labels[labels.length - 1];
   if (latestLabelDate) {
@@ -88,6 +110,7 @@ const Chart: React.FC<ChartProps> = ({
       getDateDifferenceSigned(latestLabelDate, earliestLstmDate) <= 1;
   }
 
+  // Prepare chart data
   const chartData = {
     labels: labels,
     datasets: [
@@ -125,6 +148,7 @@ const Chart: React.FC<ChartProps> = ({
     ],
   };
 
+  // Chart configuration options
   const chartOptions: ChartOptions<"line"> = {
     responsive: true,
     scales: {
@@ -150,6 +174,7 @@ const Chart: React.FC<ChartProps> = ({
       },
     },
   };
+
   return (
     <div className="graph">
       <Line data={chartData} options={chartOptions} />

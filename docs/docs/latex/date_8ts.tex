@@ -1,0 +1,406 @@
+\hypertarget{date_8ts}{}\doxysection{website/src/utils/date.ts File Reference}
+\label{date_8ts}\index{website/src/utils/date.ts@{website/src/utils/date.ts}}
+
+
+Date utility functions.  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{date_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \{ \mbox{\hyperlink{interfaces_8ts_a42cbf6a8ac2e59b4dc469f0f3c84bc4e}{Prediction\+Data}} \} from \char`\"{}../utils/interfaces\char`\"{}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{date_8ts_a4c4f296783c2786a0d2554d78cdc5e89}{format\+Date}}
+\begin{DoxyCompactList}\small\item\em Formats a Date object to YYYY-\/\+MM-\/\+DD string. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{date_8ts_a053ba3d56b90d50f58f72f9de369fd62}{generate\+Date\+Range}}
+\begin{DoxyCompactList}\small\item\em Generates a date range around a start date. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{date_8ts_a09f96a0fef4fd26335314c8e808cf221}{generate\+Period\+Dates}}
+\begin{DoxyCompactList}\small\item\em Generates dates between two dates with extra days. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{date_8ts_a60616b6be8ad7af73c0bf0b7a8029fd6}{get\+Current\+Date}}
+\begin{DoxyCompactList}\small\item\em Gets current date in YYYY-\/\+MM-\/\+DD format. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{date_8ts_a2a9dc06c84d041da1400b31d4021aa7c}{get\+Date\+Only}}
+\begin{DoxyCompactList}\small\item\em Extracts date part from datetime string. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{date_8ts_ace6c1bf8b1dd8734c08fa35456d4f656}{calculate\+Date\+Difference\+In\+Days}}
+\begin{DoxyCompactList}\small\item\em Calculates difference between two dates in days. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{date_8ts_a332cdbc141b01677e738f2a6fb850e25}{get\+Date\+Difference\+Signed}}
+\begin{DoxyCompactList}\small\item\em Calculates signed difference between two dates in days. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{date_8ts_a590246e80057da16be98573ccc2583c4}{get\+Earliest\+Date}}
+\begin{DoxyCompactList}\small\item\em Finds earliest date from array of prediction data. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{date_8ts_aef6f7a6a0312448fd5eaf8f6c200debb}{get\+Latest\+Date}}
+\begin{DoxyCompactList}\small\item\em Finds latest date from array of prediction data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Date utility functions. 
+
+Provides various date manipulation and formatting functions used throughout the application. 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{date_8ts_ace6c1bf8b1dd8734c08fa35456d4f656}\label{date_8ts_ace6c1bf8b1dd8734c08fa35456d4f656}} 
+\index{date.ts@{date.ts}!calculateDateDifferenceInDays@{calculateDateDifferenceInDays}}
+\index{calculateDateDifferenceInDays@{calculateDateDifferenceInDays}!date.ts@{date.ts}}
+\doxysubsubsection{\texorpdfstring{calculateDateDifferenceInDays}{calculateDateDifferenceInDays}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} calculate\+Date\+Difference\+In\+Days}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (}
+\DoxyCodeLine{  date1: string,}
+\DoxyCodeLine{  date2: string,}
+\DoxyCodeLine{): number => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} date1Formatted = \mbox{\hyperlink{date_8ts_a2a9dc06c84d041da1400b31d4021aa7c}{getDateOnly}}(date1);}
+\DoxyCodeLine{  \textcolor{keyword}{const} date2Formatted = \mbox{\hyperlink{date_8ts_a2a9dc06c84d041da1400b31d4021aa7c}{getDateOnly}}(date2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{const} d1 = \textcolor{keyword}{new} Date(date1Formatted);}
+\DoxyCodeLine{  \textcolor{keyword}{const} d2 = \textcolor{keyword}{new} Date(date2Formatted);}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{const} timeDifference = d2.getTime() -\/ d1.getTime();}
+\DoxyCodeLine{  \textcolor{keyword}{const} dayDifference = Math.abs(timeDifference / (1000 * 60 * 60 * 24));}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} dayDifference;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Calculates difference between two dates in days. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em date1} & -\/ First date string \\
+\hline
+{\em date2} & -\/ Second date string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Absolute difference in days 
+\end{DoxyReturn}
+
+
+Definition at line 108 of file date.\+ts.
+
+\mbox{\Hypertarget{date_8ts_a4c4f296783c2786a0d2554d78cdc5e89}\label{date_8ts_a4c4f296783c2786a0d2554d78cdc5e89}} 
+\index{date.ts@{date.ts}!formatDate@{formatDate}}
+\index{formatDate@{formatDate}!date.ts@{date.ts}}
+\doxysubsubsection{\texorpdfstring{formatDate}{formatDate}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} format\+Date}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (date: Date): \textcolor{keywordtype}{string} => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} day = String(date.getDate()).padStart(2, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{  \textcolor{keyword}{const} month = String(date.getMonth() + 1).padStart(2, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{  \textcolor{keyword}{const} year = date.getFullYear();}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} `\$\{year\}-\/\$\{month\}-\/\$\{day\}`;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Formats a Date object to YYYY-\/\+MM-\/\+DD string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em date} & -\/ Date object to format \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Formatted date string 
+\end{DoxyReturn}
+
+
+Definition at line 15 of file date.\+ts.
+
+\mbox{\Hypertarget{date_8ts_a053ba3d56b90d50f58f72f9de369fd62}\label{date_8ts_a053ba3d56b90d50f58f72f9de369fd62}} 
+\index{date.ts@{date.ts}!generateDateRange@{generateDateRange}}
+\index{generateDateRange@{generateDateRange}!date.ts@{date.ts}}
+\doxysubsubsection{\texorpdfstring{generateDateRange}{generateDateRange}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} generate\+Date\+Range}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (}
+\DoxyCodeLine{  startDate: string,}
+\DoxyCodeLine{  daysBeforeStart: number = 7,}
+\DoxyCodeLine{  totalDays: number = 12,}
+\DoxyCodeLine{): \textcolor{keywordtype}{string}[] => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} inputDate = \textcolor{keyword}{new} Date(startDate);}
+\DoxyCodeLine{  \textcolor{keyword}{const} actualStartDate = \textcolor{keyword}{new} Date(inputDate);}
+\DoxyCodeLine{  actualStartDate.setDate(inputDate.getDate() -\/ daysBeforeStart);}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{const} dates: \textcolor{keywordtype}{string}[] = [];}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{for} (let i = 0; i < totalDays; i++) \{}
+\DoxyCodeLine{    \textcolor{keyword}{const} currentDate = \textcolor{keyword}{new} Date(actualStartDate);}
+\DoxyCodeLine{    currentDate.setDate(actualStartDate.getDate() + i);}
+\DoxyCodeLine{    dates.push(\mbox{\hyperlink{date_8ts_a4c4f296783c2786a0d2554d78cdc5e89}{formatDate}}(currentDate));}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} dates;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Generates a date range around a start date. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Date} & -\/ Base date for the range \\
+\hline
+{\em days\+Before\+Start} & -\/ Number of days to include before start date \\
+\hline
+{\em total\+Days} & -\/ Total number of days in the range \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array of formatted date strings 
+\end{DoxyReturn}
+
+
+Definition at line 29 of file date.\+ts.
+
+\mbox{\Hypertarget{date_8ts_a09f96a0fef4fd26335314c8e808cf221}\label{date_8ts_a09f96a0fef4fd26335314c8e808cf221}} 
+\index{date.ts@{date.ts}!generatePeriodDates@{generatePeriodDates}}
+\index{generatePeriodDates@{generatePeriodDates}!date.ts@{date.ts}}
+\doxysubsubsection{\texorpdfstring{generatePeriodDates}{generatePeriodDates}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} generate\+Period\+Dates}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (}
+\DoxyCodeLine{  startDate: string,}
+\DoxyCodeLine{  endDate: string,}
+\DoxyCodeLine{  extraDays: number,}
+\DoxyCodeLine{): \textcolor{keywordtype}{string}[] => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} dates: \textcolor{keywordtype}{string}[] = [];}
+\DoxyCodeLine{  \textcolor{keyword}{const} currentDate = \textcolor{keyword}{new} Date(startDate);}
+\DoxyCodeLine{  \textcolor{keyword}{const} end = \textcolor{keyword}{new} Date(endDate);}
+\DoxyCodeLine{}
+\DoxyCodeLine{  end.setDate(end.getDate() + extraDays);}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{while} (currentDate <= end) \{}
+\DoxyCodeLine{    dates.push(\mbox{\hyperlink{date_8ts_a4c4f296783c2786a0d2554d78cdc5e89}{formatDate}}(currentDate));}
+\DoxyCodeLine{    currentDate.setDate(currentDate.getDate() + 1);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} dates;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Generates dates between two dates with extra days. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Date} & -\/ Range start date \\
+\hline
+{\em end\+Date} & -\/ Range end date \\
+\hline
+{\em extra\+Days} & -\/ Additional days to extend beyond end date \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array of formatted date strings 
+\end{DoxyReturn}
+
+
+Definition at line 56 of file date.\+ts.
+
+\mbox{\Hypertarget{date_8ts_a60616b6be8ad7af73c0bf0b7a8029fd6}\label{date_8ts_a60616b6be8ad7af73c0bf0b7a8029fd6}} 
+\index{date.ts@{date.ts}!getCurrentDate@{getCurrentDate}}
+\index{getCurrentDate@{getCurrentDate}!date.ts@{date.ts}}
+\doxysubsubsection{\texorpdfstring{getCurrentDate}{getCurrentDate}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} get\+Current\+Date}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= () => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} today = \textcolor{keyword}{new} Date();}
+\DoxyCodeLine{  \textcolor{keyword}{const} year = today.getFullYear();}
+\DoxyCodeLine{  \textcolor{keyword}{const} month = String(today.getMonth() + 1).padStart(2, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{  \textcolor{keyword}{const} day = String(today.getDate()).padStart(2, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} `\$\{year\}-\/\$\{month\}-\/\$\{day\}`;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Gets current date in YYYY-\/\+MM-\/\+DD format. 
+
+\begin{DoxyReturn}{Returns}
+Current date string 
+\end{DoxyReturn}
+
+
+Definition at line 79 of file date.\+ts.
+
+\mbox{\Hypertarget{date_8ts_a332cdbc141b01677e738f2a6fb850e25}\label{date_8ts_a332cdbc141b01677e738f2a6fb850e25}} 
+\index{date.ts@{date.ts}!getDateDifferenceSigned@{getDateDifferenceSigned}}
+\index{getDateDifferenceSigned@{getDateDifferenceSigned}!date.ts@{date.ts}}
+\doxysubsubsection{\texorpdfstring{getDateDifferenceSigned}{getDateDifferenceSigned}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} get\+Date\+Difference\+Signed}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (}
+\DoxyCodeLine{  date1: string,}
+\DoxyCodeLine{  date2: string,}
+\DoxyCodeLine{): number => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} d1 = \textcolor{keyword}{new} Date(date1);}
+\DoxyCodeLine{  \textcolor{keyword}{const} d2 = \textcolor{keyword}{new} Date(date2);}
+\DoxyCodeLine{  \textcolor{keyword}{const} timeDifference = d2.getTime() -\/ d1.getTime();}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} timeDifference / (1000 * 60 * 60 * 24);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Calculates signed difference between two dates in days. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em date1} & -\/ First date string \\
+\hline
+{\em date2} & -\/ Second date string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Signed difference in days (positive or negative) 
+\end{DoxyReturn}
+
+
+Definition at line 130 of file date.\+ts.
+
+\mbox{\Hypertarget{date_8ts_a2a9dc06c84d041da1400b31d4021aa7c}\label{date_8ts_a2a9dc06c84d041da1400b31d4021aa7c}} 
+\index{date.ts@{date.ts}!getDateOnly@{getDateOnly}}
+\index{getDateOnly@{getDateOnly}!date.ts@{date.ts}}
+\doxysubsubsection{\texorpdfstring{getDateOnly}{getDateOnly}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} get\+Date\+Only}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (\mbox{\hyperlink{ArticleChart_8tsx_ad626d0c9d4b2d98ea108f65ce7ccd1af}{published}}: string): \textcolor{keywordtype}{string} => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} dateObj = \textcolor{keyword}{new} Date(\mbox{\hyperlink{ArticleChart_8tsx_ad626d0c9d4b2d98ea108f65ce7ccd1af}{published}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{const} year = dateObj.getFullYear();}
+\DoxyCodeLine{  \textcolor{keyword}{const} month = String(dateObj.getMonth() + 1).padStart(2, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{  \textcolor{keyword}{const} day = String(dateObj.getDate()).padStart(2, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} `\$\{year\}-\/\$\{month\}-\/\$\{day\}`;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Extracts date part from datetime string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em published} & -\/ Datetime string to parse \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Date string in YYYY-\/\+MM-\/\+DD format 
+\end{DoxyReturn}
+
+
+Definition at line 92 of file date.\+ts.
+
+\mbox{\Hypertarget{date_8ts_a590246e80057da16be98573ccc2583c4}\label{date_8ts_a590246e80057da16be98573ccc2583c4}} 
+\index{date.ts@{date.ts}!getEarliestDate@{getEarliestDate}}
+\index{getEarliestDate@{getEarliestDate}!date.ts@{date.ts}}
+\doxysubsubsection{\texorpdfstring{getEarliestDate}{getEarliestDate}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} get\+Earliest\+Date}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (articles: \mbox{\hyperlink{interfaces_8ts_a42cbf6a8ac2e59b4dc469f0f3c84bc4e}{PredictionData}}[]): \textcolor{keywordtype}{string} => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{if} (articles.length === 0) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}0000-\/00-\/00"{}};}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{const} dates = articles.map((article) => \textcolor{keyword}{new} Date(article.published));}
+\DoxyCodeLine{  \textcolor{keyword}{const} earliestDate = \textcolor{keyword}{new} Date(}
+\DoxyCodeLine{    Math.min(...dates.map((date) => date.getTime())),}
+\DoxyCodeLine{  );}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{const} year = earliestDate.getFullYear();}
+\DoxyCodeLine{  \textcolor{keyword}{const} month = String(earliestDate.getMonth() + 1).padStart(2, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{  \textcolor{keyword}{const} day = String(earliestDate.getDate()).padStart(2, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} `\$\{year\}-\/\$\{month\}-\/\$\{day\}`;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Finds earliest date from array of prediction data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em articles} & -\/ Array of prediction data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Earliest date string or default \char`\"{}0000-\/00-\/00\char`\"{} if empty 
+\end{DoxyReturn}
+
+
+Definition at line 145 of file date.\+ts.
+
+\mbox{\Hypertarget{date_8ts_aef6f7a6a0312448fd5eaf8f6c200debb}\label{date_8ts_aef6f7a6a0312448fd5eaf8f6c200debb}} 
+\index{date.ts@{date.ts}!getLatestDate@{getLatestDate}}
+\index{getLatestDate@{getLatestDate}!date.ts@{date.ts}}
+\doxysubsubsection{\texorpdfstring{getLatestDate}{getLatestDate}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} get\+Latest\+Date}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (articles: \mbox{\hyperlink{interfaces_8ts_a42cbf6a8ac2e59b4dc469f0f3c84bc4e}{PredictionData}}[]): \textcolor{keywordtype}{string} => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{if} (articles.length === 0) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{throw} \textcolor{keyword}{new} Error(\textcolor{stringliteral}{"{}Articles array is empty"{}});}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{const} dates = articles.map((article) => \textcolor{keyword}{new} Date(article.published));}
+\DoxyCodeLine{  \textcolor{keyword}{const} latestDate = \textcolor{keyword}{new} Date(Math.max(...dates.map((date) => date.getTime())));}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{const} year = latestDate.getFullYear();}
+\DoxyCodeLine{  \textcolor{keyword}{const} month = String(latestDate.getMonth() + 1).padStart(2, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{  \textcolor{keyword}{const} day = String(latestDate.getDate()).padStart(2, \textcolor{stringliteral}{"{}0"{}});}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} `\$\{year\}-\/\$\{month\}-\/\$\{day\}`;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Finds latest date from array of prediction data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em articles} & -\/ Array of prediction data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Latest date string 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em Error} & if input array is empty \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line 168 of file date.\+ts.
+
+\mbox{\Hypertarget{date_8ts_a59be084da8908b7d77ff34b25cd84488}\label{date_8ts_a59be084da8908b7d77ff34b25cd84488}} 
+\index{date.ts@{date.ts}!import@{import}}
+\index{import@{import}!date.ts@{date.ts}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily import \{ \mbox{\hyperlink{interfaces_8ts_a42cbf6a8ac2e59b4dc469f0f3c84bc4e}{Prediction\+Data}} \} from \char`\"{}../utils/interfaces\char`\"{}}
+
+
+
+Definition at line 8 of file date.\+ts.
+

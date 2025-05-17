@@ -1,4 +1,10 @@
-// utils/downloadUtils.ts
+/**
+ * @file downloadUtils.ts
+ * @brief Utilities for downloading and exporting prediction data
+ * @details Provides functions for downloading stock prediction data in JSON format
+ * with proper formatting and error handling.
+ */
+
 import {
   fetchAnalysisData,
   fetchHistoricalData,
@@ -7,6 +13,15 @@ import {
 import { getEarliestDate } from "./date";
 import { PredictionData, HistoricalData } from "./interfaces";
 
+/**
+ * @interface PredictionExportData
+ * @brief Structure for exported prediction data
+ * @property ticker - Stock ticker symbol
+ * @property model - AI model name
+ * @property timestamp - Export timestamp
+ * @property predictionsByArticle - Array of article predictions
+ * @property sumAnalysis - Summarized analysis data
+ */
 export interface PredictionExportData {
   ticker: string;
   model: string;
@@ -30,6 +45,13 @@ export interface PredictionExportData {
   };
 }
 
+/**
+ * @brief Downloads all prediction data for a ticker-model combination
+ * @param ticker - Stock ticker symbol
+ * @param model - AI model name
+ * @returns Promise that resolves when download is complete
+ * @throws Error if no prediction data is found
+ */
 export async function downloadTickerModelData(
   ticker: string,
   model: string,
@@ -78,6 +100,7 @@ export async function downloadTickerModelData(
     };
   });
 
+  // Prepare final export data
   const data: PredictionExportData = {
     ticker,
     model,

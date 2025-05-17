@@ -1,3 +1,11 @@
+"""
+@file lstm_daemon.py
+@brief Daemon for continuous LSTM model training and prediction.
+
+This script manages periodic training and prediction for top stock tickers,
+with scheduling logic to avoid running during market closure hours.
+"""
+
 import sqlite3
 import subprocess
 import sys
@@ -11,6 +19,11 @@ TOP_N_TICKERS = 10
 
 
 def get_project_root() -> Path:
+    """
+    @brief Locates the project root directory.
+
+    @return Path object pointing to project root directory
+    """
     marker = ".git"
     current_path = Path(__file__).resolve()
     for parent in current_path.parents:
@@ -23,6 +36,12 @@ def get_project_root() -> Path:
 
 
 def get_top_tickers_by_frequency(db_file: Path) -> list[str]:
+    """
+    @brief Gets top tickers by analysis frequency.
+
+    @param db_file Path to database file
+    @return List of ticker strings ordered by frequency
+    """
     tickers = []
     conn = None
     try:
@@ -47,10 +66,16 @@ def get_top_tickers_by_frequency(db_file: Path) -> list[str]:
 
 
 def check_if_processed_today(db_file: Path, ticker: str) -> bool:
+    """
+    @brief Checks if ticker was already processed today.
+
+    @param db_file Path to database file
+    @param ticker Stock ticker symbol
+    @return True if already processed today, False otherwise
+    """
     processed_today = False
     conn = None
     try:
-        # Use the current date each time this function is called
         today_str = date.today().strftime("%Y-%m-%d")
         conn = sqlite3.connect(db_file)
         cursor = conn.cursor()
@@ -68,9 +93,7 @@ def check_if_processed_today(db_file: Path, ticker: str) -> bool:
         if result:
             processed_today = True
     except sqlite3.Error as e:
-        print(
-            f"Database error checking if processed today ({date.today().strftime('%Y-%m-%d')}) for {ticker}: {e}"
-        )
+        print(f"Database error checking if processed today for {ticker}: {e}")
     finally:
         if conn:
             conn.close()
@@ -78,12 +101,19 @@ def check_if_processed_today(db_file: Path, ticker: str) -> bool:
 
 
 def run_script(script_path: Path, ticker: str, python_executable: str) -> bool:
+    """
+    @brief Executes a Python script for a given ticker.
+
+    @param script_path Path to script to run
+    @param ticker Stock ticker symbol to process
+    @param python_executable Path to Python interpreter
+    @return True if successful, False otherwise
+    """
     try:
         python_executable_path = Path(python_executable)
-
         if not python_executable_path.is_file():
             print(
-                f"ERROR: Configured Python executable not found or is not a file at {python_executable_path}"
+                f"ERROR: Configured Python executable not found at {python_executable_path}"
             )
             return False
 
@@ -104,29 +134,24 @@ def run_script(script_path: Path, ticker: str, python_executable: str) -> bool:
         )
 
         if process.returncode != 0:
-            print(
-                f"ERROR: Script {script_path.name} failed for ticker {ticker} with exit code {process.returncode}."
-            )
+            print(f"ERROR: Script {script_path.name} failed for ticker {ticker}")
             return False
-        else:
-            print(f"Script {script_path.name} completed successfully for {ticker}.")
-            return True
+        return True
 
     except Exception as e:
-        print(f"ERROR: Scirpt {script_path.name} processing {ticker}: {e}")
+        print(f"ERROR: Script {script_path.name} processing {ticker}: {e}")
         return False
 
 
 if __name__ == "__main__":
-
     project_root = get_project_root()
     db_file = project_root / DB_PATH
     train_script = project_root / "lstm" / "train.py"
     predict_script = project_root / "lstm" / "predict.py"
 
-    PAUSE_START_HOUR = 23
-    PAUSE_END_HOUR = 0
-    PAUSE_END_MINUTE = 5
+    PAUSE_START_HOUR = 23  # 11 PM
+    PAUSE_END_HOUR = 0  # 12 AM
+    PAUSE_END_MINUTE = 5  # 12:05 AM
     SLEEP_DURATION_SECONDS = 1800  # 30 minutes
     SHORT_SLEEP_SECONDS = 60  # 1 minute
 
@@ -138,7 +163,7 @@ if __name__ == "__main__":
         current_hour = current_time.hour
         current_minute = current_time.minute
 
-        # Check if within the pause window (23:00 to 00:05)
+        # Check if within pause window
         is_pause_time = (current_hour >= PAUSE_START_HOUR) or (
             current_hour == PAUSE_END_HOUR and current_minute <= PAUSE_END_MINUTE
         )
@@ -150,24 +175,18 @@ if __name__ == "__main__":
 
         print(f"Starting processing cycle at {now.strftime('%Y-%m-%d %H:%M:%S')}")
 
-        print(f"Fetching all tickers ordered by frequency")
+        # Get candidate tickers and filter unprocessed ones
         candidate_tickers = get_top_tickers_by_frequency(db_file)
-
         if not candidate_tickers:
             print(
-                f"No tickers found in the database. Waiting for {SLEEP_DURATION_SECONDS // 60} minutes before retrying..."
+                f"No tickers found. Waiting {SLEEP_DURATION_SECONDS // 60} minutes..."
             )
             time.sleep(SLEEP_DURATION_SECONDS)
             continue
 
         tickers_to_process = []
         current_processing_date = date.today().strftime("%Y-%m-%d")
-        print(
-            f"Found {len(candidate_tickers)} total tickers. Filtering for up to {TOP_N_TICKERS} not processed on {current_processing_date}"
-        )
-
         for ticker in candidate_tickers:
-            # check_if_processed_today uses the current date automatically
             if not check_if_processed_today(db_file, ticker):
                 tickers_to_process.append(ticker)
                 if len(tickers_to_process) == TOP_N_TICKERS:
@@ -175,20 +194,17 @@ if __name__ == "__main__":
 
         if not tickers_to_process:
             print(
-                f"No tickers require processing for {current_processing_date} at this time. Waiting for {SHORT_SLEEP_SECONDS} seconds..."
+                f"No tickers require processing. Waiting {SHORT_SLEEP_SECONDS} seconds..."
             )
             time.sleep(SHORT_SLEEP_SECONDS)
             continue
 
-        print(
-            f"Selected {len(tickers_to_process)} tickers to process for {current_processing_date}."
-        )
-        failed_tickers = []
-
+        print(f"Selected {len(tickers_to_process)} tickers to process")
         for i, ticker in enumerate(tickers_to_process):
             start = time.time()
             print(f"\nProcessing ticker {i+1}/{len(tickers_to_process)}: {ticker}")
 
+            # Train and predict
             print(f"Running Training for {ticker}...")
             train_success = run_script(train_script, ticker, VENV_PYTHON_PATH)
             if train_success:
@@ -200,13 +216,13 @@ if __name__ == "__main__":
                 print(f"Training failed for {ticker}. Skipping prediction.")
                 continue
 
+            # Log processing time
             elapsed_time = time.time() - start
             with open("data/lstm_train_time.txt", "a+") as f:
                 f.write(f"{elapsed_time}\n")
 
         print(
-            f"\nProcessing cycle for {current_processing_date} finished at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}."
+            f"\nProcessing cycle finished at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}."
         )
-
-        print(f"Waiting for {SHORT_SLEEP_SECONDS} seconds before starting next cycle")
+        print(f"Waiting {SHORT_SLEEP_SECONDS} seconds before next cycle")
         time.sleep(SHORT_SLEEP_SECONDS)

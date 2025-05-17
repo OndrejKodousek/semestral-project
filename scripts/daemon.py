@@ -1,12 +1,25 @@
+"""
+@file daemon.py
+@brief Continuous processing daemon for stock news analysis.
+
+This script runs in a loop, periodically executing the scraper and analyzer components.
+It can be configured to run only scraping or only processing via command line arguments.
+"""
+
 import subprocess
 import time
 import sys
 import os
-
 from pathlib import Path
 
 
 def get_project_root():
+    """
+    @brief Locates the project root directory by searching for .git marker.
+
+    @return Path object pointing to project root directory
+    @throws SystemExit if root directory cannot be found
+    """
     marker = ".git"
     current_path = Path(__file__).resolve()
     for parent in current_path.parents:
@@ -17,6 +30,11 @@ def get_project_root():
 
 
 def main():
+    """
+    @brief Main daemon execution loop.
+
+    Processes command line arguments and runs scraper/analyzer in a continuous loop.
+    """
     args = sys.argv[1:]
     scrap = True
     process = True
@@ -32,7 +50,6 @@ def main():
     analyzer_path = os.path.join(project_root_directory, "analyzer", "main.py")
 
     while True:
-
         if scrap:
             print("-" * 40)
             print("STARTING SCRAPER")
@@ -46,6 +63,7 @@ def main():
             print("PROCESSOR FINISHED")
             print("-" * 40)
 
+        # Wait before next iteration
         minutes = 10
         for i in range(0, minutes):
             print(f"Process will run again in {minutes-i} minutes")

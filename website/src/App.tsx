@@ -1,3 +1,10 @@
+/**
+ * @file App.tsx
+ * @brief Main application component
+ * @details The root component that manages application state and renders the main layout
+ * including model selection, ticker selection, and statistics display components.
+ */
+
 import React, { useState, useEffect, useMemo } from "react";
 import TickerSelect from "./components/TickerSelect";
 import ControlPanel from "./components/ControlPanel";
@@ -8,7 +15,12 @@ import { fetchAnalysisData, fetchStockNames } from "./utils/apiEndpoints";
 import { extractTicker } from "./utils/parsing";
 import { motion } from "motion/react";
 
+/**
+ * @brief Main App component
+ * @returns The root application component with all subcomponents
+ */
 const App: React.FC = () => {
+  // State management for application data
   const [predictionData, setPredictionData] = useState<PredictionData[]>([]);
   const [tickerString, setTickerString] = useState<string>("");
   const [model, setModel] = useState<string>("");
@@ -18,15 +30,17 @@ const App: React.FC = () => {
   const [mode, setMode] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
+  // Extract ticker symbol from ticker string (e.g., "AAPL - Apple Inc" -> "AAPL")
   const extractedTicker = useMemo(
     () => extractTicker(tickerString),
     [tickerString],
   );
 
+  // Currently unused but kept for future functionality
   includeConfidence;
 
+  // Fetch prediction data when ticker or model changes
   useEffect(() => {
-    // Only fetch with valid ticker and model
     if (extractedTicker && model) {
       const fetchData = async () => {
         setIsLoading(true);
@@ -36,7 +50,7 @@ const App: React.FC = () => {
           setPredictionData(data ?? []);
         } catch (error) {
           console.error("Failed to fetch analysis data:", error);
-          setPredictionData([]); // Clear prediction data on error
+          setPredictionData([]);
         } finally {
           setIsLoading(false);
         }
@@ -44,13 +58,12 @@ const App: React.FC = () => {
 
       fetchData();
     } else {
-      // Clear data if ticker or model is missing
       setPredictionData([]);
       setIsLoading(false);
     }
-  }, [extractedTicker, model]); // Depend on the memoized extractedTicker and model
+  }, [extractedTicker, model]);
 
-  // Fetching stock names
+  // Fetch available stock names when model or minArticles changes
   useEffect(() => {
     const fetchNames = async () => {
       if (model) {
@@ -76,11 +89,11 @@ const App: React.FC = () => {
     >
       <div className="container-fluid">
         <div className="row">
-          {/* Left Column (ModelSelect, ControlPanel) */}
+          {/* Left Column - Model Selection and Control Panel */}
           <div className="col-2 grow-vert p-0">
             <div className="split-cell bg-light">
               <div className="component-container">
-                <ModelSelect setModel={setModel} /> {" "}
+                <ModelSelect setModel={setModel} />
               </div>
             </div>
             <div className="split-cell bg-light">
@@ -95,7 +108,7 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Middle Column (TickerSelect) */}
+          {/* Middle Column - Ticker Selection */}
           <div className="col-3 grow-vert p-0">
             <div className="full-height-col bg-light">
               <div className="component-container">
@@ -107,7 +120,7 @@ const App: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column (StatisticsField) */}
+          {/* Right Column - Statistics Display */}
           <div className="col-7 grow-vert p-0">
             <div className="full-height-col bg-light">
               <div className="component-container">
@@ -129,7 +142,6 @@ const App: React.FC = () => {
                 ) : predictionData === null && !isLoading ? (
                   <div>Select both model and ticker to view data</div>
                 ) : (
-                  // Data is fetched but empty
                   <div>
                     No analysis data found for the selected ticker/model.
                   </div>

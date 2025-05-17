@@ -1,3 +1,12 @@
+/**
+ * @file Metrics.tsx
+ * @brief Component for displaying stock prediction performance metrics
+ * @details Shows comparative statistics between:
+ * - Real stock data
+ * - Model predictions
+ * - LSTM predictions
+ */
+
 import React, { useEffect, useState } from "react";
 import {
   calculateMetrics,
@@ -13,6 +22,12 @@ import { filterHistoricalData } from "../utils/parsing";
 import { fetchLSTMAnalysis } from "../utils/apiEndpoints";
 import { MetricsProps } from "../utils/interfaces";
 
+/**
+ * @brief Metrics display component
+ * @param predictionData - Array of prediction data from articles
+ * @param historicalData - Array of historical stock prices
+ * @param ticker - Stock ticker symbol
+ */
 const Metrics: React.FC<MetricsProps> = ({
   predictionData,
   historicalData,
@@ -25,12 +40,17 @@ const Metrics: React.FC<MetricsProps> = ({
   });
   const [loading, setLoading] = useState(true);
 
+  // Calculate metrics when data changes
   useEffect(() => {
+    /**
+     * @brief Fetches data and calculates metrics
+     * @async
+     */
     const fetchDataAndCalculateMetrics = async () => {
       setLoading(true);
 
       try {
-        // Convert from (date:number)[] to number[]
+        // Get LSTM predictions
         const data = await fetchLSTMAnalysis(ticker);
         const lstmPredictions: number[] = Object.values(data);
 
@@ -184,6 +204,11 @@ const Metrics: React.FC<MetricsProps> = ({
   );
 };
 
+/**
+ * @brief Component for displaying a single metric item
+ * @param label - Metric name/label
+ * @param value - Formatted metric value
+ */
 const MetricItem: React.FC<{ label: string; value: string }> = ({
   label,
   value,

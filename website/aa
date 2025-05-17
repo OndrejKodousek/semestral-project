@@ -1,0 +1,61 @@
+.
+├── aa
+├── dist
+│   ├── assets
+│   │   ├── associated_press_finance-DQOr6c5h.png
+│   │   ├── benzinga-C2SxD3VL.png
+│   │   ├── bloomberg-waDM4-v1.png
+│   │   ├── business_insider-yDe17JTA.png
+│   │   ├── etf_com-MOhsJLtX.jpg
+│   │   ├── exec_edge-DbWOPmdB.png
+│   │   ├── freight_waves-Cl2hC0gU.png
+│   │   ├── index-C0DreomF.js
+│   │   ├── index-CywUDSkU.css
+│   │   ├── investopedia-e3G_yThb.png
+│   │   ├── investors_business_daily-DsiTK13w.png
+│   │   ├── manufacturing_net-BMlgGOLG.jpg
+│   │   ├── marketwatch-Cdhmjier.png
+│   │   ├── motley_fool-D6gCCLdz.png
+│   │   ├── quartz-CmelLYpa.png
+│   │   ├── reuters-Dfs-BEyM.png
+│   │   ├── schaeffers_investment_research-DWk4Z7eq.png
+│   │   ├── south_china_morning_post-CQmWly52.png
+│   │   └── yahoo_finance-2p6UjUMT.png
+│   ├── favicon.ico
+│   └── index.html
+├── eslint.config.js
+├── index.html
+├── package.json
+├── package-lock.json
+├── public
+│   └── favicon.ico
+├── src
+│   ├── App.tsx
+│   ├── assets
+│   │   ├── images
+│   │   └── styles
+│   ├── components
+│   │   ├── ArticleChart.tsx
+│   │   ├── ArticleList.tsx
+│   │   ├── BatchDownloader.tsx
+│   │   ├── CombinedChart.tsx
+│   │   ├── ControlPanel.tsx
+│   │   ├── Metrics.tsx
+│   │   ├── ModelSelect.tsx
+│   │   ├── StatisticsField.tsx
+│   │   └── TickerSelect.tsx
+│   ├── main.tsx
+│   ├── utils
+│   │   ├── apiEndpoints.ts
+│   │   ├── date.ts
+│   │   ├── downloadUtils.ts
+│   │   ├── interfaces.ts
+│   │   ├── metrics.ts
+│   │   └── parsing.ts
+│   └── vite-env.d.ts
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+
+501 directories, 1084 files

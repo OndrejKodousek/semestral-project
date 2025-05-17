@@ -1,0 +1,315 @@
+\hypertarget{metrics_8ts}{}\doxysection{website/src/utils/metrics.ts File Reference}
+\label{metrics_8ts}\index{website/src/utils/metrics.ts@{website/src/utils/metrics.ts}}
+
+
+Stock prediction metrics calculation utilities.  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+export interface \mbox{\hyperlink{metrics_8ts_a1e20085a75b67060b453bdff80f947ce}{Stock\+Metrics}}
+\item 
+predictions \mbox{\hyperlink{metrics_8ts_aae12aae37cef45d1a73d2c6bb3119ee8}{\+\_\+\+\_\+pad0\+\_\+\+\_\+}}
+\item 
+min \mbox{\hyperlink{metrics_8ts_a6e5553e3a3efc40624d1b0d45890fa3f}{\+\_\+\+\_\+pad1\+\_\+\+\_\+}}
+\item 
+max \mbox{\hyperlink{metrics_8ts_a4e7a8987e562f55c38016a0e9c1f285d}{\+\_\+\+\_\+pad2\+\_\+\+\_\+}}
+\item 
+range \mbox{\hyperlink{metrics_8ts_a057f444aba002cc88beacdd63932a38b}{\+\_\+\+\_\+pad3\+\_\+\+\_\+}}
+\item 
+volatility \mbox{\hyperlink{metrics_8ts_a5213784f6f36ed7ee0ca4c4b9d3a25c3}{\+\_\+\+\_\+pad4\+\_\+\+\_\+}}
+\item 
+count \mbox{\hyperlink{metrics_8ts_a7dc21b34f5813972a51670b037afd2ec}{\+\_\+\+\_\+pad5\+\_\+\+\_\+}}
+\item 
+average\+Error \mbox{\hyperlink{metrics_8ts_a711f48d3216365a65385091012c56984}{\+\_\+\+\_\+pad6\+\_\+\+\_\+}}
+\item 
+error\+Percentage \mbox{\hyperlink{metrics_8ts_a0e5880fa2de2ca421eb787a31e6f61df}{\+\_\+\+\_\+pad7\+\_\+\+\_\+}}
+\item 
+\mbox{\hyperlink{metrics_8ts_a44586f3a2399ec6c956326d5a405a714}{null}}
+\begin{DoxyCompactList}\small\item\em Props for Article\+List component. \end{DoxyCompactList}\item 
+lstm \mbox{\hyperlink{metrics_8ts_aee50fe283d2cd1ce54cd5289812516eb}{\+\_\+\+\_\+pad8\+\_\+\+\_\+}}
+\item 
+count \mbox{\hyperlink{metrics_8ts_a904ec28806b8cff997f66d0b1ac9799e}{\+\_\+\+\_\+pad9\+\_\+\+\_\+}}
+\item 
+accuracy \mbox{\hyperlink{metrics_8ts_a2ebff677b914fc37cf422a56c287ab16}{\+\_\+\+\_\+pad10\+\_\+\+\_\+}}
+\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{metrics_8ts_a682fe8f5c5f5f066d1c0bfac3dcb9af2}{calculate\+Metrics}}
+\begin{DoxyCompactList}\small\item\em Calculates performance metrics for stock predictions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{metrics_8ts_a34abfac0d53c4056d21353dce3705578}{calculate\+Volatility}}
+\begin{DoxyCompactList}\small\item\em Calculates volatility (standard deviation) of values. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{metrics_8ts_a6402d26ac59384b97e8b6c92258e08af}{format\+Currency}}
+\begin{DoxyCompactList}\small\item\em Formats a number as currency string. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{metrics_8ts_a7cf502e08ff25356e061976a3a10f4bc}{format\+Percentage}}
+\begin{DoxyCompactList}\small\item\em Formats a number as percentage string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Stock prediction metrics calculation utilities. 
+
+Provides functions for calculating various performance metrics comparing predictions to actual stock data. 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{metrics_8ts_aae12aae37cef45d1a73d2c6bb3119ee8}\label{metrics_8ts_aae12aae37cef45d1a73d2c6bb3119ee8}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad0\_\_@{\_\_pad0\_\_}}
+\index{\_\_pad0\_\_@{\_\_pad0\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad0\_\_}{\_\_pad0\_\_}}
+{\footnotesize\ttfamily predictions \+\_\+\+\_\+pad0\+\_\+\+\_\+}
+
+
+
+Definition at line 24 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a2ebff677b914fc37cf422a56c287ab16}\label{metrics_8ts_a2ebff677b914fc37cf422a56c287ab16}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad10\_\_@{\_\_pad10\_\_}}
+\index{\_\_pad10\_\_@{\_\_pad10\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad10\_\_}{\_\_pad10\_\_}}
+{\footnotesize\ttfamily accuracy \+\_\+\+\_\+pad10\+\_\+\+\_\+}
+
+
+
+Definition at line 37 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a6e5553e3a3efc40624d1b0d45890fa3f}\label{metrics_8ts_a6e5553e3a3efc40624d1b0d45890fa3f}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad1\_\_@{\_\_pad1\_\_}}
+\index{\_\_pad1\_\_@{\_\_pad1\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad1\_\_}{\_\_pad1\_\_}}
+{\footnotesize\ttfamily min \+\_\+\+\_\+pad1\+\_\+\+\_\+}
+
+
+
+Definition at line 26 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a4e7a8987e562f55c38016a0e9c1f285d}\label{metrics_8ts_a4e7a8987e562f55c38016a0e9c1f285d}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad2\_\_@{\_\_pad2\_\_}}
+\index{\_\_pad2\_\_@{\_\_pad2\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad2\_\_}{\_\_pad2\_\_}}
+{\footnotesize\ttfamily max \+\_\+\+\_\+pad2\+\_\+\+\_\+}
+
+
+
+Definition at line 27 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a057f444aba002cc88beacdd63932a38b}\label{metrics_8ts_a057f444aba002cc88beacdd63932a38b}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad3\_\_@{\_\_pad3\_\_}}
+\index{\_\_pad3\_\_@{\_\_pad3\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad3\_\_}{\_\_pad3\_\_}}
+{\footnotesize\ttfamily range \+\_\+\+\_\+pad3\+\_\+\+\_\+}
+
+
+
+Definition at line 28 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a5213784f6f36ed7ee0ca4c4b9d3a25c3}\label{metrics_8ts_a5213784f6f36ed7ee0ca4c4b9d3a25c3}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad4\_\_@{\_\_pad4\_\_}}
+\index{\_\_pad4\_\_@{\_\_pad4\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad4\_\_}{\_\_pad4\_\_}}
+{\footnotesize\ttfamily volatility \+\_\+\+\_\+pad4\+\_\+\+\_\+}
+
+
+
+Definition at line 29 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a7dc21b34f5813972a51670b037afd2ec}\label{metrics_8ts_a7dc21b34f5813972a51670b037afd2ec}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad5\_\_@{\_\_pad5\_\_}}
+\index{\_\_pad5\_\_@{\_\_pad5\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad5\_\_}{\_\_pad5\_\_}}
+{\footnotesize\ttfamily count \+\_\+\+\_\+pad5\+\_\+\+\_\+}
+
+
+
+Definition at line 30 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a711f48d3216365a65385091012c56984}\label{metrics_8ts_a711f48d3216365a65385091012c56984}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad6\_\_@{\_\_pad6\_\_}}
+\index{\_\_pad6\_\_@{\_\_pad6\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad6\_\_}{\_\_pad6\_\_}}
+{\footnotesize\ttfamily average\+Error \+\_\+\+\_\+pad6\+\_\+\+\_\+}
+
+
+
+Definition at line 31 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a0e5880fa2de2ca421eb787a31e6f61df}\label{metrics_8ts_a0e5880fa2de2ca421eb787a31e6f61df}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad7\_\_@{\_\_pad7\_\_}}
+\index{\_\_pad7\_\_@{\_\_pad7\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad7\_\_}{\_\_pad7\_\_}}
+{\footnotesize\ttfamily error\+Percentage \+\_\+\+\_\+pad7\+\_\+\+\_\+}
+
+
+
+Definition at line 32 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_aee50fe283d2cd1ce54cd5289812516eb}\label{metrics_8ts_aee50fe283d2cd1ce54cd5289812516eb}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad8\_\_@{\_\_pad8\_\_}}
+\index{\_\_pad8\_\_@{\_\_pad8\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad8\_\_}{\_\_pad8\_\_}}
+{\footnotesize\ttfamily lstm \+\_\+\+\_\+pad8\+\_\+\+\_\+}
+
+
+
+Definition at line 34 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a904ec28806b8cff997f66d0b1ac9799e}\label{metrics_8ts_a904ec28806b8cff997f66d0b1ac9799e}} 
+\index{metrics.ts@{metrics.ts}!\_\_pad9\_\_@{\_\_pad9\_\_}}
+\index{\_\_pad9\_\_@{\_\_pad9\_\_}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{\_\_pad9\_\_}{\_\_pad9\_\_}}
+{\footnotesize\ttfamily count \+\_\+\+\_\+pad9\+\_\+\+\_\+}
+
+
+
+Definition at line 36 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a682fe8f5c5f5f066d1c0bfac3dcb9af2}\label{metrics_8ts_a682fe8f5c5f5f066d1c0bfac3dcb9af2}} 
+\index{metrics.ts@{metrics.ts}!calculateMetrics@{calculateMetrics}}
+\index{calculateMetrics@{calculateMetrics}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{calculateMetrics}{calculateMetrics}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} calculate\+Metrics}
+
+
+
+Calculates performance metrics for stock predictions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em real\+Prices} & -\/ Array of actual stock prices \\
+\hline
+{\em all\+Predictions} & -\/ Array of all prediction values \\
+\hline
+{\em lstm\+Predictions} & -\/ Array of LSTM prediction values \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stock\+Metrics object with calculated values 
+\end{DoxyReturn}
+
+
+Definition at line 48 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a34abfac0d53c4056d21353dce3705578}\label{metrics_8ts_a34abfac0d53c4056d21353dce3705578}} 
+\index{metrics.ts@{metrics.ts}!calculateVolatility@{calculateVolatility}}
+\index{calculateVolatility@{calculateVolatility}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{calculateVolatility}{calculateVolatility}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} calculate\+Volatility}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (values: number[]): number => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} avg = values.reduce((a, b) => a + b, 0) / values.length;}
+\DoxyCodeLine{  \textcolor{keyword}{const} variance =}
+\DoxyCodeLine{    values.reduce((a, b) => a + Math.pow(b -\/ avg, 2), 0) / values.length;}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} Math.sqrt(variance);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Calculates volatility (standard deviation) of values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & -\/ Array of numeric values \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Calculated volatility 
+\end{DoxyReturn}
+
+
+Definition at line 152 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a6402d26ac59384b97e8b6c92258e08af}\label{metrics_8ts_a6402d26ac59384b97e8b6c92258e08af}} 
+\index{metrics.ts@{metrics.ts}!formatCurrency@{formatCurrency}}
+\index{formatCurrency@{formatCurrency}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{formatCurrency}{formatCurrency}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} format\+Currency}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (\mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{value}}: number): \textcolor{keywordtype}{string} => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} `\$\$\{\mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{value}}.toFixed(2)\}`;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Formats a number as currency string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & -\/ Numeric value to format \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Formatted currency string (e.\+g., \char`\"{}\$123.\+45\char`\"{}) 
+\end{DoxyReturn}
+
+
+Definition at line 164 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a7cf502e08ff25356e061976a3a10f4bc}\label{metrics_8ts_a7cf502e08ff25356e061976a3a10f4bc}} 
+\index{metrics.ts@{metrics.ts}!formatPercentage@{formatPercentage}}
+\index{formatPercentage@{formatPercentage}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{formatPercentage}{formatPercentage}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} format\+Percentage}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (\mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{value}}: number): \textcolor{keywordtype}{string} => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} `\$\{\mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{value}}.toFixed(2)\}\%`;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Formats a number as percentage string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & -\/ Numeric value to format \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Formatted percentage string (e.\+g., \char`\"{}12.\+34\%\char`\"{}) 
+\end{DoxyReturn}
+
+
+Definition at line 173 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a44586f3a2399ec6c956326d5a405a714}\label{metrics_8ts_a44586f3a2399ec6c956326d5a405a714}} 
+\index{metrics.ts@{metrics.ts}!null@{null}}
+\index{null@{null}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{null}{null}}
+{\footnotesize\ttfamily Article\+List\+Propsprediction\+Data Array of prediction data or null}
+
+
+
+Props for Article\+List component. 
+
+
+
+Definition at line 33 of file metrics.\+ts.
+
+\mbox{\Hypertarget{metrics_8ts_a1e20085a75b67060b453bdff80f947ce}\label{metrics_8ts_a1e20085a75b67060b453bdff80f947ce}} 
+\index{metrics.ts@{metrics.ts}!StockMetrics@{StockMetrics}}
+\index{StockMetrics@{StockMetrics}!metrics.ts@{metrics.ts}}
+\doxysubsubsection{\texorpdfstring{StockMetrics}{StockMetrics}}
+{\footnotesize\ttfamily export interface Stock\+Metrics}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  realData: \{}
+\DoxyCodeLine{    average: number;}
+\DoxyCodeLine{    min: number;}
+\DoxyCodeLine{    max: number;}
+\DoxyCodeLine{    range: number;}
+\DoxyCodeLine{    volatility: number;}
+\DoxyCodeLine{    dataPoints: number;}
+\DoxyCodeLine{  \} | \textcolor{keyword}{null}}
+
+\end{DoxyCode}
+
+
+Definition at line 15 of file metrics.\+ts.
+

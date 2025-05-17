@@ -1,0 +1,233 @@
+\hypertarget{ModelSelect_8tsx}{}\doxysection{website/src/components/\+Model\+Select.tsx File Reference}
+\label{ModelSelect_8tsx}\index{website/src/components/ModelSelect.tsx@{website/src/components/ModelSelect.tsx}}
+
+
+Component for selecting an AI model from a predefined list.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 distil whisper large v3 deepseek r1 distill meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} maverick meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} scout mistral qwen \mbox{\hyperlink{ModelSelect_8tsx_a4f5bf8ce22a679125d14f3cb13383432}{return}} ($<$ div class\+Name=\char`\"{}h-\/100\char`\"{}$>$$<$ select class\+Name=\char`\"{}w-\/100 h-\/100\char`\"{} size=\{5\} aria-\/label=\char`\"{}Select option\char`\"{} on\+Change=\{(e)=$>$ set\+Model(\mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{e.\+target.\+value}})\} $>$ \{items.\+map((item, index)=$>$($<$ option key=\{index\} \mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{value}}=\{item\}$>$ \{item\}$<$/option $>$))\}$<$/select $>$$<$/div $>$)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{StatisticsField_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}{React}} from \mbox{\hyperlink{ModelSelect_8tsx_aaed10feaf2dda4314d93c83408affea1}{react}}
+\item 
+\mbox{\hyperlink{ModelSelect_8tsx_a59be084da8908b7d77ff34b25cd84488}{import}} \{ \mbox{\hyperlink{interfaces_8ts_ab022cd22403b5a866b36c42b0b43f2b5}{Model\+Select\+Props}} \} from \char`\"{}../utils/interfaces\char`\"{}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{ModelSelect_8tsx_a796ed387d8aca0803b1ea46bd85ab78f}{Model\+Select}}
+\begin{DoxyCompactList}\small\item\em Model selection dropdown component. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} \mbox{\hyperlink{ModelSelect_8tsx_ad494aa9909f7760f02dcd767096c6b20}{preview}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} \mbox{\hyperlink{ModelSelect_8tsx_a0633fbddda71b5b83138bf5fc46b4dcf}{lite}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini pro gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a3c57f88dc599aa32f83f442e7322b19a}{chat}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a6e7452cbf7bca21c01d73886f620c35f}{versatile}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_aa2b6441639d884c078b4831e93d5d0bf}{instant}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 \mbox{\hyperlink{ModelSelect_8tsx_a36b68f5b56909e137f17107a8b8897e0}{it}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 distil whisper large v3 \mbox{\hyperlink{ModelSelect_8tsx_a27c6a5077235e006bc3c2afe785de9f5}{en}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek llama llama gemma2 distil whisper large v3 deepseek r1 distill \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 distil whisper large v3 deepseek r1 distill meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} maverick \mbox{\hyperlink{ModelSelect_8tsx_aa5f6106512efdfcf6dcca1732232d117}{instruct}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 distil whisper large v3 deepseek r1 distill meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} maverick meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} scout mistral \mbox{\hyperlink{ModelSelect_8tsx_a8a3ed2ee40f57f6d2dfee48b083d1d3f}{saba}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 distil whisper large v3 deepseek r1 distill meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} maverick meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} scout mistral qwen \mbox{\hyperlink{ModelSelect_8tsx_a408cf4820d27ce6f1f6b3d9e0bc4b470}{qwq}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Component for selecting an AI model from a predefined list. 
+
+Provides a scrollable select list of available AI models that can be used for stock prediction analysis. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ModelSelect_8tsx_a4f5bf8ce22a679125d14f3cb13383432}\label{ModelSelect_8tsx_a4f5bf8ce22a679125d14f3cb13383432}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!return@{return}}
+\index{return@{return}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{return()}{return()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 distil whisper large v3 deepseek r1 distill meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} maverick meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} scout mistral qwen return (\begin{DoxyParamCaption}\item[{$<$ div class\+Name=\char`\"{}h-\/100\char`\"{}$>$$<$ select class\+Name=\char`\"{}w-\/100 h-\/100\char`\"{} size=\{5\} aria-\/label=\char`\"{}Select option\char`\"{} on\+Change=\{(e)=$>$ set\+Model(\mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{e.\+target.\+value}})\}}]{,  }\item[{\{items.\+map((item, index)=$>$($<$ option key=\{index\} \mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{value}}=\{item\}$>$ \{item\}$<$/option $>$))\}$<$/select $>$$<$/div $>$}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ModelSelect_8tsx_a3c57f88dc599aa32f83f442e7322b19a}\label{ModelSelect_8tsx_a3c57f88dc599aa32f83f442e7322b19a}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!chat@{chat}}
+\index{chat@{chat}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{chat}{chat}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek chat}
+
+
+
+Definition at line 27 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_a27c6a5077235e006bc3c2afe785de9f5}\label{ModelSelect_8tsx_a27c6a5077235e006bc3c2afe785de9f5}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!en@{en}}
+\index{en@{en}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{en}{en}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 distil whisper large v3 en}
+
+
+
+Definition at line 32 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}\label{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!flash@{flash}}
+\index{flash@{flash}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{flash}{flash}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini flash gemini gemini flash}
+
+
+
+Definition at line 21 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_a59be084da8908b7d77ff34b25cd84488}\label{ModelSelect_8tsx_a59be084da8908b7d77ff34b25cd84488}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!import@{import}}
+\index{import@{import}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily import \{ \mbox{\hyperlink{interfaces_8ts_ab022cd22403b5a866b36c42b0b43f2b5}{Model\+Select\+Props}} \} from \char`\"{}../utils/interfaces\char`\"{}}
+
+
+
+Definition at line 9 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_aa2b6441639d884c078b4831e93d5d0bf}\label{ModelSelect_8tsx_aa2b6441639d884c078b4831e93d5d0bf}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!instant@{instant}}
+\index{instant@{instant}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{instant}{instant}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} instant}
+
+
+
+Definition at line 30 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_aa5f6106512efdfcf6dcca1732232d117}\label{ModelSelect_8tsx_aa5f6106512efdfcf6dcca1732232d117}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!instruct@{instruct}}
+\index{instruct@{instruct}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{instruct}{instruct}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 distil whisper large v3 deepseek r1 distill meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} maverick meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} scout instruct}
+
+
+
+Definition at line 35 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_a36b68f5b56909e137f17107a8b8897e0}\label{ModelSelect_8tsx_a36b68f5b56909e137f17107a8b8897e0}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!it@{it}}
+\index{it@{it}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{it}{it}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 it}
+
+
+
+Definition at line 31 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_a0633fbddda71b5b83138bf5fc46b4dcf}\label{ModelSelect_8tsx_a0633fbddda71b5b83138bf5fc46b4dcf}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!lite@{lite}}
+\index{lite@{lite}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{lite}{lite}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} lite}
+
+
+
+Definition at line 22 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}\label{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!llama@{llama}}
+\index{llama@{llama}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{llama}{llama}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek llama llama gemma2 distil whisper large v3 deepseek r1 distill llama}
+
+
+
+Definition at line 34 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_a796ed387d8aca0803b1ea46bd85ab78f}\label{ModelSelect_8tsx_a796ed387d8aca0803b1ea46bd85ab78f}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!ModelSelect@{ModelSelect}}
+\index{ModelSelect@{ModelSelect}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{ModelSelect}{ModelSelect}}
+{\footnotesize\ttfamily export default Model\+Select}
+
+
+
+Model selection dropdown component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em set\+Model} & -\/ Callback function to update the selected model \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 15 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_ad494aa9909f7760f02dcd767096c6b20}\label{ModelSelect_8tsx_ad494aa9909f7760f02dcd767096c6b20}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!preview@{preview}}
+\index{preview@{preview}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{preview}{preview}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} preview}
+
+
+
+Definition at line 20 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}\label{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!pro@{pro}}
+\index{pro@{pro}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{pro}{pro}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini pro gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini pro}
+
+
+
+Definition at line 25 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_a408cf4820d27ce6f1f6b3d9e0bc4b470}\label{ModelSelect_8tsx_a408cf4820d27ce6f1f6b3d9e0bc4b470}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!qwq@{qwq}}
+\index{qwq@{qwq}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{qwq}{qwq}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 distil whisper large v3 deepseek r1 distill meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} maverick meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} scout mistral qwen qwq}
+
+
+
+Definition at line 38 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_aaed10feaf2dda4314d93c83408affea1}\label{ModelSelect_8tsx_aaed10feaf2dda4314d93c83408affea1}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!react@{react}}
+\index{react@{react}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{react}{react}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{StatisticsField_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}{React}} from react}
+
+
+
+Definition at line 8 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_a8a3ed2ee40f57f6d2dfee48b083d1d3f}\label{ModelSelect_8tsx_a8a3ed2ee40f57f6d2dfee48b083d1d3f}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!saba@{saba}}
+\index{saba@{saba}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{saba}{saba}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} gemma2 distil whisper large v3 deepseek r1 distill meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} maverick meta \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} scout mistral saba}
+
+
+
+Definition at line 37 of file Model\+Select.\+tsx.
+
+\mbox{\Hypertarget{ModelSelect_8tsx_a6e7452cbf7bca21c01d73886f620c35f}\label{ModelSelect_8tsx_a6e7452cbf7bca21c01d73886f620c35f}} 
+\index{ModelSelect.tsx@{ModelSelect.tsx}!versatile@{versatile}}
+\index{versatile@{versatile}!ModelSelect.tsx@{ModelSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{versatile}{versatile}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} gemini \mbox{\hyperlink{ModelSelect_8tsx_a3418d78aa2a23357d48d097a851d7159}{pro}} gemini gemini \mbox{\hyperlink{ModelSelect_8tsx_ab3c324eb3632676355825d7299a7319b}{flash}} gemini gemini gemini deepseek deepseek \mbox{\hyperlink{ModelSelect_8tsx_a7541b9f16e92913f2190efd9bceccfdd}{llama}} versatile}
+
+
+
+Definition at line 29 of file Model\+Select.\+tsx.
+

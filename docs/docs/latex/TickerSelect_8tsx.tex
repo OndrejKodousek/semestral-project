@@ -1,0 +1,103 @@
+\hypertarget{TickerSelect_8tsx}{}\doxysection{website/src/components/\+Ticker\+Select.tsx File Reference}
+\label{TickerSelect_8tsx}\index{website/src/components/TickerSelect.tsx@{website/src/components/TickerSelect.tsx}}
+
+
+Component for selecting a stock ticker from available options.  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{StatisticsField_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}{React}} from \mbox{\hyperlink{TickerSelect_8tsx_aaed10feaf2dda4314d93c83408affea1}{react}}
+\item 
+\mbox{\hyperlink{TickerSelect_8tsx_a59be084da8908b7d77ff34b25cd84488}{import}} \{ \mbox{\hyperlink{interfaces_8ts_a9cc05ab6904e4ef9ec56c85e779ec613}{Ticker\+Select\+Props}} \} from \char`\"{}../utils/interfaces\char`\"{}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{TickerSelect_8tsx_af4b94efbba8c122e80fafb927b958a9d}{Ticker\+Select}}
+\begin{DoxyCompactList}\small\item\em Ticker selection dropdown component. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{TickerSelect_8tsx_a277a80cf211faba7b5bba4d8d4de9695}{stock\+Names}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Component for selecting a stock ticker from available options. 
+
+Displays a scrollable list of stock tickers that meet the minimum articles requirement for the selected model. 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{TickerSelect_8tsx_a59be084da8908b7d77ff34b25cd84488}\label{TickerSelect_8tsx_a59be084da8908b7d77ff34b25cd84488}} 
+\index{TickerSelect.tsx@{TickerSelect.tsx}!import@{import}}
+\index{import@{import}!TickerSelect.tsx@{TickerSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily import \{ \mbox{\hyperlink{interfaces_8ts_a9cc05ab6904e4ef9ec56c85e779ec613}{Ticker\+Select\+Props}} \} from \char`\"{}../utils/interfaces\char`\"{}}
+
+
+
+Definition at line 9 of file Ticker\+Select.\+tsx.
+
+\mbox{\Hypertarget{TickerSelect_8tsx_aaed10feaf2dda4314d93c83408affea1}\label{TickerSelect_8tsx_aaed10feaf2dda4314d93c83408affea1}} 
+\index{TickerSelect.tsx@{TickerSelect.tsx}!react@{react}}
+\index{react@{react}!TickerSelect.tsx@{TickerSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{react}{react}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{StatisticsField_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}{React}} from react}
+
+
+
+Definition at line 8 of file Ticker\+Select.\+tsx.
+
+\mbox{\Hypertarget{TickerSelect_8tsx_a277a80cf211faba7b5bba4d8d4de9695}\label{TickerSelect_8tsx_a277a80cf211faba7b5bba4d8d4de9695}} 
+\index{TickerSelect.tsx@{TickerSelect.tsx}!stockNames@{stockNames}}
+\index{stockNames@{stockNames}!TickerSelect.tsx@{TickerSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{stockNames}{stockNames}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} stock\+Names}
+
+
+
+Definition at line 18 of file Ticker\+Select.\+tsx.
+
+\mbox{\Hypertarget{TickerSelect_8tsx_af4b94efbba8c122e80fafb927b958a9d}\label{TickerSelect_8tsx_af4b94efbba8c122e80fafb927b958a9d}} 
+\index{TickerSelect.tsx@{TickerSelect.tsx}!TickerSelect@{TickerSelect}}
+\index{TickerSelect@{TickerSelect}!TickerSelect.tsx@{TickerSelect.tsx}}
+\doxysubsubsection{\texorpdfstring{TickerSelect}{TickerSelect}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} export default Ticker\+Select}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=> \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} (}
+\DoxyCodeLine{    <div className=\textcolor{stringliteral}{"{}h-\/100"{}}>}
+\DoxyCodeLine{      \{\mbox{\hyperlink{TickerSelect_8tsx_a277a80cf211faba7b5bba4d8d4de9695}{stockNames}} \&\& Array.isArray(\mbox{\hyperlink{TickerSelect_8tsx_a277a80cf211faba7b5bba4d8d4de9695}{stockNames}}) \&\& \mbox{\hyperlink{TickerSelect_8tsx_a277a80cf211faba7b5bba4d8d4de9695}{stockNames}}.length > 0 ? (}
+\DoxyCodeLine{        <select}
+\DoxyCodeLine{          className=\textcolor{stringliteral}{"{}w-\/100 h-\/100"{}}}
+\DoxyCodeLine{          size=\{10\}}
+\DoxyCodeLine{          aria-\/label=\textcolor{stringliteral}{"{}Select item"{}}}
+\DoxyCodeLine{          onChange=\{(e) => setTicker(e.target.value)\}}
+\DoxyCodeLine{        >}
+\DoxyCodeLine{          \{stockNames.map((item, index) => (}
+\DoxyCodeLine{            <option key=\{index\} \mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{value}}=\{item\}>}
+\DoxyCodeLine{              \{item\}}
+\DoxyCodeLine{            </option>}
+\DoxyCodeLine{          ))\}}
+\DoxyCodeLine{        </select>}
+\DoxyCodeLine{      ) : (}
+\DoxyCodeLine{        <div className=\textcolor{stringliteral}{"{}bold-\/text"{}}>Select \mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}} to show available stocks</div>}
+\DoxyCodeLine{      )\}}
+\DoxyCodeLine{    </div>}
+\DoxyCodeLine{  );}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Ticker selection dropdown component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em set\+Ticker} & -\/ Callback function to update selected ticker \\
+\hline
+{\em stock\+Names} & -\/ Array of available stock names/tickers \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 16 of file Ticker\+Select.\+tsx.
+

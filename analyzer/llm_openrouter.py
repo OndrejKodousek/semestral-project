@@ -1,3 +1,11 @@
+"""
+@file llm_openrouter.py
+@brief Integration with OpenRouter API for article analysis.
+
+This module handles sending requests to OpenRouter API for both individual
+article analysis and aggregated stock analysis.
+"""
+
 import json
 import config
 import re
@@ -7,6 +15,16 @@ from openai import OpenAI
 
 
 def process_article_openrouter(article, model):
+    """
+    @brief Process an individual article using OpenRouter API.
+
+    Sends the article content to the specified model via OpenRouter API,
+    extracts JSON from the response, and validates it.
+
+    @param article Dictionary containing article data.
+    @param model The model name to use for processing.
+    @return Combined dictionary of article data and analysis results, or None if processing failed.
+    """
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1", api_key=config.API_KEY_OPENROUTER
     )
@@ -59,6 +77,16 @@ def process_article_openrouter(article, model):
 
 
 def processed_article_openrouter_sum(model, prompt):
+    """
+    @brief Process aggregated article data for a stock using OpenRouter API.
+
+    Sends the aggregated prompt to the specified model via OpenRouter API,
+    extracts JSON from the response, and validates it.
+
+    @param model The model name to use for processing.
+    @param prompt The aggregated prompt containing multiple articles about a stock.
+    @return Dictionary containing analysis results, or None if processing failed.
+    """
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1", api_key=config.API_KEY_OPENROUTER
     )

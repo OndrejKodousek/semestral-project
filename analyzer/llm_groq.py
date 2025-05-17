@@ -1,3 +1,11 @@
+"""
+@file llm_groq.py
+@brief Integration with Groq API for article analysis.
+
+This module handles sending requests to Groq API for both individual
+article analysis and aggregated stock analysis.
+"""
+
 import json
 import config
 import re
@@ -7,6 +15,16 @@ from groq import Groq, RateLimitError, APIStatusError
 
 
 def process_article_groq(article, model):
+    """
+    @brief Process an individual article using Groq API.
+
+    Sends the article content to the specified model via Groq API,
+    extracts JSON from the response, and validates it.
+
+    @param article Dictionary containing article data.
+    @param model The model name to use for processing.
+    @return Combined dictionary of article data and analysis results, or None if processing failed.
+    """
     client = Groq(api_key=config.API_KEY_GROQ)
 
     try:
@@ -57,6 +75,16 @@ def process_article_groq(article, model):
 
 
 def processed_article_groq_sum(model, prompt):
+    """
+    @brief Process aggregated article data for a stock using Groq API.
+
+    Sends the aggregated prompt to the specified model via Groq API,
+    extracts JSON from the response, and validates it.
+
+    @param model The model name to use for processing.
+    @param prompt The aggregated prompt containing multiple articles about a stock.
+    @return Dictionary containing analysis results, or None if processing failed.
+    """
     client = Groq(api_key=config.API_KEY_GROQ)
 
     prompt_text = str(prompt)

@@ -1,3 +1,13 @@
+/**
+ * @file CombinedChart.tsx
+ * @brief Component for displaying a combined chart of multiple predictions
+ * @details Shows real stock data alongside predictions from:
+ * - Multiple articles
+ * - Summarized analysis
+ * - LSTM model
+ * Includes functionality to download the chart as PNG
+ */
+
 import React, { useEffect, useState, useRef } from "react";
 import { Line } from "react-chartjs-2";
 import {
@@ -23,6 +33,7 @@ import { filterHistoricalData } from "../utils/parsing";
 import { fetchSumAnalysis, fetchLSTMAnalysis } from "../utils/apiEndpoints";
 import html2canvas from "html2canvas";
 
+// Register Chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -34,6 +45,13 @@ ChartJS.register(
   annotationPlugin,
 );
 
+/**
+ * @brief Combined chart component showing multiple prediction sources
+ * @param predictionData - Array of prediction data from articles
+ * @param historicalData - Array of historical stock prices
+ * @param ticker - Stock ticker symbol
+ * @param model - Model name used for predictions
+ */
 const CombinedChart: React.FC<CombinedChartProps> = ({
   predictionData,
   historicalData,
@@ -51,6 +69,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
     [key: string]: number;
   } | null>(null);
 
+  // Reset state when ticker changes
   useEffect(() => {
     setLabels([]);
     setRealData([]);
@@ -60,6 +79,11 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
   }, [ticker]);
 
   const chartRef = useRef<HTMLDivElement>(null);
+
+  /**
+   * @brief Handles downloading the chart as PNG
+   * @async
+   */
   const handleDownloadPNG = async () => {
     if (!chartRef.current) return;
 
@@ -92,7 +116,12 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
     }
   };
 
+  // Fetch summarized analysis and LSTM predictions
   useEffect(() => {
+    /**
+     * @brief Fetches summarized analysis data
+     * @async
+     */
     const fetchSumData = async () => {
       if (ticker && model) {
         const data = await fetchSumAnalysis(ticker, model);
@@ -118,6 +147,10 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
       }
     };
 
+    /**
+     * @brief Fetches LSTM predictions
+     * @async
+     */
     const fetchLSTMData = async () => {
       if (ticker) {
         const data = await fetchLSTMAnalysis(ticker);
@@ -135,6 +168,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
     fetchLSTMData();
   }, [ticker, model]);
 
+  // Process prediction and historical data
   useEffect(() => {
     if (
       predictionData &&
@@ -164,6 +198,11 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
     }
   }, [predictionData, historicalData, ticker]);
 
+  /**
+   * @brief Gets a unique color for each prediction source
+   * @param source - Name of the prediction source
+   * @returns RGB color string
+   */
   const getColorForSource = (source: string) => {
     const colors = [
       "rgb(165, 118, 56)",
@@ -190,6 +229,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
     return colors[index % colors.length];
   };
 
+  // Prepare chart data
   const chartData = {
     labels: labels,
     datasets: [
@@ -248,6 +288,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
     ],
   };
 
+  // Chart configuration options
   const chartOptions: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
@@ -257,20 +298,20 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
           display: true,
           text: "Stock Price [$]",
           font: {
-            size: 24, // Larger Y-axis title
+            size: 24,
             weight: "bold",
           },
         },
         ticks: {
           font: {
-            size: 24, // Larger Y-axis numbers
+            size: 24,
           },
         },
       },
       x: {
         ticks: {
           font: {
-            size: 24, // Larger X-axis labels
+            size: 24,
           },
         },
       },

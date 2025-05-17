@@ -1,0 +1,58 @@
+\hypertarget{namespacedaemon}{}\doxysection{daemon Namespace Reference}
+\label{namespacedaemon}\index{daemon@{daemon}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacedaemon_aee4214eabaaf2f0a0daeec31438a1c90}{get\+\_\+project\+\_\+root}} ()
+\item 
+def \mbox{\hyperlink{namespacedaemon_a434de337b1959dcd96fcce8326904ee9}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file daemon.py
+@brief Continuous processing daemon for stock news analysis.
+
+This script runs in a loop, periodically executing the scraper and analyzer components.
+It can be configured to run only scraping or only processing via command line arguments.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacedaemon_aee4214eabaaf2f0a0daeec31438a1c90}\label{namespacedaemon_aee4214eabaaf2f0a0daeec31438a1c90}} 
+\index{daemon@{daemon}!get\_project\_root@{get\_project\_root}}
+\index{get\_project\_root@{get\_project\_root}!daemon@{daemon}}
+\doxysubsubsection{\texorpdfstring{get\_project\_root()}{get\_project\_root()}}
+{\footnotesize\ttfamily def daemon.\+get\+\_\+project\+\_\+root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Locates the project root directory by searching for .git marker.
+
+@return Path object pointing to project root directory
+@throws SystemExit if root directory cannot be found
+\end{DoxyVerb}
+ 
+
+Definition at line 16 of file daemon.\+py.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{namespacedaemon_a434de337b1959dcd96fcce8326904ee9}\label{namespacedaemon_a434de337b1959dcd96fcce8326904ee9}} 
+\index{daemon@{daemon}!main@{main}}
+\index{main@{main}!daemon@{daemon}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def daemon.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Main daemon execution loop.
+
+Processes command line arguments and runs scraper/analyzer in a continuous loop.
+\end{DoxyVerb}
+ 
+
+Definition at line 32 of file daemon.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+

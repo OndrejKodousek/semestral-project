@@ -1,0 +1,289 @@
+\hypertarget{apiEndpoints_8ts}{}\doxysection{website/src/utils/api\+Endpoints.ts File Reference}
+\label{apiEndpoints_8ts}\index{website/src/utils/apiEndpoints.ts@{website/src/utils/apiEndpoints.ts}}
+
+
+API service module for all backend communication.  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{apiEndpoints_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \{ \mbox{\hyperlink{date_8ts_a2a9dc06c84d041da1400b31d4021aa7c}{get\+Date\+Only}} \} from \char`\"{}../utils/date\char`\"{}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{apiEndpoints_8ts_a621c186327e061d086ab178f77cc9ba4}{api\+Base\+Url}}
+\begin{DoxyCompactList}\small\item\em Determines the base API URL based on current hostname. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{apiEndpoints_8ts_aaef6fefc121c234c65762c0d30c306d4}{fetch\+Historical\+Data}}
+\begin{DoxyCompactList}\small\item\em Fetches historical stock price data. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{apiEndpoints_8ts_ac8ca33971cc7998a6a70cc61021947cc}{fetch\+Analysis\+Data}}
+\begin{DoxyCompactList}\small\item\em Fetches prediction analysis data. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{apiEndpoints_8ts_a25cb7d8af9ebfb14470004b61382375a}{fetch\+Stock\+Names}}
+\begin{DoxyCompactList}\small\item\em Fetches list of available stock tickers for a model. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{apiEndpoints_8ts_af629c17b5750f76cf8b277d1a3176149}{fetch\+Sum\+Analysis}}
+\begin{DoxyCompactList}\small\item\em Fetches summarized analysis data. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{apiEndpoints_8ts_a628d0c384a878ce252e001d328fa2943}{fetch\+LSTMAnalysis}}
+\begin{DoxyCompactList}\small\item\em Fetches LSTM model predictions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+API service module for all backend communication. 
+
+Handles all HTTP requests to the backend API with proper error handling. Automatically detects environment to set correct API base URL. 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{apiEndpoints_8ts_a621c186327e061d086ab178f77cc9ba4}\label{apiEndpoints_8ts_a621c186327e061d086ab178f77cc9ba4}} 
+\index{apiEndpoints.ts@{apiEndpoints.ts}!apiBaseUrl@{apiBaseUrl}}
+\index{apiBaseUrl@{apiBaseUrl}!apiEndpoints.ts@{apiEndpoints.ts}}
+\doxysubsubsection{\texorpdfstring{apiBaseUrl}{apiBaseUrl}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} api\+Base\+Url}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (() => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} hostname = window.location.hostname;}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{if} (hostname === \textcolor{stringliteral}{"{}localhost"{}}) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}http://localhost:5000"{}};}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if} (hostname === \textcolor{stringliteral}{"{}192.168.1.101"{}}) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}http://192.168.1.101:5000"{}};}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \textcolor{stringliteral}{"{}https://kodousek.cz"{}};}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\})()}
+
+\end{DoxyCode}
+
+
+Determines the base API URL based on current hostname. 
+
+\begin{DoxyReturn}{Returns}
+Base URL string for API requests 
+\end{DoxyReturn}
+
+
+Definition at line 15 of file api\+Endpoints.\+ts.
+
+\mbox{\Hypertarget{apiEndpoints_8ts_ac8ca33971cc7998a6a70cc61021947cc}\label{apiEndpoints_8ts_ac8ca33971cc7998a6a70cc61021947cc}} 
+\index{apiEndpoints.ts@{apiEndpoints.ts}!fetchAnalysisData@{fetchAnalysisData}}
+\index{fetchAnalysisData@{fetchAnalysisData}!apiEndpoints.ts@{apiEndpoints.ts}}
+\doxysubsubsection{\texorpdfstring{fetchAnalysisData}{fetchAnalysisData}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} fetch\+Analysis\+Data}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= async (\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}: \textcolor{keywordtype}{string}, \mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}}: \textcolor{keywordtype}{string}) => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{    \textcolor{keyword}{const} response = await fetch(}
+\DoxyCodeLine{      `\$\{\mbox{\hyperlink{apiEndpoints_8ts_a621c186327e061d086ab178f77cc9ba4}{apiBaseUrl}}\}/api/analysis?\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}=\$\{\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}\}\&\mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}}=\$\{\mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}}\}`,}
+\DoxyCodeLine{    );}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!response.ok) \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} \textcolor{keyword}{new} Error(`HTTP error! Status: \$\{response.status\}`);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} await response.json();}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{catch} (error) \{}
+\DoxyCodeLine{    console.error(\textcolor{stringliteral}{"{}Error fetching analysis data:"{}}, error);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \textcolor{keyword}{null};}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Fetches prediction analysis data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ticker} & -\/ Stock ticker symbol \\
+\hline
+{\em model} & -\/ AI model name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Promise resolving to analysis data 
+\end{DoxyReturn}
+
+
+Definition at line 57 of file api\+Endpoints.\+ts.
+
+
+
+Referenced by use\+Effect().
+
+\mbox{\Hypertarget{apiEndpoints_8ts_aaef6fefc121c234c65762c0d30c306d4}\label{apiEndpoints_8ts_aaef6fefc121c234c65762c0d30c306d4}} 
+\index{apiEndpoints.ts@{apiEndpoints.ts}!fetchHistoricalData@{fetchHistoricalData}}
+\index{fetchHistoricalData@{fetchHistoricalData}!apiEndpoints.ts@{apiEndpoints.ts}}
+\doxysubsubsection{\texorpdfstring{fetchHistoricalData}{fetchHistoricalData}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} fetch\+Historical\+Data}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= async (\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}: \textcolor{keywordtype}{string}, \mbox{\hyperlink{namespacelstm__daemon_a0148cf01049a0f24b9a2132c1c4a984f}{start}}: \textcolor{keywordtype}{string}) => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{    \textcolor{keyword}{const} response = await fetch(}
+\DoxyCodeLine{      `\$\{\mbox{\hyperlink{apiEndpoints_8ts_a621c186327e061d086ab178f77cc9ba4}{apiBaseUrl}}\}/api/historical-\/data?\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}=\$\{\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}\}\&\mbox{\hyperlink{namespacelstm__daemon_a0148cf01049a0f24b9a2132c1c4a984f}{start}}=\$\{\mbox{\hyperlink{date_8ts_a2a9dc06c84d041da1400b31d4021aa7c}{getDateOnly}}(\mbox{\hyperlink{namespacelstm__daemon_a0148cf01049a0f24b9a2132c1c4a984f}{start}})\}`,}
+\DoxyCodeLine{    );}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!response.ok) \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} \textcolor{keyword}{new} Error(`HTTP error! Status: \$\{response.status\}`);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{    \textcolor{keyword}{const} jsonData = await response.json();}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} jsonData;}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{catch} (error) \{}
+\DoxyCodeLine{    console.error(\textcolor{stringliteral}{"{}Error fetching historical data:"{}}, error);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} [];}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Fetches historical stock price data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ticker} & -\/ Stock ticker symbol \\
+\hline
+{\em start} & -\/ Start date for historical data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Promise resolving to historical data array 
+\end{DoxyReturn}
+
+
+Definition at line 33 of file api\+Endpoints.\+ts.
+
+\mbox{\Hypertarget{apiEndpoints_8ts_a628d0c384a878ce252e001d328fa2943}\label{apiEndpoints_8ts_a628d0c384a878ce252e001d328fa2943}} 
+\index{apiEndpoints.ts@{apiEndpoints.ts}!fetchLSTMAnalysis@{fetchLSTMAnalysis}}
+\index{fetchLSTMAnalysis@{fetchLSTMAnalysis}!apiEndpoints.ts@{apiEndpoints.ts}}
+\doxysubsubsection{\texorpdfstring{fetchLSTMAnalysis}{fetchLSTMAnalysis}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} fetch\+LSTMAnalysis}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= async (\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}: \textcolor{keywordtype}{string}) => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{    \textcolor{keyword}{const} response = await fetch(}
+\DoxyCodeLine{      `\$\{\mbox{\hyperlink{apiEndpoints_8ts_a621c186327e061d086ab178f77cc9ba4}{apiBaseUrl}}\}/api/\mbox{\hyperlink{namespaceapi__server_a0eb3122ba60fc0be801f8b4220be4990}{fetch\_lstm}}?\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}=\$\{\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}\}`,}
+\DoxyCodeLine{    );}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!response.ok) \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} \textcolor{keyword}{new} Error(`HTTP error! Status: \$\{response.status\}`);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} await response.json();}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{catch} (error) \{}
+\DoxyCodeLine{    console.error(\textcolor{stringliteral}{"{}Error fetching LSTM predictions analysis:"{}}, error);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \textcolor{keyword}{null};}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Fetches LSTM model predictions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ticker} & -\/ Stock ticker symbol \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Promise resolving to LSTM predictions 
+\end{DoxyReturn}
+
+
+Definition at line 119 of file api\+Endpoints.\+ts.
+
+\mbox{\Hypertarget{apiEndpoints_8ts_a25cb7d8af9ebfb14470004b61382375a}\label{apiEndpoints_8ts_a25cb7d8af9ebfb14470004b61382375a}} 
+\index{apiEndpoints.ts@{apiEndpoints.ts}!fetchStockNames@{fetchStockNames}}
+\index{fetchStockNames@{fetchStockNames}!apiEndpoints.ts@{apiEndpoints.ts}}
+\doxysubsubsection{\texorpdfstring{fetchStockNames}{fetchStockNames}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} fetch\+Stock\+Names}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= async (\mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}}: \textcolor{keywordtype}{string}, \mbox{\hyperlink{BatchDownloader_8tsx_af03917480ce8b403c1192676754eb7e0}{minArticles}}: number) => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{    \textcolor{keyword}{const} response = await fetch(}
+\DoxyCodeLine{      `\$\{\mbox{\hyperlink{apiEndpoints_8ts_a621c186327e061d086ab178f77cc9ba4}{apiBaseUrl}}\}/api/stocks?\mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}}=\$\{\mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}}\}\&min\_articles=\$\{\mbox{\hyperlink{BatchDownloader_8tsx_af03917480ce8b403c1192676754eb7e0}{minArticles}}\}`,}
+\DoxyCodeLine{    );}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!response.ok) \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} \textcolor{keyword}{new} Error(`HTTP error! Status: \$\{response.status\}`);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} await response.json();}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{catch} (error) \{}
+\DoxyCodeLine{    console.error(\textcolor{stringliteral}{"{}Error fetching stock names:"{}}, error);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} [];}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Fetches list of available stock tickers for a model. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em model} & -\/ AI model name \\
+\hline
+{\em min\+Articles} & -\/ Minimum articles filter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Promise resolving to array of stock names 
+\end{DoxyReturn}
+
+
+Definition at line 78 of file api\+Endpoints.\+ts.
+
+\mbox{\Hypertarget{apiEndpoints_8ts_af629c17b5750f76cf8b277d1a3176149}\label{apiEndpoints_8ts_af629c17b5750f76cf8b277d1a3176149}} 
+\index{apiEndpoints.ts@{apiEndpoints.ts}!fetchSumAnalysis@{fetchSumAnalysis}}
+\index{fetchSumAnalysis@{fetchSumAnalysis}!apiEndpoints.ts@{apiEndpoints.ts}}
+\doxysubsubsection{\texorpdfstring{fetchSumAnalysis}{fetchSumAnalysis}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} fetch\+Sum\+Analysis}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= async (\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}: \textcolor{keywordtype}{string}, \mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}}: \textcolor{keywordtype}{string}) => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{try} \{}
+\DoxyCodeLine{    \textcolor{keyword}{const} response = await fetch(}
+\DoxyCodeLine{      `\$\{\mbox{\hyperlink{apiEndpoints_8ts_a621c186327e061d086ab178f77cc9ba4}{apiBaseUrl}}\}/api/\mbox{\hyperlink{namespaceapi__server_a2ec44e055c055d54db0ba78818d4593f}{sum\_analysis}}?\mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}}=\$\{\mbox{\hyperlink{CombinedChart_8tsx_ae1dc0ec49824bce648121ebaf9efbc03}{model}}\}\&\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}=\$\{\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}\}`,}
+\DoxyCodeLine{    );}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!response.ok) \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{throw} \textcolor{keyword}{new} Error(`HTTP error! Status: \$\{response.status\}`);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} await response.json();}
+\DoxyCodeLine{  \} \textcolor{keywordflow}{catch} (error) \{}
+\DoxyCodeLine{    console.error(\textcolor{stringliteral}{"{}Error fetching summarized analysis:"{}}, error);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \textcolor{keyword}{null};}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Fetches summarized analysis data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ticker} & -\/ Stock ticker symbol \\
+\hline
+{\em model} & -\/ AI model name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Promise resolving to summarized analysis 
+\end{DoxyReturn}
+
+
+Definition at line 99 of file api\+Endpoints.\+ts.
+
+\mbox{\Hypertarget{apiEndpoints_8ts_a59be084da8908b7d77ff34b25cd84488}\label{apiEndpoints_8ts_a59be084da8908b7d77ff34b25cd84488}} 
+\index{apiEndpoints.ts@{apiEndpoints.ts}!import@{import}}
+\index{import@{import}!apiEndpoints.ts@{apiEndpoints.ts}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily import \{ \mbox{\hyperlink{date_8ts_a2a9dc06c84d041da1400b31d4021aa7c}{get\+Date\+Only}} \} from \char`\"{}../utils/date\char`\"{}}
+
+
+
+Definition at line 9 of file api\+Endpoints.\+ts.
+

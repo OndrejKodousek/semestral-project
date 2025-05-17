@@ -1,0 +1,326 @@
+\hypertarget{parsing_8ts}{}\doxysection{website/src/utils/parsing.ts File Reference}
+\label{parsing_8ts}\index{website/src/utils/parsing.ts@{website/src/utils/parsing.ts}}
+
+
+Data parsing and transformation utilities.  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \{ \mbox{\hyperlink{interfaces_8ts_aaa083045a703b4657196cf6b83b3ce3b}{Historical\+Data}} \} from \char`\"{}./interfaces\char`\"{}
+\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{parsing_8ts_a97dec2c7e29fc1439817f83a6e77fdad}{parse\+Predictions}}
+\begin{DoxyCompactList}\small\item\em Parses raw prediction data into array format. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{parsing_8ts_ab8126ef5dfff8d691a24cb720b4ae6b9}{convert\+To\+Percent}}
+\begin{DoxyCompactList}\small\item\em Converts array of decimal values to percentages. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{parsing_8ts_a9045b2450088849d2e01be795d3b0060}{align\+Historical\+Data}}
+\begin{DoxyCompactList}\small\item\em Aligns historical data with prediction dates. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{parsing_8ts_a9a3cda848ef56ab8460bb73241f43b2b}{format\+String\+To\+CSSClass}}
+\begin{DoxyCompactList}\small\item\em Converts string to CSS-\/friendly class name. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{parsing_8ts_aec032600429a76b51a6d8d10e4c1268a}{extract\+Ticker}}
+\begin{DoxyCompactList}\small\item\em Extracts ticker symbol from stock name string. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{parsing_8ts_ab1826afcc205ba0004d8e6819bd16d7e}{filter\+Historical\+Data}}
+\begin{DoxyCompactList}\small\item\em Filters historical data to match specific dates. \end{DoxyCompactList}\item 
+export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{parsing_8ts_a07b8745602a192bfdc9a5e508dc46df3}{convert\+Stock\+Price\+To\+Percent\+Change}}
+\begin{DoxyCompactList}\small\item\em Converts stock prices to percentage changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Data parsing and transformation utilities. 
+
+Provides various functions for processing and converting stock prediction data between different formats. 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{parsing_8ts_a9045b2450088849d2e01be795d3b0060}\label{parsing_8ts_a9045b2450088849d2e01be795d3b0060}} 
+\index{parsing.ts@{parsing.ts}!alignHistoricalData@{alignHistoricalData}}
+\index{alignHistoricalData@{alignHistoricalData}!parsing.ts@{parsing.ts}}
+\doxysubsubsection{\texorpdfstring{alignHistoricalData}{alignHistoricalData}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} align\+Historical\+Data}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (}
+\DoxyCodeLine{  data: \mbox{\hyperlink{interfaces_8ts_aaa083045a703b4657196cf6b83b3ce3b}{HistoricalData}}[],}
+\DoxyCodeLine{  \mbox{\hyperlink{ArticleChart_8tsx_ad626d0c9d4b2d98ea108f65ce7ccd1af}{published}}: string,}
+\DoxyCodeLine{): (number | \textcolor{keyword}{null})[] => \{}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{keyword}{const} offset = \mbox{\hyperlink{date_8ts_ace6c1bf8b1dd8734c08fa35456d4f656}{calculateDateDifferenceInDays}}(\mbox{\hyperlink{ArticleChart_8tsx_ad626d0c9d4b2d98ea108f65ce7ccd1af}{published}}, data[0][\textcolor{stringliteral}{"{}date"{}}]);}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keyword}{const} output: (number | \textcolor{keyword}{null})[] = [];}
+\DoxyCodeLine{}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{keywordflow}{for} (let i = 0; i < offset; i++) \{}
+\DoxyCodeLine{    output.push(\textcolor{keyword}{null});}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{keywordflow}{for} (let i = offset; i < data.length; i++) \{}
+\DoxyCodeLine{    output.push(data[i][\textcolor{stringliteral}{"{}price"{}}]);}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} output;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Aligns historical data with prediction dates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & -\/ Array of historical stock prices \\
+\hline
+{\em published} & -\/ Article publication date \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array aligned with prediction dates (null for missing data) 
+\end{DoxyReturn}
+
+
+Definition at line 49 of file parsing.\+ts.
+
+\mbox{\Hypertarget{parsing_8ts_a07b8745602a192bfdc9a5e508dc46df3}\label{parsing_8ts_a07b8745602a192bfdc9a5e508dc46df3}} 
+\index{parsing.ts@{parsing.ts}!convertStockPriceToPercentChange@{convertStockPriceToPercentChange}}
+\index{convertStockPriceToPercentChange@{convertStockPriceToPercentChange}!parsing.ts@{parsing.ts}}
+\doxysubsubsection{\texorpdfstring{convertStockPriceToPercentChange}{convertStockPriceToPercentChange}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} convert\+Stock\+Price\+To\+Percent\+Change}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (}
+\DoxyCodeLine{  prices: number[],}
+\DoxyCodeLine{): number[] => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} result: number[] = [];}
+\DoxyCodeLine{}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  let baseline = 0;}
+\DoxyCodeLine{  \textcolor{keywordflow}{for} (let i = 0; i < prices.length; i++) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (!Number.isNaN(prices[i])) \{}
+\DoxyCodeLine{      baseline = prices[i];}
+\DoxyCodeLine{      \textcolor{keywordflow}{break};}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{keywordflow}{for} (let i = 0; i < prices.length; i++) \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (Number.isNaN(prices[i])) \{}
+\DoxyCodeLine{      result.push(NaN);}
+\DoxyCodeLine{    \} \textcolor{keywordflow}{else} \{}
+\DoxyCodeLine{      \textcolor{keyword}{const} change = (prices[i] -\/ baseline) / baseline;}
+\DoxyCodeLine{      result.push(change);}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{  \}}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Converts stock prices to percentage changes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prices} & -\/ Array of stock prices \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array of percentage changes from baseline 
+\end{DoxyReturn}
+
+
+Definition at line 125 of file parsing.\+ts.
+
+\mbox{\Hypertarget{parsing_8ts_ab8126ef5dfff8d691a24cb720b4ae6b9}\label{parsing_8ts_ab8126ef5dfff8d691a24cb720b4ae6b9}} 
+\index{parsing.ts@{parsing.ts}!convertToPercent@{convertToPercent}}
+\index{convertToPercent@{convertToPercent}!parsing.ts@{parsing.ts}}
+\doxysubsubsection{\texorpdfstring{convertToPercent}{convertToPercent}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} convert\+To\+Percent}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (array: number[]): number[] => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} array.map((\mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{value}}) => \{}
+\DoxyCodeLine{    \textcolor{keywordflow}{if} (Number.isNaN(\mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{value}})) \{}
+\DoxyCodeLine{      \textcolor{keywordflow}{return} NaN;}
+\DoxyCodeLine{    \}}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} \mbox{\hyperlink{Metrics_8tsx_a7610c0ebb9ebf3452111f147bec5ba0e}{value}} * 100;}
+\DoxyCodeLine{  \});}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Converts array of decimal values to percentages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em array} & -\/ Array of decimal values (0-\/1) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array of percentage values (0-\/100) 
+\end{DoxyReturn}
+
+
+Definition at line 34 of file parsing.\+ts.
+
+\mbox{\Hypertarget{parsing_8ts_aec032600429a76b51a6d8d10e4c1268a}\label{parsing_8ts_aec032600429a76b51a6d8d10e4c1268a}} 
+\index{parsing.ts@{parsing.ts}!extractTicker@{extractTicker}}
+\index{extractTicker@{extractTicker}!parsing.ts@{parsing.ts}}
+\doxysubsubsection{\texorpdfstring{extractTicker}{extractTicker}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} extract\+Ticker}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (input: string): \textcolor{keywordtype}{string} | \textcolor{keyword}{null} => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} match = input.match(/\string^([A-\/Z0-\/9.]+)/);}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} match ? match[1] : \textcolor{keyword}{null};}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Extracts ticker symbol from stock name string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & -\/ Stock name string (e.\+g., \char`\"{}\+AAPL -\/ Apple Inc\char`\"{}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Ticker symbol or null if not found 
+\end{DoxyReturn}
+
+
+Definition at line 89 of file parsing.\+ts.
+
+\mbox{\Hypertarget{parsing_8ts_ab1826afcc205ba0004d8e6819bd16d7e}\label{parsing_8ts_ab1826afcc205ba0004d8e6819bd16d7e}} 
+\index{parsing.ts@{parsing.ts}!filterHistoricalData@{filterHistoricalData}}
+\index{filterHistoricalData@{filterHistoricalData}!parsing.ts@{parsing.ts}}
+\doxysubsubsection{\texorpdfstring{filterHistoricalData}{filterHistoricalData}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} filter\+Historical\+Data}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (}
+\DoxyCodeLine{  data: \mbox{\hyperlink{interfaces_8ts_aaa083045a703b4657196cf6b83b3ce3b}{HistoricalData}}[],}
+\DoxyCodeLine{  labels: \textcolor{keywordtype}{string}[],}
+\DoxyCodeLine{): number[] => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} priceByDate = \textcolor{keyword}{new} Map<string, number>();}
+\DoxyCodeLine{}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  data.forEach((item) => \{}
+\DoxyCodeLine{    priceByDate.set(item.date, item.price);}
+\DoxyCodeLine{  \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{  }
+\DoxyCodeLine{  \textcolor{keyword}{const} result = labels.map((label) => \{}
+\DoxyCodeLine{    \textcolor{keyword}{const} price = priceByDate.get(label);}
+\DoxyCodeLine{    \textcolor{keywordflow}{return} price !== undefined ? price : NaN;}
+\DoxyCodeLine{  \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Filters historical data to match specific dates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & -\/ Array of historical stock prices \\
+\hline
+{\em labels} & -\/ Array of date strings to filter by \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array of prices corresponding to the labels 
+\end{DoxyReturn}
+
+
+Definition at line 100 of file parsing.\+ts.
+
+\mbox{\Hypertarget{parsing_8ts_a9a3cda848ef56ab8460bb73241f43b2b}\label{parsing_8ts_a9a3cda848ef56ab8460bb73241f43b2b}} 
+\index{parsing.ts@{parsing.ts}!formatStringToCSSClass@{formatStringToCSSClass}}
+\index{formatStringToCSSClass@{formatStringToCSSClass}!parsing.ts@{parsing.ts}}
+\doxysubsubsection{\texorpdfstring{formatStringToCSSClass}{formatStringToCSSClass}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} format\+String\+To\+CSSClass}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (input: string): \textcolor{keywordtype}{string} => \{}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} input}
+\DoxyCodeLine{    .toLowerCase()}
+\DoxyCodeLine{    .replace(/\(\backslash\)s+/g, \textcolor{stringliteral}{"{}-\/"{}})}
+\DoxyCodeLine{    .replace(/\(\backslash\)./g, \textcolor{stringliteral}{"{}-\/"{}})}
+\DoxyCodeLine{    .replace(/\(\backslash\)\textcolor{stringliteral}{'/g, "{}"{});}}
+\DoxyCodeLine{\textcolor{stringliteral}{\}}}
+
+\end{DoxyCode}
+
+
+Converts string to CSS-\/friendly class name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em input} & -\/ Original string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Sanitized string suitable for CSS classes 
+\end{DoxyReturn}
+
+
+Definition at line 76 of file parsing.\+ts.
+
+\mbox{\Hypertarget{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}\label{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}} 
+\index{parsing.ts@{parsing.ts}!import@{import}}
+\index{import@{import}!parsing.ts@{parsing.ts}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily import \{ \mbox{\hyperlink{interfaces_8ts_aaa083045a703b4657196cf6b83b3ce3b}{Historical\+Data}} \} from \char`\"{}./interfaces\char`\"{}}
+
+
+
+Definition at line 8 of file parsing.\+ts.
+
+\mbox{\Hypertarget{parsing_8ts_a97dec2c7e29fc1439817f83a6e77fdad}\label{parsing_8ts_a97dec2c7e29fc1439817f83a6e77fdad}} 
+\index{parsing.ts@{parsing.ts}!parsePredictions@{parsePredictions}}
+\index{parsePredictions@{parsePredictions}!parsing.ts@{parsing.ts}}
+\doxysubsubsection{\texorpdfstring{parsePredictions}{parsePredictions}}
+{\footnotesize\ttfamily export \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} parse\+Predictions}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{= (predictions: any): number[] => \{}
+\DoxyCodeLine{  \textcolor{keyword}{const} output = [}
+\DoxyCodeLine{    0, }
+\DoxyCodeLine{    predictions[\textcolor{stringliteral}{"{}1\_day"{}}][\textcolor{stringliteral}{"{}prediction"{}}],}
+\DoxyCodeLine{    predictions[\textcolor{stringliteral}{"{}2\_day"{}}][\textcolor{stringliteral}{"{}prediction"{}}],}
+\DoxyCodeLine{    predictions[\textcolor{stringliteral}{"{}3\_day"{}}][\textcolor{stringliteral}{"{}prediction"{}}],}
+\DoxyCodeLine{    predictions[\textcolor{stringliteral}{"{}4\_day"{}}][\textcolor{stringliteral}{"{}prediction"{}}],}
+\DoxyCodeLine{    predictions[\textcolor{stringliteral}{"{}5\_day"{}}][\textcolor{stringliteral}{"{}prediction"{}}],}
+\DoxyCodeLine{    predictions[\textcolor{stringliteral}{"{}6\_day"{}}][\textcolor{stringliteral}{"{}prediction"{}}],}
+\DoxyCodeLine{  ];}
+\DoxyCodeLine{  \textcolor{keywordflow}{return} output;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Parses raw prediction data into array format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em predictions} & -\/ Raw prediction data object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Array of parsed prediction values 
+\end{DoxyReturn}
+
+
+Definition at line 16 of file parsing.\+ts.
+

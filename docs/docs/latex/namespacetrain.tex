@@ -1,0 +1,181 @@
+\hypertarget{namespacetrain}{}\doxysection{train Namespace Reference}
+\label{namespacetrain}\index{train@{train}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespacetrain_a2a1eac85254c697154c79a12ee779a96}{get\+\_\+project\+\_\+root}} ()
+\item 
+def \mbox{\hyperlink{namespacetrain_a3281fd41677c1de0f9a627b2c5bc61ce}{fetch\+\_\+stock\+\_\+data}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, start\+\_\+date=\char`\"{}2010-\/01-\/01\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacetrain_a1e91f400270e2a0220654557c231d546}{build\+\_\+lstm\+\_\+model}} (input\+\_\+shape)
+\item 
+def \mbox{\hyperlink{namespacetrain_a254853cf3fcd65fa96ba5b0cc66f5bf3}{save\+\_\+model\+\_\+and\+\_\+scaler}} (\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}, scaler, \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, base\+\_\+path)
+\item 
+def \mbox{\hyperlink{namespacetrain_a96b92a5d8e2b1a8280c6b6302989d9a5}{main}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{namespacetrain_accc55b0eb3c6c023a8b877485eb63c39}{DB\+\_\+\+PATH}} = \char`\"{}data/news.\+db\char`\"{}
+\item 
+int \mbox{\hyperlink{namespacetrain_a88ab20f5ea0f6663b2057073c4687853}{SEQUENCE\+\_\+\+LENGTH}} = 60
+\item 
+int \mbox{\hyperlink{namespacetrain_aa6944fe332881cea473979a10c51d1c2}{EPOCHS}} = 25
+\item 
+\mbox{\hyperlink{namespacetrain_aadaf49b79b62965c9992367f505e5f01}{ticker\+\_\+symbol}} = sys.\+argv\mbox{[}1\mbox{]}.upper()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file train.py
+@brief LSTM model training for stock price prediction.
+
+This module provides functionality to:
+- Fetch historical stock data
+- Preprocess data for LSTM training
+- Build and train LSTM models
+- Save trained models and scalers
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacetrain_a1e91f400270e2a0220654557c231d546}\label{namespacetrain_a1e91f400270e2a0220654557c231d546}} 
+\index{train@{train}!build\_lstm\_model@{build\_lstm\_model}}
+\index{build\_lstm\_model@{build\_lstm\_model}!train@{train}}
+\doxysubsubsection{\texorpdfstring{build\_lstm\_model()}{build\_lstm\_model()}}
+{\footnotesize\ttfamily def train.\+build\+\_\+lstm\+\_\+model (\begin{DoxyParamCaption}\item[{}]{input\+\_\+shape }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Constructs LSTM model architecture.
+
+@param input_shape Shape of input data (sequence_length, features)
+@return Compiled Keras Sequential model
+\end{DoxyVerb}
+ 
+
+Definition at line 65 of file train.\+py.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{namespacetrain_a3281fd41677c1de0f9a627b2c5bc61ce}\label{namespacetrain_a3281fd41677c1de0f9a627b2c5bc61ce}} 
+\index{train@{train}!fetch\_stock\_data@{fetch\_stock\_data}}
+\index{fetch\_stock\_data@{fetch\_stock\_data}!train@{train}}
+\doxysubsubsection{\texorpdfstring{fetch\_stock\_data()}{fetch\_stock\_data()}}
+{\footnotesize\ttfamily def train.\+fetch\+\_\+stock\+\_\+data (\begin{DoxyParamCaption}\item[{}]{ticker,  }\item[{}]{start\+\_\+date = {\ttfamily \char`\"{}2010-\/01-\/01\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Fetches historical stock data from Yahoo Finance.
+
+@param ticker Stock ticker symbol
+@param start_date Start date for historical data
+@return Tuple containing (numpy array of close prices, pandas DataFrame of full data)
+        or (None, None) if data cannot be fetched
+\end{DoxyVerb}
+ 
+
+Definition at line 45 of file train.\+py.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{namespacetrain_a2a1eac85254c697154c79a12ee779a96}\label{namespacetrain_a2a1eac85254c697154c79a12ee779a96}} 
+\index{train@{train}!get\_project\_root@{get\_project\_root}}
+\index{get\_project\_root@{get\_project\_root}!train@{train}}
+\doxysubsubsection{\texorpdfstring{get\_project\_root()}{get\_project\_root()}}
+{\footnotesize\ttfamily def train.\+get\+\_\+project\+\_\+root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Locates the project root directory by searching for .git marker.
+
+@return Path object pointing to project root directory
+\end{DoxyVerb}
+ 
+
+Definition at line 31 of file train.\+py.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{namespacetrain_a96b92a5d8e2b1a8280c6b6302989d9a5}\label{namespacetrain_a96b92a5d8e2b1a8280c6b6302989d9a5}} 
+\index{train@{train}!main@{main}}
+\index{main@{main}!train@{train}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def train.\+main (\begin{DoxyParamCaption}\item[{}]{ticker }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Main training workflow.
+
+@param ticker Stock ticker symbol to train model for
+\end{DoxyVerb}
+ 
+
+Definition at line 103 of file train.\+py.
+
+
+
+References build\+\_\+lstm\+\_\+model(), fetch\+\_\+stock\+\_\+data(), get\+\_\+project\+\_\+root(), and save\+\_\+model\+\_\+and\+\_\+scaler().
+
+\mbox{\Hypertarget{namespacetrain_a254853cf3fcd65fa96ba5b0cc66f5bf3}\label{namespacetrain_a254853cf3fcd65fa96ba5b0cc66f5bf3}} 
+\index{train@{train}!save\_model\_and\_scaler@{save\_model\_and\_scaler}}
+\index{save\_model\_and\_scaler@{save\_model\_and\_scaler}!train@{train}}
+\doxysubsubsection{\texorpdfstring{save\_model\_and\_scaler()}{save\_model\_and\_scaler()}}
+{\footnotesize\ttfamily def train.\+save\+\_\+model\+\_\+and\+\_\+scaler (\begin{DoxyParamCaption}\item[{}]{model,  }\item[{}]{scaler,  }\item[{}]{ticker,  }\item[{}]{base\+\_\+path }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Saves trained model and scaler to disk.
+
+@param model Trained Keras model
+@param scaler Fitted MinMaxScaler
+@param ticker Stock ticker symbol
+@param base_path Directory path to save files
+\end{DoxyVerb}
+ 
+
+Definition at line 81 of file train.\+py.
+
+
+
+Referenced by main().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacetrain_accc55b0eb3c6c023a8b877485eb63c39}\label{namespacetrain_accc55b0eb3c6c023a8b877485eb63c39}} 
+\index{train@{train}!DB\_PATH@{DB\_PATH}}
+\index{DB\_PATH@{DB\_PATH}!train@{train}}
+\doxysubsubsection{\texorpdfstring{DB\_PATH}{DB\_PATH}}
+{\footnotesize\ttfamily string train.\+DB\+\_\+\+PATH = \char`\"{}data/news.\+db\char`\"{}}
+
+
+
+Definition at line 26 of file train.\+py.
+
+\mbox{\Hypertarget{namespacetrain_aa6944fe332881cea473979a10c51d1c2}\label{namespacetrain_aa6944fe332881cea473979a10c51d1c2}} 
+\index{train@{train}!EPOCHS@{EPOCHS}}
+\index{EPOCHS@{EPOCHS}!train@{train}}
+\doxysubsubsection{\texorpdfstring{EPOCHS}{EPOCHS}}
+{\footnotesize\ttfamily int train.\+EPOCHS = 25}
+
+
+
+Definition at line 28 of file train.\+py.
+
+\mbox{\Hypertarget{namespacetrain_a88ab20f5ea0f6663b2057073c4687853}\label{namespacetrain_a88ab20f5ea0f6663b2057073c4687853}} 
+\index{train@{train}!SEQUENCE\_LENGTH@{SEQUENCE\_LENGTH}}
+\index{SEQUENCE\_LENGTH@{SEQUENCE\_LENGTH}!train@{train}}
+\doxysubsubsection{\texorpdfstring{SEQUENCE\_LENGTH}{SEQUENCE\_LENGTH}}
+{\footnotesize\ttfamily int train.\+SEQUENCE\+\_\+\+LENGTH = 60}
+
+
+
+Definition at line 27 of file train.\+py.
+
+\mbox{\Hypertarget{namespacetrain_aadaf49b79b62965c9992367f505e5f01}\label{namespacetrain_aadaf49b79b62965c9992367f505e5f01}} 
+\index{train@{train}!ticker\_symbol@{ticker\_symbol}}
+\index{ticker\_symbol@{ticker\_symbol}!train@{train}}
+\doxysubsubsection{\texorpdfstring{ticker\_symbol}{ticker\_symbol}}
+{\footnotesize\ttfamily train.\+ticker\+\_\+symbol = sys.\+argv\mbox{[}1\mbox{]}.upper()}
+
+
+
+Definition at line 154 of file train.\+py.
+

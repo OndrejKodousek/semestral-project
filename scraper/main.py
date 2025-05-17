@@ -1,3 +1,14 @@
+"""
+@file Main.py
+@brief Main scraping script for financial news articles.
+
+This script handles:
+- RSS feed parsing
+- Article content extraction
+- Database storage of scraped content
+- Source-specific scraping logic
+"""
+
 import os
 import feedparser
 import random
@@ -16,10 +27,17 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 from scraper_library import *
 
+# Initialize webdriver
 driver = getDriver()
 
 
 def scrape_yahoo_finance_article(link):
+    """
+    @brief Scrapes article content from Yahoo Finance.
+
+    @param link URL of article to scrape
+    @return Extracted article content or error string
+    """
     driver.get(link)
     random_delay()
 
@@ -75,8 +93,13 @@ def scrape_yahoo_finance_article(link):
     return raw_text
 
 
-# TODO: Fix this
 def scrape_investors_article(link):
+    """
+    @brief Scrapes article content from Investors.com.
+
+    @param link URL of article to scrape
+    @return Extracted article content or error string
+    """
     driver.get(link)
     random_delay()
 
@@ -97,6 +120,11 @@ def scrape_investors_article(link):
 
 
 def main():
+    """
+    @brief Main scraping workflow.
+
+    Processes RSS feed, scrapes new articles, and stores them in database.
+    """
     rss_url = "https://finance.yahoo.com/news/rssindex"
     feed = feedparser.parse(rss_url)
 
@@ -110,7 +138,7 @@ def main():
             continue
 
         if "finance.yahoo.com/research/reports/" in link:
-            # Premium article
+            # Skip premium articles
             continue
 
         print(f"Scraping {shorten_string(link)}", end="", flush=True)
@@ -120,7 +148,7 @@ def main():
         if domain == "finance.yahoo.com":
             content = scrape_yahoo_finance_article(link)
         elif domain == "investors.com":
-            # TODO: Fix investors.com
+            # TODO: Fix investors.com scraping
             continue
             content = scrape_investors_article(link)
         elif domain == "wsj.com":
@@ -141,11 +169,12 @@ def main():
                 print(f" | FAILED, unknown error")
                 continue
 
-        # Sometimes old article gets pushed to RSS feed, because it was updated or similar
+        # Skip suspiciously old articles
         if not entry.published.startswith("2025"):
             print(f" | FAILED, article was suspiciously old")
             continue
 
+        # Store article in database
         insert_query = """
             INSERT INTO articles (priority, link, title, published, source, content)
             VALUES (?, ?, ?, ?, ?, ?)

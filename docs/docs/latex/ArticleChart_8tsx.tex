@@ -1,0 +1,140 @@
+\hypertarget{ArticleChart_8tsx}{}\doxysection{website/src/components/\+Article\+Chart.tsx File Reference}
+\label{ArticleChart_8tsx}\index{website/src/components/ArticleChart.tsx@{website/src/components/ArticleChart.tsx}}
+
+
+Component for displaying stock price charts with predictions.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Chart\+JS \mbox{\hyperlink{ArticleChart_8tsx_ae11047d12b7829f671b08ad9139df02e}{register}} (Category\+Scale, Linear\+Scale, Point\+Element, Line\+Element, Title, Tooltip, Legend, annotation\+Plugin,)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{ArticleChart_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}{React}}
+\item 
+import \mbox{\hyperlink{ArticleChart_8tsx_a59be084da8908b7d77ff34b25cd84488}{import}} \{ Line \} from \char`\"{}react-\/chartjs-\/2\char`\"{}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} annotation\+Plugin from chartjs plugin \mbox{\hyperlink{ArticleChart_8tsx_a47e20ad1faecf50ad8abe52738a98c1e}{annotation}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{ArticleChart_8tsx_a90de8ecd95ba30160e506aa2cb9f250f}{Chart}}
+\begin{DoxyCompactList}\small\item\em Chart component displaying stock data and predictions. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{ArticleChart_8tsx_a46958e400133845da077a817e5d46f76}{historical\+Data}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{ArticleChart_8tsx_ad626d0c9d4b2d98ea108f65ce7ccd1af}{published}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}
+\begin{DoxyCompactList}\small\item\em Props for Ticker\+Select component. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Component for displaying stock price charts with predictions. 
+
+This component renders a line chart showing\+:
+\begin{DoxyItemize}
+\item Historical stock prices
+\item Model predictions
+\item Optional LSTM predictions Uses Chart.\+js for rendering 
+\end{DoxyItemize}
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{ArticleChart_8tsx_ae11047d12b7829f671b08ad9139df02e}\label{ArticleChart_8tsx_ae11047d12b7829f671b08ad9139df02e}} 
+\index{ArticleChart.tsx@{ArticleChart.tsx}!register@{register}}
+\index{register@{register}!ArticleChart.tsx@{ArticleChart.tsx}}
+\doxysubsubsection{\texorpdfstring{register()}{register()}}
+{\footnotesize\ttfamily Chart\+JS register (\begin{DoxyParamCaption}\item[{Category\+Scale}]{,  }\item[{Linear\+Scale}]{,  }\item[{Point\+Element}]{,  }\item[{Line\+Element}]{,  }\item[{Title}]{,  }\item[{Tooltip}]{,  }\item[{Legend}]{,  }\item[{annotation\+Plugin}]{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{ArticleChart_8tsx_a47e20ad1faecf50ad8abe52738a98c1e}\label{ArticleChart_8tsx_a47e20ad1faecf50ad8abe52738a98c1e}} 
+\index{ArticleChart.tsx@{ArticleChart.tsx}!annotation@{annotation}}
+\index{annotation@{annotation}!ArticleChart.tsx@{ArticleChart.tsx}}
+\doxysubsubsection{\texorpdfstring{annotation}{annotation}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} annotation\+Plugin from chartjs plugin annotation}
+
+
+
+Definition at line 24 of file Article\+Chart.\+tsx.
+
+\mbox{\Hypertarget{ArticleChart_8tsx_a90de8ecd95ba30160e506aa2cb9f250f}\label{ArticleChart_8tsx_a90de8ecd95ba30160e506aa2cb9f250f}} 
+\index{ArticleChart.tsx@{ArticleChart.tsx}!Chart@{Chart}}
+\index{Chart@{Chart}!ArticleChart.tsx@{ArticleChart.tsx}}
+\doxysubsubsection{\texorpdfstring{Chart}{Chart}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} export default Chart}
+
+
+
+Chart component displaying stock data and predictions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em predictions} & -\/ Object containing prediction data by date \\
+\hline
+{\em historical\+Data} & -\/ Array of historical stock prices \\
+\hline
+{\em published} & -\/ Publication date of the article \\
+\hline
+{\em ticker} & -\/ Stock ticker symbol \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 53 of file Article\+Chart.\+tsx.
+
+\mbox{\Hypertarget{ArticleChart_8tsx_a46958e400133845da077a817e5d46f76}\label{ArticleChart_8tsx_a46958e400133845da077a817e5d46f76}} 
+\index{ArticleChart.tsx@{ArticleChart.tsx}!historicalData@{historicalData}}
+\index{historicalData@{historicalData}!ArticleChart.tsx@{ArticleChart.tsx}}
+\doxysubsubsection{\texorpdfstring{historicalData}{historicalData}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} historical\+Data}
+
+
+
+Definition at line 55 of file Article\+Chart.\+tsx.
+
+\mbox{\Hypertarget{ArticleChart_8tsx_a59be084da8908b7d77ff34b25cd84488}\label{ArticleChart_8tsx_a59be084da8908b7d77ff34b25cd84488}} 
+\index{ArticleChart.tsx@{ArticleChart.tsx}!import@{import}}
+\index{import@{import}!ArticleChart.tsx@{ArticleChart.tsx}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily import \{ Line \} from \char`\"{}react-\/chartjs-\/2\char`\"{}}
+
+
+
+Definition at line 12 of file Article\+Chart.\+tsx.
+
+\mbox{\Hypertarget{ArticleChart_8tsx_ad626d0c9d4b2d98ea108f65ce7ccd1af}\label{ArticleChart_8tsx_ad626d0c9d4b2d98ea108f65ce7ccd1af}} 
+\index{ArticleChart.tsx@{ArticleChart.tsx}!published@{published}}
+\index{published@{published}!ArticleChart.tsx@{ArticleChart.tsx}}
+\doxysubsubsection{\texorpdfstring{published}{published}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} published}
+
+
+
+Definition at line 56 of file Article\+Chart.\+tsx.
+
+\mbox{\Hypertarget{ArticleChart_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}\label{ArticleChart_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}} 
+\index{ArticleChart.tsx@{ArticleChart.tsx}!React@{React}}
+\index{React@{React}!ArticleChart.tsx@{ArticleChart.tsx}}
+\doxysubsubsection{\texorpdfstring{React}{React}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} React}
+
+
+
+Definition at line 11 of file Article\+Chart.\+tsx.
+
+\mbox{\Hypertarget{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}\label{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}} 
+\index{ArticleChart.tsx@{ArticleChart.tsx}!ticker@{ticker}}
+\index{ticker@{ticker}!ArticleChart.tsx@{ArticleChart.tsx}}
+\doxysubsubsection{\texorpdfstring{ticker}{ticker}}
+{\footnotesize\ttfamily Ticker\+Select\+Propsset\+Ticker Function to update selected ticker}
+
+
+
+Props for Ticker\+Select component. 
+
+
+
+Definition at line 57 of file Article\+Chart.\+tsx.
+

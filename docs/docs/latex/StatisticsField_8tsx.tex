@@ -1,0 +1,186 @@
+\hypertarget{StatisticsField_8tsx}{}\doxysection{website/src/components/\+Statistics\+Field.tsx File Reference}
+\label{StatisticsField_8tsx}\index{website/src/components/StatisticsField.tsx@{website/src/components/StatisticsField.tsx}}
+
+
+Container component for displaying different statistical views.  
+
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{StatisticsField_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}{React}}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Article\+List from \mbox{\hyperlink{StatisticsField_8tsx_aaa878e1d65bd5e87a769ff45a53e8634}{Article\+List}} \{ \mbox{\hyperlink{App_8tsx_a268b40c7bdbfb618b73546fd95f330fc}{use\+Effect}}, use\+State \} from \char`\"{}react\char`\"{}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Batch\+Downloader from \mbox{\hyperlink{StatisticsField_8tsx_afa827e9da4414c4dc4dda8d9487744d9}{Batch\+Downloader}}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Combined\+Chart from \mbox{\hyperlink{StatisticsField_8tsx_a51c6e6d7aa74259fc222247aab3eed58}{Combined\+Chart}}
+\item 
+\mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Metrics from \mbox{\hyperlink{StatisticsField_8tsx_a6443fcbcb82a8ef9798d65df91d1920c}{Metrics}}
+\item 
+\mbox{\hyperlink{StatisticsField_8tsx_a59be084da8908b7d77ff34b25cd84488}{import}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{StatisticsField_8tsx_ab74b3f56efdc3a31095d708c45eccef0}{Statistics\+Field}}
+\begin{DoxyCompactList}\small\item\em Statistics container component. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}
+\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}{mode}}
+\begin{DoxyCompactList}\small\item\em Props for Control\+Panel component. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} \mbox{\hyperlink{StatisticsField_8tsx_af03917480ce8b403c1192676754eb7e0}{min\+Articles}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Container component for displaying different statistical views. 
+
+Manages the display of different view modes\+:
+\begin{DoxyEnumerate}
+\item Article List
+\item Combined Chart
+\item Metrics
+\item Batch Downloader 
+\end{DoxyEnumerate}
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{StatisticsField_8tsx_aaa878e1d65bd5e87a769ff45a53e8634}\label{StatisticsField_8tsx_aaa878e1d65bd5e87a769ff45a53e8634}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!ArticleList@{ArticleList}}
+\index{ArticleList@{ArticleList}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{ArticleList}{ArticleList}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Article\+List from Article\+List \{ \mbox{\hyperlink{App_8tsx_a268b40c7bdbfb618b73546fd95f330fc}{use\+Effect}}, use\+State \} from \char`\"{}react\char`\"{}}
+
+
+
+Definition at line 12 of file Statistics\+Field.\+tsx.
+
+\mbox{\Hypertarget{StatisticsField_8tsx_afa827e9da4414c4dc4dda8d9487744d9}\label{StatisticsField_8tsx_afa827e9da4414c4dc4dda8d9487744d9}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!BatchDownloader@{BatchDownloader}}
+\index{BatchDownloader@{BatchDownloader}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{BatchDownloader}{BatchDownloader}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Batch\+Downloader from Batch\+Downloader}
+
+
+
+Definition at line 13 of file Statistics\+Field.\+tsx.
+
+\mbox{\Hypertarget{StatisticsField_8tsx_a51c6e6d7aa74259fc222247aab3eed58}\label{StatisticsField_8tsx_a51c6e6d7aa74259fc222247aab3eed58}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!CombinedChart@{CombinedChart}}
+\index{CombinedChart@{CombinedChart}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{CombinedChart}{CombinedChart}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Combined\+Chart from Combined\+Chart}
+
+
+
+Definition at line 14 of file Statistics\+Field.\+tsx.
+
+\mbox{\Hypertarget{StatisticsField_8tsx_a59be084da8908b7d77ff34b25cd84488}\label{StatisticsField_8tsx_a59be084da8908b7d77ff34b25cd84488}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!import@{import}}
+\index{import@{import}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{import}{import}}
+{\footnotesize\ttfamily import}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{  \mbox{\hyperlink{interfaces_8ts_af7c25f48cd774f91c9c2b75d62841572}{StatisticsFieldProps}},}
+\DoxyCodeLine{  \mbox{\hyperlink{interfaces_8ts_aaa083045a703b4657196cf6b83b3ce3b}{HistoricalData}},}
+\DoxyCodeLine{  \mbox{\hyperlink{interfaces_8ts_a42cbf6a8ac2e59b4dc469f0f3c84bc4e}{PredictionData}},}
+\DoxyCodeLine{\} from \textcolor{stringliteral}{"{}../utils/interfaces"{}}}
+
+\end{DoxyCode}
+
+
+Definition at line 16 of file Statistics\+Field.\+tsx.
+
+\mbox{\Hypertarget{StatisticsField_8tsx_a6443fcbcb82a8ef9798d65df91d1920c}\label{StatisticsField_8tsx_a6443fcbcb82a8ef9798d65df91d1920c}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!Metrics@{Metrics}}
+\index{Metrics@{Metrics}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{Metrics}{Metrics}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} Metrics from Metrics}
+
+
+
+Definition at line 15 of file Statistics\+Field.\+tsx.
+
+\mbox{\Hypertarget{StatisticsField_8tsx_af03917480ce8b403c1192676754eb7e0}\label{StatisticsField_8tsx_af03917480ce8b403c1192676754eb7e0}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!minArticles@{minArticles}}
+\index{minArticles@{minArticles}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{minArticles}{minArticles}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} min\+Articles}
+
+
+
+Definition at line 37 of file Statistics\+Field.\+tsx.
+
+\mbox{\Hypertarget{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}\label{StatisticsField_8tsx_a24dc565d453773eb0b87ce607454be84}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!mode@{mode}}
+\index{mode@{mode}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{mode}{mode}}
+{\footnotesize\ttfamily mode Current view mode}
+
+
+
+Props for Control\+Panel component. 
+
+
+
+Definition at line 36 of file Statistics\+Field.\+tsx.
+
+\mbox{\Hypertarget{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}\label{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!model@{model}}
+\index{model@{model}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{model}{model}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} model}
+
+
+
+Definition at line 35 of file Statistics\+Field.\+tsx.
+
+\mbox{\Hypertarget{StatisticsField_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}\label{StatisticsField_8tsx_a8e6a862a904cf8b07c69fae7c44a1a04}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!React@{React}}
+\index{React@{React}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{React}{React}}
+{\footnotesize\ttfamily \mbox{\hyperlink{parsing_8ts_a59be084da8908b7d77ff34b25cd84488}{import}} React}
+
+
+
+Definition at line 11 of file Statistics\+Field.\+tsx.
+
+\mbox{\Hypertarget{StatisticsField_8tsx_ab74b3f56efdc3a31095d708c45eccef0}\label{StatisticsField_8tsx_ab74b3f56efdc3a31095d708c45eccef0}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!StatisticsField@{StatisticsField}}
+\index{StatisticsField@{StatisticsField}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{StatisticsField}{StatisticsField}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} export default Statistics\+Field}
+
+
+
+Statistics container component. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prediction\+Data} & -\/ Array of prediction data from articles \\
+\hline
+{\em ticker} & -\/ Stock ticker symbol \\
+\hline
+{\em model} & -\/ Selected AI model name \\
+\hline
+{\em mode} & -\/ Current view mode (1-\/4) \\
+\hline
+{\em min\+Articles} & -\/ Minimum articles filter value \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 32 of file Statistics\+Field.\+tsx.
+
+\mbox{\Hypertarget{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}\label{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}} 
+\index{StatisticsField.tsx@{StatisticsField.tsx}!ticker@{ticker}}
+\index{ticker@{ticker}!StatisticsField.tsx@{StatisticsField.tsx}}
+\doxysubsubsection{\texorpdfstring{ticker}{ticker}}
+{\footnotesize\ttfamily \mbox{\hyperlink{App_8tsx_ae8875116826212bd8e60e68934dfaa2a}{const}} ticker}
+
+
+
+Definition at line 34 of file Statistics\+Field.\+tsx.
+

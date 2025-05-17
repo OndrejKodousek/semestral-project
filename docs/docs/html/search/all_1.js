@@ -1,0 +1,21 @@
+var searchData=
+[
+  ['action_28',['action',['../namespacedatabase.html#a11b9286e05da07e50ad97dd4d79fb2a1',1,'database.action()'],['../namespaceapi__server.html#addd1b83a3fde1b2e9044795e5c0c2a33',1,'api_server.action()']]],
+  ['alignhistoricaldata_29',['alignHistoricalData',['../parsing_8ts.html#a9045b2450088849d2e01be795d3b0060',1,'parsing.ts']]],
+  ['annotation_30',['annotation',['../CombinedChart_8tsx.html#a47e20ad1faecf50ad8abe52738a98c1e',1,'annotation():&#160;CombinedChart.tsx'],['../ArticleChart_8tsx.html#a47e20ad1faecf50ad8abe52738a98c1e',1,'annotation():&#160;ArticleChart.tsx']]],
+  ['api_5fkey_5fgemini_31',['API_KEY_GEMINI',['../namespaceconfig.html#a5ab42e20a89e2b9e5d1e8d3a522dd498',1,'config']]],
+  ['api_5fkey_5fgroq_32',['API_KEY_GROQ',['../namespaceconfig.html#a606336c49eb96338ad2f98ece6136cef',1,'config']]],
+  ['api_5fkey_5fopenrouter_33',['API_KEY_OPENROUTER',['../namespaceconfig.html#ae2aea2dfa9da9a96f717680917589714',1,'config']]],
+  ['api_5fserver_34',['api_server',['../namespaceapi__server.html',1,'']]],
+  ['api_5fserver_2epy_35',['api_server.py',['../api__server_8py.html',1,'']]],
+  ['apibaseurl_36',['apiBaseUrl',['../apiEndpoints_8ts.html#a621c186327e061d086ab178f77cc9ba4',1,'apiEndpoints.ts']]],
+  ['apiendpoints_2ets_37',['apiEndpoints.ts',['../apiEndpoints_8ts.html',1,'']]],
+  ['app_38',['app',['../namespaceapi__server.html#ab0ad197101b7c6eb30af78f5acbf6ffe',1,'api_server']]],
+  ['app_39',['App',['../App_8tsx.html#a690f095bb8406aa8956b250c0ff7f2d7',1,'App.tsx']]],
+  ['app_2etsx_40',['App.tsx',['../App_8tsx.html',1,'']]],
+  ['articlechart_41',['ArticleChart',['../ArticleList_8tsx.html#a77645f42b4e3450c4041912fe5374203',1,'ArticleList.tsx']]],
+  ['articlechart_2etsx_42',['ArticleChart.tsx',['../ArticleChart_8tsx.html',1,'']]],
+  ['articlelist_43',['ArticleList',['../ArticleList_8tsx.html#a118895c20a5bbd66ea7287820db0d2c0',1,'ArticleList():&#160;ArticleList.tsx'],['../StatisticsField_8tsx.html#aaa878e1d65bd5e87a769ff45a53e8634',1,'ArticleList():&#160;StatisticsField.tsx']]],
+  ['articlelist_2etsx_44',['ArticleList.tsx',['../ArticleList_8tsx.html',1,'']]],
+  ['articlelistprops_45',['ArticleListProps',['../interfaces_8ts.html#a8a25bf2fdcf7c248090ffabc85558ae5',1,'interfaces.ts']]]
+];

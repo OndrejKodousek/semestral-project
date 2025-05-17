@@ -1,3 +1,14 @@
+"""
+@file predict.py
+@brief Stock price prediction using LSTM models.
+
+This module provides functionality to:
+- Load trained LSTM models and scalers
+- Fetch recent stock data
+- Generate future price predictions
+- Save predictions to a database
+"""
+
 import os
 import sys
 import yfinance as yf
@@ -12,12 +23,17 @@ from tensorflow.keras.utils import disable_interactive_logging
 
 disable_interactive_logging()
 
-DB_PATH = "data/news.db"
-DEFAULT_PREDICTION_DAYS = 12
-SEQUENCE_LENGTH = 60
+DB_PATH = "data/news.db"  # Path to database file
+DEFAULT_PREDICTION_DAYS = 12  # Default number of days to predict
+SEQUENCE_LENGTH = 60  # Sequence length used by LSTM model
 
 
 def get_project_root():
+    """
+    @brief Locates the project root directory by searching for .git marker.
+
+    @return Path object pointing to project root directory
+    """
     marker = ".git"
     current_path = Path(__file__).resolve()
     for parent in current_path.parents:
@@ -27,6 +43,13 @@ def get_project_root():
 
 
 def fetch_recent_stock_data(ticker):
+    """
+    @brief Fetches recent stock price data for prediction.
+
+    @param ticker Stock ticker symbol
+    @return Tuple containing (numpy array of close prices, pandas DataFrame of full data)
+            or (None, None) if data cannot be fetched
+    """
     try:
         start_date = (datetime.today() - timedelta(days=SEQUENCE_LENGTH + 30)).strftime(
             "%Y-%m-%d"
@@ -41,6 +64,13 @@ def fetch_recent_stock_data(ticker):
 
 
 def load_model_and_scaler(ticker, base_path):
+    """
+    @brief Loads trained LSTM model and scaler for a given ticker.
+
+    @param ticker Stock ticker symbol
+    @param base_path Path to directory containing model files
+    @return Tuple containing (loaded model, scaler) or (None, None) if loading fails
+    """
     filepath_model = base_path / f"{ticker}_model.keras"
     filepath_scaler = base_path / f"{ticker}_scaler.pkl"
     if not filepath_model.exists() or not filepath_scaler.exists():
@@ -56,6 +86,14 @@ def load_model_and_scaler(ticker, base_path):
 
 
 def predict_future_prices(model, scaler, recent_data_values):
+    """
+    @brief Generates future price predictions using LSTM model.
+
+    @param model Loaded LSTM model
+    @param scaler Loaded MinMaxScaler
+    @param recent_data_values Array of recent stock prices
+    @return List of predicted prices for DEFAULT_PREDICTION_DAYS
+    """
     predictions = []
     last_sequence = recent_data_values[-SEQUENCE_LENGTH:]
     current_batch = scaler.transform(last_sequence).reshape((1, SEQUENCE_LENGTH, 1))
@@ -72,6 +110,15 @@ def predict_future_prices(model, scaler, recent_data_values):
 def save_reference_and_predictions(
     db_path, ticker, last_actual_value, last_actual_date_obj, prediction_list
 ):
+    """
+    @brief Saves reference price and predictions to database.
+
+    @param db_path Path to SQLite database
+    @param ticker Stock ticker symbol
+    @param last_actual_value Most recent actual stock price
+    @param last_actual_date_obj Date of last actual price
+    @param prediction_list List of predicted prices
+    """
     conn = None
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
@@ -124,6 +171,12 @@ def save_reference_and_predictions(
 
 
 def main(ticker, days_to_predict):
+    """
+    @brief Main prediction workflow.
+
+    @param ticker Stock ticker symbol
+    @param days_to_predict Number of days to predict (currently unused)
+    """
     project_root = get_project_root()
     models_path = project_root / "data" / "lstm_models"
     db_file = project_root / DB_PATH
@@ -139,9 +192,7 @@ def main(ticker, days_to_predict):
         sys.exit(1)
 
     last_actual_value = recent_data_values[-1][0]
-
     last_actual_date_obj = recent_data_df.index[-1].date()
-
     predictions = predict_future_prices(model, scaler, recent_data_values)
 
     save_reference_and_predictions(

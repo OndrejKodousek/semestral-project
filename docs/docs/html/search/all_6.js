@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['fetch_5flstm_100',['fetch_lstm',['../namespaceapi__server.html#a0eb3122ba60fc0be801f8b4220be4990',1,'api_server']]],
+  ['fetch_5frecent_5fstock_5fdata_101',['fetch_recent_stock_data',['../namespacepredict.html#a050ae2e41556da139f0789ba150170f9',1,'predict']]],
+  ['fetch_5fstock_5fdata_102',['fetch_stock_data',['../namespacetrain.html#a3281fd41677c1de0f9a627b2c5bc61ce',1,'train']]],
+  ['fetch_5fsum_5fanalysis_5fdata_103',['fetch_sum_analysis_data',['../namespacedatabase.html#adfc74b0bd3a80196ad1f1ea664109557',1,'database']]],
+  ['fetchanalysisdata_104',['fetchAnalysisData',['../apiEndpoints_8ts.html#ac8ca33971cc7998a6a70cc61021947cc',1,'apiEndpoints.ts']]],
+  ['fetchhistoricaldata_105',['fetchHistoricalData',['../apiEndpoints_8ts.html#aaef6fefc121c234c65762c0d30c306d4',1,'apiEndpoints.ts']]],
+  ['fetchlstmanalysis_106',['fetchLSTMAnalysis',['../apiEndpoints_8ts.html#a628d0c384a878ce252e001d328fa2943',1,'apiEndpoints.ts']]],
+  ['fetchstocknames_107',['fetchStockNames',['../apiEndpoints_8ts.html#a25cb7d8af9ebfb14470004b61382375a',1,'apiEndpoints.ts']]],
+  ['fetchsumanalysis_108',['fetchSumAnalysis',['../apiEndpoints_8ts.html#af629c17b5750f76cf8b277d1a3176149',1,'apiEndpoints.ts']]],
+  ['file_5fpath_109',['file_path',['../namespaceconfig.html#a9705145279595a44abf39c42460f7428',1,'config']]],
+  ['filterhistoricaldata_110',['filterHistoricalData',['../parsing_8ts.html#ab1826afcc205ba0004d8e6819bd16d7e',1,'parsing.ts']]],
+  ['flash_111',['flash',['../ModelSelect_8tsx.html#ab3c324eb3632676355825d7299a7319b',1,'ModelSelect.tsx']]],
+  ['formatcurrency_112',['formatCurrency',['../metrics_8ts.html#a6402d26ac59384b97e8b6c92258e08af',1,'metrics.ts']]],
+  ['formatdate_113',['formatDate',['../date_8ts.html#a4c4f296783c2786a0d2554d78cdc5e89',1,'date.ts']]],
+  ['formatpercentage_114',['formatPercentage',['../metrics_8ts.html#a7cf502e08ff25356e061976a3a10f4bc',1,'metrics.ts']]],
+  ['formatstringtocssclass_115',['formatStringToCSSClass',['../parsing_8ts.html#a9a3cda848ef56ab8460bb73241f43b2b',1,'parsing.ts']]]
+];

@@ -1,0 +1,69 @@
+\hypertarget{lstm__daemon_8py}{}\doxysection{scripts/lstm\+\_\+daemon.py File Reference}
+\label{lstm__daemon_8py}\index{scripts/lstm\_daemon.py@{scripts/lstm\_daemon.py}}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacelstm__daemon}{lstm\+\_\+daemon}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Path \mbox{\hyperlink{namespacelstm__daemon_ab7edfc58dbae4ca9549d4bbe09d2e16f}{lstm\+\_\+daemon.\+get\+\_\+project\+\_\+root}} ()
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{namespacelstm__daemon_a2a82eefa08d1d085080214be358d886a}{lstm\+\_\+daemon.\+get\+\_\+top\+\_\+tickers\+\_\+by\+\_\+frequency}} (Path db\+\_\+file)
+\item 
+bool \mbox{\hyperlink{namespacelstm__daemon_ae660f91ab24f94acf7cb445b1ec3570e}{lstm\+\_\+daemon.\+check\+\_\+if\+\_\+processed\+\_\+today}} (Path db\+\_\+file, str \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}})
+\item 
+bool \mbox{\hyperlink{namespacelstm__daemon_a5c1ce351ec7977bd03fd73c0eb852c8f}{lstm\+\_\+daemon.\+run\+\_\+script}} (Path script\+\_\+path, str \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, str python\+\_\+executable)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{namespacelstm__daemon_a512bc81a250c1bd568442e3e17929964}{lstm\+\_\+daemon.\+VENV\+\_\+\+PYTHON\+\_\+\+PATH}} = \char`\"{}/mnt/samsung/semestral-\/project/venv/bin/python\char`\"{}
+\item 
+string \mbox{\hyperlink{namespacelstm__daemon_ac45ccfd2f9e6a0bb0cea38a5e1def0f7}{lstm\+\_\+daemon.\+DB\+\_\+\+PATH}} = \char`\"{}data/news.\+db\char`\"{}
+\item 
+int \mbox{\hyperlink{namespacelstm__daemon_a92b4746d2f4868d044d63b858e14616a}{lstm\+\_\+daemon.\+TOP\+\_\+\+N\+\_\+\+TICKERS}} = 10
+\item 
+Path \mbox{\hyperlink{namespacelstm__daemon_aaeab8a37042e566028bdcb1a263aef8e}{lstm\+\_\+daemon.\+project\+\_\+root}} = get\+\_\+project\+\_\+root()
+\item 
+Path \mbox{\hyperlink{namespacelstm__daemon_ab5413e7865c94c66c0211a49b6fd5a4e}{lstm\+\_\+daemon.\+db\+\_\+file}} = project\+\_\+root / DB\+\_\+\+PATH
+\item 
+Path \mbox{\hyperlink{namespacelstm__daemon_aa85e44cb1c49a02df23c48611f76bfe7}{lstm\+\_\+daemon.\+train\+\_\+script}} = project\+\_\+root / \char`\"{}lstm\char`\"{} / \char`\"{}train.\+py\char`\"{}
+\item 
+Path \mbox{\hyperlink{namespacelstm__daemon_adbf44bdafa383ba757f35d7c0da43252}{lstm\+\_\+daemon.\+predict\+\_\+script}} = project\+\_\+root / \char`\"{}lstm\char`\"{} / \char`\"{}predict.\+py\char`\"{}
+\item 
+int \mbox{\hyperlink{namespacelstm__daemon_a35eb6f6335c6cbfe196d765a797ee2aa}{lstm\+\_\+daemon.\+PAUSE\+\_\+\+START\+\_\+\+HOUR}} = 23
+\item 
+int \mbox{\hyperlink{namespacelstm__daemon_a4a7e6d3bc83b839acc4fb90e5778ca5f}{lstm\+\_\+daemon.\+PAUSE\+\_\+\+END\+\_\+\+HOUR}} = 0
+\item 
+int \mbox{\hyperlink{namespacelstm__daemon_a5172b91a99605ca2870f66de2897954b}{lstm\+\_\+daemon.\+PAUSE\+\_\+\+END\+\_\+\+MINUTE}} = 5
+\item 
+int \mbox{\hyperlink{namespacelstm__daemon_a5a75dd182a1b590d679cd7cb1d2a656e}{lstm\+\_\+daemon.\+SLEEP\+\_\+\+DURATION\+\_\+\+SECONDS}} = 1800
+\item 
+int \mbox{\hyperlink{namespacelstm__daemon_a9e319e2b10184ada41777d7b0242d413}{lstm\+\_\+daemon.\+SHORT\+\_\+\+SLEEP\+\_\+\+SECONDS}} = 60
+\item 
+\mbox{\hyperlink{namespacelstm__daemon_a97a5bf2f8353b567fc71a88c1569f77d}{lstm\+\_\+daemon.\+now}} = datetime.\+now()
+\item 
+\mbox{\hyperlink{namespacelstm__daemon_a65c11ea508b06294067285b6d2aee6e2}{lstm\+\_\+daemon.\+current\+\_\+time}} = now.\+time()
+\item 
+\mbox{\hyperlink{namespacelstm__daemon_a6d9d55a035fc7d9cfe3cddc3f8b431f6}{lstm\+\_\+daemon.\+current\+\_\+hour}} = current\+\_\+time.\+hour
+\item 
+\mbox{\hyperlink{namespacelstm__daemon_a90cac7280f9dab2b2a0f582fd7a9c094}{lstm\+\_\+daemon.\+current\+\_\+minute}} = current\+\_\+time.\+minute
+\item 
+tuple \mbox{\hyperlink{namespacelstm__daemon_a72784b2cc34b149191bde3b403b20f9a}{lstm\+\_\+daemon.\+is\+\_\+pause\+\_\+time}}
+\item 
+list\mbox{[}str\mbox{]} \mbox{\hyperlink{namespacelstm__daemon_a85c2b882fe7f5ceb97ecdba6b7591a36}{lstm\+\_\+daemon.\+candidate\+\_\+tickers}} = get\+\_\+top\+\_\+tickers\+\_\+by\+\_\+frequency(db\+\_\+file)
+\item 
+list \mbox{\hyperlink{namespacelstm__daemon_a37f409d7c4c77b702907f20a4f92d256}{lstm\+\_\+daemon.\+tickers\+\_\+to\+\_\+process}} = \mbox{[}$\,$\mbox{]}
+\item 
+\mbox{\hyperlink{namespacelstm__daemon_a25bf8078b9d22524878447a3de3a81cf}{lstm\+\_\+daemon.\+current\+\_\+processing\+\_\+date}} = date.\+today().strftime(\char`\"{}\%Y-\/\%m-\/\%d\char`\"{})
+\item 
+\mbox{\hyperlink{namespacelstm__daemon_a0148cf01049a0f24b9a2132c1c4a984f}{lstm\+\_\+daemon.\+start}} = time.\+time()
+\item 
+bool \mbox{\hyperlink{namespacelstm__daemon_a6316499a06a2957c10e1aa84ebb5178f}{lstm\+\_\+daemon.\+train\+\_\+success}} = run\+\_\+script(train\+\_\+script, \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, VENV\+\_\+\+PYTHON\+\_\+\+PATH)
+\item 
+bool \mbox{\hyperlink{namespacelstm__daemon_afd61a0cf3530ac11ebea9a25fa542d36}{lstm\+\_\+daemon.\+predict\+\_\+success}} = run\+\_\+script(predict\+\_\+script, \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, VENV\+\_\+\+PYTHON\+\_\+\+PATH)
+\item 
+\mbox{\hyperlink{namespacelstm__daemon_a05fad3ece61207816da5aab79de54c5b}{lstm\+\_\+daemon.\+elapsed\+\_\+time}} = time.\+time() -\/ start
+\end{DoxyCompactItemize}

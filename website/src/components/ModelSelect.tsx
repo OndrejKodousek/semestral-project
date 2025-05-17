@@ -1,8 +1,19 @@
+/**
+ * @file ModelSelect.tsx
+ * @brief Component for selecting an AI model from a predefined list
+ * @details Provides a scrollable select list of available AI models
+ * that can be used for stock prediction analysis.
+ */
+
 import React from "react";
 import { ModelSelectProps } from "../utils/interfaces";
 
+/**
+ * @brief Model selection dropdown component
+ * @param setModel - Callback function to update the selected model
+ */
 const ModelSelect: React.FC<ModelSelectProps> = ({ setModel }) => {
-  // ! Make sure it's always sync'd with LLM analyzer models !
+  // List of available AI models (should match backend)
   const items: string[] = [
     // Google AI Studio
     "gemini-2.5-flash-preview-04-17",

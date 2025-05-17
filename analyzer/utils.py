@@ -1,8 +1,26 @@
+"""
+@file utils.py
+@brief Utility functions for string manipulation, data validation, and project management.
+
+This module contains helper functions used throughout the project for tasks like
+string formatting, data validation, and project path management.
+"""
+
 import re
 from pathlib import Path
 
 
 def shorten_string(string, max_length=60):
+    """
+    @brief Shortens a string to a specified maximum length.
+
+    If the string is shorter than the maximum length, it will be padded with spaces.
+    If longer, it will be truncated with ellipsis in the middle.
+
+    @param string The input string to be shortened.
+    @param max_length Maximum length of the output string (default: 60).
+    @return The shortened or padded string.
+    """
     if len(string) <= max_length:
         extra_space = max_length - len(string)
         appended_spaces = extra_space * " "
@@ -12,12 +30,29 @@ def shorten_string(string, max_length=60):
 
 
 def str_to_int(string):
+    """
+    @brief Extracts the first integer from a string.
+
+    @param string The input string to extract an integer from.
+    @return The first integer found in the string.
+    """
     matches = re.findall(r"\d+", str(string))
     integer = int(matches[0])
     return integer
 
 
 def is_valid_data(data):
+    """
+    @brief Validates stock data structure.
+
+    Ensures that the data dictionary contains all required keys and that values are valid.
+    Checks for presence of required keys, validates that stock and ticker fields are not empty,
+    and verifies that prediction values are between -1.0 and 1.0 and confidence values are
+    between 0.0 and 1.0.
+
+    @param data The data dictionary to validate.
+    @return True if the data is valid, False otherwise.
+    """
     try:
         required_keys = [
             "stock",
@@ -84,6 +119,14 @@ def is_valid_data(data):
 
 
 def get_project_root():
+    """
+    @brief Finds the root directory of the project.
+
+    Searches for a .git directory in parent directories to identify the project root.
+
+    @return Path to the project root directory.
+    @throws SystemExit if the root directory cannot be found.
+    """
     marker = ".git"
     current_path = Path(__file__).resolve()
     for parent in current_path.parents:
