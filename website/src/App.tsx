@@ -9,11 +9,9 @@ import { extractTicker } from "./utils/parsing";
 import { motion } from "motion/react";
 
 const App: React.FC = () => {
-  const [predictionData, setPredictionData] = useState<PredictionData[] | null>(
-    null,
-  );
-  const [tickerString, setTickerString] = useState<string | null>(null);
-  const [model, setModel] = useState<string | null>(null);
+  const [predictionData, setPredictionData] = useState<PredictionData[]>([]);
+  const [tickerString, setTickerString] = useState<string>("");
+  const [model, setModel] = useState<string>("");
   const [minArticles, setMinArticles] = useState<number>(3);
   const [includeConfidence, setIncludeConfidence] = useState<number>(1);
   const [stockNames, setStockNames] = useState<string[]>([]);
@@ -21,7 +19,7 @@ const App: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const extractedTicker = useMemo(
-    () => (tickerString ? extractTicker(tickerString) : null),
+    () => extractTicker(tickerString),
     [tickerString],
   );
 
@@ -32,7 +30,7 @@ const App: React.FC = () => {
     if (extractedTicker && model) {
       const fetchData = async () => {
         setIsLoading(true);
-        setPredictionData(null);
+        setPredictionData([]);
         try {
           const data = await fetchAnalysisData(extractedTicker, model);
           setPredictionData(data ?? []);
@@ -47,7 +45,7 @@ const App: React.FC = () => {
       fetchData();
     } else {
       // Clear data if ticker or model is missing
-      setPredictionData(null);
+      setPredictionData([]);
       setIsLoading(false);
     }
   }, [extractedTicker, model]); // Depend on the memoized extractedTicker and model
@@ -123,7 +121,7 @@ const App: React.FC = () => {
                   <StatisticsField
                     key={`stats-${extractedTicker}-${model}`}
                     predictionData={predictionData}
-                    ticker={extractedTicker}
+                    ticker={extractedTicker || ""}
                     model={model}
                     mode={mode}
                     minArticles={minArticles}

@@ -90,3 +90,13 @@ export interface MetricsProps {
   historicalData: HistoricalData[];
   ticker: string;
 }
+
+export interface BatchDownloaderProps {
+  models: string[];
+  minArticles: number;
+}
+
+export interface Progress {
+  current: number;
+  total: number;
+}

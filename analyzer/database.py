@@ -211,7 +211,7 @@ def save_processed_summarized_articles(data, model_name, ticker, published_date)
         conn = None
         try:
 
-            # Extract the date part (YYYY-MM-DD) from the published field
+            # Extract the date (YYYY-MM-DD) from the published field
             ticker = data.get("ticker")
 
             base_stock_price = None
@@ -325,7 +325,7 @@ def save_processed_summarized_articles(data, model_name, ticker, published_date)
                 print(
                     f" | FAILED (Summary Save), DB Error: {e} for {ticker} with {model_name}"
                 )
-                break  # Stop retrying on non-lock errors
+                break
 
         finally:
             if conn:

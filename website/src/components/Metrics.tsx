@@ -11,7 +11,6 @@ import {
 } from "../utils/date";
 import { filterHistoricalData } from "../utils/parsing";
 import { fetchLSTMAnalysis } from "../utils/apiEndpoints";
-import { PredictionData, HistoricalData } from "../utils/interfaces";
 import { MetricsProps } from "../utils/interfaces";
 
 const Metrics: React.FC<MetricsProps> = ({

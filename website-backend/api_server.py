@@ -322,7 +322,7 @@ def historical_data():
         if stock_data.empty:
             return jsonify([])
 
-        # Ensure we're working with unique dates by taking the last value if duplicates exist
+        # Ensure unique dates by taking the last value if duplicates exist
         stock_data = stock_data[~stock_data.index.duplicated(keep="last")]
 
         prices = []

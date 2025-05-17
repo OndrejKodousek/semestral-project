@@ -1,18 +1,8 @@
-// components/BatchDownloader.tsx
 import React, { useState } from "react";
 import { fetchStockNames } from "../utils/apiEndpoints";
 import { extractTicker } from "../utils/parsing";
 import { downloadTickerModelData } from "../utils/downloadUtils";
-
-interface BatchDownloaderProps {
-  models: string[];
-  minArticles: number;
-}
-
-interface Progress {
-  current: number;
-  total: number;
-}
+import { BatchDownloaderProps, Progress } from "../utils/interfaces";
 
 const BatchDownloader: React.FC<BatchDownloaderProps> = ({
   models,

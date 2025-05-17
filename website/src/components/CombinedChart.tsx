@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -21,6 +21,7 @@ import {
 } from "../utils/date";
 import { filterHistoricalData } from "../utils/parsing";
 import { fetchSumAnalysis, fetchLSTMAnalysis } from "../utils/apiEndpoints";
+import html2canvas from "html2canvas";
 
 ChartJS.register(
   CategoryScale,
@@ -57,6 +58,39 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
     setSumAnalysisDate(null);
     setLstmPredictions(null);
   }, [ticker]);
+
+  const chartRef = useRef<HTMLDivElement>(null);
+  const handleDownloadPNG = async () => {
+    if (!chartRef.current) return;
+
+    try {
+      // Quality settings
+      const scale = 4; // 4x scaling = ~384 DPI
+      const quality = 1; // Maximum quality (0-1)
+
+      // Create high-res canvas
+      const canvas = await html2canvas(chartRef.current, {
+        scale,
+        logging: false,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: "#FFFFFF",
+        windowWidth: chartRef.current.scrollWidth * scale,
+        windowHeight: chartRef.current.scrollHeight * scale,
+      });
+
+      // Create download link
+      const link = document.createElement("a");
+      link.download = `${ticker}_stock_analysis_${new Date().toISOString().split("T")[0]}.png`;
+      link.href = canvas.toDataURL("image/png", quality);
+      link.click();
+
+      // Clean up
+      URL.revokeObjectURL(link.href);
+    } catch (error) {
+      console.error("Error generating image:", error);
+    }
+  };
 
   useEffect(() => {
     const fetchSumData = async () => {
@@ -222,6 +256,22 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
         title: {
           display: true,
           text: "Stock Price [$]",
+          font: {
+            size: 24, // Larger Y-axis title
+            weight: "bold",
+          },
+        },
+        ticks: {
+          font: {
+            size: 24, // Larger Y-axis numbers
+          },
+        },
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 24, // Larger X-axis labels
+          },
         },
       },
     },
@@ -232,7 +282,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
             type: "line",
             xMin: labels.indexOf(getCurrentDate()),
             xMax: labels.indexOf(getCurrentDate()),
-            borderColor: "red",
+            borderColor: "rgb(90, 0, 90)",
             borderWidth: 2,
             borderDash: [5, 5],
           },
@@ -241,6 +291,9 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
       legend: {
         position: "top",
         labels: {
+          font: {
+            size: 24,
+          },
           filter: (legendItem) => {
             const keepLegends = [
               "Real Data",
@@ -254,6 +307,10 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
       title: {
         display: true,
         text: `${ticker} Stock Price and Predictions`,
+        font: {
+          size: 24,
+          weight: "bold",
+        },
       },
       tooltip: {
         mode: "index",
@@ -268,8 +325,18 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
 
   return (
     <div className="combined-chart">
+      <button onClick={handleDownloadPNG}>Download</button>
       {labels && labels.length > 0 ? (
-        <Line data={chartData} options={chartOptions} />
+        <div
+          ref={chartRef}
+          style={{
+            width: "100%",
+            minHeight: "600px",
+            position: "relative",
+          }}
+        >
+          <Line data={chartData} options={chartOptions} />
+        </div>
       ) : (
         <p>Loading chart data for {ticker}...</p>
       )}

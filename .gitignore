@@ -75,3 +75,4 @@ data/news.db
 data/news.db
 
 evaluator/data/*
+*.png
