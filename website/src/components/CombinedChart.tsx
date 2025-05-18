@@ -88,11 +88,9 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
     if (!chartRef.current) return;
 
     try {
-      // Quality settings
       const scale = 4; // 4x scaling = ~384 DPI
-      const quality = 1; // Maximum quality (0-1)
+      const quality = 1;
 
-      // Create high-res canvas
       const canvas = await html2canvas(chartRef.current, {
         scale,
         logging: false,
@@ -109,7 +107,6 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
       link.href = canvas.toDataURL("image/png", quality);
       link.click();
 
-      // Clean up
       URL.revokeObjectURL(link.href);
     } catch (error) {
       console.error("Error generating image:", error);
@@ -366,7 +363,9 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
 
   return (
     <div className="combined-chart">
-      {/* <button onClick={handleDownloadPNG}>Download</button> */}
+      <button style={{ display: "none" }} onClick={handleDownloadPNG}>
+        Download
+      </button>
       {labels && labels.length > 0 ? (
         <div
           ref={chartRef}
