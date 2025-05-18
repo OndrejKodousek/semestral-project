@@ -201,7 +201,6 @@ if __name__ == "__main__":
 
         print(f"Selected {len(tickers_to_process)} tickers to process")
         for i, ticker in enumerate(tickers_to_process):
-            start = time.time()
             print(f"\nProcessing ticker {i+1}/{len(tickers_to_process)}: {ticker}")
 
             # Train and predict
@@ -215,11 +214,6 @@ if __name__ == "__main__":
             else:
                 print(f"Training failed for {ticker}. Skipping prediction.")
                 continue
-
-            # Log processing time
-            elapsed_time = time.time() - start
-            with open("data/lstm_train_time.txt", "a+") as f:
-                f.write(f"{elapsed_time}\n")
 
         print(
             f"\nProcessing cycle finished at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}."
