@@ -298,20 +298,20 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
           display: true,
           text: "Stock Price [$]",
           font: {
-            size: 24,
+            size: 14,
             weight: "bold",
           },
         },
         ticks: {
           font: {
-            size: 24,
+            size: 14,
           },
         },
       },
       x: {
         ticks: {
           font: {
-            size: 24,
+            size: 14,
           },
         },
       },
@@ -333,7 +333,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
         position: "top",
         labels: {
           font: {
-            size: 24,
+            size: 14,
           },
           filter: (legendItem) => {
             const keepLegends = [
@@ -349,7 +349,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
         display: true,
         text: `${ticker} Stock Price and Predictions`,
         font: {
-          size: 24,
+          size: 14,
           weight: "bold",
         },
       },
@@ -366,13 +366,13 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
 
   return (
     <div className="combined-chart">
-      <button onClick={handleDownloadPNG}>Download</button>
+      {/* <button onClick={handleDownloadPNG}>Download</button> */}
       {labels && labels.length > 0 ? (
         <div
           ref={chartRef}
           style={{
             width: "100%",
-            minHeight: "600px",
+            minHeight: "400px",
             position: "relative",
           }}
         >
@@ -382,20 +382,11 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
         <p>Loading chart data for {ticker}...</p>
       )}
       {sumAnalysis && (
-        <div
-          style={{
-            marginTop: "20px",
-            padding: "10px",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-          }}
-        >
+        <div className="analysis-summary">
           <h3>Summarized Analysis ({model})</h3>
           <p>{sumAnalysis.summary}</p>
           {sumAnalysisDate && (
-            <p>
-              <small>Analysis date: {sumAnalysisDate}</small>
-            </p>
+            <p className="mb-0">Analysis date: {sumAnalysisDate}</p>
           )}
         </div>
       )}

@@ -119,8 +119,21 @@ body {
   padding: 1rem;
   background: #f0f7ff;
   border-radius: 8px;
+  border: 1px solid #001244;
 }
 
 .analysis-summary h3 {
   margin-top: 0;
+}
+
+/* Add this to your styles */
+.article-list-container {
+  height: 100%; /* Or specific height */
+  overflow-y: auto;
+  border: 1px solid #ddd; /* Your border style */
+  border-radius: 4px; /* If you want rounded corners */
+}
+
+.article-content {
+  padding: 16px; /* Adjust as needed */
 }

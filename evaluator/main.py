@@ -1,8 +1,3 @@
-#!/usr/bin/env python3
-"""
-Analyzes and visualizes stock prediction accuracy metrics from JSON files.
-"""
-
 import json
 import os
 import glob
@@ -13,11 +8,9 @@ import argparse
 from matplotlib.ticker import MaxNLocator
 
 
-def load_data(data_dir, max_day=12, min_articles_per_source=1, max_include_day=3):
-    """Load and process prediction data from JSON files."""
+def load_data(data_dir, max_day=12, min_articles_per_source=1):
     print(f"Processing JSON files in {data_dir}...")
 
-    # Initialize data structures
     day_metrics = defaultdict(lambda: {"errors": [], "count": 0})
     model_day_metrics = defaultdict(lambda: defaultdict(list))
     source_day_metrics = defaultdict(lambda: defaultdict(list))
@@ -71,7 +64,6 @@ def load_data(data_dir, max_day=12, min_articles_per_source=1, max_include_day=3
                     or real is None
                     or prediction is None
                     or real == 0
-                    or day > max_include_day
                 ):
                     continue
 
@@ -106,12 +98,12 @@ def load_data(data_dir, max_day=12, min_articles_per_source=1, max_include_day=3
     }
 
 
-def plot_accuracy_over_time(data, min_datapoints=10, output_dir="graphs"):
-    """Plot overall prediction accuracy degradation over time."""
+def plot_accuracy_over_time(data, max_day, min_datapoints=10, output_dir="graphs"):
+    """Plot overall prediction MAPE degradation over time."""
     os.makedirs(output_dir, exist_ok=True)
     day_metrics = data["day_metrics"]
 
-    days = sorted(day_metrics.keys())
+    days = sorted(day for day in day_metrics.keys() if day <= max_day)
     if not days:
         print("No day data to plot.")
         return
@@ -144,23 +136,32 @@ def plot_accuracy_over_time(data, min_datapoints=10, output_dir="graphs"):
 
     ax.set_xlabel("Prediction Day")
     ax.set_ylabel("Mean Absolute Percentage Error (MAPE) %")
-    ax.set_title("Prediction Accuracy Degradation Over Time")
+    ax.set_title(
+        f"Prediction MAPE Over Time (Days 1-{max_day}, Min {min_datapoints} samples/day)"
+    )
     ax.grid(True, linestyle="--", alpha=0.7)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
 
+    # Set axes to start at 0
+    ax.set_xlim(left=0)
+    ax.set_ylim(bottom=0)
+
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "accuracy_over_time.png"))
+    plt.savefig(os.path.join(output_dir, "accuracy_over_time.pdf"))
     plt.close()
 
 
-def plot_model_accuracy_over_time(data, min_datapoints=10, output_dir="graphs"):
-    """Plot accuracy trends for individual models over time."""
+def plot_model_accuracy_over_time(
+    data, max_day, min_datapoints=10, output_dir="graphs"
+):
+    """Plot MAPE trends for individual models over time."""
     os.makedirs(output_dir, exist_ok=True)
     model_day_metrics = data["model_day_metrics"]
     model_counts = data["model_counts"]
     day_metrics = data["day_metrics"]
 
-    days = sorted(day_metrics.keys())
+    days = sorted(day for day in day_metrics.keys() if day <= max_day)
     if not days:
         print("No model-day data to plot.")
         return
@@ -179,29 +180,36 @@ def plot_model_accuracy_over_time(data, min_datapoints=10, output_dir="graphs"):
     fig, ax = plt.subplots(figsize=(12, 6))
 
     for model in sorted(valid_models):
+        if (
+            model == "llama-3.1-8b-instant"
+            or model == "meta-llama/llama-4-scout-17b-16e-instruct"
+        ):
+            continue
+
         model_mape = []
-        model_counts = []
+        model_day_counts = []
+        valid_days = []
         for day in days:
             if (
                 day in model_day_metrics[model]
                 and len(model_day_metrics[model][day]) >= min_datapoints
             ):
                 model_mape.append(np.mean(model_day_metrics[model][day]) * 100)
-                model_counts.append(len(model_day_metrics[model][day]))
-            else:
-                model_mape.append(np.nan)
-                model_counts.append(0)
+                model_day_counts.append(len(model_day_metrics[model][day]))
+                valid_days.append(day)
 
         display_name = model.replace("meta-llama/", "")
-        line = ax.plot(days, model_mape, marker="o", linestyle="-", label=display_name)
+        line = ax.plot(
+            valid_days, model_mape, marker="o", linestyle="-", label=display_name
+        )
 
         # Add count annotations
-        for i, day in enumerate(days):
-            if model_counts[i] > 0:
+        for i, day in enumerate(valid_days):
+            if model_day_counts[i] > 0:
                 ax.text(
                     day,
                     model_mape[i],
-                    f"n={model_counts[i]}",
+                    f"n={model_day_counts[i]}",
                     ha="center",
                     va="bottom",
                     fontsize=8,
@@ -210,34 +218,52 @@ def plot_model_accuracy_over_time(data, min_datapoints=10, output_dir="graphs"):
 
     ax.set_xlabel("Prediction Day")
     ax.set_ylabel("Mean Absolute Percentage Error (MAPE) %")
-    ax.set_title(f"Model Accuracy Over Time (Min {min_datapoints} datapoints)")
+    ax.set_title(
+        f"Model MAPE Over Time (Days 1-{max_day}, Min {min_datapoints} samples/day)"
+    )
     ax.grid(True, linestyle="--", alpha=0.7)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    ax.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
+
+    # Set axes to start at 0
+    ax.set_xlim(left=0)
+    ax.set_ylim(bottom=0)
+
+    # Move legend inside plot at bottom right
+    ax.legend(loc="lower right")
 
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "model_accuracy_over_time.png"))
+    plt.savefig(os.path.join(output_dir, "model_accuracy_over_time.pdf"))
     plt.close()
 
 
-def plot_source_accuracy_over_time(data, min_datapoints=10, output_dir="graphs"):
-    """Plot accuracy trends for individual sources over time."""
+def plot_source_accuracy_over_time(
+    data, max_day, min_datapoints=10, output_dir="graphs"
+):
+    """Plot MAPE trends for individual sources over time."""
     os.makedirs(output_dir, exist_ok=True)
     source_day_metrics = data["source_day_metrics"]
     source_counts = data["source_counts"]
     day_metrics = data["day_metrics"]
 
-    days = sorted(day_metrics.keys())
+    days = sorted(day for day in day_metrics.keys() if day <= max_day)
     if not days:
         print("No source-day data to plot.")
         return
 
-    # Filter sources with sufficient data
-    valid_sources = [
-        source
-        for source in source_day_metrics
-        if sum(source_counts[source].values()) >= min_datapoints
-    ]
+    # Filter sources with sufficient data and at least one valid day
+    valid_sources = []
+    for source in source_day_metrics:
+        valid_days = [
+            day
+            for day in days
+            if (
+                day in source_day_metrics[source]
+                and len(source_day_metrics[source][day]) >= min_datapoints
+            )
+        ]
+        if valid_days:
+            valid_sources.append((source, valid_days))
 
     if not valid_sources:
         print("No sources meet the minimum datapoint requirement.")
@@ -245,29 +271,22 @@ def plot_source_accuracy_over_time(data, min_datapoints=10, output_dir="graphs")
 
     fig, ax = plt.subplots(figsize=(12, 6))
 
-    for source in sorted(valid_sources):
+    for source, valid_days in sorted(valid_sources, key=lambda x: x[0]):
         source_mape = []
-        source_counts = []
-        for day in days:
-            if (
-                day in source_day_metrics[source]
-                and len(source_day_metrics[source][day]) >= min_datapoints
-            ):
-                source_mape.append(np.mean(source_day_metrics[source][day]) * 100)
-                source_counts.append(len(source_day_metrics[source][day]))
-            else:
-                source_mape.append(np.nan)
-                source_counts.append(0)
+        source_day_counts = []
+        for day in valid_days:
+            source_mape.append(np.mean(source_day_metrics[source][day]) * 100)
+            source_day_counts.append(len(source_day_metrics[source][day]))
 
-        line = ax.plot(days, source_mape, marker="o", linestyle="-", label=source)
+        line = ax.plot(valid_days, source_mape, marker="o", linestyle="-", label=source)
 
         # Add count annotations
-        for i, day in enumerate(days):
-            if source_counts[i] > 0:
+        for i, day in enumerate(valid_days):
+            if source_day_counts[i] > 0:
                 ax.text(
                     day,
                     source_mape[i],
-                    f"n={source_counts[i]}",
+                    f"n={source_day_counts[i]}",
                     ha="center",
                     va="bottom",
                     fontsize=8,
@@ -276,18 +295,27 @@ def plot_source_accuracy_over_time(data, min_datapoints=10, output_dir="graphs")
 
     ax.set_xlabel("Prediction Day")
     ax.set_ylabel("Mean Absolute Percentage Error (MAPE) %")
-    ax.set_title(f"Source Accuracy Over Time (Min {min_datapoints} datapoints)")
+    ax.set_title(
+        f"Source MAPE Over Time (Days 1-{max_day}, Min {min_datapoints} samples/day)"
+    )
     ax.grid(True, linestyle="--", alpha=0.7)
     ax.xaxis.set_major_locator(MaxNLocator(integer=True))
-    ax.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
+
+    # Set axes to start at 0
+    ax.set_xlim(left=0)
+    ax.set_ylim(bottom=0)
+
+    # Move legend inside plot at bottom right
+    ax.legend(loc="lower right")
 
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "source_accuracy_over_time.png"))
+    plt.savefig(os.path.join(output_dir, "source_accuracy_over_time.pdf"))
     plt.close()
 
 
-def plot_model_comparison(data, min_datapoints=10, output_dir="graphs"):
-    """Generate bar chart comparing overall model accuracy."""
+def plot_model_comparison(data, max_day, min_datapoints=10, output_dir="graphs"):
+    """Generate bar chart comparing overall model MAPE."""
     os.makedirs(output_dir, exist_ok=True)
     model_overall = data["model_overall"]
 
@@ -332,17 +360,23 @@ def plot_model_comparison(data, min_datapoints=10, output_dir="graphs"):
         )
 
     ax.set_ylabel("Mean Absolute Percentage Error (MAPE) %")
-    ax.set_title(f"Model Accuracy Comparison (Min {min_datapoints} datapoints)")
+    ax.set_title(
+        f"Model MAPE Comparison (Days 1-{max_day}, Min {min_datapoints} samples)"
+    )
     plt.xticks(rotation=45, ha="right")
     ax.grid(axis="y", linestyle="--", alpha=0.7)
 
+    # Set y-axis to start at 0
+    ax.set_ylim(bottom=0)
+
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "model_comparison.png"))
+    plt.savefig(os.path.join(output_dir, "model_comparison.pdf"))
     plt.close()
 
 
-def plot_source_comparison(data, min_datapoints=10, output_dir="graphs"):
-    """Generate bar chart comparing overall source accuracy."""
+def plot_source_comparison(data, max_day, min_datapoints=10, output_dir="graphs"):
+    """Generate bar chart comparing overall source MAPE."""
     os.makedirs(output_dir, exist_ok=True)
     source_overall = data["source_overall"]
 
@@ -386,20 +420,27 @@ def plot_source_comparison(data, min_datapoints=10, output_dir="graphs"):
         )
 
     ax.set_ylabel("Mean Absolute Percentage Error (MAPE) %")
-    ax.set_title(f"Source Accuracy Comparison (Min {min_datapoints} datapoints)")
+    ax.set_title(
+        f"Source MAPE Comparison (Days 1-{max_day}, Min {min_datapoints} samples)"
+    )
     plt.xticks(rotation=90, ha="center")
     ax.grid(axis="y", linestyle="--", alpha=0.7)
+
+    # Set y-axis to start at 0
+    ax.set_ylim(bottom=0)
 
     plt.subplots_adjust(bottom=0.4)
     plt.tight_layout()
     plt.savefig(os.path.join(output_dir, "source_comparison.png"))
+    plt.savefig(os.path.join(output_dir, "source_comparison.pdf"))
     plt.close()
 
 
-def print_summary_stats(data, min_datapoints=10):
+def print_summary_stats(data, max_day, min_datapoints=10):
     """Print summary statistics to console."""
     print("\nSummary Statistics")
     print("=" * 70)
+    print(f"Analysis Parameters: Days 1-{max_day}, Min {min_datapoints} samples")
 
     # Model statistics
     print("\nModel Performance:")
@@ -430,7 +471,7 @@ def print_summary_stats(data, min_datapoints=10):
 def main():
     """Command line interface for prediction analysis."""
     parser = argparse.ArgumentParser(
-        description="Analyze prediction accuracy across models and sources"
+        description="Analyze prediction MAPE across models and sources"
     )
     parser.add_argument(
         "--data-dir", type=str, default="data", help="Directory containing JSON files"
@@ -438,14 +479,8 @@ def main():
     parser.add_argument(
         "--max-day",
         type=int,
-        default=12,
-        help="Maximum prediction day to analyze (1-12)",
-    )
-    parser.add_argument(
-        "--max-include-day",
-        type=int,
         default=3,
-        help="Maximum day to include in analysis (1-12)",
+        help="Maximum prediction day to analyze (1-12)",
     )
     parser.add_argument(
         "--min-datapoints",
@@ -461,18 +496,17 @@ def main():
     )
     args = parser.parse_args()
 
-    data = load_data(
-        args.data_dir, args.max_day, args.min_articles, args.max_include_day
-    )
-    print_summary_stats(data, args.min_datapoints)
+    data = load_data(args.data_dir, args.max_day, args.min_articles)
+    print_summary_stats(data, args.max_day, args.min_datapoints)
 
-    if args.max_include_day == 12:
-        plot_accuracy_over_time(data, args.min_datapoints)
-        plot_model_accuracy_over_time(data, args.min_datapoints)
-        plot_source_accuracy_over_time(data, args.min_datapoints)
-    plot_model_comparison(data, args.min_datapoints)
-    plot_source_comparison(data, args.min_datapoints)
+    plot_accuracy_over_time(data, args.max_day, args.min_datapoints)
+    plot_model_accuracy_over_time(data, args.max_day, args.min_datapoints)
+    plot_source_accuracy_over_time(data, args.max_day, args.min_datapoints)
+    plot_model_comparison(data, args.max_day, args.min_datapoints)
+    plot_source_comparison(data, args.max_day, args.min_datapoints)
 
 
 if __name__ == "__main__":
     main()
+
+# python main.py --max-day 3 --max-include-day 3 --min-datapoints 20 --min-articles 10

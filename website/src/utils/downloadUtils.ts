@@ -40,11 +40,10 @@ export interface PredictionExportData {
   sumAnalysis: {
     summary: string;
     predictions: {
-      [key: string]: number;
+      [key: string]: number | null;
     };
   };
 }
-
 /**
  * @brief Downloads all prediction data for a ticker-model combination
  * @param ticker - Stock ticker symbol
@@ -65,9 +64,37 @@ export async function downloadTickerModelData(
   const startDate = getEarliestDate(predictionData);
   const historicalData = await fetchHistoricalData(ticker, startDate);
 
-  const sumAnalysisResponse = await fetchSumAnalysis(ticker, model);
-  if (!sumAnalysisResponse?.analysis) {
-    throw new Error(`No sum analysis found for ${ticker}-${model}`);
+  // Initialize sumAnalysis with null values in case fetching fails
+  let sumAnalysis = {
+    summary: "No summary available",
+    predictions: {} as Record<string, number | null>,
+  };
+
+  try {
+    const sumAnalysisResponse = await fetchSumAnalysis(ticker, model);
+    if (sumAnalysisResponse?.analysis) {
+      sumAnalysis = {
+        summary: sumAnalysisResponse.analysis.summary || "No summary available",
+        predictions: Object.fromEntries(
+          Object.entries(sumAnalysisResponse.analysis)
+            .filter(([key]: [string, unknown]) => key.startsWith("prediction_"))
+            .map(([key, value]: [string, unknown]) => [
+              key.replace("prediction_", "").replace("_day", ""),
+              value as number | null,
+            ]),
+        ),
+      };
+    }
+  } catch (error) {
+    console.error(
+      `Failed to fetch sum analysis for ${ticker}-${model}:`,
+      error,
+    );
+    // Continue with null values for predictions
+    sumAnalysis = {
+      summary: "Failed to fetch analysis summary",
+      predictions: {},
+    };
   }
 
   // Create type-safe historical price map
@@ -106,17 +133,7 @@ export async function downloadTickerModelData(
     model,
     timestamp: new Date().toISOString(),
     predictionsByArticle: processedArticles,
-    sumAnalysis: {
-      summary: sumAnalysisResponse.analysis.summary || "No summary available.",
-      predictions: Object.fromEntries(
-        Object.entries(sumAnalysisResponse.analysis)
-          .filter(([key]: [string, unknown]) => key.startsWith("prediction_"))
-          .map(([key, value]: [string, unknown]) => [
-            key.replace("prediction_", "").replace("_day", ""),
-            value as number,
-          ]),
-      ),
-    },
+    sumAnalysis,
   };
 
   // Trigger download

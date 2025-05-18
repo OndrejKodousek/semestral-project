@@ -23,37 +23,39 @@ const ArticleList: React.FC<ArticleListProps> = ({
   ticker,
 }) => {
   return (
-    <>
-      {predictionData &&
-        predictionData.length > 0 &&
-        predictionData.map((item, index) => (
-          <div
-            className={`p-3 ${index !== 0 ? "mt-3" : ""} article`}
-            key={index}
-          >
+    <div className="article-list-container">
+      <div className="article-content">
+        {predictionData &&
+          predictionData.length > 0 &&
+          predictionData.map((item, index) => (
             <div
-              className={`backdrop-${formatStringToCSSClass(item.source)} row p-3`}
+              className={`p-3 ${index !== 0 ? "mt-3" : ""} article`}
+              key={index}
             >
-              <div className="col-6">
-                <div className="pb-3">
-                  <a href={item.link}>
-                    {item.source}: {item.title}
-                  </a>
+              <div
+                className={`backdrop-${formatStringToCSSClass(item.source)} row p-3`}
+              >
+                <div className="col-6">
+                  <div className="pb-3">
+                    <a href={item.link}>
+                      {item.source}: {item.title}
+                    </a>
+                  </div>
+                  <div>{item.summary}</div>
                 </div>
-                <div>{item.summary}</div>
-              </div>
-              <div className="col-6">
-                <ArticleChart
-                  predictions={item.predictions}
-                  historicalData={historicalData}
-                  published={item.published}
-                  ticker={ticker}
-                />
+                <div className="col-6">
+                  <ArticleChart
+                    predictions={item.predictions}
+                    historicalData={historicalData}
+                    published={item.published}
+                    ticker={ticker}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-    </>
+          ))}
+      </div>
+    </div>
   );
 };
 

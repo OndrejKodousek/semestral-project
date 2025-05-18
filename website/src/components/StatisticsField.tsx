@@ -96,7 +96,7 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
       : null;
 
   return (
-    <>
+    <div className="h-100">
       {/* Mode 1: Article List View */}
       {mode === 1 && relevantPredictionData && (
         <ArticleList
@@ -158,11 +158,10 @@ const StatisticsField: React.FC<StatisticsFieldProps> = ({
         />
       )}
 
-      {/* Loading state */}
       {mode === 1 && !relevantPredictionData && ticker && (
         <p>Loading analysis data for {ticker}...</p>
       )}
-    </>
+    </div>
   );
 };
 
