@@ -1,0 +1,545 @@
+Model,Source,MAPE,Samples
+deepseek-r1-distill-llama-70b,Associated Press,3.83%,11
+deepseek-r1-distill-llama-70b,Associated Press Finance,13.93%,42
+deepseek-r1-distill-llama-70b,Automotive Dive,13.22%,7
+deepseek-r1-distill-llama-70b,Banking Dive,5.43%,5
+deepseek-r1-distill-llama-70b,Benzinga,5.55%,150
+deepseek-r1-distill-llama-70b,Black Enterprise,2.18%,2
+deepseek-r1-distill-llama-70b,Bloomberg,7.26%,46
+deepseek-r1-distill-llama-70b,Business Insider,3.47%,21
+deepseek-r1-distill-llama-70b,C-Store Dive,2.80%,12
+deepseek-r1-distill-llama-70b,CFO.com,4.77%,5
+deepseek-r1-distill-llama-70b,CoinDesk,9.01%,21
+deepseek-r1-distill-llama-70b,Exec Edge,3.57%,17
+deepseek-r1-distill-llama-70b,FX Empire,8.14%,12
+deepseek-r1-distill-llama-70b,FastCompany,8.00%,1
+deepseek-r1-distill-llama-70b,Footwear News,15.08%,3
+deepseek-r1-distill-llama-70b,Fortune,8.41%,28
+deepseek-r1-distill-llama-70b,Fox Business,1.55%,7
+deepseek-r1-distill-llama-70b,FreightWaves,7.22%,23
+deepseek-r1-distill-llama-70b,GOBankingRates,6.42%,11
+deepseek-r1-distill-llama-70b,Grocery Dive,3.40%,7
+deepseek-r1-distill-llama-70b,Healthcare Dive,20.92%,7
+deepseek-r1-distill-llama-70b,IPO-Edge.com,8.24%,4
+deepseek-r1-distill-llama-70b,Insider Monkey,5.01%,2264
+deepseek-r1-distill-llama-70b,International Accounting Bulletin,5.49%,6
+deepseek-r1-distill-llama-70b,Investing.com,5.78%,7
+deepseek-r1-distill-llama-70b,Investopedia,4.03%,89
+deepseek-r1-distill-llama-70b,Just Auto,1.21%,10
+deepseek-r1-distill-llama-70b,Just Drinks,12.61%,11
+deepseek-r1-distill-llama-70b,Just Food,1.85%,13
+deepseek-r1-distill-llama-70b,LA Times,0.73%,2
+deepseek-r1-distill-llama-70b,Leasing Life,0.67%,1
+deepseek-r1-distill-llama-70b,Life Insurance International,1.40%,10
+deepseek-r1-distill-llama-70b,MarketWatch,6.49%,11
+deepseek-r1-distill-llama-70b,Medical Device Network,3.95%,1
+deepseek-r1-distill-llama-70b,Mining Technology,10.21%,19
+deepseek-r1-distill-llama-70b,Moneywise,3.05%,14
+deepseek-r1-distill-llama-70b,Motley Fool,5.27%,532
+deepseek-r1-distill-llama-70b,Offshore Technology,3.50%,7
+deepseek-r1-distill-llama-70b,Oilprice.com,3.50%,1
+deepseek-r1-distill-llama-70b,Packaging Gateway,2.46%,5
+deepseek-r1-distill-llama-70b,Payments Dive,3.09%,4
+deepseek-r1-distill-llama-70b,Private Banker International,0.76%,8
+deepseek-r1-distill-llama-70b,Quartz,4.39%,23
+deepseek-r1-distill-llama-70b,Retail Dive,2.64%,8
+deepseek-r1-distill-llama-70b,Retail Insight Network,2.80%,14
+deepseek-r1-distill-llama-70b,Reuters,6.22%,423
+deepseek-r1-distill-llama-70b,Schaeffer's Investment Research,35.14%,4
+deepseek-r1-distill-llama-70b,Sourcing Journal,1.80%,1
+deepseek-r1-distill-llama-70b,The Guardian,4.65%,2
+deepseek-r1-distill-llama-70b,TheStreet,5.60%,33
+deepseek-r1-distill-llama-70b,TipRanks,6.87%,46
+deepseek-r1-distill-llama-70b,USA TODAY,1.49%,9
+deepseek-r1-distill-llama-70b,Verdict,5.88%,12
+deepseek-r1-distill-llama-70b,WWD,9.15%,16
+deepseek-r1-distill-llama-70b,World Construction Network,1.55%,3
+deepseek-r1-distill-llama-70b,Yahoo Finance,4.85%,133
+deepseek-r1-distill-llama-70b,Yahoo Personal Finance,5.45%,9
+deepseek-r1-distill-llama-70b,etf.com,3.76%,28
+deepseek/deepseek-chat:free,Benzinga,5.19%,23
+deepseek/deepseek-chat:free,Exec Edge,5.66%,8
+deepseek/deepseek-chat:free,Insider Monkey,6.72%,308
+deepseek/deepseek-chat:free,Motley Fool,5.96%,34
+deepseek/deepseek-chat:free,Reuters,3.31%,16
+deepseek/deepseek-chat:free,TheStreet,13.40%,8
+gemini-1.5-flash,Associated Press,1.22%,11
+gemini-1.5-flash,Associated Press Finance,12.07%,43
+gemini-1.5-flash,Automotive Dive,9.61%,7
+gemini-1.5-flash,Banking Dive,6.37%,8
+gemini-1.5-flash,Benzinga,5.34%,197
+gemini-1.5-flash,Black Enterprise,0.92%,3
+gemini-1.5-flash,Bloomberg,7.21%,54
+gemini-1.5-flash,Business Insider,6.56%,28
+gemini-1.5-flash,C-Store Dive,0.88%,8
+gemini-1.5-flash,CFO.com,1.49%,6
+gemini-1.5-flash,CoinDesk,7.19%,35
+gemini-1.5-flash,Exec Edge,5.98%,12
+gemini-1.5-flash,FX Empire,7.46%,12
+gemini-1.5-flash,FastCompany,9.11%,1
+gemini-1.5-flash,Footwear News,13.90%,3
+gemini-1.5-flash,Fortune,9.02%,22
+gemini-1.5-flash,Fox Business,2.99%,7
+gemini-1.5-flash,FreightWaves,9.08%,33
+gemini-1.5-flash,GOBankingRates,3.93%,12
+gemini-1.5-flash,Grocery Dive,3.14%,7
+gemini-1.5-flash,Healthcare Dive,15.30%,7
+gemini-1.5-flash,IPO-Edge.com,9.61%,4
+gemini-1.5-flash,Insider Monkey,5.37%,2272
+gemini-1.5-flash,International Accounting Bulletin,1.62%,6
+gemini-1.5-flash,Investing.com,11.68%,7
+gemini-1.5-flash,Investopedia,5.38%,89
+gemini-1.5-flash,Just Auto,8.74%,14
+gemini-1.5-flash,Just Drinks,16.12%,11
+gemini-1.5-flash,Just Food,2.03%,13
+gemini-1.5-flash,LA Times,1.21%,1
+gemini-1.5-flash,Leasing Life,1.03%,1
+gemini-1.5-flash,Life Insurance International,1.05%,5
+gemini-1.5-flash,MarketWatch,4.04%,6
+gemini-1.5-flash,Medical Device Network,3.18%,1
+gemini-1.5-flash,Mining Technology,3.82%,32
+gemini-1.5-flash,Moneywise,1.22%,14
+gemini-1.5-flash,Motley Fool,5.76%,560
+gemini-1.5-flash,Offshore Technology,8.53%,4
+gemini-1.5-flash,Packaging Gateway,3.22%,1
+gemini-1.5-flash,Payments Dive,3.26%,4
+gemini-1.5-flash,Power Technology,2.56%,2
+gemini-1.5-flash,Private Banker International,2.16%,8
+gemini-1.5-flash,Quartz,5.71%,24
+gemini-1.5-flash,Retail Dive,9.75%,8
+gemini-1.5-flash,Retail Insight Network,1.75%,15
+gemini-1.5-flash,Reuters,5.60%,497
+gemini-1.5-flash,Schaeffer's Investment Research,35.51%,4
+gemini-1.5-flash,Sourcing Journal,2.25%,1
+gemini-1.5-flash,The Guardian,4.78%,2
+gemini-1.5-flash,TheStreet,4.50%,40
+gemini-1.5-flash,TipRanks,6.22%,46
+gemini-1.5-flash,USA TODAY,3.10%,13
+gemini-1.5-flash,Verdict,5.67%,12
+gemini-1.5-flash,Verdict Food Service,2.19%,2
+gemini-1.5-flash,WWD,3.99%,9
+gemini-1.5-flash,World Construction Network,2.20%,3
+gemini-1.5-flash,Yahoo Finance,4.66%,149
+gemini-1.5-flash,Yahoo Personal Finance,8.23%,30
+gemini-1.5-flash,etf.com,2.22%,28
+gemini-1.5-flash-8b,Associated Press,5.04%,4
+gemini-1.5-flash-8b,Associated Press Finance,19.52%,29
+gemini-1.5-flash-8b,Automotive Dive,13.48%,7
+gemini-1.5-flash-8b,Benzinga,4.14%,126
+gemini-1.5-flash-8b,Bloomberg,6.10%,37
+gemini-1.5-flash-8b,Business Insider,5.94%,22
+gemini-1.5-flash-8b,CoinDesk,3.80%,32
+gemini-1.5-flash-8b,Exec Edge,3.83%,17
+gemini-1.5-flash-8b,FX Empire,2.51%,12
+gemini-1.5-flash-8b,FastCompany,7.45%,1
+gemini-1.5-flash-8b,Footwear News,13.97%,3
+gemini-1.5-flash-8b,Fortune,6.83%,20
+gemini-1.5-flash-8b,Fox Business,0.55%,5
+gemini-1.5-flash-8b,FreightWaves,10.17%,20
+gemini-1.5-flash-8b,GOBankingRates,4.59%,7
+gemini-1.5-flash-8b,Healthcare Dive,20.54%,7
+gemini-1.5-flash-8b,IPO-Edge.com,8.60%,4
+gemini-1.5-flash-8b,Insider Monkey,4.85%,2250
+gemini-1.5-flash-8b,Investing.com,3.14%,7
+gemini-1.5-flash-8b,Investopedia,4.91%,87
+gemini-1.5-flash-8b,Just Auto,1.60%,8
+gemini-1.5-flash-8b,Just Drinks,13.17%,11
+gemini-1.5-flash-8b,Just Food,1.24%,5
+gemini-1.5-flash-8b,Life Insurance International,11.61%,5
+gemini-1.5-flash-8b,Medical Device Network,0.39%,1
+gemini-1.5-flash-8b,Mining Technology,4.14%,20
+gemini-1.5-flash-8b,Motley Fool,5.66%,488
+gemini-1.5-flash-8b,Offshore Technology,0.60%,3
+gemini-1.5-flash-8b,Packaging Gateway,1.37%,4
+gemini-1.5-flash-8b,Power Technology,0.95%,2
+gemini-1.5-flash-8b,Quartz,5.20%,18
+gemini-1.5-flash-8b,Retail Insight Network,2.62%,19
+gemini-1.5-flash-8b,Reuters,6.12%,286
+gemini-1.5-flash-8b,Schaeffer's Investment Research,34.25%,4
+gemini-1.5-flash-8b,TheStreet,6.86%,27
+gemini-1.5-flash-8b,TipRanks,5.76%,45
+gemini-1.5-flash-8b,USA TODAY,1.08%,3
+gemini-1.5-flash-8b,Verdict,1.14%,2
+gemini-1.5-flash-8b,WWD,3.03%,3
+gemini-1.5-flash-8b,Yahoo Finance,5.20%,120
+gemini-1.5-flash-8b,etf.com,2.62%,14
+gemini-2.0-flash,Associated Press,4.09%,11
+gemini-2.0-flash,Associated Press Finance,10.21%,56
+gemini-2.0-flash,Automotive Dive,12.42%,7
+gemini-2.0-flash,Automotive News,2.02%,6
+gemini-2.0-flash,Banking Dive,6.99%,8
+gemini-2.0-flash,Benzinga,4.24%,214
+gemini-2.0-flash,Black Enterprise,0.85%,2
+gemini-2.0-flash,Bloomberg,5.18%,65
+gemini-2.0-flash,Business Insider,6.04%,29
+gemini-2.0-flash,C-Store Dive,0.76%,12
+gemini-2.0-flash,CFO.com,5.31%,6
+gemini-2.0-flash,CoinDesk,6.62%,20
+gemini-2.0-flash,Exec Edge,7.15%,12
+gemini-2.0-flash,FX Empire,1.90%,12
+gemini-2.0-flash,FastCompany,7.17%,1
+gemini-2.0-flash,Footwear News,14.46%,3
+gemini-2.0-flash,Fortune,8.85%,22
+gemini-2.0-flash,Fox Business,0.54%,5
+gemini-2.0-flash,FreightWaves,7.32%,37
+gemini-2.0-flash,GOBankingRates,2.14%,51
+gemini-2.0-flash,Grocery Dive,4.75%,7
+gemini-2.0-flash,Healthcare Dive,20.71%,7
+gemini-2.0-flash,IPO-Edge.com,9.44%,4
+gemini-2.0-flash,Insider Monkey,5.04%,2240
+gemini-2.0-flash,International Accounting Bulletin,4.07%,6
+gemini-2.0-flash,Investing.com,3.75%,7
+gemini-2.0-flash,Investopedia,4.64%,89
+gemini-2.0-flash,Just Auto,2.03%,12
+gemini-2.0-flash,Just Drinks,13.46%,11
+gemini-2.0-flash,Just Food,2.93%,13
+gemini-2.0-flash,LA Times,0.96%,1
+gemini-2.0-flash,Life Insurance International,5.42%,12
+gemini-2.0-flash,MarketWatch,3.18%,18
+gemini-2.0-flash,Medical Device Network,0.53%,1
+gemini-2.0-flash,Mining Technology,2.34%,27
+gemini-2.0-flash,Moneywise,2.67%,34
+gemini-2.0-flash,Motley Fool,5.67%,533
+gemini-2.0-flash,Motor Finance,0.47%,3
+gemini-2.0-flash,Offshore Technology,1.80%,6
+gemini-2.0-flash,Oilprice.com,2.82%,1
+gemini-2.0-flash,Payments Dive,3.48%,4
+gemini-2.0-flash,Private Banker International,2.07%,16
+gemini-2.0-flash,Quartz,4.25%,23
+gemini-2.0-flash,Retail Dive,7.23%,8
+gemini-2.0-flash,Retail Insight Network,2.16%,14
+gemini-2.0-flash,Reuters,5.00%,534
+gemini-2.0-flash,Schaeffer's Investment Research,34.65%,4
+gemini-2.0-flash,Sourcing Journal,2.12%,1
+gemini-2.0-flash,The Telegraph,1.19%,6
+gemini-2.0-flash,TheStreet,5.05%,36
+gemini-2.0-flash,TipRanks,6.42%,46
+gemini-2.0-flash,USA TODAY,2.51%,13
+gemini-2.0-flash,Verdict,7.46%,13
+gemini-2.0-flash,WWD,4.41%,10
+gemini-2.0-flash,World Construction Network,1.00%,3
+gemini-2.0-flash,Yahoo Finance,4.44%,157
+gemini-2.0-flash,Yahoo Personal Finance,4.21%,91
+gemini-2.0-flash,etf.com,3.72%,29
+gemini-2.0-flash-lite,Associated Press,3.37%,11
+gemini-2.0-flash-lite,Associated Press Finance,12.24%,46
+gemini-2.0-flash-lite,Automotive Dive,10.90%,7
+gemini-2.0-flash-lite,Banking Dive,6.95%,8
+gemini-2.0-flash-lite,Benzinga,4.32%,162
+gemini-2.0-flash-lite,Bloomberg,7.25%,54
+gemini-2.0-flash-lite,Business Insider,6.70%,22
+gemini-2.0-flash-lite,C-Store Dive,1.01%,8
+gemini-2.0-flash-lite,CoinDesk,7.58%,16
+gemini-2.0-flash-lite,Exec Edge,5.18%,12
+gemini-2.0-flash-lite,FX Empire,4.01%,12
+gemini-2.0-flash-lite,FastCompany,8.57%,1
+gemini-2.0-flash-lite,Footwear News,14.00%,3
+gemini-2.0-flash-lite,Fortune,8.24%,20
+gemini-2.0-flash-lite,Fox Business,1.63%,5
+gemini-2.0-flash-lite,FreightWaves,7.48%,32
+gemini-2.0-flash-lite,GOBankingRates,2.24%,16
+gemini-2.0-flash-lite,Grocery Dive,3.22%,7
+gemini-2.0-flash-lite,Healthcare Dive,20.13%,7
+gemini-2.0-flash-lite,IPO-Edge.com,10.62%,4
+gemini-2.0-flash-lite,Insider Monkey,4.91%,2273
+gemini-2.0-flash-lite,Investing.com,3.01%,7
+gemini-2.0-flash-lite,Investopedia,4.36%,94
+gemini-2.0-flash-lite,Just Auto,0.84%,9
+gemini-2.0-flash-lite,Just Drinks,13.65%,11
+gemini-2.0-flash-lite,Just Food,2.66%,13
+gemini-2.0-flash-lite,LA Times,0.96%,1
+gemini-2.0-flash-lite,Life Insurance International,1.18%,5
+gemini-2.0-flash-lite,MarketWatch,1.78%,6
+gemini-2.0-flash-lite,Medical Device Network,0.84%,1
+gemini-2.0-flash-lite,Mining Technology,2.10%,10
+gemini-2.0-flash-lite,Moneywise,0.84%,2
+gemini-2.0-flash-lite,Motley Fool,5.40%,533
+gemini-2.0-flash-lite,Offshore Technology,0.81%,3
+gemini-2.0-flash-lite,Oilprice.com,0.73%,1
+gemini-2.0-flash-lite,Payments Dive,3.03%,4
+gemini-2.0-flash-lite,Power Technology,0.75%,1
+gemini-2.0-flash-lite,Private Banker International,2.26%,8
+gemini-2.0-flash-lite,Quartz,4.87%,20
+gemini-2.0-flash-lite,Retail Dive,9.12%,8
+gemini-2.0-flash-lite,Retail Insight Network,2.95%,14
+gemini-2.0-flash-lite,Reuters,5.63%,417
+gemini-2.0-flash-lite,Schaeffer's Investment Research,34.97%,4
+gemini-2.0-flash-lite,TheStreet,5.89%,43
+gemini-2.0-flash-lite,TipRanks,6.51%,46
+gemini-2.0-flash-lite,USA TODAY,1.40%,9
+gemini-2.0-flash-lite,Verdict,1.35%,2
+gemini-2.0-flash-lite,WWD,4.93%,8
+gemini-2.0-flash-lite,World Construction Network,2.68%,3
+gemini-2.0-flash-lite,Yahoo Finance,4.43%,133
+gemini-2.0-flash-lite,Yahoo Personal Finance,5.64%,20
+gemini-2.0-flash-lite,etf.com,4.09%,28
+gemini-2.5-flash-preview-04-17,Associated Press,4.82%,11
+gemini-2.5-flash-preview-04-17,Associated Press Finance,9.75%,41
+gemini-2.5-flash-preview-04-17,Automotive Dive,13.79%,7
+gemini-2.5-flash-preview-04-17,Banking Dive,4.70%,8
+gemini-2.5-flash-preview-04-17,Benzinga,5.34%,138
+gemini-2.5-flash-preview-04-17,Black Enterprise,0.35%,2
+gemini-2.5-flash-preview-04-17,Bloomberg,5.46%,49
+gemini-2.5-flash-preview-04-17,Business Insider,9.36%,20
+gemini-2.5-flash-preview-04-17,C-Store Dive,4.11%,16
+gemini-2.5-flash-preview-04-17,CFO.com,5.46%,6
+gemini-2.5-flash-preview-04-17,CoinDesk,6.49%,16
+gemini-2.5-flash-preview-04-17,Exec Edge,4.87%,12
+gemini-2.5-flash-preview-04-17,FX Empire,3.62%,12
+gemini-2.5-flash-preview-04-17,FastCompany,7.63%,1
+gemini-2.5-flash-preview-04-17,Footwear News,14.26%,3
+gemini-2.5-flash-preview-04-17,Fortune,11.03%,16
+gemini-2.5-flash-preview-04-17,Fox Business,2.18%,5
+gemini-2.5-flash-preview-04-17,FreightWaves,11.23%,25
+gemini-2.5-flash-preview-04-17,GOBankingRates,4.06%,10
+gemini-2.5-flash-preview-04-17,Grocery Dive,3.91%,7
+gemini-2.5-flash-preview-04-17,Healthcare Dive,20.51%,7
+gemini-2.5-flash-preview-04-17,IPO-Edge.com,10.35%,4
+gemini-2.5-flash-preview-04-17,Insider Monkey,4.93%,2272
+gemini-2.5-flash-preview-04-17,International Accounting Bulletin,1.00%,6
+gemini-2.5-flash-preview-04-17,Investing.com,5.66%,7
+gemini-2.5-flash-preview-04-17,Investopedia,5.68%,89
+gemini-2.5-flash-preview-04-17,Just Auto,3.17%,11
+gemini-2.5-flash-preview-04-17,Just Drinks,14.39%,11
+gemini-2.5-flash-preview-04-17,Just Food,1.83%,13
+gemini-2.5-flash-preview-04-17,LA Times,0.57%,1
+gemini-2.5-flash-preview-04-17,Leasing Life,1.50%,1
+gemini-2.5-flash-preview-04-17,Life Insurance International,2.02%,10
+gemini-2.5-flash-preview-04-17,MarketWatch,2.46%,6
+gemini-2.5-flash-preview-04-17,Medical Device Network,0.26%,1
+gemini-2.5-flash-preview-04-17,Mining Technology,2.93%,27
+gemini-2.5-flash-preview-04-17,Moneywise,0.91%,2
+gemini-2.5-flash-preview-04-17,Motley Fool,5.52%,536
+gemini-2.5-flash-preview-04-17,Motor Finance,0.69%,3
+gemini-2.5-flash-preview-04-17,Offshore Technology,1.39%,9
+gemini-2.5-flash-preview-04-17,Oilprice.com,1.93%,1
+gemini-2.5-flash-preview-04-17,Packaging Gateway,88.29%,1
+gemini-2.5-flash-preview-04-17,Payments Dive,3.56%,4
+gemini-2.5-flash-preview-04-17,Power Technology,1.42%,2
+gemini-2.5-flash-preview-04-17,Private Banker International,2.34%,8
+gemini-2.5-flash-preview-04-17,Quartz,4.92%,19
+gemini-2.5-flash-preview-04-17,Retail Dive,7.56%,8
+gemini-2.5-flash-preview-04-17,Retail Insight Network,4.40%,14
+gemini-2.5-flash-preview-04-17,Reuters,5.22%,415
+gemini-2.5-flash-preview-04-17,Schaeffer's Investment Research,34.39%,4
+gemini-2.5-flash-preview-04-17,Sourcing Journal,1.87%,1
+gemini-2.5-flash-preview-04-17,The Guardian,3.49%,2
+gemini-2.5-flash-preview-04-17,TheStreet,5.39%,32
+gemini-2.5-flash-preview-04-17,TipRanks,6.57%,46
+gemini-2.5-flash-preview-04-17,USA TODAY,0.96%,9
+gemini-2.5-flash-preview-04-17,Verdict,3.41%,7
+gemini-2.5-flash-preview-04-17,WWD,5.08%,9
+gemini-2.5-flash-preview-04-17,World Construction Network,0.29%,3
+gemini-2.5-flash-preview-04-17,Yahoo Finance,3.83%,136
+gemini-2.5-flash-preview-04-17,Yahoo Personal Finance,2.54%,13
+gemini-2.5-flash-preview-04-17,etf.com,3.29%,23
+gemma2-9b-it,Automotive Dive,10.62%,5
+gemma2-9b-it,Benzinga,7.85%,51
+gemma2-9b-it,Bloomberg,10.99%,5
+gemma2-9b-it,Exec Edge,3.65%,8
+gemma2-9b-it,FX Empire,14.82%,6
+gemma2-9b-it,Healthcare Dive,16.93%,7
+gemma2-9b-it,Insider Monkey,5.75%,827
+gemma2-9b-it,Investopedia,2.53%,5
+gemma2-9b-it,Motley Fool,6.53%,190
+gemma2-9b-it,Reuters,5.85%,52
+gemma2-9b-it,TheStreet,11.65%,8
+gemma2-9b-it,Yahoo Finance,10.48%,5
+llama-3.1-8b-instant,Associated Press Finance,8.98%,7
+llama-3.1-8b-instant,Automotive Dive,12.05%,7
+llama-3.1-8b-instant,Benzinga,5.77%,94
+llama-3.1-8b-instant,Bloomberg,9.96%,12
+llama-3.1-8b-instant,Business Insider,3.76%,4
+llama-3.1-8b-instant,CoinDesk,15.13%,6
+llama-3.1-8b-instant,Exec Edge,5.88%,12
+llama-3.1-8b-instant,FX Empire,1.81%,6
+llama-3.1-8b-instant,FastCompany,7.69%,1
+llama-3.1-8b-instant,Footwear News,16.18%,3
+llama-3.1-8b-instant,Fortune,16.72%,8
+llama-3.1-8b-instant,FreightWaves,5.45%,8
+llama-3.1-8b-instant,Healthcare Dive,9.72%,7
+llama-3.1-8b-instant,IPO-Edge.com,10.82%,4
+llama-3.1-8b-instant,Insider Monkey,6.14%,1567
+llama-3.1-8b-instant,Investing.com,0.30%,1
+llama-3.1-8b-instant,Investopedia,4.76%,47
+llama-3.1-8b-instant,Just Drinks,19.97%,8
+llama-3.1-8b-instant,Just Food,3.59%,13
+llama-3.1-8b-instant,Life Insurance International,1.21%,5
+llama-3.1-8b-instant,Motley Fool,7.24%,274
+llama-3.1-8b-instant,Quartz,0.98%,6
+llama-3.1-8b-instant,Retail Insight Network,7.81%,3
+llama-3.1-8b-instant,Reuters,9.25%,147
+llama-3.1-8b-instant,The Guardian,8.76%,2
+llama-3.1-8b-instant,TheStreet,14.21%,12
+llama-3.1-8b-instant,TipRanks,3.10%,7
+llama-3.1-8b-instant,USA TODAY,2.08%,3
+llama-3.1-8b-instant,Verdict,1.98%,2
+llama-3.1-8b-instant,Yahoo Finance,5.88%,51
+llama-3.1-8b-instant,etf.com,0.29%,4
+llama-3.3-70b-versatile,Benzinga,7.72%,16
+llama-3.3-70b-versatile,Business Insider,3.60%,4
+llama-3.3-70b-versatile,Exec Edge,2.01%,8
+llama-3.3-70b-versatile,Insider Monkey,9.69%,168
+llama-3.3-70b-versatile,Motley Fool,3.23%,16
+llama-3.3-70b-versatile,Reuters,7.14%,32
+llama-3.3-70b-versatile,TheStreet,10.89%,8
+llama-4-maverick-17b-128e-instruct,Associated Press,2.75%,11
+llama-4-maverick-17b-128e-instruct,Associated Press Finance,15.76%,49
+llama-4-maverick-17b-128e-instruct,Automotive Dive,11.24%,7
+llama-4-maverick-17b-128e-instruct,Automotive News,5.50%,6
+llama-4-maverick-17b-128e-instruct,Banking Dive,7.11%,8
+llama-4-maverick-17b-128e-instruct,Benzinga,4.81%,147
+llama-4-maverick-17b-128e-instruct,Black Enterprise,1.04%,3
+llama-4-maverick-17b-128e-instruct,Bloomberg,4.83%,62
+llama-4-maverick-17b-128e-instruct,Business Insider,5.51%,22
+llama-4-maverick-17b-128e-instruct,C-Store Dive,3.31%,8
+llama-4-maverick-17b-128e-instruct,CFO.com,3.11%,6
+llama-4-maverick-17b-128e-instruct,CoinDesk,9.25%,22
+llama-4-maverick-17b-128e-instruct,Exec Edge,5.93%,17
+llama-4-maverick-17b-128e-instruct,FX Empire,4.63%,12
+llama-4-maverick-17b-128e-instruct,FastCompany,8.57%,1
+llama-4-maverick-17b-128e-instruct,Footwear News,13.40%,3
+llama-4-maverick-17b-128e-instruct,Fortune,6.53%,20
+llama-4-maverick-17b-128e-instruct,Fox Business,2.62%,9
+llama-4-maverick-17b-128e-instruct,FreightWaves,7.73%,32
+llama-4-maverick-17b-128e-instruct,GOBankingRates,3.87%,6
+llama-4-maverick-17b-128e-instruct,Grocery Dive,3.33%,7
+llama-4-maverick-17b-128e-instruct,Healthcare Dive,19.73%,7
+llama-4-maverick-17b-128e-instruct,IPO-Edge.com,9.07%,4
+llama-4-maverick-17b-128e-instruct,Insider Monkey,4.93%,2250
+llama-4-maverick-17b-128e-instruct,International Accounting Bulletin,2.18%,12
+llama-4-maverick-17b-128e-instruct,Investing.com,3.09%,7
+llama-4-maverick-17b-128e-instruct,Investopedia,4.17%,94
+llama-4-maverick-17b-128e-instruct,Just Auto,0.98%,10
+llama-4-maverick-17b-128e-instruct,Just Drinks,11.43%,17
+llama-4-maverick-17b-128e-instruct,Just Food,1.95%,13
+llama-4-maverick-17b-128e-instruct,LA Times,0.43%,1
+llama-4-maverick-17b-128e-instruct,Life Insurance International,1.53%,6
+llama-4-maverick-17b-128e-instruct,MarketWatch,5.88%,16
+llama-4-maverick-17b-128e-instruct,Medical Device Network,1.84%,1
+llama-4-maverick-17b-128e-instruct,Mining Technology,5.52%,31
+llama-4-maverick-17b-128e-instruct,Moneywise,1.50%,2
+llama-4-maverick-17b-128e-instruct,Motley Fool,5.52%,499
+llama-4-maverick-17b-128e-instruct,Offshore Technology,3.05%,10
+llama-4-maverick-17b-128e-instruct,Oilprice.com,3.63%,1
+llama-4-maverick-17b-128e-instruct,Packaging Gateway,1.68%,5
+llama-4-maverick-17b-128e-instruct,Payments Dive,2.65%,4
+llama-4-maverick-17b-128e-instruct,Power Technology,1.13%,2
+llama-4-maverick-17b-128e-instruct,Private Banker International,2.02%,8
+llama-4-maverick-17b-128e-instruct,Quartz,3.86%,22
+llama-4-maverick-17b-128e-instruct,Retail Dive,6.70%,8
+llama-4-maverick-17b-128e-instruct,Retail Insight Network,4.77%,19
+llama-4-maverick-17b-128e-instruct,Reuters,4.68%,510
+llama-4-maverick-17b-128e-instruct,Schaeffer's Investment Research,34.44%,4
+llama-4-maverick-17b-128e-instruct,Sourcing Journal,3.71%,1
+llama-4-maverick-17b-128e-instruct,The Guardian,5.50%,2
+llama-4-maverick-17b-128e-instruct,TheStreet,5.02%,34
+llama-4-maverick-17b-128e-instruct,TipRanks,7.63%,46
+llama-4-maverick-17b-128e-instruct,USA TODAY,2.60%,9
+llama-4-maverick-17b-128e-instruct,Verdict,6.22%,12
+llama-4-maverick-17b-128e-instruct,WWD,4.03%,9
+llama-4-maverick-17b-128e-instruct,World Construction Network,1.55%,3
+llama-4-maverick-17b-128e-instruct,Yahoo Finance,4.20%,139
+llama-4-maverick-17b-128e-instruct,Yahoo Personal Finance,5.16%,5
+llama-4-maverick-17b-128e-instruct,etf.com,3.15%,28
+llama-4-scout-17b-16e-instruct,Associated Press,0.62%,4
+llama-4-scout-17b-16e-instruct,Associated Press Finance,10.48%,27
+llama-4-scout-17b-16e-instruct,Automotive Dive,8.70%,5
+llama-4-scout-17b-16e-instruct,Banking Dive,3.48%,5
+llama-4-scout-17b-16e-instruct,Benzinga,5.62%,100
+llama-4-scout-17b-16e-instruct,Bloomberg,7.32%,22
+llama-4-scout-17b-16e-instruct,Business Insider,7.75%,14
+llama-4-scout-17b-16e-instruct,C-Store Dive,6.22%,5
+llama-4-scout-17b-16e-instruct,CoinDesk,8.45%,14
+llama-4-scout-17b-16e-instruct,Exec Edge,5.89%,14
+llama-4-scout-17b-16e-instruct,FX Empire,7.83%,10
+llama-4-scout-17b-16e-instruct,FastCompany,0.03%,1
+llama-4-scout-17b-16e-instruct,Footwear News,14.17%,3
+llama-4-scout-17b-16e-instruct,Fortune,6.79%,12
+llama-4-scout-17b-16e-instruct,Fox Business,3.20%,5
+llama-4-scout-17b-16e-instruct,FreightWaves,10.82%,15
+llama-4-scout-17b-16e-instruct,GOBankingRates,0.80%,3
+llama-4-scout-17b-16e-instruct,Grocery Dive,9.47%,5
+llama-4-scout-17b-16e-instruct,Healthcare Dive,12.85%,5
+llama-4-scout-17b-16e-instruct,IPO-Edge.com,8.88%,4
+llama-4-scout-17b-16e-instruct,Insider Monkey,4.96%,1941
+llama-4-scout-17b-16e-instruct,Investing.com,3.34%,6
+llama-4-scout-17b-16e-instruct,Investopedia,5.91%,68
+llama-4-scout-17b-16e-instruct,Just Auto,4.60%,6
+llama-4-scout-17b-16e-instruct,Just Drinks,14.20%,8
+llama-4-scout-17b-16e-instruct,Just Food,3.39%,10
+llama-4-scout-17b-16e-instruct,LA Times,1.66%,1
+llama-4-scout-17b-16e-instruct,Life Insurance International,1.58%,5
+llama-4-scout-17b-16e-instruct,Medical Device Network,5.83%,1
+llama-4-scout-17b-16e-instruct,Mining Technology,7.42%,13
+llama-4-scout-17b-16e-instruct,Motley Fool,5.12%,455
+llama-4-scout-17b-16e-instruct,Offshore Technology,8.88%,3
+llama-4-scout-17b-16e-instruct,Private Banker International,1.59%,5
+llama-4-scout-17b-16e-instruct,Quartz,1.68%,12
+llama-4-scout-17b-16e-instruct,Retail Insight Network,4.77%,19
+llama-4-scout-17b-16e-instruct,Reuters,6.67%,255
+llama-4-scout-17b-16e-instruct,Schaeffer's Investment Research,35.44%,4
+llama-4-scout-17b-16e-instruct,The Guardian,5.58%,2
+llama-4-scout-17b-16e-instruct,TheStreet,6.58%,33
+llama-4-scout-17b-16e-instruct,TipRanks,6.88%,42
+llama-4-scout-17b-16e-instruct,USA TODAY,4.53%,8
+llama-4-scout-17b-16e-instruct,Verdict,2.44%,2
+llama-4-scout-17b-16e-instruct,WWD,4.31%,8
+llama-4-scout-17b-16e-instruct,World Construction Network,1.09%,3
+llama-4-scout-17b-16e-instruct,Yahoo Finance,4.08%,99
+llama-4-scout-17b-16e-instruct,etf.com,4.27%,24
+qwen-qwq-32b,Associated Press,4.20%,11
+qwen-qwq-32b,Associated Press Finance,11.59%,48
+qwen-qwq-32b,Automotive Dive,13.41%,7
+qwen-qwq-32b,Banking Dive,5.93%,11
+qwen-qwq-32b,Benzinga,4.32%,111
+qwen-qwq-32b,Black Enterprise,0.22%,2
+qwen-qwq-32b,Bloomberg,6.54%,56
+qwen-qwq-32b,Business Insider,7.87%,20
+qwen-qwq-32b,C-Store Dive,4.06%,16
+qwen-qwq-32b,CFO.com,4.52%,10
+qwen-qwq-32b,CoinDesk,9.96%,9
+qwen-qwq-32b,Exec Edge,7.23%,12
+qwen-qwq-32b,FX Empire,2.27%,12
+qwen-qwq-32b,FastCompany,8.23%,1
+qwen-qwq-32b,Footwear News,13.30%,3
+qwen-qwq-32b,Fortune,10.42%,22
+qwen-qwq-32b,Fox Business,0.69%,6
+qwen-qwq-32b,FreightWaves,9.12%,25
+qwen-qwq-32b,GOBankingRates,4.41%,8
+qwen-qwq-32b,Grocery Dive,2.30%,7
+qwen-qwq-32b,Healthcare Dive,20.43%,7
+qwen-qwq-32b,IPO-Edge.com,8.95%,4
+qwen-qwq-32b,Insider Monkey,4.89%,2225
+qwen-qwq-32b,International Accounting Bulletin,2.48%,12
+qwen-qwq-32b,Investing.com,2.70%,7
+qwen-qwq-32b,Investopedia,5.57%,87
+qwen-qwq-32b,Just Auto,1.89%,8
+qwen-qwq-32b,Just Drinks,12.89%,11
+qwen-qwq-32b,Just Food,1.86%,13
+qwen-qwq-32b,LA Times,0.25%,1
+qwen-qwq-32b,Life Insurance International,1.54%,5
+qwen-qwq-32b,MarketWatch,0.87%,6
+qwen-qwq-32b,Medical Device Network,0.03%,1
+qwen-qwq-32b,Mining Technology,1.28%,32
+qwen-qwq-32b,Moneywise,1.42%,2
+qwen-qwq-32b,Motley Fool,5.61%,511
+qwen-qwq-32b,Motor Finance,9.41%,3
+qwen-qwq-32b,Offshore Technology,1.54%,6
+qwen-qwq-32b,Payments Dive,3.50%,4
+qwen-qwq-32b,Power Technology,2.76%,1
+qwen-qwq-32b,Private Banker International,2.83%,8
+qwen-qwq-32b,Quartz,4.62%,20
+qwen-qwq-32b,Retail Dive,7.24%,8
+qwen-qwq-32b,Retail Insight Network,9.33%,19
+qwen-qwq-32b,Reuters,5.38%,396
+qwen-qwq-32b,Schaeffer's Investment Research,34.70%,4
+qwen-qwq-32b,TheStreet,5.58%,32
+qwen-qwq-32b,TipRanks,5.71%,45
+qwen-qwq-32b,USA TODAY,1.41%,9
+qwen-qwq-32b,Verdict,2.72%,8
+qwen-qwq-32b,WWD,2.70%,20
+qwen-qwq-32b,World Construction Network,3.23%,3
+qwen-qwq-32b,Yahoo Finance,4.78%,121
+qwen-qwq-32b,Yahoo Personal Finance,5.41%,9
+qwen-qwq-32b,etf.com,3.16%,23

@@ -1,0 +1,11 @@
+model_accuracy_over_time.png:
+python main.py --max-day 12 --min-datapoints 30 --min-articles 10
+
+source_comparison: DAY 1
+python main.py --max-day 1 --min-datapoints 200 --min-articles 10
+
+source_comparison: DAY 3
+python main.py --max-day 3 --min-datapoints 200 --min-articles 10
+
+model_comparison:
+python main.py --max-day 3 --min-datapoints 200 --min-articles 10

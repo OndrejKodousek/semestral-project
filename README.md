@@ -30,6 +30,7 @@ Simple script which continuosly runs the scraper and then analyzer.
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+python scripts/create_db.py
 cd website
 npm install
 cd ..
@@ -37,12 +38,18 @@ cd ..
 
 ## Usage
 
-You need to run 3 separate processes
+You need to run 4 separate processes
 
-### Daemon
+### Daemon - Runs scraper and analyzer
 
 ```bash
 python scripts/daemon.py
+```
+
+### LSTM Daemon - Trains LSTM models and creates predictions
+
+```bash
+python scripts/lstm_daemon.py
 ```
 
 ### API server
@@ -67,7 +74,7 @@ npm run dev-host
 
 ### Build and publish website
 
-Assumes you have NGINX webserver setup up and ready to go
+Assumes you have NGINX webserver set up and ready to go
 
 ```bash
 cd website
