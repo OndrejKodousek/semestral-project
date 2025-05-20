@@ -8,19 +8,33 @@
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-def \mbox{\hyperlink{namespacemain_ad3dd80a0fa613c36027489e6a30ff4a8}{main.\+load\+\_\+data}} (data\+\_\+dir, max\+\_\+day=12, min\+\_\+articles\+\_\+per\+\_\+source=1, max\+\_\+include\+\_\+day=3)
+def \mbox{\hyperlink{namespacemain_a92e687c2f4e5310ad58c4e77f2d27613}{main.\+load\+\_\+data}} (data\+\_\+dir, max\+\_\+day=12, min\+\_\+articles\+\_\+per\+\_\+source=1)
 \item 
-def \mbox{\hyperlink{namespacemain_a6799d2420b243f26115e3ea6c34450db}{main.\+plot\+\_\+accuracy\+\_\+over\+\_\+time}} (data, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+def \mbox{\hyperlink{namespacemain_a3605faba0dbf36ce1ed82257ebebf641}{main.\+plot\+\_\+accuracy\+\_\+over\+\_\+time}} (data, max\+\_\+day, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
 \item 
-def \mbox{\hyperlink{namespacemain_a6ae94e36676b642ce57e9bf30b535f13}{main.\+plot\+\_\+model\+\_\+accuracy\+\_\+over\+\_\+time}} (data, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+def \mbox{\hyperlink{namespacemain_a9a477917d7cda0e9907b03add1b10987}{main.\+plot\+\_\+model\+\_\+accuracy\+\_\+over\+\_\+time}} (data, max\+\_\+day, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
 \item 
-def \mbox{\hyperlink{namespacemain_aef1500531fe4f19990966296f07f7e53}{main.\+plot\+\_\+source\+\_\+accuracy\+\_\+over\+\_\+time}} (data, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+def \mbox{\hyperlink{namespacemain_a6c76690d55c8c6dbc927aca69a5ce3db}{main.\+plot\+\_\+source\+\_\+accuracy\+\_\+over\+\_\+time}} (data, max\+\_\+day, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
 \item 
-def \mbox{\hyperlink{namespacemain_a173e39208dea470d5846209fff78032b}{main.\+plot\+\_\+model\+\_\+comparison}} (data, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+def \mbox{\hyperlink{namespacemain_a0db0e3cfe4f4bac345d769b59c576d30}{main.\+plot\+\_\+model\+\_\+comparison}} (data, max\+\_\+day, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
 \item 
-def \mbox{\hyperlink{namespacemain_a8395a735d305102ae106b41acd6555df}{main.\+plot\+\_\+source\+\_\+comparison}} (data, min\+\_\+datapoints=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+def \mbox{\hyperlink{namespacemain_a207b8b742c5e7d5b2c6d549893e7d112}{main.\+plot\+\_\+source\+\_\+comparison}} (data, max\+\_\+day, min\+\_\+articles=10, output\+\_\+dir=\char`\"{}graphs\char`\"{})
 \item 
-def \mbox{\hyperlink{namespacemain_a85f40bca3406eb6c66eabc63db266f2f}{main.\+print\+\_\+summary\+\_\+stats}} (data, min\+\_\+datapoints=10)
+def \mbox{\hyperlink{namespacemain_ad68619698c21610198f0c7b025e3a0d5}{main.\+print\+\_\+summary\+\_\+stats}} (data, max\+\_\+day, min\+\_\+datapoints=10)
+\item 
+def \mbox{\hyperlink{namespacemain_a38987e85b6fdcc875ee7a826b62583e9}{main.\+save\+\_\+model\+\_\+performance\+\_\+by\+\_\+day}} (data, max\+\_\+day, output\+\_\+dir=\char`\"{}tables\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_acb91ff1108e57cc9827057dd36dbcd4d}{main.\+save\+\_\+source\+\_\+performance\+\_\+by\+\_\+day}} (data, max\+\_\+day, output\+\_\+dir=\char`\"{}tables\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_a32ddd46b1e0d8c3c888fb304c13094da}{main.\+save\+\_\+ticker\+\_\+performance\+\_\+by\+\_\+day}} (data, max\+\_\+day, output\+\_\+dir=\char`\"{}tables\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_a2f65ca859ea6f7950d92e7c78d884abc}{main.\+save\+\_\+model\+\_\+source\+\_\+interaction}} (data, output\+\_\+dir=\char`\"{}tables\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_a8a3d6d9e186b8cc13867b5d663c9e82a}{main.\+save\+\_\+model\+\_\+ticker\+\_\+interaction}} (data, output\+\_\+dir=\char`\"{}tables\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_a5d6ab7224f1cc509718976cc0c67c10e}{main.\+save\+\_\+error\+\_\+trend\+\_\+by\+\_\+ticker}} (data, max\+\_\+day, output\+\_\+dir=\char`\"{}tables\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_a1a2748142b9bf9370df50798bfc0ae54}{main.\+plot\+\_\+source\+\_\+distribution}} (data, output\+\_\+dir=\char`\"{}graphs\char`\"{}, threshold\+\_\+percent=1.\+5)
 \item 
 def \mbox{\hyperlink{namespacemain_ab0a4a29a72200a5cf786f96fdab9a2bd}{main.\+main}} ()
 \end{DoxyCompactItemize}

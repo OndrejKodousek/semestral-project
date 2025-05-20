@@ -112,41 +112,43 @@ $(document).ready(function(){initNavTree('ArticleList_8tsx_source.html',''); ini
 <div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="ArticleList_8tsx.html#a1601f364121b84b5088e4fb763f0e540">   23</a></span>&#160;  <a class="code" href="ArticleList_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a>,</div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;}) =&gt; {</div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;  <span class="keywordflow">return</span> (</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    &lt;&gt;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      {predictionData &amp;&amp;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        predictionData.length &gt; 0 &amp;&amp;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        predictionData.map((item, index) =&gt; (</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;          &lt;div</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            className={`p-3 ${index !== 0 ? <span class="stringliteral">&quot;mt-3&quot;</span> : <span class="stringliteral">&quot;&quot;</span>} article`}</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            key={index}</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;          &gt;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            &lt;div</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;              className={`backdrop-${<a class="code" href="parsing_8ts.html#a9a3cda848ef56ab8460bb73241f43b2b">formatStringToCSSClass</a>(item.source)} row p-3`}</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            &gt;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;              &lt;div className=<span class="stringliteral">&quot;col-6&quot;</span>&gt;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                &lt;div className=<span class="stringliteral">&quot;pb-3&quot;</span>&gt;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                  &lt;a href={item.link}&gt;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                    {item.source}: {item.title}</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                  &lt;/a&gt;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                &lt;/div&gt;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                &lt;div&gt;{item.summary}&lt;/div&gt;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;              &lt;/div&gt;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;              &lt;div className=<span class="stringliteral">&quot;col-6&quot;</span>&gt;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                &lt;<a class="code" href="ArticleList_8tsx.html#a77645f42b4e3450c4041912fe5374203">ArticleChart</a></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                  predictions={item.predictions}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                  <a class="code" href="ArticleList_8tsx.html#a46958e400133845da077a817e5d46f76">historicalData</a>={<a class="code" href="ArticleList_8tsx.html#a46958e400133845da077a817e5d46f76">historicalData</a>}</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                  <a class="code" href="ArticleChart_8tsx.html#ad626d0c9d4b2d98ea108f65ce7ccd1af">published</a>={item.published}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                  <a class="code" href="ArticleList_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a>={<a class="code" href="ArticleList_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a>}</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                /&gt;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;              &lt;/div&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            &lt;/div&gt;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;          &lt;/div&gt;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        ))}</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    &lt;/&gt;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  );</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;};</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;export <span class="keywordflow">default</span> <a class="code" href="ArticleList_8tsx.html#a118895c20a5bbd66ea7287820db0d2c0">ArticleList</a>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    &lt;div className=<span class="stringliteral">&quot;article-list-container&quot;</span>&gt;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      &lt;div className=<span class="stringliteral">&quot;article-content&quot;</span>&gt;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        {predictionData &amp;&amp;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;          predictionData.length &gt; 0 &amp;&amp;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;          predictionData.map((item, index) =&gt; (</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            &lt;div</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;              className={`p-3 ${index !== 0 ? <span class="stringliteral">&quot;mt-3&quot;</span> : <span class="stringliteral">&quot;&quot;</span>} article`}</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;              key={index}</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            &gt;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;              &lt;div</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                className={`backdrop-${<a class="code" href="parsing_8ts.html#a9a3cda848ef56ab8460bb73241f43b2b">formatStringToCSSClass</a>(item.source)} row p-3`}</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;              &gt;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;                &lt;div className=<span class="stringliteral">&quot;col-6&quot;</span>&gt;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                  &lt;div className=<span class="stringliteral">&quot;pb-3&quot;</span>&gt;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                    &lt;a href={item.link}&gt;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                      {item.source}: {item.title}</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                    &lt;/a&gt;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;                  &lt;/div&gt;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                  &lt;div&gt;{item.summary}&lt;/div&gt;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                &lt;/div&gt;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                &lt;div className=<span class="stringliteral">&quot;col-6&quot;</span>&gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                  &lt;<a class="code" href="ArticleList_8tsx.html#a77645f42b4e3450c4041912fe5374203">ArticleChart</a></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                    predictions={item.predictions}</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;                    <a class="code" href="ArticleList_8tsx.html#a46958e400133845da077a817e5d46f76">historicalData</a>={<a class="code" href="ArticleList_8tsx.html#a46958e400133845da077a817e5d46f76">historicalData</a>}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                    <a class="code" href="ArticleChart_8tsx.html#ad626d0c9d4b2d98ea108f65ce7ccd1af">published</a>={item.published}</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                    <a class="code" href="ArticleList_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a>={<a class="code" href="ArticleList_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a>}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                  /&gt;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                &lt;/div&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;              &lt;/div&gt;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            &lt;/div&gt;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;          ))}</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      &lt;/div&gt;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    &lt;/div&gt;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;  );</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;export <span class="keywordflow">default</span> <a class="code" href="ArticleList_8tsx.html#a118895c20a5bbd66ea7287820db0d2c0">ArticleList</a>;</div>
 <div class="ttc" id="aApp_8tsx_html_a8e6a862a904cf8b07c69fae7c44a1a04"><div class="ttname"><a href="App_8tsx.html#a8e6a862a904cf8b07c69fae7c44a1a04">React</a></div><div class="ttdeci">import React</div><div class="ttdef"><b>Definition:</b> <a href="App_8tsx_source.html#l00008">App.tsx:8</a></div></div>
 <div class="ttc" id="aArticleChart_8tsx_html_ad626d0c9d4b2d98ea108f65ce7ccd1af"><div class="ttname"><a href="ArticleChart_8tsx.html#ad626d0c9d4b2d98ea108f65ce7ccd1af">published</a></div><div class="ttdeci">const published</div><div class="ttdef"><b>Definition:</b> <a href="ArticleChart_8tsx_source.html#l00056">ArticleChart.tsx:56</a></div></div>
 <div class="ttc" id="aArticleList_8tsx_html_a118895c20a5bbd66ea7287820db0d2c0"><div class="ttname"><a href="ArticleList_8tsx.html#a118895c20a5bbd66ea7287820db0d2c0">ArticleList</a></div><div class="ttdeci">const ArticleList</div><div class="ttdoc">Component that renders a list of articles with their prediction charts.</div><div class="ttdef"><b>Definition:</b> <a href="ArticleList_8tsx_source.html#l00020">ArticleList.tsx:21</a></div></div>
@@ -161,7 +163,7 @@ $(document).ready(function(){initNavTree('ArticleList_8tsx_source.html',''); ini
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_4fdf20d635b99bb54f698874f5ca05ac.html">website</a></li><li class="navelem"><a class="el" href="dir_7a9a42e618e4db6d0f7bfc1d92388aeb.html">src</a></li><li class="navelem"><a class="el" href="dir_762f6021449e2ebfd6c76503339671ad.html">components</a></li><li class="navelem"><a class="el" href="ArticleList_8tsx.html">ArticleList.tsx</a></li>
-    <li class="footer">Generated on Sun May 18 2025 00:46:45 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue May 20 2025 19:59:17 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

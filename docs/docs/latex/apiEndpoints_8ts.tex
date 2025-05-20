@@ -116,10 +116,10 @@ Referenced by use\+Effect().
 
 {\bfseries Initial value\+:}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{= async (\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}: \textcolor{keywordtype}{string}, \mbox{\hyperlink{namespacelstm__daemon_a0148cf01049a0f24b9a2132c1c4a984f}{start}}: \textcolor{keywordtype}{string}) => \{}
+\DoxyCodeLine{= async (\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}: \textcolor{keywordtype}{string}, start: \textcolor{keywordtype}{string}) => \{}
 \DoxyCodeLine{  \textcolor{keywordflow}{try} \{}
 \DoxyCodeLine{    \textcolor{keyword}{const} response = await fetch(}
-\DoxyCodeLine{      `\$\{\mbox{\hyperlink{apiEndpoints_8ts_a621c186327e061d086ab178f77cc9ba4}{apiBaseUrl}}\}/api/historical-\/data?\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}=\$\{\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}\}\&\mbox{\hyperlink{namespacelstm__daemon_a0148cf01049a0f24b9a2132c1c4a984f}{start}}=\$\{\mbox{\hyperlink{date_8ts_a2a9dc06c84d041da1400b31d4021aa7c}{getDateOnly}}(\mbox{\hyperlink{namespacelstm__daemon_a0148cf01049a0f24b9a2132c1c4a984f}{start}})\}`,}
+\DoxyCodeLine{      `\$\{\mbox{\hyperlink{apiEndpoints_8ts_a621c186327e061d086ab178f77cc9ba4}{apiBaseUrl}}\}/api/historical-\/data?\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}=\$\{\mbox{\hyperlink{ArticleChart_8tsx_a79f2a8a40a1c59f45dc69ef45fb97815}{ticker}}\}\&start=\$\{\mbox{\hyperlink{date_8ts_a2a9dc06c84d041da1400b31d4021aa7c}{getDateOnly}}(start)\}`,}
 \DoxyCodeLine{    );}
 \DoxyCodeLine{}
 \DoxyCodeLine{    \textcolor{keywordflow}{if} (!response.ok) \{}

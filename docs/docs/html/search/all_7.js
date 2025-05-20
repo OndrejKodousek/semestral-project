@@ -1,16 +1,18 @@
 var searchData=
 [
-  ['generatedaterange_116',['generateDateRange',['../date_8ts.html#a053ba3d56b90d50f58f72f9de369fd62',1,'date.ts']]],
-  ['generateperioddates_117',['generatePeriodDates',['../date_8ts.html#a09f96a0fef4fd26335314c8e808cf221',1,'date.ts']]],
-  ['get_5fdb_5fconnection_118',['get_db_connection',['../namespacedatabase.html#a39c4e0f70234e06bcc8009fae6eb8be4',1,'database']]],
-  ['get_5flast_5ftrading_5fday_119',['get_last_trading_day',['../namespacedatabase.html#a7bbdd782b04c81f8c07dc60b71702570',1,'database']]],
-  ['get_5fproject_5froot_120',['get_project_root',['../namespacedaemon.html#aee4214eabaaf2f0a0daeec31438a1c90',1,'daemon.get_project_root()'],['../namespacelstm__daemon.html#ab7edfc58dbae4ca9549d4bbe09d2e16f',1,'lstm_daemon.get_project_root()'],['../namespaceapi__server.html#a48016177366974fbea006dec34dcd0a8',1,'api_server.get_project_root()'],['../namespacetrain.html#a2a1eac85254c697154c79a12ee779a96',1,'train.get_project_root()'],['../namespacepredict.html#a85ea3822df90c0f499046f207bc24400',1,'predict.get_project_root()'],['../namespacescraper__library.html#a3a420a1daeb66a57c9e9dfb56f0bbf7c',1,'scraper_library.get_project_root()'],['../namespaceutils.html#a9e5b18caf6181bb092a19721a6e7bbf0',1,'utils.get_project_root()']]],
-  ['get_5fstock_5fprice_121',['get_stock_price',['../namespacedatabase.html#aabf0f407342b4944cac6265e56aa80fe',1,'database']]],
-  ['get_5ftop_5ftickers_5fby_5ffrequency_122',['get_top_tickers_by_frequency',['../namespacelstm__daemon.html#a2a82eefa08d1d085080214be358d886a',1,'lstm_daemon']]],
-  ['getcurrentdate_123',['getCurrentDate',['../date_8ts.html#a60616b6be8ad7af73c0bf0b7a8029fd6',1,'date.ts']]],
-  ['getdatedifferencesigned_124',['getDateDifferenceSigned',['../date_8ts.html#a332cdbc141b01677e738f2a6fb850e25',1,'date.ts']]],
-  ['getdateonly_125',['getDateOnly',['../date_8ts.html#a2a9dc06c84d041da1400b31d4021aa7c',1,'date.ts']]],
-  ['getdriver_126',['getDriver',['../namespacescraper__library.html#a51803b7e799776783a99cf7914799cde',1,'scraper_library']]],
-  ['getearliestdate_127',['getEarliestDate',['../date_8ts.html#a590246e80057da16be98573ccc2583c4',1,'date.ts']]],
-  ['getlatestdate_128',['getLatestDate',['../date_8ts.html#aef6f7a6a0312448fd5eaf8f6c200debb',1,'date.ts']]]
+  ['generatedaterange_117',['generateDateRange',['../date_8ts.html#a053ba3d56b90d50f58f72f9de369fd62',1,'date.ts']]],
+  ['generateperioddates_118',['generatePeriodDates',['../date_8ts.html#a09f96a0fef4fd26335314c8e808cf221',1,'date.ts']]],
+  ['get_5fdb_5fconnection_119',['get_db_connection',['../namespacedatabase.html#a39c4e0f70234e06bcc8009fae6eb8be4',1,'database']]],
+  ['get_5flast_5ftrading_5fday_120',['get_last_trading_day',['../namespacedatabase.html#a7bbdd782b04c81f8c07dc60b71702570',1,'database']]],
+  ['get_5fproject_5froot_121',['get_project_root',['../namespacelstm__daemon.html#ab7edfc58dbae4ca9549d4bbe09d2e16f',1,'lstm_daemon.get_project_root()'],['../namespacedaemon.html#aee4214eabaaf2f0a0daeec31438a1c90',1,'daemon.get_project_root()'],['../namespaceapi__server.html#a48016177366974fbea006dec34dcd0a8',1,'api_server.get_project_root()'],['../namespacetrain.html#a2a1eac85254c697154c79a12ee779a96',1,'train.get_project_root()'],['../namespacepredict.html#a85ea3822df90c0f499046f207bc24400',1,'predict.get_project_root()'],['../namespacescraper__library.html#a3a420a1daeb66a57c9e9dfb56f0bbf7c',1,'scraper_library.get_project_root()'],['../namespaceutils.html#a9e5b18caf6181bb092a19721a6e7bbf0',1,'utils.get_project_root()']]],
+  ['get_5fresults_122',['get_results',['../namespaceapi__server.html#a7ea3cf108811462f602650ed4d2ec05a',1,'api_server']]],
+  ['get_5fstock_5fprice_123',['get_stock_price',['../namespacedatabase.html#aabf0f407342b4944cac6265e56aa80fe',1,'database']]],
+  ['get_5fstocks_124',['get_stocks',['../namespaceapi__server.html#a071fcd4a14923088dc40b9564bb1cbee',1,'api_server']]],
+  ['get_5ftop_5ftickers_5fby_5ffrequency_125',['get_top_tickers_by_frequency',['../namespacelstm__daemon.html#a2a82eefa08d1d085080214be358d886a',1,'lstm_daemon']]],
+  ['getcurrentdate_126',['getCurrentDate',['../date_8ts.html#a60616b6be8ad7af73c0bf0b7a8029fd6',1,'date.ts']]],
+  ['getdatedifferencesigned_127',['getDateDifferenceSigned',['../date_8ts.html#a332cdbc141b01677e738f2a6fb850e25',1,'date.ts']]],
+  ['getdateonly_128',['getDateOnly',['../date_8ts.html#a2a9dc06c84d041da1400b31d4021aa7c',1,'date.ts']]],
+  ['getdriver_129',['getDriver',['../namespacescraper__library.html#a51803b7e799776783a99cf7914799cde',1,'scraper_library']]],
+  ['getearliestdate_130',['getEarliestDate',['../date_8ts.html#a590246e80057da16be98573ccc2583c4',1,'date.ts']]],
+  ['getlatestdate_131',['getLatestDate',['../date_8ts.html#aef6f7a6a0312448fd5eaf8f6c200debb',1,'date.ts']]]
 ];

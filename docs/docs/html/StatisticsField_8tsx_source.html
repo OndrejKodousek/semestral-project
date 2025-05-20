@@ -144,24 +144,24 @@ $(document).ready(function(){initNavTree('StatisticsField_8tsx_source.html','');
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;      currentTicker: <span class="keywordtype">string</span>,</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      currentPredictionData: <a class="code" href="interfaces_8ts.html#a42cbf6a8ac2e59b4dc469f0f3c84bc4e">PredictionData</a>[] | <span class="keyword">null</span>,</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    ) =&gt; {</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      let <a class="code" href="namespacelstm__daemon.html#a0148cf01049a0f24b9a2132c1c4a984f">start</a>: <span class="keywordtype">string</span> | <span class="keyword">null</span> = <span class="keyword">null</span>;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      let start: <span class="keywordtype">string</span> | <span class="keyword">null</span> = <span class="keyword">null</span>;</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      <span class="keywordflow">if</span> (</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        currentPredictionData &amp;&amp;</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        currentPredictionData.length &gt; 0 &amp;&amp;</div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        currentPredictionData[0].ticker === currentTicker</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;      ) {</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">try</span> {</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;          <a class="code" href="namespacelstm__daemon.html#a0148cf01049a0f24b9a2132c1c4a984f">start</a> = <a class="code" href="date_8ts.html#a590246e80057da16be98573ccc2583c4">getEarliestDate</a>(currentPredictionData);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;          start = <a class="code" href="date_8ts.html#a590246e80057da16be98573ccc2583c4">getEarliestDate</a>(currentPredictionData);</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        } <span class="keywordflow">catch</span> (e) {</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;          console.error(<span class="stringliteral">&quot;Could not get earliest date from prediction data:&quot;</span>, e);</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        }</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;      }</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keywordflow">if</span> (currentTicker &amp;&amp; <a class="code" href="namespacelstm__daemon.html#a0148cf01049a0f24b9a2132c1c4a984f">start</a>) {</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;      <span class="keywordflow">if</span> (currentTicker &amp;&amp; start) {</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">try</span> {</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;          <span class="keyword">const</span> fetchedHistoricalData = await <a class="code" href="apiEndpoints_8ts.html#aaef6fefc121c234c65762c0d30c306d4">fetchHistoricalData</a>(</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            currentTicker,</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <a class="code" href="namespacelstm__daemon.html#a0148cf01049a0f24b9a2132c1c4a984f">start</a>,</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            start,</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;          );</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;          setHistoricalData(fetchedHistoricalData);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        } <span class="keywordflow">catch</span> (error) {</div>
@@ -185,7 +185,7 @@ $(document).ready(function(){initNavTree('StatisticsField_8tsx_source.html','');
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      : <span class="keyword">null</span>;</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;  <span class="keywordflow">return</span> (</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    &lt;&gt;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    &lt;div className=<span class="stringliteral">&quot;h-100&quot;</span>&gt;</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;      {<span class="comment">/* Mode 1: Article List View */</span>}</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;      {<a class="code" href="StatisticsField_8tsx.html#a24dc565d453773eb0b87ce607454be84">mode</a> === 1 &amp;&amp; relevantPredictionData &amp;&amp; (</div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        &lt;<a class="code" href="StatisticsField_8tsx.html#aaa878e1d65bd5e87a769ff45a53e8634">ArticleList</a></div>
@@ -247,15 +247,14 @@ $(document).ready(function(){initNavTree('StatisticsField_8tsx_source.html','');
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        /&gt;</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;      )}</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      {<span class="comment">/* Loading state */</span>}</div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;      {<a class="code" href="StatisticsField_8tsx.html#a24dc565d453773eb0b87ce607454be84">mode</a> === 1 &amp;&amp; !relevantPredictionData &amp;&amp; <a class="code" href="StatisticsField_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a> &amp;&amp; (</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;        &lt;p&gt;Loading analysis data <span class="keywordflow">for</span> {<a class="code" href="StatisticsField_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a>}...&lt;/p&gt;</div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;      )}</div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    &lt;/&gt;</div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;  );</div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;};</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;export <span class="keywordflow">default</span> <a class="code" href="StatisticsField_8tsx.html#ab74b3f56efdc3a31095d708c45eccef0">StatisticsField</a>;</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;      {<a class="code" href="StatisticsField_8tsx.html#a24dc565d453773eb0b87ce607454be84">mode</a> === 1 &amp;&amp; !relevantPredictionData &amp;&amp; <a class="code" href="StatisticsField_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a> &amp;&amp; (</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        &lt;p&gt;Loading analysis data <span class="keywordflow">for</span> {<a class="code" href="StatisticsField_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a>}...&lt;/p&gt;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;      )}</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    &lt;/div&gt;</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;  );</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;};</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;export <span class="keywordflow">default</span> <a class="code" href="StatisticsField_8tsx.html#ab74b3f56efdc3a31095d708c45eccef0">StatisticsField</a>;</div>
 <div class="ttc" id="aApp_8tsx_html_a268b40c7bdbfb618b73546fd95f330fc"><div class="ttname"><a href="App_8tsx.html#a268b40c7bdbfb618b73546fd95f330fc">useEffect</a></div><div class="ttdeci">useEffect(()=&gt; { if(extractedTicker &amp;&amp;model) { const fetchData=async()=&gt; { setIsLoading(true);setPredictionData([]);try { const data=await fetchAnalysisData(extractedTicker, model);setPredictionData(data ??[]);} catch(error) { console.error(&quot;Failed to fetch analysis data:&quot;, error);setPredictionData([]);} finally { setIsLoading(false);} };fetchData();} else { setPredictionData([]);setIsLoading(false);} }, [extractedTicker, model])</div></div>
 <div class="ttc" id="aArticleChart_8tsx_html_a46958e400133845da077a817e5d46f76"><div class="ttname"><a href="ArticleChart_8tsx.html#a46958e400133845da077a817e5d46f76">historicalData</a></div><div class="ttdeci">const historicalData</div><div class="ttdef"><b>Definition:</b> <a href="ArticleChart_8tsx_source.html#l00055">ArticleChart.tsx:55</a></div></div>
 <div class="ttc" id="aStatisticsField_8tsx_html_a1601f364121b84b5088e4fb763f0e540"><div class="ttname"><a href="StatisticsField_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a></div><div class="ttdeci">const ticker</div><div class="ttdef"><b>Definition:</b> <a href="StatisticsField_8tsx_source.html#l00034">StatisticsField.tsx:34</a></div></div>
@@ -273,14 +272,13 @@ $(document).ready(function(){initNavTree('StatisticsField_8tsx_source.html','');
 <div class="ttc" id="ainterfaces_8ts_html_a42cbf6a8ac2e59b4dc469f0f3c84bc4e"><div class="ttname"><a href="interfaces_8ts.html#a42cbf6a8ac2e59b4dc469f0f3c84bc4e">PredictionData</a></div><div class="ttdeci">export interface PredictionData</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_8ts_source.html#l00019">interfaces.ts:19</a></div></div>
 <div class="ttc" id="ainterfaces_8ts_html_aaa083045a703b4657196cf6b83b3ce3b"><div class="ttname"><a href="interfaces_8ts.html#aaa083045a703b4657196cf6b83b3ce3b">HistoricalData</a></div><div class="ttdeci">export interface HistoricalData</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_8ts_source.html#l00055">interfaces.ts:55</a></div></div>
 <div class="ttc" id="ainterfaces_8ts_html_af7c25f48cd774f91c9c2b75d62841572"><div class="ttname"><a href="interfaces_8ts.html#af7c25f48cd774f91c9c2b75d62841572">StatisticsFieldProps</a></div><div class="ttdeci">export interface StatisticsFieldProps</div><div class="ttdef"><b>Definition:</b> <a href="interfaces_8ts_source.html#l00117">interfaces.ts:117</a></div></div>
-<div class="ttc" id="anamespacelstm__daemon_html_a0148cf01049a0f24b9a2132c1c4a984f"><div class="ttname"><a href="namespacelstm__daemon.html#a0148cf01049a0f24b9a2132c1c4a984f">lstm_daemon.start</a></div><div class="ttdeci">start</div><div class="ttdef"><b>Definition:</b> <a href="lstm__daemon_8py_source.html#l00204">lstm_daemon.py:204</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_4fdf20d635b99bb54f698874f5ca05ac.html">website</a></li><li class="navelem"><a class="el" href="dir_7a9a42e618e4db6d0f7bfc1d92388aeb.html">src</a></li><li class="navelem"><a class="el" href="dir_762f6021449e2ebfd6c76503339671ad.html">components</a></li><li class="navelem"><a class="el" href="StatisticsField_8tsx.html">StatisticsField.tsx</a></li>
-    <li class="footer">Generated on Sun May 18 2025 00:46:45 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue May 20 2025 19:59:17 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

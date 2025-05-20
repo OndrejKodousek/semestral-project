@@ -5,20 +5,36 @@
 \item 
 def \mbox{\hyperlink{namespaceapi__server_a48016177366974fbea006dec34dcd0a8}{get\+\_\+project\+\_\+root}} ()
 \item 
+def \mbox{\hyperlink{namespaceapi__server_aacf29e9b9cdffd76f7c3422ef0936c87}{extract\+\_\+ticker}} (company\+\_\+string)
+\item 
+def \mbox{\hyperlink{namespaceapi__server_af1b455843f65f74ed670f6425a2f1ffc}{fetch\+\_\+analyzed\+\_\+articles\+\_\+and\+\_\+predictions}} (\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}, \mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}})
+\item 
+def \mbox{\hyperlink{namespaceapi__server_ae4249520013f4e3cb176975711db78e9}{process\+\_\+article\+\_\+groq}} (article, \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}, system\+\_\+instruction)
+\item 
+def \mbox{\hyperlink{namespaceapi__server_ae5e2bbbe81963a5c6ee641c361f6af91}{process\+\_\+article\+\_\+openrouter}} (article, \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}, system\+\_\+instruction)
+\item 
+def \mbox{\hyperlink{namespaceapi__server_a085df1a1cd6e1cc7d72066e2a960330f}{process\+\_\+article\+\_\+gemini}} (article, \mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}, system\+\_\+instruction)
+\item 
 def \mbox{\hyperlink{namespaceapi__server_a0eb3122ba60fc0be801f8b4220be4990}{fetch\+\_\+lstm}} ()
 \item 
 def \mbox{\hyperlink{namespaceapi__server_a2ec44e055c055d54db0ba78818d4593f}{sum\+\_\+analysis}} ()
 \item 
 def \mbox{\hyperlink{namespaceapi__server_afdf37e3c051638b1e88e15fe7fdd3d97}{historical\+\_\+data}} ()
+\item 
+def \mbox{\hyperlink{namespaceapi__server_a071fcd4a14923088dc40b9564bb1cbee}{get\+\_\+stocks}} ()
+\item 
+def \mbox{\hyperlink{namespaceapi__server_a7ea3cf108811462f602650ed4d2ec05a}{get\+\_\+results}} ()
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{namespaceapi__server_ab0ad197101b7c6eb30af78f5acbf6ffe}{app}} = Flask(\+\_\+\+\_\+name\+\_\+\+\_\+)
+\mbox{\hyperlink{namespaceapi__server_a968b74d023fefcba1c51b98e0d29ddd8}{session}} = requests.\+Session(impersonate=\char`\"{}chrome\char`\"{})
 \item 
 \mbox{\hyperlink{namespaceapi__server_addd1b83a3fde1b2e9044795e5c0c2a33}{action}}
 \item 
 \mbox{\hyperlink{namespaceapi__server_a63be5e31e3f33a7f6357db86c87e9fc2}{category}}
+\item 
+\mbox{\hyperlink{namespaceapi__server_ab0ad197101b7c6eb30af78f5acbf6ffe}{app}} = Flask(\+\_\+\+\_\+name\+\_\+\+\_\+)
 \item 
 \mbox{\hyperlink{namespaceapi__server_a764a1817ee677f57da2f56c9db7fe1a4}{host}}
 \item 
@@ -29,31 +45,66 @@ def \mbox{\hyperlink{namespaceapi__server_afdf37e3c051638b1e88e15fe7fdd3d97}{his
 
 
 \doxysubsection{Detailed Description}
-\begin{DoxyVerb}@file api_server.py
-@brief Flask API server for stock analysis system.
+\begin{DoxyVerb}@package website-backend.api_server
+@brief Flask API server for stock analysis and predictions
 
-This module provides RESTful endpoints for:
-- Fetching LSTM predictions
-- Retrieving summarized analyses
-- Accessing historical stock data
-- Getting stock lists and individual analyses
+This module provides a Flask-based API server that handles requests related to:
+- Stock price predictions
+- News article analysis
+- Historical stock data
+- Summary analysis of stocks
 \end{DoxyVerb}
  
 
 \doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceapi__server_aacf29e9b9cdffd76f7c3422ef0936c87}\label{namespaceapi__server_aacf29e9b9cdffd76f7c3422ef0936c87}} 
+\index{api\_server@{api\_server}!extract\_ticker@{extract\_ticker}}
+\index{extract\_ticker@{extract\_ticker}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{extract\_ticker()}{extract\_ticker()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+extract\+\_\+ticker (\begin{DoxyParamCaption}\item[{}]{company\+\_\+string }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Extract stock ticker from company string
+
+@param company_string String containing company information (e.g., "AAPL (Apple Inc.)")
+@return Extracted ticker (e.g., "AAPL") or None if no match
+\end{DoxyVerb}
+ 
+
+Definition at line 56 of file api\+\_\+server.\+py.
+
+\mbox{\Hypertarget{namespaceapi__server_af1b455843f65f74ed670f6425a2f1ffc}\label{namespaceapi__server_af1b455843f65f74ed670f6425a2f1ffc}} 
+\index{api\_server@{api\_server}!fetch\_analyzed\_articles\_and\_predictions@{fetch\_analyzed\_articles\_and\_predictions}}
+\index{fetch\_analyzed\_articles\_and\_predictions@{fetch\_analyzed\_articles\_and\_predictions}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{fetch\_analyzed\_articles\_and\_predictions()}{fetch\_analyzed\_articles\_and\_predictions()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+fetch\+\_\+analyzed\+\_\+articles\+\_\+and\+\_\+predictions (\begin{DoxyParamCaption}\item[{}]{model,  }\item[{}]{ticker }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Fetch analyzed articles and predictions from database
+
+@param model Name of the analysis model to query
+@param ticker Stock ticker symbol to query
+@return List of sqlite3.Row objects containing analysis results
+\end{DoxyVerb}
+ 
+
+Definition at line 66 of file api\+\_\+server.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+
 \mbox{\Hypertarget{namespaceapi__server_a0eb3122ba60fc0be801f8b4220be4990}\label{namespaceapi__server_a0eb3122ba60fc0be801f8b4220be4990}} 
 \index{api\_server@{api\_server}!fetch\_lstm@{fetch\_lstm}}
 \index{fetch\_lstm@{fetch\_lstm}!api\_server@{api\_server}}
 \doxysubsubsection{\texorpdfstring{fetch\_lstm()}{fetch\_lstm()}}
 {\footnotesize\ttfamily def api\+\_\+server.\+fetch\+\_\+lstm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}@brief Endpoint for fetching LSTM predictions.
+\begin{DoxyVerb}@brief API endpoint to fetch LSTM predictions for a stock
 
-@return JSON response with predictions or error message
+@return JSON response containing predictions or error message
 \end{DoxyVerb}
  
 
-Definition at line 54 of file api\+\_\+server.\+py.
+Definition at line 190 of file api\+\_\+server.\+py.
 
 
 
@@ -65,18 +116,56 @@ References get\+\_\+project\+\_\+root().
 \doxysubsubsection{\texorpdfstring{get\_project\_root()}{get\_project\_root()}}
 {\footnotesize\ttfamily def api\+\_\+server.\+get\+\_\+project\+\_\+root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}@brief Locates the project root directory.
+\begin{DoxyVerb}@brief Get the root directory of the project
+
+@details Identifies the project root by looking for a .git marker file
+in parent directories. If not found, exits the program.
 
 @return Path object pointing to project root directory
-@throws SystemExit if root directory cannot be found
 \end{DoxyVerb}
  
 
-Definition at line 37 of file api\+\_\+server.\+py.
+Definition at line 39 of file api\+\_\+server.\+py.
 
 
 
-Referenced by fetch\+\_\+lstm(), and sum\+\_\+analysis().
+Referenced by fetch\+\_\+analyzed\+\_\+articles\+\_\+and\+\_\+predictions(), fetch\+\_\+lstm(), get\+\_\+results(), get\+\_\+stocks(), process\+\_\+article\+\_\+gemini(), process\+\_\+article\+\_\+groq(), process\+\_\+article\+\_\+openrouter(), and sum\+\_\+analysis().
+
+\mbox{\Hypertarget{namespaceapi__server_a7ea3cf108811462f602650ed4d2ec05a}\label{namespaceapi__server_a7ea3cf108811462f602650ed4d2ec05a}} 
+\index{api\_server@{api\_server}!get\_results@{get\_results}}
+\index{get\_results@{get\_results}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{get\_results()}{get\_results()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+get\+\_\+results (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief API endpoint to fetch detailed analysis for a stock
+
+@return JSON response containing analysis results or error message
+\end{DoxyVerb}
+ 
+
+Definition at line 464 of file api\+\_\+server.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+
+\mbox{\Hypertarget{namespaceapi__server_a071fcd4a14923088dc40b9564bb1cbee}\label{namespaceapi__server_a071fcd4a14923088dc40b9564bb1cbee}} 
+\index{api\_server@{api\_server}!get\_stocks@{get\_stocks}}
+\index{get\_stocks@{get\_stocks}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{get\_stocks()}{get\_stocks()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+get\+\_\+stocks (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief API endpoint to fetch list of available stocks
+
+@return JSON response containing stock list or error message
+\end{DoxyVerb}
+ 
+
+Definition at line 405 of file api\+\_\+server.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
 
 \mbox{\Hypertarget{namespaceapi__server_afdf37e3c051638b1e88e15fe7fdd3d97}\label{namespaceapi__server_afdf37e3c051638b1e88e15fe7fdd3d97}} 
 \index{api\_server@{api\_server}!historical\_data@{historical\_data}}
@@ -84,13 +173,76 @@ Referenced by fetch\+\_\+lstm(), and sum\+\_\+analysis().
 \doxysubsubsection{\texorpdfstring{historical\_data()}{historical\_data()}}
 {\footnotesize\ttfamily def api\+\_\+server.\+historical\+\_\+data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}@brief Endpoint for historical stock price data.
+\begin{DoxyVerb}@brief API endpoint to fetch historical stock price data
 
-@return JSON response with price history or error message
+@return JSON response containing historical prices or error message
 \end{DoxyVerb}
  
 
-Definition at line 202 of file api\+\_\+server.\+py.
+Definition at line 364 of file api\+\_\+server.\+py.
+
+\mbox{\Hypertarget{namespaceapi__server_a085df1a1cd6e1cc7d72066e2a960330f}\label{namespaceapi__server_a085df1a1cd6e1cc7d72066e2a960330f}} 
+\index{api\_server@{api\_server}!process\_article\_gemini@{process\_article\_gemini}}
+\index{process\_article\_gemini@{process\_article\_gemini}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{process\_article\_gemini()}{process\_article\_gemini()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+process\+\_\+article\+\_\+gemini (\begin{DoxyParamCaption}\item[{}]{article,  }\item[{}]{model,  }\item[{}]{system\+\_\+instruction }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Process article using Google Gemini API
+
+@param article Dictionary containing article content
+@param model Name of Gemini model to use
+@param system_instruction System prompt for the model
+@return Tuple of (error_code, response_text) where error_code is None if successful
+\end{DoxyVerb}
+ 
+
+Definition at line 165 of file api\+\_\+server.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+
+\mbox{\Hypertarget{namespaceapi__server_ae4249520013f4e3cb176975711db78e9}\label{namespaceapi__server_ae4249520013f4e3cb176975711db78e9}} 
+\index{api\_server@{api\_server}!process\_article\_groq@{process\_article\_groq}}
+\index{process\_article\_groq@{process\_article\_groq}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{process\_article\_groq()}{process\_article\_groq()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+process\+\_\+article\+\_\+groq (\begin{DoxyParamCaption}\item[{}]{article,  }\item[{}]{model,  }\item[{}]{system\+\_\+instruction }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Process article using Groq API
+
+@param article Dictionary containing article content
+@param model Name of Groq model to use
+@param system_instruction System prompt for the model
+@return Tuple of (error_code, response_text) where error_code is None if successful
+\end{DoxyVerb}
+ 
+
+Definition at line 94 of file api\+\_\+server.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+
+\mbox{\Hypertarget{namespaceapi__server_ae5e2bbbe81963a5c6ee641c361f6af91}\label{namespaceapi__server_ae5e2bbbe81963a5c6ee641c361f6af91}} 
+\index{api\_server@{api\_server}!process\_article\_openrouter@{process\_article\_openrouter}}
+\index{process\_article\_openrouter@{process\_article\_openrouter}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{process\_article\_openrouter()}{process\_article\_openrouter()}}
+{\footnotesize\ttfamily def api\+\_\+server.\+process\+\_\+article\+\_\+openrouter (\begin{DoxyParamCaption}\item[{}]{article,  }\item[{}]{model,  }\item[{}]{system\+\_\+instruction }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Process article using OpenRouter API
+
+@param article Dictionary containing article content
+@param model Name of OpenRouter model to use
+@param system_instruction System prompt for the model
+@return Tuple of (error_code, response_text) where error_code is None if successful
+\end{DoxyVerb}
+ 
+
+Definition at line 129 of file api\+\_\+server.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
 
 \mbox{\Hypertarget{namespaceapi__server_a2ec44e055c055d54db0ba78818d4593f}\label{namespaceapi__server_a2ec44e055c055d54db0ba78818d4593f}} 
 \index{api\_server@{api\_server}!sum\_analysis@{sum\_analysis}}
@@ -98,13 +250,13 @@ Definition at line 202 of file api\+\_\+server.\+py.
 \doxysubsubsection{\texorpdfstring{sum\_analysis()}{sum\_analysis()}}
 {\footnotesize\ttfamily def api\+\_\+server.\+sum\+\_\+analysis (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-\begin{DoxyVerb}@brief Endpoint for summarized analysis data.
+\begin{DoxyVerb}@brief API endpoint to fetch summarized analysis for a stock
 
-@return JSON response with analysis or error message
+@return JSON response containing summary, predictions and confidence scores
 \end{DoxyVerb}
  
 
-Definition at line 115 of file api\+\_\+server.\+py.
+Definition at line 252 of file api\+\_\+server.\+py.
 
 
 
@@ -121,7 +273,7 @@ References get\+\_\+project\+\_\+root().
 
 
 
-Definition at line 34 of file api\+\_\+server.\+py.
+Definition at line 32 of file api\+\_\+server.\+py.
 
 \mbox{\Hypertarget{namespaceapi__server_ab0ad197101b7c6eb30af78f5acbf6ffe}\label{namespaceapi__server_ab0ad197101b7c6eb30af78f5acbf6ffe}} 
 \index{api\_server@{api\_server}!app@{app}}
@@ -131,7 +283,7 @@ Definition at line 34 of file api\+\_\+server.\+py.
 
 
 
-Definition at line 32 of file api\+\_\+server.\+py.
+Definition at line 33 of file api\+\_\+server.\+py.
 
 \mbox{\Hypertarget{namespaceapi__server_a63be5e31e3f33a7f6357db86c87e9fc2}\label{namespaceapi__server_a63be5e31e3f33a7f6357db86c87e9fc2}} 
 \index{api\_server@{api\_server}!category@{category}}
@@ -141,7 +293,7 @@ Definition at line 32 of file api\+\_\+server.\+py.
 
 
 
-Definition at line 34 of file api\+\_\+server.\+py.
+Definition at line 32 of file api\+\_\+server.\+py.
 
 \mbox{\Hypertarget{namespaceapi__server_a32f0ed0478293ebb613012e14ed03786}\label{namespaceapi__server_a32f0ed0478293ebb613012e14ed03786}} 
 \index{api\_server@{api\_server}!debug@{debug}}
@@ -151,7 +303,7 @@ Definition at line 34 of file api\+\_\+server.\+py.
 
 
 
-Definition at line 241 of file api\+\_\+server.\+py.
+Definition at line 540 of file api\+\_\+server.\+py.
 
 \mbox{\Hypertarget{namespaceapi__server_a764a1817ee677f57da2f56c9db7fe1a4}\label{namespaceapi__server_a764a1817ee677f57da2f56c9db7fe1a4}} 
 \index{api\_server@{api\_server}!host@{host}}
@@ -161,7 +313,7 @@ Definition at line 241 of file api\+\_\+server.\+py.
 
 
 
-Definition at line 241 of file api\+\_\+server.\+py.
+Definition at line 540 of file api\+\_\+server.\+py.
 
 \mbox{\Hypertarget{namespaceapi__server_a93f8cc8a36673cd7b9b68d9c50ad7868}\label{namespaceapi__server_a93f8cc8a36673cd7b9b68d9c50ad7868}} 
 \index{api\_server@{api\_server}!port@{port}}
@@ -171,5 +323,15 @@ Definition at line 241 of file api\+\_\+server.\+py.
 
 
 
-Definition at line 241 of file api\+\_\+server.\+py.
+Definition at line 540 of file api\+\_\+server.\+py.
+
+\mbox{\Hypertarget{namespaceapi__server_a968b74d023fefcba1c51b98e0d29ddd8}\label{namespaceapi__server_a968b74d023fefcba1c51b98e0d29ddd8}} 
+\index{api\_server@{api\_server}!session@{session}}
+\index{session@{session}!api\_server@{api\_server}}
+\doxysubsubsection{\texorpdfstring{session}{session}}
+{\footnotesize\ttfamily api\+\_\+server.\+session = requests.\+Session(impersonate=\char`\"{}chrome\char`\"{})}
+
+
+
+Definition at line 30 of file api\+\_\+server.\+py.
 

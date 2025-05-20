@@ -144,14 +144,10 @@ Variables</h2></td></tr>
 <tr class="separator:a37f409d7c4c77b702907f20a4f92d256"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a25bf8078b9d22524878447a3de3a81cf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelstm__daemon.html#a25bf8078b9d22524878447a3de3a81cf">current_processing_date</a> = date.today().strftime(&quot;%Y-%m-%d&quot;)</td></tr>
 <tr class="separator:a25bf8078b9d22524878447a3de3a81cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0148cf01049a0f24b9a2132c1c4a984f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelstm__daemon.html#a0148cf01049a0f24b9a2132c1c4a984f">start</a> = time.time()</td></tr>
-<tr class="separator:a0148cf01049a0f24b9a2132c1c4a984f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6316499a06a2957c10e1aa84ebb5178f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelstm__daemon.html#a6316499a06a2957c10e1aa84ebb5178f">train_success</a> = <a class="el" href="namespacelstm__daemon.html#a5c1ce351ec7977bd03fd73c0eb852c8f">run_script</a>(<a class="el" href="namespacelstm__daemon.html#aa85e44cb1c49a02df23c48611f76bfe7">train_script</a>, <a class="el" href="StatisticsField_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a>, <a class="el" href="namespacelstm__daemon.html#a512bc81a250c1bd568442e3e17929964">VENV_PYTHON_PATH</a>)</td></tr>
 <tr class="separator:a6316499a06a2957c10e1aa84ebb5178f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd61a0cf3530ac11ebea9a25fa542d36"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelstm__daemon.html#afd61a0cf3530ac11ebea9a25fa542d36">predict_success</a> = <a class="el" href="namespacelstm__daemon.html#a5c1ce351ec7977bd03fd73c0eb852c8f">run_script</a>(<a class="el" href="namespacelstm__daemon.html#adbf44bdafa383ba757f35d7c0da43252">predict_script</a>, <a class="el" href="StatisticsField_8tsx.html#a1601f364121b84b5088e4fb763f0e540">ticker</a>, <a class="el" href="namespacelstm__daemon.html#a512bc81a250c1bd568442e3e17929964">VENV_PYTHON_PATH</a>)</td></tr>
 <tr class="separator:afd61a0cf3530ac11ebea9a25fa542d36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05fad3ece61207816da5aab79de54c5b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacelstm__daemon.html#a05fad3ece61207816da5aab79de54c5b">elapsed_time</a> = time.time() - <a class="el" href="namespacelstm__daemon.html#a0148cf01049a0f24b9a2132c1c4a984f">start</a></td></tr>
-<tr class="separator:a05fad3ece61207816da5aab79de54c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><pre class="fragment">@file lstm_daemon.py
@@ -400,22 +396,6 @@ with scheduling logic to avoid running during market closure hours.
 
 </div>
 </div>
-<a id="a05fad3ece61207816da5aab79de54c5b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05fad3ece61207816da5aab79de54c5b">&#9670;&nbsp;</a></span>elapsed_time</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">lstm_daemon.elapsed_time = time.time() - <a class="el" href="namespacelstm__daemon.html#a0148cf01049a0f24b9a2132c1c4a984f">start</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="lstm__daemon_8py_source.html#l00220">220</a> of file <a class="el" href="lstm__daemon_8py_source.html">lstm_daemon.py</a>.</p>
-
-</div>
-</div>
 <a id="a72784b2cc34b149191bde3b403b20f9a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a72784b2cc34b149191bde3b403b20f9a">&#9670;&nbsp;</a></span>is_pause_time</h2>
 
@@ -527,7 +507,7 @@ with scheduling logic to avoid running during market closure hours.
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lstm__daemon_8py_source.html#l00212">212</a> of file <a class="el" href="lstm__daemon_8py_source.html">lstm_daemon.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lstm__daemon_8py_source.html#l00211">211</a> of file <a class="el" href="lstm__daemon_8py_source.html">lstm_daemon.py</a>.</p>
 
 </div>
 </div>
@@ -576,22 +556,6 @@ with scheduling logic to avoid running during market closure hours.
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="lstm__daemon_8py_source.html#l00155">155</a> of file <a class="el" href="lstm__daemon_8py_source.html">lstm_daemon.py</a>.</p>
-
-</div>
-</div>
-<a id="a0148cf01049a0f24b9a2132c1c4a984f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0148cf01049a0f24b9a2132c1c4a984f">&#9670;&nbsp;</a></span>start</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">lstm_daemon.start = time.time()</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="lstm__daemon_8py_source.html#l00204">204</a> of file <a class="el" href="lstm__daemon_8py_source.html">lstm_daemon.py</a>.</p>
 
 </div>
 </div>
@@ -655,7 +619,7 @@ with scheduling logic to avoid running during market closure hours.
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lstm__daemon_8py_source.html#l00209">209</a> of file <a class="el" href="lstm__daemon_8py_source.html">lstm_daemon.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lstm__daemon_8py_source.html#l00208">208</a> of file <a class="el" href="lstm__daemon_8py_source.html">lstm_daemon.py</a>.</p>
 
 </div>
 </div>
@@ -681,7 +645,7 @@ with scheduling logic to avoid running during market closure hours.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacelstm__daemon.html">lstm_daemon</a></li>
-    <li class="footer">Generated on Sun May 18 2025 00:46:46 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Tue May 20 2025 19:59:17 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
