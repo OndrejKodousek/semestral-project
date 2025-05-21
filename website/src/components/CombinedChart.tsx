@@ -371,7 +371,7 @@ const CombinedChart: React.FC<CombinedChartProps> = ({
           ref={chartRef}
           style={{
             width: "100%",
-            minHeight: "400px",
+            minHeight: "600px",
             position: "relative",
           }}
         >

@@ -126,14 +126,13 @@ body {
   margin-top: 0;
 }
 
-/* Add this to your styles */
 .article-list-container {
-  height: 100%; /* Or specific height */
+  height: 100%;
   overflow-y: auto;
-  border: 1px solid #ddd; /* Your border style */
-  border-radius: 4px; /* If you want rounded corners */
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .article-content {
-  padding: 16px; /* Adjust as needed */
+  padding: 16px;
 }

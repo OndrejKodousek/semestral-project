@@ -155,7 +155,7 @@ const Chart: React.FC<ChartProps> = ({
       y: {
         title: {
           display: true,
-          text: "Change [%]",
+          text: "Stock Price [$]",
         },
       },
     },
