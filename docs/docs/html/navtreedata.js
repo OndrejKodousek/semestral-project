@@ -47,8 +47,8 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "App_8tsx.html",
-"interfaces_8ts.html#aafd7272b0fde237f1f873fd8bb30098e",
-"scraper_2main_8py.html"
+"evaluator_2main_8py_source.html",
+"namespacepredict.html#a12476fad9ae6b4a17186ab0597eb1629"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

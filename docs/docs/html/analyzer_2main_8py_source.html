@@ -142,119 +142,117 @@ $(document).ready(function(){initNavTree('analyzer_2main_8py_source.html',''); i
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="stringliteral">&quot;llama-3.3-70b-versatile&quot;</span>,</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="stringliteral">&quot;llama-3.1-8b-instant&quot;</span>,</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="stringliteral">&quot;gemma2-9b-it&quot;</span>,</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="stringliteral">&quot;distil-whisper-large-v3-en&quot;</span>,</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="comment"># Groq preview</span></div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="stringliteral">&quot;deepseek-r1-distill-llama-70b&quot;</span>,</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="stringliteral">&quot;meta-llama/llama-4-maverick-17b-128e-instruct&quot;</span>,</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="stringliteral">&quot;meta-llama/llama-4-scout-17b-16e-instruct&quot;</span>,</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="stringliteral">&quot;mistral-saba-24b&quot;</span>,</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="stringliteral">&quot;qwen-qwq-32b&quot;</span>,</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    ]</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="comment"># Groq preview</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <span class="stringliteral">&quot;deepseek-r1-distill-llama-70b&quot;</span>,</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <span class="stringliteral">&quot;meta-llama/llama-4-maverick-17b-128e-instruct&quot;</span>,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="stringliteral">&quot;meta-llama/llama-4-scout-17b-16e-instruct&quot;</span>,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <span class="stringliteral">&quot;qwen-qwq-32b&quot;</span>,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    ]</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    random.shuffle(models)</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    random.shuffle(models)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    conn = <a class="code" href="namespacedatabase.html#a39c4e0f70234e06bcc8009fae6eb8be4">get_db_connection</a>()</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    cursor = conn.cursor()</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    cursor.execute(<span class="stringliteral">&quot;SELECT * FROM articles ORDER BY priority ASC&quot;</span>)</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    articles = cursor.fetchall()</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    conn.close()</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">for</span> model <span class="keywordflow">in</span> models:</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        processed_article_ids = <a class="code" href="namespacedatabase.html#a8a9c901bb7ad668bcd553ec4acceb32f">load_processed_articles</a>(model)</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="comment"># Process only unprocessed articles</span></div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        new_processed_articles = []</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">for</span> article <span class="keywordflow">in</span> articles:</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">if</span> article[<span class="stringliteral">&quot;id&quot;</span>] <span class="keywordflow">in</span> processed_article_ids:</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="keywordflow">continue</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;            <span class="keywordflow">if</span> article[<span class="stringliteral">&quot;priority&quot;</span>] &gt; 20:</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="comment"># Model/s have failed to analyze article too many times, something is very likely</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                <span class="comment"># wrong with the article that makes it impossible to determine ticker</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keywordflow">continue</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="comment">####################################################################</span></div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="comment">            # PROCESSING INDIVIDUAL ARTICLE</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">            #</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            print(</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                f<span class="stringliteral">&quot;Processing article {shorten_string(article[&#39;link&#39;], 60-len(model))} with {model}&quot;</span>,</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                end=<span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                flush=<span class="keyword">True</span>,</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            )</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">if</span> <span class="stringliteral">&quot;gemini&quot;</span> <span class="keywordflow">in</span> model:</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                processed_entry = <a class="code" href="namespacellm__google.html#aaf10455484fc5107670ae49a131c7cb0">process_article_google</a>(article, model)</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">elif</span> <span class="stringliteral">&quot;deepseek/deepseek-chat:free&quot;</span> == model:</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                processed_entry = <a class="code" href="namespacellm__openrouter.html#adc605827eb58b95653ef7457e464c19e">process_article_openrouter</a>(article, model)</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;            <span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;                processed_entry = <a class="code" href="namespacellm__groq.html#a640d6dc4b2a4f4c71434ec3e15c7a4fd">process_article_groq</a>(article, model)</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            <span class="keywordflow">if</span> processed_entry <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;                <span class="keywordflow">continue</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code" href="namespaceutils.html#a831264642252f5623e53bfb687ba295f">is_valid_data</a>(processed_entry):</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;                print(f<span class="stringliteral">&quot; | FAILED, data format is invalid&quot;</span>)</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;                <span class="keywordflow">continue</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;            ret = <a class="code" href="namespacedatabase.html#a12ef51bb8363d1e2c94879a30d96d5c9">save_processed_articles</a>(article[<span class="stringliteral">&quot;id&quot;</span>], model, processed_entry)</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;            <span class="keywordflow">if</span> ret <span class="keywordflow">is</span> <span class="keyword">True</span>:</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;                print(f<span class="stringliteral">&quot; | ARTICLE ANALYSIS SUCCESS&quot;</span>)</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="comment">#</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;            <span class="comment"># PROCESSING INDIVIDUAL ARTICLE</span></div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;            <span class="comment">####################################################################</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="comment">            # PROCESSING AGGREGATED ARTICLES</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="comment">            #</span></div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            ticker = str(processed_entry[<span class="stringliteral">&quot;ticker&quot;</span>])</div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;            stock = str(processed_entry[<span class="stringliteral">&quot;stock&quot;</span>])</div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            print(</div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                <a class="code" href="namespaceutils.html#a5f0bf53873931ff75fd4b0f58e6aaa6e">shorten_string</a>(</div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                    f<span class="stringliteral">&quot;Running aggregated analysis for {stock} ({ticker})&quot;</span>,</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                    85,</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                ),</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;                end=<span class="stringliteral">&quot;&quot;</span>,</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;                flush=<span class="keyword">True</span>,</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            )</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    conn = <a class="code" href="namespacedatabase.html#a39c4e0f70234e06bcc8009fae6eb8be4">get_db_connection</a>()</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    cursor = conn.cursor()</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    cursor.execute(<span class="stringliteral">&quot;SELECT * FROM articles ORDER BY priority ASC&quot;</span>)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    articles = cursor.fetchall()</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    conn.close()</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordflow">for</span> model <span class="keywordflow">in</span> models:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        processed_article_ids = <a class="code" href="namespacedatabase.html#a8a9c901bb7ad668bcd553ec4acceb32f">load_processed_articles</a>(model)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <span class="comment"># Process only unprocessed articles</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        new_processed_articles = []</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">for</span> article <span class="keywordflow">in</span> articles:</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;            <span class="keywordflow">if</span> article[<span class="stringliteral">&quot;id&quot;</span>] <span class="keywordflow">in</span> processed_article_ids:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordflow">continue</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            <span class="keywordflow">if</span> article[<span class="stringliteral">&quot;priority&quot;</span>] &gt; 20:</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                <span class="comment"># Model/s have failed to analyze article too many times, something is very likely</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                <span class="comment"># wrong with the article that makes it impossible to determine ticker</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                <span class="keywordflow">continue</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;            <span class="comment">####################################################################</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="comment">            # PROCESSING INDIVIDUAL ARTICLE</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">            #</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;            print(</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                f<span class="stringliteral">&quot;Processing article {shorten_string(article[&#39;link&#39;], 60-len(model))} with {model}&quot;</span>,</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                end=<span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                flush=<span class="keyword">True</span>,</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;            )</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;            <span class="keywordflow">if</span> <span class="stringliteral">&quot;gemini&quot;</span> <span class="keywordflow">in</span> model:</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                processed_entry = <a class="code" href="namespacellm__google.html#aaf10455484fc5107670ae49a131c7cb0">process_article_google</a>(article, model)</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;            <span class="keywordflow">elif</span> <span class="stringliteral">&quot;deepseek/deepseek-chat:free&quot;</span> == model:</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                processed_entry = <a class="code" href="namespacellm__openrouter.html#adc605827eb58b95653ef7457e464c19e">process_article_openrouter</a>(article, model)</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;            <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;                processed_entry = <a class="code" href="namespacellm__groq.html#a640d6dc4b2a4f4c71434ec3e15c7a4fd">process_article_groq</a>(article, model)</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;            <span class="keywordflow">if</span> processed_entry <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;                <span class="keywordflow">continue</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code" href="namespaceutils.html#a831264642252f5623e53bfb687ba295f">is_valid_data</a>(processed_entry):</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;                print(f<span class="stringliteral">&quot; | FAILED, data format is invalid&quot;</span>)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;                <span class="keywordflow">continue</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;            ret = <a class="code" href="namespacedatabase.html#a12ef51bb8363d1e2c94879a30d96d5c9">save_processed_articles</a>(article[<span class="stringliteral">&quot;id&quot;</span>], model, processed_entry)</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;            <span class="keywordflow">if</span> ret <span class="keywordflow">is</span> <span class="keyword">True</span>:</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;                print(f<span class="stringliteral">&quot; | ARTICLE ANALYSIS SUCCESS&quot;</span>)</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;            <span class="comment">#</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;            <span class="comment"># PROCESSING INDIVIDUAL ARTICLE</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;            <span class="comment">####################################################################</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="comment">            # PROCESSING AGGREGATED ARTICLES</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="comment">            #</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            ticker = str(processed_entry[<span class="stringliteral">&quot;ticker&quot;</span>])</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;            stock = str(processed_entry[<span class="stringliteral">&quot;stock&quot;</span>])</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;            print(</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;                <a class="code" href="namespaceutils.html#a5f0bf53873931ff75fd4b0f58e6aaa6e">shorten_string</a>(</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;                    f<span class="stringliteral">&quot;Running aggregated analysis for {stock} ({ticker})&quot;</span>,</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;                    85,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;                ),</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;                end=<span class="stringliteral">&quot;&quot;</span>,</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;                flush=<span class="keyword">True</span>,</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;            )</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160; </div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;            reference_date, prompt = <a class="code" href="namespacedatabase.html#adfc74b0bd3a80196ad1f1ea664109557">fetch_sum_analysis_data</a>(ticker, model)</div>
 <div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160; </div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            reference_date, prompt = <a class="code" href="namespacedatabase.html#adfc74b0bd3a80196ad1f1ea664109557">fetch_sum_analysis_data</a>(ticker, model)</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keywordflow">if</span> <span class="stringliteral">&quot;gemini&quot;</span> <span class="keywordflow">in</span> model:</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                processed_entry = <a class="code" href="namespacellm__google.html#a548b91eb7f88e320f9ae16a98f649c96">process_article_google_sum</a>(model, prompt)</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordflow">elif</span> <span class="stringliteral">&quot;deepseek/deepseek-chat:free&quot;</span> == model:</div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                processed_entry = <a class="code" href="namespacellm__openrouter.html#ac86226dafeaf15d0799907a0927ef4c3">processed_article_openrouter_sum</a>(model, prompt)</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            <span class="keywordflow">else</span>:</div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;                processed_entry = <a class="code" href="namespacellm__groq.html#a4bc90ba3090530f8b24286d91301a1f6">processed_article_groq_sum</a>(model, prompt)</div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordflow">if</span> processed_entry <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                <span class="keywordflow">continue</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;            <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code" href="namespaceutils.html#a831264642252f5623e53bfb687ba295f">is_valid_data</a>(processed_entry):</div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;                print(f<span class="stringliteral">&quot; | FAILED, data format is invalid&quot;</span>)</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;                <span class="keywordflow">continue</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;            print(f<span class="stringliteral">&quot; | AGGREGATED ANALYSIS SUCCESS&quot;</span>)</div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            <a class="code" href="namespacedatabase.html#a7adfcf4312a21615a8345b1a408d0ca1">save_processed_summarized_articles</a>(</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;                processed_entry, model, ticker, reference_date</div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            )</div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160; </div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <span class="comment">#</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;            <span class="comment"># PROCESSING AGGREGATED ARTICLES</span></div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            <span class="comment">####################################################################</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;    <a class="code" href="namespacemain.html">main</a>()</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            <span class="keywordflow">if</span> <span class="stringliteral">&quot;gemini&quot;</span> <span class="keywordflow">in</span> model:</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                processed_entry = <a class="code" href="namespacellm__google.html#a548b91eb7f88e320f9ae16a98f649c96">process_article_google_sum</a>(model, prompt)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            <span class="keywordflow">elif</span> <span class="stringliteral">&quot;deepseek/deepseek-chat:free&quot;</span> == model:</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                processed_entry = <a class="code" href="namespacellm__openrouter.html#ac86226dafeaf15d0799907a0927ef4c3">processed_article_openrouter_sum</a>(model, prompt)</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;            <span class="keywordflow">else</span>:</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                processed_entry = <a class="code" href="namespacellm__groq.html#a4bc90ba3090530f8b24286d91301a1f6">processed_article_groq_sum</a>(model, prompt)</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;            <span class="keywordflow">if</span> processed_entry <span class="keywordflow">is</span> <span class="keywordtype">None</span>:</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;                <span class="keywordflow">continue</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;            <span class="keywordflow">if</span> <span class="keywordflow">not</span> <a class="code" href="namespaceutils.html#a831264642252f5623e53bfb687ba295f">is_valid_data</a>(processed_entry):</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;                print(f<span class="stringliteral">&quot; | FAILED, data format is invalid&quot;</span>)</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;                <span class="keywordflow">continue</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;            print(f<span class="stringliteral">&quot; | AGGREGATED ANALYSIS SUCCESS&quot;</span>)</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;            <a class="code" href="namespacedatabase.html#a7adfcf4312a21615a8345b1a408d0ca1">save_processed_summarized_articles</a>(</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;                processed_entry, model, ticker, reference_date</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;            )</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;            <span class="comment">#</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;            <span class="comment"># PROCESSING AGGREGATED ARTICLES</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;            <span class="comment">####################################################################</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160; </div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="keywordflow">if</span> __name__ == <span class="stringliteral">&quot;__main__&quot;</span>:</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <a class="code" href="namespacemain.html">main</a>()</div>
 <div class="ttc" id="anamespacedatabase_html_a12ef51bb8363d1e2c94879a30d96d5c9"><div class="ttname"><a href="namespacedatabase.html#a12ef51bb8363d1e2c94879a30d96d5c9">database.save_processed_articles</a></div><div class="ttdeci">def save_processed_articles(article_id, model, data)</div><div class="ttdef"><b>Definition:</b> <a href="database_8py_source.html#l00139">database.py:139</a></div></div>
 <div class="ttc" id="anamespacedatabase_html_a39c4e0f70234e06bcc8009fae6eb8be4"><div class="ttname"><a href="namespacedatabase.html#a39c4e0f70234e06bcc8009fae6eb8be4">database.get_db_connection</a></div><div class="ttdeci">def get_db_connection()</div><div class="ttdef"><b>Definition:</b> <a href="database_8py_source.html#l00030">database.py:30</a></div></div>
 <div class="ttc" id="anamespacedatabase_html_a7adfcf4312a21615a8345b1a408d0ca1"><div class="ttname"><a href="namespacedatabase.html#a7adfcf4312a21615a8345b1a408d0ca1">database.save_processed_summarized_articles</a></div><div class="ttdeci">def save_processed_summarized_articles(data, model_name, ticker, published_date)</div><div class="ttdef"><b>Definition:</b> <a href="database_8py_source.html#l00245">database.py:245</a></div></div>
 <div class="ttc" id="anamespacedatabase_html_a8a9c901bb7ad668bcd553ec4acceb32f"><div class="ttname"><a href="namespacedatabase.html#a8a9c901bb7ad668bcd553ec4acceb32f">database.load_processed_articles</a></div><div class="ttdeci">def load_processed_articles(model)</div><div class="ttdef"><b>Definition:</b> <a href="database_8py_source.html#l00041">database.py:41</a></div></div>
 <div class="ttc" id="anamespacedatabase_html_adfc74b0bd3a80196ad1f1ea664109557"><div class="ttname"><a href="namespacedatabase.html#adfc74b0bd3a80196ad1f1ea664109557">database.fetch_sum_analysis_data</a></div><div class="ttdeci">def fetch_sum_analysis_data(ticker, model)</div><div class="ttdef"><b>Definition:</b> <a href="database_8py_source.html#l00403">database.py:403</a></div></div>
-<div class="ttc" id="anamespacellm__google_html_a548b91eb7f88e320f9ae16a98f649c96"><div class="ttname"><a href="namespacellm__google.html#a548b91eb7f88e320f9ae16a98f649c96">llm_google.process_article_google_sum</a></div><div class="ttdeci">def process_article_google_sum(model_name, prompt)</div><div class="ttdef"><b>Definition:</b> <a href="llm__google_8py_source.html#l00067">llm_google.py:67</a></div></div>
+<div class="ttc" id="anamespacellm__google_html_a548b91eb7f88e320f9ae16a98f649c96"><div class="ttname"><a href="namespacellm__google.html#a548b91eb7f88e320f9ae16a98f649c96">llm_google.process_article_google_sum</a></div><div class="ttdeci">def process_article_google_sum(model_name, prompt)</div><div class="ttdef"><b>Definition:</b> <a href="llm__google_8py_source.html#l00069">llm_google.py:69</a></div></div>
 <div class="ttc" id="anamespacellm__google_html_aaf10455484fc5107670ae49a131c7cb0"><div class="ttname"><a href="namespacellm__google.html#aaf10455484fc5107670ae49a131c7cb0">llm_google.process_article_google</a></div><div class="ttdeci">def process_article_google(entry, model)</div><div class="ttdef"><b>Definition:</b> <a href="llm__google_8py_source.html#l00018">llm_google.py:18</a></div></div>
-<div class="ttc" id="anamespacellm__groq_html_a4bc90ba3090530f8b24286d91301a1f6"><div class="ttname"><a href="namespacellm__groq.html#a4bc90ba3090530f8b24286d91301a1f6">llm_groq.processed_article_groq_sum</a></div><div class="ttdeci">def processed_article_groq_sum(model, prompt)</div><div class="ttdef"><b>Definition:</b> <a href="llm__groq_8py_source.html#l00077">llm_groq.py:77</a></div></div>
+<div class="ttc" id="anamespacellm__groq_html_a4bc90ba3090530f8b24286d91301a1f6"><div class="ttname"><a href="namespacellm__groq.html#a4bc90ba3090530f8b24286d91301a1f6">llm_groq.processed_article_groq_sum</a></div><div class="ttdeci">def processed_article_groq_sum(model, prompt)</div><div class="ttdef"><b>Definition:</b> <a href="llm__groq_8py_source.html#l00079">llm_groq.py:79</a></div></div>
 <div class="ttc" id="anamespacellm__groq_html_a640d6dc4b2a4f4c71434ec3e15c7a4fd"><div class="ttname"><a href="namespacellm__groq.html#a640d6dc4b2a4f4c71434ec3e15c7a4fd">llm_groq.process_article_groq</a></div><div class="ttdeci">def process_article_groq(article, model)</div><div class="ttdef"><b>Definition:</b> <a href="llm__groq_8py_source.html#l00017">llm_groq.py:17</a></div></div>
-<div class="ttc" id="anamespacellm__openrouter_html_ac86226dafeaf15d0799907a0927ef4c3"><div class="ttname"><a href="namespacellm__openrouter.html#ac86226dafeaf15d0799907a0927ef4c3">llm_openrouter.processed_article_openrouter_sum</a></div><div class="ttdeci">def processed_article_openrouter_sum(model, prompt)</div><div class="ttdef"><b>Definition:</b> <a href="llm__openrouter_8py_source.html#l00079">llm_openrouter.py:79</a></div></div>
+<div class="ttc" id="anamespacellm__openrouter_html_ac86226dafeaf15d0799907a0927ef4c3"><div class="ttname"><a href="namespacellm__openrouter.html#ac86226dafeaf15d0799907a0927ef4c3">llm_openrouter.processed_article_openrouter_sum</a></div><div class="ttdeci">def processed_article_openrouter_sum(model, prompt)</div><div class="ttdef"><b>Definition:</b> <a href="llm__openrouter_8py_source.html#l00085">llm_openrouter.py:85</a></div></div>
 <div class="ttc" id="anamespacellm__openrouter_html_adc605827eb58b95653ef7457e464c19e"><div class="ttname"><a href="namespacellm__openrouter.html#adc605827eb58b95653ef7457e464c19e">llm_openrouter.process_article_openrouter</a></div><div class="ttdeci">def process_article_openrouter(article, model)</div><div class="ttdef"><b>Definition:</b> <a href="llm__openrouter_8py_source.html#l00017">llm_openrouter.py:17</a></div></div>
 <div class="ttc" id="anamespacemain_html"><div class="ttname"><a href="namespacemain.html">main</a></div><div class="ttdef"><b>Definition:</b> <a href="analyzer_2main_8py_source.html#l00001">main.py:1</a></div></div>
 <div class="ttc" id="anamespacemain_html_ab0a4a29a72200a5cf786f96fdab9a2bd"><div class="ttname"><a href="namespacemain.html#ab0a4a29a72200a5cf786f96fdab9a2bd">main.main</a></div><div class="ttdeci">def main()</div><div class="ttdef"><b>Definition:</b> <a href="analyzer_2main_8py_source.html#l00027">main.py:27</a></div></div>
@@ -266,7 +264,7 @@ $(document).ready(function(){initNavTree('analyzer_2main_8py_source.html',''); i
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_956cf9344146dcd696d78b01e0683c94.html">analyzer</a></li><li class="navelem"><a class="el" href="analyzer_2main_8py.html">main.py</a></li>
-    <li class="footer">Generated on Tue May 20 2025 19:59:17 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri May 23 2025 20:25:51 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

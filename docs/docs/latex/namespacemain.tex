@@ -36,6 +36,10 @@ def \mbox{\hyperlink{namespacemain_a8a3d6d9e186b8cc13867b5d663c9e82a}{save\+\_\+
 def \mbox{\hyperlink{namespacemain_a5d6ab7224f1cc509718976cc0c67c10e}{save\+\_\+error\+\_\+trend\+\_\+by\+\_\+ticker}} (data, max\+\_\+day, output\+\_\+dir=\char`\"{}tables\char`\"{})
 \item 
 def \mbox{\hyperlink{namespacemain_a1a2748142b9bf9370df50798bfc0ae54}{plot\+\_\+source\+\_\+distribution}} (data, output\+\_\+dir=\char`\"{}graphs\char`\"{}, threshold\+\_\+percent=1.\+5)
+\item 
+def \mbox{\hyperlink{namespacemain_aec999c06ebb9d7432a097245b73447dd}{plot\+\_\+model\+\_\+comparison\+\_\+combined}} (data\+\_\+day1, data\+\_\+days1to3, output\+\_\+dir=\char`\"{}graphs\char`\"{})
+\item 
+def \mbox{\hyperlink{namespacemain_aba055e66a2b4bf282db3ff3a190dcc2f}{plot\+\_\+source\+\_\+comparison\+\_\+combined}} (data\+\_\+day1, data\+\_\+days1to3, output\+\_\+dir=\char`\"{}graphs\char`\"{})
 \end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -93,7 +97,7 @@ Definition at line 22 of file main.\+py.
 
 
 
-Referenced by plot\+\_\+source\+\_\+distribution().
+Referenced by plot\+\_\+source\+\_\+comparison\+\_\+combined().
 
 \mbox{\Hypertarget{namespacemain_ab0a4a29a72200a5cf786f96fdab9a2bd}\label{namespacemain_ab0a4a29a72200a5cf786f96fdab9a2bd}} 
 \index{main@{main}!main@{main}}
@@ -131,7 +135,7 @@ References database.\+fetch\+\_\+sum\+\_\+analysis\+\_\+data(), database.\+get\+
 
 
 
-Referenced by plot\+\_\+source\+\_\+distribution(), and scrape\+\_\+investors\+\_\+article().
+Referenced by plot\+\_\+source\+\_\+comparison\+\_\+combined(), and scrape\+\_\+investors\+\_\+article().
 
 \mbox{\Hypertarget{namespacemain_a3605faba0dbf36ce1ed82257ebebf641}\label{namespacemain_a3605faba0dbf36ce1ed82257ebebf641}} 
 \index{main@{main}!plot\_accuracy\_over\_time@{plot\_accuracy\_over\_time}}
@@ -151,7 +155,7 @@ Definition at line 133 of file main.\+py.
 
 
 
-Referenced by plot\+\_\+source\+\_\+distribution().
+Referenced by plot\+\_\+source\+\_\+comparison\+\_\+combined().
 
 \mbox{\Hypertarget{namespacemain_a9a477917d7cda0e9907b03add1b10987}\label{namespacemain_a9a477917d7cda0e9907b03add1b10987}} 
 \index{main@{main}!plot\_model\_accuracy\_over\_time@{plot\_model\_accuracy\_over\_time}}
@@ -171,7 +175,7 @@ Definition at line 181 of file main.\+py.
 
 
 
-Referenced by plot\+\_\+source\+\_\+distribution().
+Referenced by plot\+\_\+source\+\_\+comparison\+\_\+combined().
 
 \mbox{\Hypertarget{namespacemain_a0db0e3cfe4f4bac345d769b59c576d30}\label{namespacemain_a0db0e3cfe4f4bac345d769b59c576d30}} 
 \index{main@{main}!plot\_model\_comparison@{plot\_model\_comparison}}
@@ -189,9 +193,24 @@ Referenced by plot\+\_\+source\+\_\+distribution().
 
 Definition at line 327 of file main.\+py.
 
+\mbox{\Hypertarget{namespacemain_aec999c06ebb9d7432a097245b73447dd}\label{namespacemain_aec999c06ebb9d7432a097245b73447dd}} 
+\index{main@{main}!plot\_model\_comparison\_combined@{plot\_model\_comparison\_combined}}
+\index{plot\_model\_comparison\_combined@{plot\_model\_comparison\_combined}!main@{main}}
+\doxysubsubsection{\texorpdfstring{plot\_model\_comparison\_combined()}{plot\_model\_comparison\_combined()}}
+{\footnotesize\ttfamily def main.\+plot\+\_\+model\+\_\+comparison\+\_\+combined (\begin{DoxyParamCaption}\item[{}]{data\+\_\+day1,  }\item[{}]{data\+\_\+days1to3,  }\item[{}]{output\+\_\+dir = {\ttfamily \char`\"{}graphs\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Generate combined bar chart comparing model MAPE for day1 vs days1-3
+@param data_day1 Processed metrics dictionary for day1 only
+@param data_days1to3 Processed metrics dictionary for days1-3
+@param output_dir Directory to save output graphs
+\end{DoxyVerb}
+ 
+
+Definition at line 880 of file main.\+py.
 
 
-Referenced by plot\+\_\+source\+\_\+distribution().
+
+Referenced by plot\+\_\+source\+\_\+comparison\+\_\+combined().
 
 \mbox{\Hypertarget{namespacemain_a6c76690d55c8c6dbc927aca69a5ce3db}\label{namespacemain_a6c76690d55c8c6dbc927aca69a5ce3db}} 
 \index{main@{main}!plot\_source\_accuracy\_over\_time@{plot\_source\_accuracy\_over\_time}}
@@ -209,10 +228,6 @@ Referenced by plot\+\_\+source\+\_\+distribution().
 
 Definition at line 250 of file main.\+py.
 
-
-
-Referenced by plot\+\_\+source\+\_\+distribution().
-
 \mbox{\Hypertarget{namespacemain_a207b8b742c5e7d5b2c6d549893e7d112}\label{namespacemain_a207b8b742c5e7d5b2c6d549893e7d112}} 
 \index{main@{main}!plot\_source\_comparison@{plot\_source\_comparison}}
 \index{plot\_source\_comparison@{plot\_source\_comparison}!main@{main}}
@@ -229,9 +244,24 @@ Referenced by plot\+\_\+source\+\_\+distribution().
 
 Definition at line 392 of file main.\+py.
 
+\mbox{\Hypertarget{namespacemain_aba055e66a2b4bf282db3ff3a190dcc2f}\label{namespacemain_aba055e66a2b4bf282db3ff3a190dcc2f}} 
+\index{main@{main}!plot\_source\_comparison\_combined@{plot\_source\_comparison\_combined}}
+\index{plot\_source\_comparison\_combined@{plot\_source\_comparison\_combined}!main@{main}}
+\doxysubsubsection{\texorpdfstring{plot\_source\_comparison\_combined()}{plot\_source\_comparison\_combined()}}
+{\footnotesize\ttfamily def main.\+plot\+\_\+source\+\_\+comparison\+\_\+combined (\begin{DoxyParamCaption}\item[{}]{data\+\_\+day1,  }\item[{}]{data\+\_\+days1to3,  }\item[{}]{output\+\_\+dir = {\ttfamily \char`\"{}graphs\char`\"{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Generate combined bar chart comparing source MAPE for day1 vs days1-3
+@param data_day1 Processed metrics dictionary for day1 only
+@param data_days1to3 Processed metrics dictionary for days1-3
+@param output_dir Directory to save output graphs
+\end{DoxyVerb}
+ 
+
+Definition at line 1005 of file main.\+py.
 
 
-Referenced by plot\+\_\+source\+\_\+distribution().
+
+References load\+\_\+data(), main(), plot\+\_\+accuracy\+\_\+over\+\_\+time(), plot\+\_\+model\+\_\+accuracy\+\_\+over\+\_\+time(), and plot\+\_\+model\+\_\+comparison\+\_\+combined().
 
 \mbox{\Hypertarget{namespacemain_a1a2748142b9bf9370df50798bfc0ae54}\label{namespacemain_a1a2748142b9bf9370df50798bfc0ae54}} 
 \index{main@{main}!plot\_source\_distribution@{plot\_source\_distribution}}
@@ -248,10 +278,6 @@ Referenced by plot\+\_\+source\+\_\+distribution().
 
 Definition at line 801 of file main.\+py.
 
-
-
-References load\+\_\+data(), main(), plot\+\_\+accuracy\+\_\+over\+\_\+time(), plot\+\_\+model\+\_\+accuracy\+\_\+over\+\_\+time(), plot\+\_\+model\+\_\+comparison(), plot\+\_\+source\+\_\+accuracy\+\_\+over\+\_\+time(), plot\+\_\+source\+\_\+comparison(), and print\+\_\+summary\+\_\+stats().
-
 \mbox{\Hypertarget{namespacemain_ad68619698c21610198f0c7b025e3a0d5}\label{namespacemain_ad68619698c21610198f0c7b025e3a0d5}} 
 \index{main@{main}!print\_summary\_stats@{print\_summary\_stats}}
 \index{print\_summary\_stats@{print\_summary\_stats}!main@{main}}
@@ -266,10 +292,6 @@ References load\+\_\+data(), main(), plot\+\_\+accuracy\+\_\+over\+\_\+time(), p
  
 
 Definition at line 460 of file main.\+py.
-
-
-
-Referenced by plot\+\_\+source\+\_\+distribution().
 
 \mbox{\Hypertarget{namespacemain_a5d6ab7224f1cc509718976cc0c67c10e}\label{namespacemain_a5d6ab7224f1cc509718976cc0c67c10e}} 
 \index{main@{main}!save\_error\_trend\_by\_ticker@{save\_error\_trend\_by\_ticker}}

@@ -877,6 +877,217 @@ def plot_source_distribution(data, output_dir="graphs", threshold_percent=1.5):
     plt.close()
 
 
+def plot_model_comparison_combined(data_day1, data_days1to3, output_dir="graphs"):
+    """
+    @brief Generate combined bar chart comparing model MAPE for day1 vs days1-3
+    @param data_day1 Processed metrics dictionary for day1 only
+    @param data_days1to3 Processed metrics dictionary for days1-3
+    @param output_dir Directory to save output graphs
+    """
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Get model stats for day1
+    day1_stats = []
+    for model, errors in data_day1["model_overall"].items():
+        if len(errors) >= data_day1["min_datapoints"]:
+            mape = np.mean(errors) * 100
+            display_name = model.replace("meta-llama/", "")
+            day1_stats.append((display_name, mape, len(errors)))
+
+    # Get model stats for days1-3
+    days1to3_stats = []
+    for model, errors in data_days1to3["model_overall"].items():
+        if len(errors) >= data_days1to3["min_datapoints"]:
+            mape = np.mean(errors) * 100
+            display_name = model.replace("meta-llama/", "")
+            days1to3_stats.append((display_name, mape, len(errors)))
+
+    # Find models that appear in both datasets
+    common_models = set(m[0] for m in day1_stats) & set(m[0] for m in days1to3_stats)
+    if not common_models:
+        print("No common models between the two datasets")
+        return
+
+    # Create combined stats with sample counts
+    combined_stats = []
+    for model in common_models:
+        day1_entry = next(m for m in day1_stats if m[0] == model)
+        days1to3_entry = next(m for m in days1to3_stats if m[0] == model)
+        combined_stats.append(
+            (
+                model,
+                day1_entry[1],  # day1 MAPE
+                days1to3_entry[1],  # days1-3 MAPE
+                day1_entry[2],  # day1 count
+                days1to3_entry[2],  # days1-3 count
+            )
+        )
+
+    # Sort by day1 MAPE (ascending - from best to worst)
+    combined_stats.sort(key=lambda x: x[1])
+
+    model_names = [m[0] for m in combined_stats]
+    day1_mapes = [m[1] for m in combined_stats]
+    days1to3_mapes = [m[2] for m in combined_stats]
+    day1_counts = [m[3] for m in combined_stats]
+    days1to3_counts = [m[4] for m in combined_stats]
+
+    fig, ax = plt.subplots(
+        figsize=(max(10, len(model_names) * 0.8), 8)
+    )  # Increased height
+
+    x = np.arange(len(model_names))
+    width = 0.35
+
+    bars1 = ax.bar(
+        x - width / 2, day1_mapes, width, label="Day 1 Only", color="skyblue"
+    )
+    bars2 = ax.bar(
+        x + width / 2, days1to3_mapes, width, label="Days 1-3", color="lightcoral"
+    )
+
+    # Add MAPE values on top of bars
+    for bars in [bars1, bars2]:
+        for bar in bars:
+            height = bar.get_height()
+            ax.text(
+                bar.get_x() + bar.get_width() / 2.0,
+                height,
+                f"{height:.2f}%",
+                ha="center",
+                va="bottom",
+                fontsize=9,
+            )
+
+    for i, (day1_count, days1to3_count) in enumerate(zip(day1_counts, days1to3_counts)):
+        y_pos = ax.get_ylim()[0] + (ax.get_ylim()[1] * 0.01)
+
+        # Day 1 count
+        ax.text(
+            x[i] - width / 2,
+            y_pos,
+            f"samples={day1_count}",
+            ha="center",
+            va="bottom",  # Changed to bottom to place text above this point
+            rotation=90,
+            fontsize=8,
+            color="black",
+        )
+        # Days 1-3 count
+        ax.text(
+            x[i] + width / 2,
+            y_pos,
+            f"samples={days1to3_count}",
+            ha="center",
+            va="bottom",
+            rotation=90,
+            fontsize=8,
+            color="black",
+        )
+
+    ax.set_ylabel("Mean Absolute Percentage Error (MAPE) %")
+    ax.set_title("Model MAPE Comparison: Day 1 vs Days 1-3")
+    ax.set_xticks(x)
+    ax.set_xticklabels(model_names, rotation=45, ha="right")
+    ax.legend(loc="upper left")
+    ax.grid(axis="y", linestyle="--", alpha=0.7)
+
+    # Adjust ylim to make room for the vertical sample counts
+    current_ylim = ax.get_ylim()
+    ax.set_ylim(bottom=current_ylim[0], top=current_ylim[1] * 1.05)
+
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, "model_comparison_combined.png"))
+    plt.savefig(os.path.join(output_dir, "model_comparison_combined.pdf"))
+    plt.close()
+
+
+def plot_source_comparison_combined(data_day1, data_days1to3, output_dir="graphs"):
+    """
+    @brief Generate combined bar chart comparing source MAPE for day1 vs days1-3
+    @param data_day1 Processed metrics dictionary for day1 only
+    @param data_days1to3 Processed metrics dictionary for days1-3
+    @param output_dir Directory to save output graphs
+    """
+    os.makedirs(output_dir, exist_ok=True)
+
+    # Get source stats for day1
+    day1_stats = []
+    for source, errors in data_day1["source_overall"].items():
+        if len(errors) >= data_day1["min_datapoints"]:
+            mape = np.mean(errors) * 100
+            day1_stats.append((source, mape, len(errors)))
+
+    # Get source stats for days1-3
+    days1to3_stats = []
+    for source, errors in data_days1to3["source_overall"].items():
+        if len(errors) >= data_days1to3["min_datapoints"]:
+            mape = np.mean(errors) * 100
+            days1to3_stats.append((source, mape, len(errors)))
+
+    # Find sources that appear in both datasets
+    common_sources = set(s[0] for s in day1_stats) & set(s[0] for s in days1to3_stats)
+    if not common_sources:
+        print("No common sources between the two datasets")
+        return
+
+    combined_stats = []
+    for source in common_sources:
+        day1_mape = next(s[1] for s in day1_stats if s[0] == source)
+        days1to3_mape = next(s[1] for s in days1to3_stats if s[0] == source)
+        article_count = data_day1["source_article_counts"].get(source, 0)
+        combined_stats.append((source, day1_mape, days1to3_mape, article_count))
+
+    # Sort by day1 MAPE (ascending - from best to worst)
+    combined_stats.sort(key=lambda x: x[1])
+
+    source_names = [s[0] for s in combined_stats]
+    day1_mapes = [s[1] for s in combined_stats]
+    days1to3_mapes = [s[2] for s in combined_stats]
+    article_counts = [s[3] for s in combined_stats]
+
+    fig, ax = plt.subplots(figsize=(max(10, len(source_names) * 0.8), 6))
+
+    x = np.arange(len(source_names))
+    width = 0.35
+
+    bars1 = ax.bar(
+        x - width / 2, day1_mapes, width, label="Day 1 Only", color="lightgreen"
+    )
+    bars2 = ax.bar(
+        x + width / 2, days1to3_mapes, width, label="Days 1-3", color="mediumseagreen"
+    )
+
+    for bars in [bars1, bars2]:
+        for bar in bars:
+            height = bar.get_height()
+            ax.text(
+                bar.get_x() + bar.get_width() / 2.0,
+                height,
+                f"{height:.2f}%",
+                ha="center",
+                va="bottom",
+            )
+
+    for i, count in enumerate(article_counts):
+        ax.text(x[i], ax.get_ylim()[0], f"articles={count}", ha="center", va="bottom")
+
+    ax.set_ylabel("Mean Absolute Percentage Error (MAPE) %")
+    ax.set_title("Source MAPE Comparison: Day 1 vs Days 1-3")
+    ax.set_xticks(x)
+    ax.set_xticklabels(source_names, rotation=90, ha="center")
+    ax.legend()
+    ax.grid(axis="y", linestyle="--", alpha=0.7)
+
+    ax.set_ylim(bottom=0)
+
+    plt.subplots_adjust(bottom=0.4)
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, "source_comparison_combined.png"))
+    plt.savefig(os.path.join(output_dir, "source_comparison_combined.pdf"))
+    plt.close()
+
+
 def main():
     """Command line interface for prediction analysis."""
     parser = argparse.ArgumentParser(
@@ -902,13 +1113,13 @@ def main():
         type=int,
         default=1,
         help="Minimum number of articles required per source",
-    )
+    )s
     args = parser.parse_args()
 
     data = load_data(args.data_dir, args.max_day, args.min_articles)
     data["data_dir"] = args.data_dir
 
-    print_summary_stats(data, args.max_day, args.min_datapoints)
+    # print_summary_stats(data, args.max_day, args.min_datapoints)
 
     # CSV
     # save_model_performance_by_day(data, args.max_day)
@@ -919,13 +1130,23 @@ def main():
     # save_error_trend_by_ticker(data, args.max_day)
 
     # Plots
-    plot_accuracy_over_time(data, args.max_day, args.min_datapoints)
-    plot_model_accuracy_over_time(data, args.max_day, args.min_datapoints)
-    plot_source_accuracy_over_time(data, args.max_day, args.min_datapoints)
-    plot_model_comparison(data, args.max_day, args.min_datapoints)
-    plot_source_comparison(data, args.max_day, args.min_articles)
+    # plot_model_accuracy_over_time(data, args.max_day, args.min_datapoints)
+    # plot_source_accuracy_over_time(data, args.max_day, args.min_datapoints)
+    # plot_model_comparison(data, args.max_day, args.min_datapoints)
+    # plot_source_comparison(data, args.max_day, args.min_articles)
+    # plot_source_distribution(data)
 
-    plot_source_distribution(data)
+    data_day1 = load_data(args.data_dir, max_day=1, min_articles_per_source=1)
+    data_day1["min_datapoints"] = 100
+    data_day1["data_dir"] = args.data_dir
+
+    data_days1to3 = load_data(args.data_dir, max_day=3, min_articles_per_source=1)
+    data_days1to3["min_datapoints"] = 300
+    data_days1to3["data_dir"] = args.data_dir
+
+    #plot_accuracy_over_time(data, 12, 50)
+    plot_model_comparison_combined(data_day1, data_days1to3)
+    plot_model_accuracy_over_time(data, args.max_day, args.min_datapoints)
 
 
 if __name__ == "__main__":

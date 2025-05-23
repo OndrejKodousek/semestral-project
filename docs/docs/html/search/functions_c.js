@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['useeffect_383',['useEffect',['../App_8tsx.html#a268b40c7bdbfb618b73546fd95f330fc',1,'App.tsx']]]
+  ['train_5fmodel_419',['train_model',['../namespaceevaluate.html#ac1770a18f3f5252907fe24f73dd25e43',1,'evaluate']]]
 ];

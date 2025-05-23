@@ -107,12 +107,19 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>build_lstm_model()
-: <a class="el" href="namespacetrain.html#a1e91f400270e2a0220654557c231d546">train</a>
+: <a class="el" href="namespaceevaluate.html#a650071772e15aea89199c58235ffeb6a">evaluate</a>
+, <a class="el" href="namespacetrain.html#a1e91f400270e2a0220654557c231d546">train</a>
 </li>
 </ul>
 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
+<li>calculate_daily_mape()
+: <a class="el" href="namespaceevaluate.html#ac61ac5e0f791262b754301f9d9a2ff89">evaluate</a>
+</li>
+<li>calculate_mape()
+: <a class="el" href="namespaceevaluate.html#a202dda5270983b738a2385622cb29adb">evaluate</a>
+</li>
 <li>candidate_tickers
 : <a class="el" href="namespacelstm__daemon.html#a85c2b882fe7f5ceb97ecdba6b7591a36">lstm_daemon</a>
 </li>
@@ -145,11 +152,15 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 
 
 <h3><a id="index_d"></a>- d -</h3><ul>
+<li>daily_mape_results
+: <a class="el" href="namespaceevaluate.html#a73fd8a4c3bc0bafdc45254c7d6a0940b">evaluate</a>
+</li>
 <li>db_file
 : <a class="el" href="namespacelstm__daemon.html#ab5413e7865c94c66c0211a49b6fd5a4e">lstm_daemon</a>
 </li>
 <li>DB_PATH
-: <a class="el" href="namespacelstm__daemon.html#ac45ccfd2f9e6a0bb0cea38a5e1def0f7">lstm_daemon</a>
+: <a class="el" href="namespaceevaluate.html#a770b2f28f109992c8a8f439aceffe0cb">evaluate</a>
+, <a class="el" href="namespacelstm__daemon.html#ac45ccfd2f9e6a0bb0cea38a5e1def0f7">lstm_daemon</a>
 , <a class="el" href="namespacepredict.html#a12476fad9ae6b4a17186ab0597eb1629">predict</a>
 , <a class="el" href="namespacetrain.html#accc55b0eb3c6c023a8b877485eb63c39">train</a>
 </li>
@@ -157,7 +168,8 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 : <a class="el" href="namespaceapi__server.html#a32f0ed0478293ebb613012e14ed03786">api_server</a>
 </li>
 <li>DEFAULT_PREDICTION_DAYS
-: <a class="el" href="namespacepredict.html#a589c5df88c2d40e99c2c311d36139550">predict</a>
+: <a class="el" href="namespaceevaluate.html#ab9937f4d7fed5881f3da7c6e3a35b3b5">evaluate</a>
+, <a class="el" href="namespacepredict.html#a589c5df88c2d40e99c2c311d36139550">predict</a>
 </li>
 <li>driver
 : <a class="el" href="namespacemain.html#afe1c140a1cab1f302ab94aac99efba8f">main</a>
@@ -168,7 +180,14 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 
 <h3><a id="index_e"></a>- e -</h3><ul>
 <li>EPOCHS
-: <a class="el" href="namespacetrain.html#aa6944fe332881cea473979a10c51d1c2">train</a>
+: <a class="el" href="namespaceevaluate.html#a2b30ded0b1b803473368c15f09033f55">evaluate</a>
+, <a class="el" href="namespacetrain.html#aa6944fe332881cea473979a10c51d1c2">train</a>
+</li>
+<li>EVAL_LOG_FILE
+: <a class="el" href="namespaceevaluate.html#a7a733be28b271c90006768db51a394c6">evaluate</a>
+</li>
+<li>evaluate_ticker()
+: <a class="el" href="namespaceevaluate.html#af9fd08aec04746ceea6bd6f9c66e995d">evaluate</a>
 </li>
 <li>execute_query()
 : <a class="el" href="namespacescraper__library.html#a6dbb7a0c71a642f127b5ae5a89e2a785">scraper_library</a>
@@ -186,8 +205,14 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 
 
 <h3><a id="index_f"></a>- f -</h3><ul>
+<li>failed_evaluations
+: <a class="el" href="namespaceevaluate.html#a3b3f2c03a8d6db1b74dfe4fbcbedf522">evaluate</a>
+</li>
 <li>fetch_analyzed_articles_and_predictions()
 : <a class="el" href="namespaceapi__server.html#af1b455843f65f74ed670f6425a2f1ffc">api_server</a>
+</li>
+<li>fetch_historical_data()
+: <a class="el" href="namespaceevaluate.html#a27525b1bfa65306251e2e6c12694eebf">evaluate</a>
 </li>
 <li>fetch_lstm()
 : <a class="el" href="namespaceapi__server.html#a0eb3122ba60fc0be801f8b4220be4990">api_server</a>
@@ -217,6 +242,7 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 <li>get_project_root()
 : <a class="el" href="namespaceapi__server.html#a48016177366974fbea006dec34dcd0a8">api_server</a>
 , <a class="el" href="namespacedaemon.html#aee4214eabaaf2f0a0daeec31438a1c90">daemon</a>
+, <a class="el" href="namespaceevaluate.html#a6b96fa1021e159cdcd84054d3b6f75bb">evaluate</a>
 , <a class="el" href="namespacelstm__daemon.html#ab7edfc58dbae4ca9549d4bbe09d2e16f">lstm_daemon</a>
 , <a class="el" href="namespacepredict.html#a85ea3822df90c0f499046f207bc24400">predict</a>
 , <a class="el" href="namespacescraper__library.html#a3a420a1daeb66a57c9e9dfb56f0bbf7c">scraper_library</a>
@@ -233,7 +259,11 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 : <a class="el" href="namespaceapi__server.html#a071fcd4a14923088dc40b9564bb1cbee">api_server</a>
 </li>
 <li>get_top_tickers_by_frequency()
-: <a class="el" href="namespacelstm__daemon.html#a2a82eefa08d1d085080214be358d886a">lstm_daemon</a>
+: <a class="el" href="namespaceevaluate.html#ae0b7731d16c9c264283bdd9e863b0357">evaluate</a>
+, <a class="el" href="namespacelstm__daemon.html#a2a82eefa08d1d085080214be358d886a">lstm_daemon</a>
+</li>
+<li>get_trading_days_from_data()
+: <a class="el" href="namespaceevaluate.html#a534baca732c2ebefc0602064c343dcf7">evaluate</a>
 </li>
 <li>getDriver()
 : <a class="el" href="namespacescraper__library.html#a51803b7e799776783a99cf7914799cde">scraper_library</a>
@@ -261,6 +291,9 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 <li>is_valid_data()
 : <a class="el" href="namespaceutils.html#a831264642252f5623e53bfb687ba295f">utils</a>
 </li>
+<li>is_weekend()
+: <a class="el" href="namespaceevaluate.html#a8a488bea17b3e724cfe1bb7417cf321a">evaluate</a>
+</li>
 </ul>
 
 
@@ -277,6 +310,9 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 <li>log()
 : <a class="el" href="namespacescraper__library.html#a06eabbd400515672cd48746c2a7406a0">scraper_library</a>
 </li>
+<li>log_evaluation_results()
+: <a class="el" href="namespaceevaluate.html#ae630bcc2e8d87e0e59377960cd0540c5">evaluate</a>
+</li>
 <li>logToFile()
 : <a class="el" href="namespacescraper__library.html#a4b04649db1a00bb6fdab9de41f26c3d7">scraper_library</a>
 </li>
@@ -286,9 +322,16 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 <h3><a id="index_m"></a>- m -</h3><ul>
 <li>main()
 : <a class="el" href="namespacedaemon.html#a434de337b1959dcd96fcce8326904ee9">daemon</a>
+, <a class="el" href="namespaceevaluate.html#a819a356655056a1a3cb06a47c236e3c9">evaluate</a>
 , <a class="el" href="namespacemain.html#ab0a4a29a72200a5cf786f96fdab9a2bd">main</a>
 , <a class="el" href="namespacepredict.html#a99994094d06ce9e5a79a7e7cf6566602">predict</a>
 , <a class="el" href="namespacetrain.html#a96b92a5d8e2b1a8280c6b6302989d9a5">train</a>
+</li>
+<li>make_predictions()
+: <a class="el" href="namespaceevaluate.html#a614518f4fd06421d12a9ada003fe5216">evaluate</a>
+</li>
+<li>MAX_TIME_OFFSET_DAYS
+: <a class="el" href="namespaceevaluate.html#a435b038d2829ba1bec0b98719bd644bd">evaluate</a>
 </li>
 </ul>
 
@@ -322,11 +365,17 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 <li>plot_model_comparison()
 : <a class="el" href="namespacemain.html#a0db0e3cfe4f4bac345d769b59c576d30">main</a>
 </li>
+<li>plot_model_comparison_combined()
+: <a class="el" href="namespacemain.html#aec999c06ebb9d7432a097245b73447dd">main</a>
+</li>
 <li>plot_source_accuracy_over_time()
 : <a class="el" href="namespacemain.html#a6c76690d55c8c6dbc927aca69a5ce3db">main</a>
 </li>
 <li>plot_source_comparison()
 : <a class="el" href="namespacemain.html#a207b8b742c5e7d5b2c6d549893e7d112">main</a>
+</li>
+<li>plot_source_comparison_combined()
+: <a class="el" href="namespacemain.html#aba055e66a2b4bf282db3ff3a190dcc2f">main</a>
 </li>
 <li>plot_source_distribution()
 : <a class="el" href="namespacemain.html#a1a2748142b9bf9370df50798bfc0ae54">main</a>
@@ -392,6 +441,9 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
+<li>save_daily_mape_results()
+: <a class="el" href="namespaceevaluate.html#aba5187633bd79750ab8dcdffd61495c0">evaluate</a>
+</li>
 <li>save_error_trend_by_ticker()
 : <a class="el" href="namespacemain.html#a5d6ab7224f1cc509718976cc0c67c10e">main</a>
 </li>
@@ -416,6 +468,9 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 <li>save_reference_and_predictions()
 : <a class="el" href="namespacepredict.html#aa02a7f7226b0f113ff9fbc3a11508856">predict</a>
 </li>
+<li>save_results_to_files()
+: <a class="el" href="namespaceevaluate.html#aa22d17518df47e2e68585209b1a9f07b">evaluate</a>
+</li>
 <li>save_source_performance_by_day()
 : <a class="el" href="namespacemain.html#acb91ff1108e57cc9827057dd36dbcd4d">main</a>
 </li>
@@ -429,7 +484,8 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 : <a class="el" href="namespacemain.html#a01ac8c3db06ec878a1058f68356ab6b3">main</a>
 </li>
 <li>SEQUENCE_LENGTH
-: <a class="el" href="namespacepredict.html#a5be5b6d178ac0e2892f7efb417676524">predict</a>
+: <a class="el" href="namespaceevaluate.html#a23c11961133a0b4d4e8a3f85986983f1">evaluate</a>
+, <a class="el" href="namespacepredict.html#a5be5b6d178ac0e2892f7efb417676524">predict</a>
 , <a class="el" href="namespacetrain.html#a88ab20f5ea0f6663b2057073c4687853">train</a>
 </li>
 <li>session
@@ -449,8 +505,17 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 <li>str_to_int()
 : <a class="el" href="namespaceutils.html#ae20f1344088613e2c4ccbe1c95de48ef">utils</a>
 </li>
+<li>success
+: <a class="el" href="namespaceevaluate.html#a30d8832ceef1bb0c318d9f79d20c7ff2">evaluate</a>
+</li>
+<li>successful_evaluations
+: <a class="el" href="namespaceevaluate.html#af8558a72490a75cbd478db87b68c30b8">evaluate</a>
+</li>
 <li>sum_analysis()
 : <a class="el" href="namespaceapi__server.html#a2ec44e055c055d54db0ba78818d4593f">api_server</a>
+</li>
+<li>SUMMARY_RESULTS_FILE
+: <a class="el" href="namespaceevaluate.html#ac88f516e3678e38acf29a91691a0a79b">evaluate</a>
 </li>
 <li>SYSTEM_INSTRUCTION_AGGREGATED
 : <a class="el" href="namespaceconfig.html#a7889e93f289432fbec15fb7ecbaf6343">config</a>
@@ -462,6 +527,9 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
+<li>TEST_DAYS_AFTER_TRAIN
+: <a class="el" href="namespaceevaluate.html#a98705c495b62e657b6585f0f5fd0a9d4">evaluate</a>
+</li>
 <li>ticker_symbol
 : <a class="el" href="namespacepredict.html#a28d3c7da4c979b03ebba3eb54866c527">predict</a>
 , <a class="el" href="namespacetrain.html#aadaf49b79b62965c9992367f505e5f01">train</a>
@@ -470,7 +538,14 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 : <a class="el" href="namespacelstm__daemon.html#a37f409d7c4c77b702907f20a4f92d256">lstm_daemon</a>
 </li>
 <li>TOP_N_TICKERS
-: <a class="el" href="namespacelstm__daemon.html#a92b4746d2f4868d044d63b858e14616a">lstm_daemon</a>
+: <a class="el" href="namespaceevaluate.html#adc795de8b2f67f68cc7705bc51b806d0">evaluate</a>
+, <a class="el" href="namespacelstm__daemon.html#a92b4746d2f4868d044d63b858e14616a">lstm_daemon</a>
+</li>
+<li>TRAIN_DAYS
+: <a class="el" href="namespaceevaluate.html#a236dbf8fec4474f260e8164077e62183">evaluate</a>
+</li>
+<li>train_model()
+: <a class="el" href="namespaceevaluate.html#ac1770a18f3f5252907fe24f73dd25e43">evaluate</a>
 </li>
 <li>train_script
 : <a class="el" href="namespacelstm__daemon.html#aa85e44cb1c49a02df23c48611f76bfe7">lstm_daemon</a>
@@ -491,7 +566,7 @@ $(document).ready(function(){initNavTree('namespacemembers.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Tue May 20 2025 19:59:17 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri May 23 2025 20:25:51 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

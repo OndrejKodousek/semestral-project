@@ -1,0 +1,456 @@
+\hypertarget{namespaceevaluate}{}\doxysection{evaluate Namespace Reference}
+\label{namespaceevaluate}\index{evaluate@{evaluate}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespaceevaluate_ae0b7731d16c9c264283bdd9e863b0357}{get\+\_\+top\+\_\+tickers\+\_\+by\+\_\+frequency}} (db\+\_\+file, limit=\mbox{\hyperlink{namespaceevaluate_adc795de8b2f67f68cc7705bc51b806d0}{TOP\+\_\+\+N\+\_\+\+TICKERS}})
+\item 
+def \mbox{\hyperlink{namespaceevaluate_a8a488bea17b3e724cfe1bb7417cf321a}{is\+\_\+weekend}} (date\+\_\+obj)
+\item 
+def \mbox{\hyperlink{namespaceevaluate_a534baca732c2ebefc0602064c343dcf7}{get\+\_\+trading\+\_\+days\+\_\+from\+\_\+data}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, start\+\_\+date, end\+\_\+date)
+\item 
+def \mbox{\hyperlink{namespaceevaluate_a27525b1bfa65306251e2e6c12694eebf}{fetch\+\_\+historical\+\_\+data}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, start\+\_\+date, end\+\_\+date)
+\item 
+def \mbox{\hyperlink{namespaceevaluate_a650071772e15aea89199c58235ffeb6a}{build\+\_\+lstm\+\_\+model}} (input\+\_\+shape)
+\item 
+def \mbox{\hyperlink{namespaceevaluate_ac1770a18f3f5252907fe24f73dd25e43}{train\+\_\+model}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, train\+\_\+data)
+\item 
+def \mbox{\hyperlink{namespaceevaluate_a614518f4fd06421d12a9ada003fe5216}{make\+\_\+predictions}} (\mbox{\hyperlink{StatisticsField_8tsx_a644378717e5c9f39f5d013d33189c65a}{model}}, scaler, recent\+\_\+data\+\_\+values)
+\item 
+def \mbox{\hyperlink{namespaceevaluate_a202dda5270983b738a2385622cb29adb}{calculate\+\_\+mape}} (actual\+\_\+values, predicted\+\_\+values)
+\item 
+def \mbox{\hyperlink{namespaceevaluate_ac61ac5e0f791262b754301f9d9a2ff89}{calculate\+\_\+daily\+\_\+mape}} (actual\+\_\+values, predicted\+\_\+values)
+\item 
+def \mbox{\hyperlink{namespaceevaluate_a6b96fa1021e159cdcd84054d3b6f75bb}{get\+\_\+project\+\_\+root}} ()
+\item 
+def \mbox{\hyperlink{namespaceevaluate_aba5187633bd79750ab8dcdffd61495c0}{save\+\_\+daily\+\_\+mape\+\_\+results}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, train\+\_\+end\+\_\+date, test\+\_\+start\+\_\+date, daily\+\_\+mapes, actual\+\_\+values, predicted\+\_\+values, trading\+\_\+days)
+\item 
+def \mbox{\hyperlink{namespaceevaluate_ae630bcc2e8d87e0e59377960cd0540c5}{log\+\_\+evaluation\+\_\+results}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}}, mape, train\+\_\+end\+\_\+date, test\+\_\+start\+\_\+date, test\+\_\+end\+\_\+date, \mbox{\hyperlink{namespaceevaluate_a30d8832ceef1bb0c318d9f79d20c7ff2}{success}})
+\item 
+def \mbox{\hyperlink{namespaceevaluate_af9fd08aec04746ceea6bd6f9c66e995d}{evaluate\+\_\+ticker}} (\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}})
+\item 
+def \mbox{\hyperlink{namespaceevaluate_aa22d17518df47e2e68585209b1a9f07b}{save\+\_\+results\+\_\+to\+\_\+files}} ()
+\item 
+def \mbox{\hyperlink{namespaceevaluate_a819a356655056a1a3cb06a47c236e3c9}{main}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+string \mbox{\hyperlink{namespaceevaluate_a770b2f28f109992c8a8f439aceffe0cb}{DB\+\_\+\+PATH}} = \char`\"{}data/news.\+db\char`\"{}
+\item 
+int \mbox{\hyperlink{namespaceevaluate_ab9937f4d7fed5881f3da7c6e3a35b3b5}{DEFAULT\+\_\+\+PREDICTION\+\_\+\+DAYS}} = 12
+\item 
+int \mbox{\hyperlink{namespaceevaluate_a23c11961133a0b4d4e8a3f85986983f1}{SEQUENCE\+\_\+\+LENGTH}} = 60
+\item 
+int \mbox{\hyperlink{namespaceevaluate_a2b30ded0b1b803473368c15f09033f55}{EPOCHS}} = 25
+\item 
+string \mbox{\hyperlink{namespaceevaluate_a7a733be28b271c90006768db51a394c6}{EVAL\+\_\+\+LOG\+\_\+\+FILE}} = \char`\"{}lstm\+\_\+evaluation.\+log\char`\"{}
+\item 
+string \mbox{\hyperlink{namespaceevaluate_ac88f516e3678e38acf29a91691a0a79b}{SUMMARY\+\_\+\+RESULTS\+\_\+\+FILE}} = \char`\"{}mape\+\_\+summary\+\_\+by\+\_\+day.\+csv\char`\"{}
+\item 
+int \mbox{\hyperlink{namespaceevaluate_a236dbf8fec4474f260e8164077e62183}{TRAIN\+\_\+\+DAYS}} = 365 $\ast$ 2
+\item 
+int \mbox{\hyperlink{namespaceevaluate_a98705c495b62e657b6585f0f5fd0a9d4}{TEST\+\_\+\+DAYS\+\_\+\+AFTER\+\_\+\+TRAIN}} = 1
+\item 
+int \mbox{\hyperlink{namespaceevaluate_a435b038d2829ba1bec0b98719bd644bd}{MAX\+\_\+\+TIME\+\_\+\+OFFSET\+\_\+\+DAYS}} = 7
+\item 
+int \mbox{\hyperlink{namespaceevaluate_adc795de8b2f67f68cc7705bc51b806d0}{TOP\+\_\+\+N\+\_\+\+TICKERS}} = 100
+\item 
+list \mbox{\hyperlink{namespaceevaluate_a73fd8a4c3bc0bafdc45254c7d6a0940b}{daily\+\_\+mape\+\_\+results}} = \mbox{[}$\,$\mbox{]}
+\item 
+int \mbox{\hyperlink{namespaceevaluate_af8558a72490a75cbd478db87b68c30b8}{successful\+\_\+evaluations}} = 0
+\item 
+int \mbox{\hyperlink{namespaceevaluate_a3b3f2c03a8d6db1b74dfe4fbcbedf522}{failed\+\_\+evaluations}} = 0
+\item 
+def \mbox{\hyperlink{namespaceevaluate_a30d8832ceef1bb0c318d9f79d20c7ff2}{success}} = \mbox{\hyperlink{namespaceevaluate_af9fd08aec04746ceea6bd6f9c66e995d}{evaluate\+\_\+ticker}}(\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@file evaluate.py
+@brief Evaluates LSTM model performance by comparing predictions with actual values.
+Enhanced to calculate day-by-day MAPE analysis across all tickers.
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespaceevaluate_a650071772e15aea89199c58235ffeb6a}\label{namespaceevaluate_a650071772e15aea89199c58235ffeb6a}} 
+\index{evaluate@{evaluate}!build\_lstm\_model@{build\_lstm\_model}}
+\index{build\_lstm\_model@{build\_lstm\_model}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{build\_lstm\_model()}{build\_lstm\_model()}}
+{\footnotesize\ttfamily def evaluate.\+build\+\_\+lstm\+\_\+model (\begin{DoxyParamCaption}\item[{}]{input\+\_\+shape }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Constructs LSTM model architecture.\end{DoxyVerb}
+ 
+
+Definition at line 111 of file evaluate.\+py.
+
+
+
+Referenced by train\+\_\+model().
+
+\mbox{\Hypertarget{namespaceevaluate_ac61ac5e0f791262b754301f9d9a2ff89}\label{namespaceevaluate_ac61ac5e0f791262b754301f9d9a2ff89}} 
+\index{evaluate@{evaluate}!calculate\_daily\_mape@{calculate\_daily\_mape}}
+\index{calculate\_daily\_mape@{calculate\_daily\_mape}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{calculate\_daily\_mape()}{calculate\_daily\_mape()}}
+{\footnotesize\ttfamily def evaluate.\+calculate\+\_\+daily\+\_\+mape (\begin{DoxyParamCaption}\item[{}]{actual\+\_\+values,  }\item[{}]{predicted\+\_\+values }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates MAPE for each prediction day separately.\end{DoxyVerb}
+ 
+
+Definition at line 196 of file evaluate.\+py.
+
+
+
+Referenced by evaluate\+\_\+ticker().
+
+\mbox{\Hypertarget{namespaceevaluate_a202dda5270983b738a2385622cb29adb}\label{namespaceevaluate_a202dda5270983b738a2385622cb29adb}} 
+\index{evaluate@{evaluate}!calculate\_mape@{calculate\_mape}}
+\index{calculate\_mape@{calculate\_mape}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{calculate\_mape()}{calculate\_mape()}}
+{\footnotesize\ttfamily def evaluate.\+calculate\+\_\+mape (\begin{DoxyParamCaption}\item[{}]{actual\+\_\+values,  }\item[{}]{predicted\+\_\+values }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Calculates Mean Absolute Percentage Error (absolute values).\end{DoxyVerb}
+ 
+
+Definition at line 184 of file evaluate.\+py.
+
+
+
+Referenced by evaluate\+\_\+ticker().
+
+\mbox{\Hypertarget{namespaceevaluate_af9fd08aec04746ceea6bd6f9c66e995d}\label{namespaceevaluate_af9fd08aec04746ceea6bd6f9c66e995d}} 
+\index{evaluate@{evaluate}!evaluate\_ticker@{evaluate\_ticker}}
+\index{evaluate\_ticker@{evaluate\_ticker}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{evaluate\_ticker()}{evaluate\_ticker()}}
+{\footnotesize\ttfamily def evaluate.\+evaluate\+\_\+ticker (\begin{DoxyParamCaption}\item[{}]{ticker }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Evaluates a single ticker.\end{DoxyVerb}
+ 
+
+Definition at line 282 of file evaluate.\+py.
+
+
+
+References calculate\+\_\+daily\+\_\+mape(), calculate\+\_\+mape(), fetch\+\_\+historical\+\_\+data(), get\+\_\+project\+\_\+root(), get\+\_\+trading\+\_\+days\+\_\+from\+\_\+data(), log\+\_\+evaluation\+\_\+results(), make\+\_\+predictions(), save\+\_\+daily\+\_\+mape\+\_\+results(), and train\+\_\+model().
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{namespaceevaluate_a27525b1bfa65306251e2e6c12694eebf}\label{namespaceevaluate_a27525b1bfa65306251e2e6c12694eebf}} 
+\index{evaluate@{evaluate}!fetch\_historical\_data@{fetch\_historical\_data}}
+\index{fetch\_historical\_data@{fetch\_historical\_data}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{fetch\_historical\_data()}{fetch\_historical\_data()}}
+{\footnotesize\ttfamily def evaluate.\+fetch\+\_\+historical\+\_\+data (\begin{DoxyParamCaption}\item[{}]{ticker,  }\item[{}]{start\+\_\+date,  }\item[{}]{end\+\_\+date }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Fetches historical stock data for given date range.\end{DoxyVerb}
+ 
+
+Definition at line 90 of file evaluate.\+py.
+
+
+
+Referenced by evaluate\+\_\+ticker().
+
+\mbox{\Hypertarget{namespaceevaluate_a6b96fa1021e159cdcd84054d3b6f75bb}\label{namespaceevaluate_a6b96fa1021e159cdcd84054d3b6f75bb}} 
+\index{evaluate@{evaluate}!get\_project\_root@{get\_project\_root}}
+\index{get\_project\_root@{get\_project\_root}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{get\_project\_root()}{get\_project\_root()}}
+{\footnotesize\ttfamily def evaluate.\+get\+\_\+project\+\_\+root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Locates the project root directory.\end{DoxyVerb}
+ 
+
+Definition at line 216 of file evaluate.\+py.
+
+
+
+Referenced by evaluate\+\_\+ticker(), log\+\_\+evaluation\+\_\+results(), main(), and save\+\_\+results\+\_\+to\+\_\+files().
+
+\mbox{\Hypertarget{namespaceevaluate_ae0b7731d16c9c264283bdd9e863b0357}\label{namespaceevaluate_ae0b7731d16c9c264283bdd9e863b0357}} 
+\index{evaluate@{evaluate}!get\_top\_tickers\_by\_frequency@{get\_top\_tickers\_by\_frequency}}
+\index{get\_top\_tickers\_by\_frequency@{get\_top\_tickers\_by\_frequency}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{get\_top\_tickers\_by\_frequency()}{get\_top\_tickers\_by\_frequency()}}
+{\footnotesize\ttfamily def evaluate.\+get\+\_\+top\+\_\+tickers\+\_\+by\+\_\+frequency (\begin{DoxyParamCaption}\item[{}]{db\+\_\+file,  }\item[{}]{limit = {\ttfamily \mbox{\hyperlink{namespaceevaluate_adc795de8b2f67f68cc7705bc51b806d0}{TOP\+\_\+\+N\+\_\+\+TICKERS}}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Gets top tickers by analysis frequency from database.\end{DoxyVerb}
+ 
+
+Definition at line 37 of file evaluate.\+py.
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{namespaceevaluate_a534baca732c2ebefc0602064c343dcf7}\label{namespaceevaluate_a534baca732c2ebefc0602064c343dcf7}} 
+\index{evaluate@{evaluate}!get\_trading\_days\_from\_data@{get\_trading\_days\_from\_data}}
+\index{get\_trading\_days\_from\_data@{get\_trading\_days\_from\_data}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{get\_trading\_days\_from\_data()}{get\_trading\_days\_from\_data()}}
+{\footnotesize\ttfamily def evaluate.\+get\+\_\+trading\+\_\+days\+\_\+from\+\_\+data (\begin{DoxyParamCaption}\item[{}]{ticker,  }\item[{}]{start\+\_\+date,  }\item[{}]{end\+\_\+date }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Get actual trading days for a ticker by fetching the data.\end{DoxyVerb}
+ 
+
+Definition at line 71 of file evaluate.\+py.
+
+
+
+Referenced by evaluate\+\_\+ticker().
+
+\mbox{\Hypertarget{namespaceevaluate_a8a488bea17b3e724cfe1bb7417cf321a}\label{namespaceevaluate_a8a488bea17b3e724cfe1bb7417cf321a}} 
+\index{evaluate@{evaluate}!is\_weekend@{is\_weekend}}
+\index{is\_weekend@{is\_weekend}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{is\_weekend()}{is\_weekend()}}
+{\footnotesize\ttfamily def evaluate.\+is\+\_\+weekend (\begin{DoxyParamCaption}\item[{}]{date\+\_\+obj }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Check if a date falls on weekend (Saturday=5, Sunday=6).\end{DoxyVerb}
+ 
+
+Definition at line 66 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_ae630bcc2e8d87e0e59377960cd0540c5}\label{namespaceevaluate_ae630bcc2e8d87e0e59377960cd0540c5}} 
+\index{evaluate@{evaluate}!log\_evaluation\_results@{log\_evaluation\_results}}
+\index{log\_evaluation\_results@{log\_evaluation\_results}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{log\_evaluation\_results()}{log\_evaluation\_results()}}
+{\footnotesize\ttfamily def evaluate.\+log\+\_\+evaluation\+\_\+results (\begin{DoxyParamCaption}\item[{}]{ticker,  }\item[{}]{mape,  }\item[{}]{train\+\_\+end\+\_\+date,  }\item[{}]{test\+\_\+start\+\_\+date,  }\item[{}]{test\+\_\+end\+\_\+date,  }\item[{}]{success }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Logs evaluation results to file.\end{DoxyVerb}
+ 
+
+Definition at line 256 of file evaluate.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+
+
+
+Referenced by evaluate\+\_\+ticker().
+
+\mbox{\Hypertarget{namespaceevaluate_a819a356655056a1a3cb06a47c236e3c9}\label{namespaceevaluate_a819a356655056a1a3cb06a47c236e3c9}} 
+\index{evaluate@{evaluate}!main@{main}}
+\index{main@{main}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def evaluate.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Main evaluation workflow for all tickers.\end{DoxyVerb}
+ 
+
+Definition at line 531 of file evaluate.\+py.
+
+
+
+References evaluate\+\_\+ticker(), get\+\_\+project\+\_\+root(), get\+\_\+top\+\_\+tickers\+\_\+by\+\_\+frequency(), and save\+\_\+results\+\_\+to\+\_\+files().
+
+\mbox{\Hypertarget{namespaceevaluate_a614518f4fd06421d12a9ada003fe5216}\label{namespaceevaluate_a614518f4fd06421d12a9ada003fe5216}} 
+\index{evaluate@{evaluate}!make\_predictions@{make\_predictions}}
+\index{make\_predictions@{make\_predictions}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{make\_predictions()}{make\_predictions()}}
+{\footnotesize\ttfamily def evaluate.\+make\+\_\+predictions (\begin{DoxyParamCaption}\item[{}]{model,  }\item[{}]{scaler,  }\item[{}]{recent\+\_\+data\+\_\+values }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Generates future price predictions using LSTM model.\end{DoxyVerb}
+ 
+
+Definition at line 161 of file evaluate.\+py.
+
+
+
+Referenced by evaluate\+\_\+ticker().
+
+\mbox{\Hypertarget{namespaceevaluate_aba5187633bd79750ab8dcdffd61495c0}\label{namespaceevaluate_aba5187633bd79750ab8dcdffd61495c0}} 
+\index{evaluate@{evaluate}!save\_daily\_mape\_results@{save\_daily\_mape\_results}}
+\index{save\_daily\_mape\_results@{save\_daily\_mape\_results}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{save\_daily\_mape\_results()}{save\_daily\_mape\_results()}}
+{\footnotesize\ttfamily def evaluate.\+save\+\_\+daily\+\_\+mape\+\_\+results (\begin{DoxyParamCaption}\item[{}]{ticker,  }\item[{}]{train\+\_\+end\+\_\+date,  }\item[{}]{test\+\_\+start\+\_\+date,  }\item[{}]{daily\+\_\+mapes,  }\item[{}]{actual\+\_\+values,  }\item[{}]{predicted\+\_\+values,  }\item[{}]{trading\+\_\+days }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Saves daily MAPE results for later aggregation, only for valid trading days.\end{DoxyVerb}
+ 
+
+Definition at line 226 of file evaluate.\+py.
+
+
+
+Referenced by evaluate\+\_\+ticker().
+
+\mbox{\Hypertarget{namespaceevaluate_aa22d17518df47e2e68585209b1a9f07b}\label{namespaceevaluate_aa22d17518df47e2e68585209b1a9f07b}} 
+\index{evaluate@{evaluate}!save\_results\_to\_files@{save\_results\_to\_files}}
+\index{save\_results\_to\_files@{save\_results\_to\_files}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{save\_results\_to\_files()}{save\_results\_to\_files()}}
+{\footnotesize\ttfamily def evaluate.\+save\+\_\+results\+\_\+to\+\_\+files (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Saves summary statistics to CSV file.\end{DoxyVerb}
+ 
+
+Definition at line 443 of file evaluate.\+py.
+
+
+
+References get\+\_\+project\+\_\+root().
+
+
+
+Referenced by main().
+
+\mbox{\Hypertarget{namespaceevaluate_ac1770a18f3f5252907fe24f73dd25e43}\label{namespaceevaluate_ac1770a18f3f5252907fe24f73dd25e43}} 
+\index{evaluate@{evaluate}!train\_model@{train\_model}}
+\index{train\_model@{train\_model}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{train\_model()}{train\_model()}}
+{\footnotesize\ttfamily def evaluate.\+train\+\_\+model (\begin{DoxyParamCaption}\item[{}]{ticker,  }\item[{}]{train\+\_\+data }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Trains an LSTM model on the given data.\end{DoxyVerb}
+ 
+
+Definition at line 126 of file evaluate.\+py.
+
+
+
+References build\+\_\+lstm\+\_\+model().
+
+
+
+Referenced by evaluate\+\_\+ticker().
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceevaluate_a73fd8a4c3bc0bafdc45254c7d6a0940b}\label{namespaceevaluate_a73fd8a4c3bc0bafdc45254c7d6a0940b}} 
+\index{evaluate@{evaluate}!daily\_mape\_results@{daily\_mape\_results}}
+\index{daily\_mape\_results@{daily\_mape\_results}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{daily\_mape\_results}{daily\_mape\_results}}
+{\footnotesize\ttfamily list evaluate.\+daily\+\_\+mape\+\_\+results = \mbox{[}$\,$\mbox{]}}
+
+
+
+Definition at line 34 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_a770b2f28f109992c8a8f439aceffe0cb}\label{namespaceevaluate_a770b2f28f109992c8a8f439aceffe0cb}} 
+\index{evaluate@{evaluate}!DB\_PATH@{DB\_PATH}}
+\index{DB\_PATH@{DB\_PATH}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{DB\_PATH}{DB\_PATH}}
+{\footnotesize\ttfamily string evaluate.\+DB\+\_\+\+PATH = \char`\"{}data/news.\+db\char`\"{}}
+
+
+
+Definition at line 22 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_ab9937f4d7fed5881f3da7c6e3a35b3b5}\label{namespaceevaluate_ab9937f4d7fed5881f3da7c6e3a35b3b5}} 
+\index{evaluate@{evaluate}!DEFAULT\_PREDICTION\_DAYS@{DEFAULT\_PREDICTION\_DAYS}}
+\index{DEFAULT\_PREDICTION\_DAYS@{DEFAULT\_PREDICTION\_DAYS}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_PREDICTION\_DAYS}{DEFAULT\_PREDICTION\_DAYS}}
+{\footnotesize\ttfamily int evaluate.\+DEFAULT\+\_\+\+PREDICTION\+\_\+\+DAYS = 12}
+
+
+
+Definition at line 23 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_a2b30ded0b1b803473368c15f09033f55}\label{namespaceevaluate_a2b30ded0b1b803473368c15f09033f55}} 
+\index{evaluate@{evaluate}!EPOCHS@{EPOCHS}}
+\index{EPOCHS@{EPOCHS}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{EPOCHS}{EPOCHS}}
+{\footnotesize\ttfamily int evaluate.\+EPOCHS = 25}
+
+
+
+Definition at line 25 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_a7a733be28b271c90006768db51a394c6}\label{namespaceevaluate_a7a733be28b271c90006768db51a394c6}} 
+\index{evaluate@{evaluate}!EVAL\_LOG\_FILE@{EVAL\_LOG\_FILE}}
+\index{EVAL\_LOG\_FILE@{EVAL\_LOG\_FILE}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{EVAL\_LOG\_FILE}{EVAL\_LOG\_FILE}}
+{\footnotesize\ttfamily string evaluate.\+EVAL\+\_\+\+LOG\+\_\+\+FILE = \char`\"{}lstm\+\_\+evaluation.\+log\char`\"{}}
+
+
+
+Definition at line 26 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_a3b3f2c03a8d6db1b74dfe4fbcbedf522}\label{namespaceevaluate_a3b3f2c03a8d6db1b74dfe4fbcbedf522}} 
+\index{evaluate@{evaluate}!failed\_evaluations@{failed\_evaluations}}
+\index{failed\_evaluations@{failed\_evaluations}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{failed\_evaluations}{failed\_evaluations}}
+{\footnotesize\ttfamily int evaluate.\+failed\+\_\+evaluations = 0}
+
+
+
+Definition at line 609 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_a435b038d2829ba1bec0b98719bd644bd}\label{namespaceevaluate_a435b038d2829ba1bec0b98719bd644bd}} 
+\index{evaluate@{evaluate}!MAX\_TIME\_OFFSET\_DAYS@{MAX\_TIME\_OFFSET\_DAYS}}
+\index{MAX\_TIME\_OFFSET\_DAYS@{MAX\_TIME\_OFFSET\_DAYS}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{MAX\_TIME\_OFFSET\_DAYS}{MAX\_TIME\_OFFSET\_DAYS}}
+{\footnotesize\ttfamily int evaluate.\+MAX\+\_\+\+TIME\+\_\+\+OFFSET\+\_\+\+DAYS = 7}
+
+
+
+Definition at line 30 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_a23c11961133a0b4d4e8a3f85986983f1}\label{namespaceevaluate_a23c11961133a0b4d4e8a3f85986983f1}} 
+\index{evaluate@{evaluate}!SEQUENCE\_LENGTH@{SEQUENCE\_LENGTH}}
+\index{SEQUENCE\_LENGTH@{SEQUENCE\_LENGTH}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{SEQUENCE\_LENGTH}{SEQUENCE\_LENGTH}}
+{\footnotesize\ttfamily int evaluate.\+SEQUENCE\+\_\+\+LENGTH = 60}
+
+
+
+Definition at line 24 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_a30d8832ceef1bb0c318d9f79d20c7ff2}\label{namespaceevaluate_a30d8832ceef1bb0c318d9f79d20c7ff2}} 
+\index{evaluate@{evaluate}!success@{success}}
+\index{success@{success}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{success}{success}}
+{\footnotesize\ttfamily def evaluate.\+success = \mbox{\hyperlink{namespaceevaluate_af9fd08aec04746ceea6bd6f9c66e995d}{evaluate\+\_\+ticker}}(\mbox{\hyperlink{StatisticsField_8tsx_a1601f364121b84b5088e4fb763f0e540}{ticker}})}
+
+
+
+Definition at line 614 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_af8558a72490a75cbd478db87b68c30b8}\label{namespaceevaluate_af8558a72490a75cbd478db87b68c30b8}} 
+\index{evaluate@{evaluate}!successful\_evaluations@{successful\_evaluations}}
+\index{successful\_evaluations@{successful\_evaluations}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{successful\_evaluations}{successful\_evaluations}}
+{\footnotesize\ttfamily int evaluate.\+successful\+\_\+evaluations = 0}
+
+
+
+Definition at line 608 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_ac88f516e3678e38acf29a91691a0a79b}\label{namespaceevaluate_ac88f516e3678e38acf29a91691a0a79b}} 
+\index{evaluate@{evaluate}!SUMMARY\_RESULTS\_FILE@{SUMMARY\_RESULTS\_FILE}}
+\index{SUMMARY\_RESULTS\_FILE@{SUMMARY\_RESULTS\_FILE}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{SUMMARY\_RESULTS\_FILE}{SUMMARY\_RESULTS\_FILE}}
+{\footnotesize\ttfamily string evaluate.\+SUMMARY\+\_\+\+RESULTS\+\_\+\+FILE = \char`\"{}mape\+\_\+summary\+\_\+by\+\_\+day.\+csv\char`\"{}}
+
+
+
+Definition at line 27 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_a98705c495b62e657b6585f0f5fd0a9d4}\label{namespaceevaluate_a98705c495b62e657b6585f0f5fd0a9d4}} 
+\index{evaluate@{evaluate}!TEST\_DAYS\_AFTER\_TRAIN@{TEST\_DAYS\_AFTER\_TRAIN}}
+\index{TEST\_DAYS\_AFTER\_TRAIN@{TEST\_DAYS\_AFTER\_TRAIN}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{TEST\_DAYS\_AFTER\_TRAIN}{TEST\_DAYS\_AFTER\_TRAIN}}
+{\footnotesize\ttfamily int evaluate.\+TEST\+\_\+\+DAYS\+\_\+\+AFTER\+\_\+\+TRAIN = 1}
+
+
+
+Definition at line 29 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_adc795de8b2f67f68cc7705bc51b806d0}\label{namespaceevaluate_adc795de8b2f67f68cc7705bc51b806d0}} 
+\index{evaluate@{evaluate}!TOP\_N\_TICKERS@{TOP\_N\_TICKERS}}
+\index{TOP\_N\_TICKERS@{TOP\_N\_TICKERS}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{TOP\_N\_TICKERS}{TOP\_N\_TICKERS}}
+{\footnotesize\ttfamily int evaluate.\+TOP\+\_\+\+N\+\_\+\+TICKERS = 100}
+
+
+
+Definition at line 32 of file evaluate.\+py.
+
+\mbox{\Hypertarget{namespaceevaluate_a236dbf8fec4474f260e8164077e62183}\label{namespaceevaluate_a236dbf8fec4474f260e8164077e62183}} 
+\index{evaluate@{evaluate}!TRAIN\_DAYS@{TRAIN\_DAYS}}
+\index{TRAIN\_DAYS@{TRAIN\_DAYS}!evaluate@{evaluate}}
+\doxysubsubsection{\texorpdfstring{TRAIN\_DAYS}{TRAIN\_DAYS}}
+{\footnotesize\ttfamily int evaluate.\+TRAIN\+\_\+\+DAYS = 365 $\ast$ 2}
+
+
+
+Definition at line 28 of file evaluate.\+py.
+

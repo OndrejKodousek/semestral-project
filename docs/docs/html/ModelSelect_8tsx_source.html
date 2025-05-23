@@ -118,34 +118,32 @@ $(document).ready(function(){initNavTree('ModelSelect_8tsx_source.html',''); ini
 <div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#a6e7452cbf7bca21c01d73886f620c35f">   29</a></span>&#160;    <span class="stringliteral">&quot;llama-3.3-70b-versatile&quot;</span>,</div>
 <div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#aa2b6441639d884c078b4831e93d5d0bf">   30</a></span>&#160;    <span class="stringliteral">&quot;llama-3.1-8b-instant&quot;</span>,</div>
 <div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#a36b68f5b56909e137f17107a8b8897e0">   31</a></span>&#160;    <span class="stringliteral">&quot;gemma2-9b-it&quot;</span>,</div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#a27c6a5077235e006bc3c2afe785de9f5">   32</a></span>&#160;    <span class="stringliteral">&quot;distil-whisper-large-v3-en&quot;</span>,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// Groq preview</span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#a7541b9f16e92913f2190efd9bceccfdd">   34</a></span>&#160;    <span class="stringliteral">&quot;deepseek-r1-distill-llama-70b&quot;</span>,</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#aa5f6106512efdfcf6dcca1732232d117">   35</a></span>&#160;    <span class="stringliteral">&quot;meta-llama/llama-4-maverick-17b-128e-instruct&quot;</span>,</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="stringliteral">&quot;meta-llama/llama-4-scout-17b-16e-instruct&quot;</span>,</div>
-<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#a8a3ed2ee40f57f6d2dfee48b083d1d3f">   37</a></span>&#160;    <span class="stringliteral">&quot;mistral-saba-24b&quot;</span>,</div>
-<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#a408cf4820d27ce6f1f6b3d9e0bc4b470">   38</a></span>&#160;    <span class="stringliteral">&quot;qwen-qwq-32b&quot;</span>,</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;  ];</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
-<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#a4f5bf8ce22a679125d14f3cb13383432">   41</a></span>&#160;  <span class="keywordflow">return</span> (</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    &lt;div className=<span class="stringliteral">&quot;h-100&quot;</span>&gt;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      &lt;select</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        className=<span class="stringliteral">&quot;w-100 h-100&quot;</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        size={5}</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        aria-label=<span class="stringliteral">&quot;Select option&quot;</span></div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        onChange={(e) =&gt; setModel(e.target.value)}</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      &gt;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        {items.map((item, index) =&gt; (</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;          &lt;option key={index} <a class="code" href="Metrics_8tsx.html#a7610c0ebb9ebf3452111f147bec5ba0e">value</a>={item}&gt;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            {item}</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;          &lt;/option&gt;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        ))}</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      &lt;/select&gt;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    &lt;/div&gt;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;  );</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;};</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;export <span class="keywordflow">default</span> <a class="code" href="ModelSelect_8tsx.html#a796ed387d8aca0803b1ea46bd85ab78f">ModelSelect</a>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="comment">// Groq preview</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#aeffc282fb653b2e78510f57b6628a8ab">   33</a></span>&#160;    <span class="stringliteral">&quot;deepseek-r1-distill-llama-70b&quot;</span>,</div>
+<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#a016ff7792df59e563f0d04c6dd56c933">   34</a></span>&#160;    <span class="stringliteral">&quot;meta-llama/llama-4-maverick-17b-128e-instruct&quot;</span>,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="stringliteral">&quot;meta-llama/llama-4-scout-17b-16e-instruct&quot;</span>,</div>
+<div class="line"><a name="l00036"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#ad0d0350a993c25f8a6902e836ea23124">   36</a></span>&#160;    <span class="stringliteral">&quot;qwen-qwq-32b&quot;</span>,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;  ];</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="ModelSelect_8tsx.html#a6573c79abe95559f2d735f12e7b19481">   39</a></span>&#160;  <span class="keywordflow">return</span> (</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    &lt;div className=<span class="stringliteral">&quot;h-100&quot;</span>&gt;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      &lt;select</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        className=<span class="stringliteral">&quot;w-100 h-100&quot;</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        size={5}</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        aria-label=<span class="stringliteral">&quot;Select option&quot;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        onChange={(e) =&gt; setModel(e.target.value)}</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;      &gt;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        {items.map((item, index) =&gt; (</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;          &lt;option key={index} <a class="code" href="Metrics_8tsx.html#a7610c0ebb9ebf3452111f147bec5ba0e">value</a>={item}&gt;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            {item}</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;          &lt;/option&gt;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        ))}</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;      &lt;/select&gt;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    &lt;/div&gt;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  );</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;export <span class="keywordflow">default</span> <a class="code" href="ModelSelect_8tsx.html#a796ed387d8aca0803b1ea46bd85ab78f">ModelSelect</a>;</div>
 <div class="ttc" id="aApp_8tsx_html_a8e6a862a904cf8b07c69fae7c44a1a04"><div class="ttname"><a href="App_8tsx.html#a8e6a862a904cf8b07c69fae7c44a1a04">React</a></div><div class="ttdeci">import React</div><div class="ttdef"><b>Definition:</b> <a href="App_8tsx_source.html#l00008">App.tsx:8</a></div></div>
 <div class="ttc" id="aMetrics_8tsx_html_a7610c0ebb9ebf3452111f147bec5ba0e"><div class="ttname"><a href="Metrics_8tsx.html#a7610c0ebb9ebf3452111f147bec5ba0e">value</a></div><div class="ttdeci">value value</div><div class="ttdef"><b>Definition:</b> <a href="Metrics_8tsx_source.html#l00214">Metrics.tsx:214</a></div></div>
 <div class="ttc" id="aModelSelect_8tsx_html_a796ed387d8aca0803b1ea46bd85ab78f"><div class="ttname"><a href="ModelSelect_8tsx.html#a796ed387d8aca0803b1ea46bd85ab78f">ModelSelect</a></div><div class="ttdeci">const ModelSelect</div><div class="ttdoc">Model selection dropdown component.</div><div class="ttdef"><b>Definition:</b> <a href="ModelSelect_8tsx_source.html#l00015">ModelSelect.tsx:19</a></div></div>
@@ -156,7 +154,7 @@ $(document).ready(function(){initNavTree('ModelSelect_8tsx_source.html',''); ini
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_4fdf20d635b99bb54f698874f5ca05ac.html">website</a></li><li class="navelem"><a class="el" href="dir_7a9a42e618e4db6d0f7bfc1d92388aeb.html">src</a></li><li class="navelem"><a class="el" href="dir_762f6021449e2ebfd6c76503339671ad.html">components</a></li><li class="navelem"><a class="el" href="ModelSelect_8tsx.html">ModelSelect.tsx</a></li>
-    <li class="footer">Generated on Tue May 20 2025 19:59:17 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri May 23 2025 20:25:51 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>

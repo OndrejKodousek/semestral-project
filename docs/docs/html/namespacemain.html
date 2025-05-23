@@ -127,6 +127,10 @@ Functions</h2></td></tr>
 <tr class="separator:a5d6ab7224f1cc509718976cc0c67c10e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a2748142b9bf9370df50798bfc0ae54"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemain.html#a1a2748142b9bf9370df50798bfc0ae54">plot_source_distribution</a> (data, output_dir=&quot;graphs&quot;, threshold_percent=1.5)</td></tr>
 <tr class="separator:a1a2748142b9bf9370df50798bfc0ae54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec999c06ebb9d7432a097245b73447dd"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemain.html#aec999c06ebb9d7432a097245b73447dd">plot_model_comparison_combined</a> (data_day1, data_days1to3, output_dir=&quot;graphs&quot;)</td></tr>
+<tr class="separator:aec999c06ebb9d7432a097245b73447dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba055e66a2b4bf282db3ff3a190dcc2f"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacemain.html#aba055e66a2b4bf282db3ff3a190dcc2f">plot_source_comparison_combined</a> (data_day1, data_days1to3, output_dir=&quot;graphs&quot;)</td></tr>
+<tr class="separator:aba055e66a2b4bf282db3ff3a190dcc2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
@@ -194,7 +198,7 @@ This script handles:
 </pre> 
 <p class="definition">Definition at line <a class="el" href="evaluator_2main_8py_source.html#l00022">22</a> of file <a class="el" href="evaluator_2main_8py_source.html">main.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l00801">plot_source_distribution()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l01005">plot_source_comparison_combined()</a>.</p>
 
 </div>
 </div>
@@ -228,9 +232,9 @@ Processes RSS feed, scrapes new articles, and stores them in database.
 </pre><pre class="fragment">Command line interface for prediction analysis.</pre> 
 <p class="definition">Definition at line <a class="el" href="analyzer_2main_8py_source.html#l00027">27</a> of file <a class="el" href="analyzer_2main_8py_source.html">main.py</a>.</p>
 
-<p class="reference">References <a class="el" href="database_8py_source.html#l00403">database.fetch_sum_analysis_data()</a>, <a class="el" href="database_8py_source.html#l00030">database.get_db_connection()</a>, <a class="el" href="utils_8py_source.html#l00044">utils.is_valid_data()</a>, <a class="el" href="database_8py_source.html#l00041">database.load_processed_articles()</a>, <a class="el" href="llm__google_8py_source.html#l00018">llm_google.process_article_google()</a>, <a class="el" href="llm__google_8py_source.html#l00067">llm_google.process_article_google_sum()</a>, <a class="el" href="llm__groq_8py_source.html#l00017">llm_groq.process_article_groq()</a>, <a class="el" href="llm__openrouter_8py_source.html#l00017">llm_openrouter.process_article_openrouter()</a>, <a class="el" href="llm__groq_8py_source.html#l00077">llm_groq.processed_article_groq_sum()</a>, <a class="el" href="llm__openrouter_8py_source.html#l00079">llm_openrouter.processed_article_openrouter_sum()</a>, <a class="el" href="database_8py_source.html#l00139">database.save_processed_articles()</a>, <a class="el" href="database_8py_source.html#l00245">database.save_processed_summarized_articles()</a>, and <a class="el" href="utils_8py_source.html#l00013">utils.shorten_string()</a>.</p>
+<p class="reference">References <a class="el" href="database_8py_source.html#l00403">database.fetch_sum_analysis_data()</a>, <a class="el" href="database_8py_source.html#l00030">database.get_db_connection()</a>, <a class="el" href="utils_8py_source.html#l00044">utils.is_valid_data()</a>, <a class="el" href="database_8py_source.html#l00041">database.load_processed_articles()</a>, <a class="el" href="llm__google_8py_source.html#l00018">llm_google.process_article_google()</a>, <a class="el" href="llm__google_8py_source.html#l00069">llm_google.process_article_google_sum()</a>, <a class="el" href="llm__groq_8py_source.html#l00017">llm_groq.process_article_groq()</a>, <a class="el" href="llm__openrouter_8py_source.html#l00017">llm_openrouter.process_article_openrouter()</a>, <a class="el" href="llm__groq_8py_source.html#l00079">llm_groq.processed_article_groq_sum()</a>, <a class="el" href="llm__openrouter_8py_source.html#l00085">llm_openrouter.processed_article_openrouter_sum()</a>, <a class="el" href="database_8py_source.html#l00139">database.save_processed_articles()</a>, <a class="el" href="database_8py_source.html#l00245">database.save_processed_summarized_articles()</a>, and <a class="el" href="utils_8py_source.html#l00013">utils.shorten_string()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l00801">plot_source_distribution()</a>, and <a class="el" href="scraper_2main_8py_source.html#l00096">scrape_investors_article()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l01005">plot_source_comparison_combined()</a>, and <a class="el" href="scraper_2main_8py_source.html#l00096">scrape_investors_article()</a>.</p>
 
 </div>
 </div>
@@ -279,7 +283,7 @@ Processes RSS feed, scrapes new articles, and stores them in database.
 </pre> 
 <p class="definition">Definition at line <a class="el" href="evaluator_2main_8py_source.html#l00133">133</a> of file <a class="el" href="evaluator_2main_8py_source.html">main.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l00801">plot_source_distribution()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l01005">plot_source_comparison_combined()</a>.</p>
 
 </div>
 </div>
@@ -328,7 +332,7 @@ Processes RSS feed, scrapes new articles, and stores them in database.
 </pre> 
 <p class="definition">Definition at line <a class="el" href="evaluator_2main_8py_source.html#l00181">181</a> of file <a class="el" href="evaluator_2main_8py_source.html">main.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l00801">plot_source_distribution()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l01005">plot_source_comparison_combined()</a>.</p>
 
 </div>
 </div>
@@ -377,7 +381,47 @@ Processes RSS feed, scrapes new articles, and stores them in database.
 </pre> 
 <p class="definition">Definition at line <a class="el" href="evaluator_2main_8py_source.html#l00327">327</a> of file <a class="el" href="evaluator_2main_8py_source.html">main.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l00801">plot_source_distribution()</a>.</p>
+</div>
+</div>
+<a id="aec999c06ebb9d7432a097245b73447dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec999c06ebb9d7432a097245b73447dd">&#9670;&nbsp;</a></span>plot_model_comparison_combined()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.plot_model_comparison_combined </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>data_day1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>data_days1to3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>output_dir</em> = <code>&quot;graphs&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">@brief Generate combined bar chart comparing model MAPE for day1 vs days1-3
+@param data_day1 Processed metrics dictionary for day1 only
+@param data_days1to3 Processed metrics dictionary for days1-3
+@param output_dir Directory to save output graphs
+</pre> 
+<p class="definition">Definition at line <a class="el" href="evaluator_2main_8py_source.html#l00880">880</a> of file <a class="el" href="evaluator_2main_8py_source.html">main.py</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l01005">plot_source_comparison_combined()</a>.</p>
 
 </div>
 </div>
@@ -426,8 +470,6 @@ Processes RSS feed, scrapes new articles, and stores them in database.
 </pre> 
 <p class="definition">Definition at line <a class="el" href="evaluator_2main_8py_source.html#l00250">250</a> of file <a class="el" href="evaluator_2main_8py_source.html">main.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l00801">plot_source_distribution()</a>.</p>
-
 </div>
 </div>
 <a id="a207b8b742c5e7d5b2c6d549893e7d112"></a>
@@ -475,7 +517,47 @@ Processes RSS feed, scrapes new articles, and stores them in database.
 </pre> 
 <p class="definition">Definition at line <a class="el" href="evaluator_2main_8py_source.html#l00392">392</a> of file <a class="el" href="evaluator_2main_8py_source.html">main.py</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l00801">plot_source_distribution()</a>.</p>
+</div>
+</div>
+<a id="aba055e66a2b4bf282db3ff3a190dcc2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba055e66a2b4bf282db3ff3a190dcc2f">&#9670;&nbsp;</a></span>plot_source_comparison_combined()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def main.plot_source_comparison_combined </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>data_day1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>data_days1to3</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>output_dir</em> = <code>&quot;graphs&quot;</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<pre class="fragment">@brief Generate combined bar chart comparing source MAPE for day1 vs days1-3
+@param data_day1 Processed metrics dictionary for day1 only
+@param data_days1to3 Processed metrics dictionary for days1-3
+@param output_dir Directory to save output graphs
+</pre> 
+<p class="definition">Definition at line <a class="el" href="evaluator_2main_8py_source.html#l01005">1005</a> of file <a class="el" href="evaluator_2main_8py_source.html">main.py</a>.</p>
+
+<p class="reference">References <a class="el" href="evaluator_2main_8py_source.html#l00022">load_data()</a>, <a class="el" href="analyzer_2main_8py_source.html#l00027">main()</a>, <a class="el" href="evaluator_2main_8py_source.html#l00133">plot_accuracy_over_time()</a>, <a class="el" href="evaluator_2main_8py_source.html#l00183">plot_model_accuracy_over_time()</a>, and <a class="el" href="evaluator_2main_8py_source.html#l00880">plot_model_comparison_combined()</a>.</p>
 
 </div>
 </div>
@@ -517,8 +599,6 @@ Processes RSS feed, scrapes new articles, and stores them in database.
 </pre> 
 <p class="definition">Definition at line <a class="el" href="evaluator_2main_8py_source.html#l00801">801</a> of file <a class="el" href="evaluator_2main_8py_source.html">main.py</a>.</p>
 
-<p class="reference">References <a class="el" href="evaluator_2main_8py_source.html#l00022">load_data()</a>, <a class="el" href="analyzer_2main_8py_source.html#l00027">main()</a>, <a class="el" href="evaluator_2main_8py_source.html#l00133">plot_accuracy_over_time()</a>, <a class="el" href="evaluator_2main_8py_source.html#l00183">plot_model_accuracy_over_time()</a>, <a class="el" href="evaluator_2main_8py_source.html#l00327">plot_model_comparison()</a>, <a class="el" href="evaluator_2main_8py_source.html#l00252">plot_source_accuracy_over_time()</a>, <a class="el" href="evaluator_2main_8py_source.html#l00392">plot_source_comparison()</a>, and <a class="el" href="evaluator_2main_8py_source.html#l00460">print_summary_stats()</a>.</p>
-
 </div>
 </div>
 <a id="ad68619698c21610198f0c7b025e3a0d5"></a>
@@ -558,8 +638,6 @@ Processes RSS feed, scrapes new articles, and stores them in database.
 @param min_datapoints Minimum samples required for inclusion
 </pre> 
 <p class="definition">Definition at line <a class="el" href="evaluator_2main_8py_source.html#l00460">460</a> of file <a class="el" href="evaluator_2main_8py_source.html">main.py</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="evaluator_2main_8py_source.html#l00801">plot_source_distribution()</a>.</p>
 
 </div>
 </div>
@@ -866,7 +944,7 @@ Processes RSS feed, scrapes new articles, and stores them in database.
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacemain.html">main</a></li>
-    <li class="footer">Generated on Tue May 20 2025 19:59:17 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
+    <li class="footer">Generated on Fri May 23 2025 20:25:51 for News Analyzer Project by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1 </li>
   </ul>
 </div>
 </body>
