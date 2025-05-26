@@ -29,12 +29,17 @@ Simple script which continuosly runs the scraper and then analyzer.
 ```bash
 python -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
-python scripts/create_db.py
+pip install -r requirements.txt 
 cd website
 npm install
 cd ..
 ```
+
+Put your API keys to these files:
+
+* data/API_KEY_GEMINI
+* data/API_KEY_GROQ
+* data/API_KEY_OPENROUTER
 
 ## Usage
 
@@ -56,6 +61,8 @@ python scripts/lstm_daemon.py
 
 ```bash
 gunicorn --bind 0.0.0.0:500 website_backend/api_server:app
+OR
+python website-backend/api_server.py 
 ```
 
 ### Host website locally
@@ -79,5 +86,9 @@ Assumes you have NGINX webserver set up and ready to go
 ```bash
 cd website
 npm run build
-npm run publish
+npm run publish // Has fixed path
 ```
+
+### Note
+
+You theoretically don't need to run either of daemons aside of website's api server, since the database is included, but it will have old data and it might have undefined behaviour (some things rely on current day, for example)
