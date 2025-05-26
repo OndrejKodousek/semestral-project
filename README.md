@@ -91,4 +91,4 @@ npm run publish // Has fixed path
 
 ### Note
 
-You theoretically don't need to run either of daemons aside of website's api server, since the database is included, but it will have old data and it might have undefined behaviour (some things rely on current day, for example)
+You theoretically don't need to run either of daemons aside of website's api server, since the database is included, but it will have old data and it might have undefined behaviour (some things rely on current day, for example, so there could be too large gap between current day and the data, so graphs might show no data).
